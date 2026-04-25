@@ -1,0 +1,40 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.idea/
+.vscode/
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+
+# Node (reserved — not used today but possible in phase-two)
+node_modules/
+npm-debug.log
+yarn-error.log
+.pnp.*
+
+# Planning backup (private owner assets — never committed)
+Planning/backup/**
+!Planning/backup/.gitkeep
+
+# Local preview server state
+.preview/
+.preview-pid
+*.log
+
+# Generated runtime manifest — written fresh on every build
+site/assets/js/media-manifest.js

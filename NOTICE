@@ -1,0 +1,18 @@
+Mira Palace website — third-party notices
+-------------------------------------------
+
+This site uses the following third-party resources at runtime:
+
+- Tailwind CSS (via cdn.tailwindcss.com) — MIT Licence.
+- Google Fonts (Cormorant Garamond, Inter) — Open Font Licence.
+- Google Maps embed — Google Maps terms of service.
+- Unsplash image URLs (demo placeholders only) — Unsplash Licence.
+  Real hotel photography will replace all Unsplash images before public launch.
+
+The original source tree of this repository (page generator, templates, copy,
+stylesheets, JavaScript, data files) is © 2026 Mi World — held jointly by
+Mİ WORLD YAZILIM TEKNOLOJİ LİMİTED ŞİRKETİ (Türkiye) and Mi World Pty Ltd
+(Australia) — and is governed by the LICENSE file at the root of this
+repository.
+
+Permissions and queries: info@miworld.tech

@@ -1,0 +1,360 @@
+/* Mira Palace — custom stylesheet */
+
+:root {
+  --mira-900: #132630;
+  --mira-800: #1D3742;
+  --mira-700: #274551;
+  --sand-300: #D4B971;
+  --sand-400: #C9A961;
+  --sand-500: #B68F3F;
+  --ink: #111827;
+  /* Hero overlay RGB triplet (used by .hero-overlay); each theme overrides. */
+  --hero-tint: 19, 38, 48;
+}
+
+html { scroll-behavior: smooth; }
+body { -webkit-font-smoothing: antialiased; }
+
+/* Hero overlay — gentle gradient on top of the image via a ::before pseudo.
+   Tints just enough to keep white text legible without colour-washing the photo. */
+.hero-overlay::before {
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(var(--hero-tint), .10) 0%,
+    rgba(var(--hero-tint), .35) 55%,
+    rgba(var(--hero-tint), .70) 100%
+  );
+  pointer-events: none;
+}
+
+/* Header scroll-solidify */
+#siteheader.is-scrolled > div:first-child {
+  background: rgba(19,38,48,.95);
+  box-shadow: 0 10px 30px -20px rgba(0,0,0,.5);
+}
+
+/* ------------------------------------------------------------------- */
+/* THEME SYSTEM                                                          */
+/* Toggle with html[data-theme="sunset|olive|midnight"]                  */
+/* Each theme overrides nav/footer dark, accents, text, body bg, hero.  */
+/* Goal: visibly different at a glance.                                  */
+/* ------------------------------------------------------------------- */
+
+/* ----- SUNSET COAST: terracotta + dusty rose + warm cream ----- */
+html[data-theme="sunset"] {
+  --hero-tint: 132, 50, 42;
+  background-color: #FAF6F1;
+}
+html[data-theme="sunset"] body { background-color: #FAF6F1; }
+html[data-theme="sunset"] .bg-mira-900,
+html[data-theme="sunset"] .bg-mira-900\/80,
+html[data-theme="sunset"] .bg-mira-900\/70,
+html[data-theme="sunset"] .bg-mira-900\/95 { background-color: #84322A !important; }
+html[data-theme="sunset"] .supports-\[backdrop-filter\]\:bg-mira-900\/70 { background-color: rgba(132,50,42,.85) !important; }
+html[data-theme="sunset"] .bg-mira-800 { background-color: #9A4034 !important; }
+html[data-theme="sunset"] .bg-mira-700 { background-color: #B85A45 !important; }
+html[data-theme="sunset"] .bg-mira-50  { background-color: #FBE4D2 !important; }
+html[data-theme="sunset"] .hover\:bg-mira-800:hover { background-color: #9A4034 !important; }
+html[data-theme="sunset"] .text-mira-900 { color: #5A2018 !important; }
+html[data-theme="sunset"] .text-mira-800 { color: #6F2A1F !important; }
+html[data-theme="sunset"] .text-mira-700 { color: #84322A !important; }
+html[data-theme="sunset"] .text-mira-600 { color: #A75643 !important; }
+html[data-theme="sunset"] .text-mira-500 { color: #BF7860 !important; }
+html[data-theme="sunset"] .bg-sand-300  { background-color: #F4B07A !important; }
+html[data-theme="sunset"] .hover\:bg-sand-200:hover { background-color: #F8C7A0 !important; }
+html[data-theme="sunset"] .bg-sand-50   { background-color: #FDE8D5 !important; }
+html[data-theme="sunset"] .text-sand-300 { color: #F4B07A !important; }
+html[data-theme="sunset"] .text-sand-400 { color: #E89556 !important; }
+html[data-theme="sunset"] .text-sand-500 { color: #C9722E !important; }
+html[data-theme="sunset"] .text-sand-600 { color: #9F551B !important; }
+html[data-theme="sunset"] .hover\:text-sand-600:hover { color: #9F551B !important; }
+html[data-theme="sunset"] .border-mira-200 { border-color: #F0D5C0 !important; }
+html[data-theme="sunset"] #siteheader.is-scrolled > div:first-child { background: rgba(132,50,42,.95) !important; }
+
+/* ----- OLIVE GROVE: vibrant olive + brass gold + sage cream ----- */
+html[data-theme="olive"] {
+  --hero-tint: 60, 75, 36;
+  background-color: #F6F5EC;
+}
+html[data-theme="olive"] body { background-color: #F6F5EC; }
+html[data-theme="olive"] .bg-mira-900,
+html[data-theme="olive"] .bg-mira-900\/80,
+html[data-theme="olive"] .bg-mira-900\/70,
+html[data-theme="olive"] .bg-mira-900\/95 { background-color: #3C4B24 !important; }
+html[data-theme="olive"] .supports-\[backdrop-filter\]\:bg-mira-900\/70 { background-color: rgba(60,75,36,.85) !important; }
+html[data-theme="olive"] .bg-mira-800 { background-color: #4D5E30 !important; }
+html[data-theme="olive"] .bg-mira-700 { background-color: #62753F !important; }
+html[data-theme="olive"] .bg-mira-50  { background-color: #E5E5C5 !important; }
+html[data-theme="olive"] .hover\:bg-mira-800:hover { background-color: #4D5E30 !important; }
+html[data-theme="olive"] .text-mira-900 { color: #2A341A !important; }
+html[data-theme="olive"] .text-mira-800 { color: #364320 !important; }
+html[data-theme="olive"] .text-mira-700 { color: #485A2C !important; }
+html[data-theme="olive"] .text-mira-600 { color: #677B45 !important; }
+html[data-theme="olive"] .text-mira-500 { color: #859760 !important; }
+html[data-theme="olive"] .bg-sand-300  { background-color: #DEC34A !important; }
+html[data-theme="olive"] .hover\:bg-sand-200:hover { background-color: #ECD56F !important; }
+html[data-theme="olive"] .bg-sand-50   { background-color: #F1F1D8 !important; }
+html[data-theme="olive"] .text-sand-300 { color: #DEC34A !important; }
+html[data-theme="olive"] .text-sand-400 { color: #C7A833 !important; }
+html[data-theme="olive"] .text-sand-500 { color: #A38520 !important; }
+html[data-theme="olive"] .text-sand-600 { color: #7A6411 !important; }
+html[data-theme="olive"] .hover\:text-sand-600:hover { color: #7A6411 !important; }
+html[data-theme="olive"] .border-mira-200 { border-color: #D5D5B0 !important; }
+html[data-theme="olive"] #siteheader.is-scrolled > div:first-child { background: rgba(60,75,36,.95) !important; }
+
+/* ----- MIDNIGHT PEARL: deep blue-black + bright champagne + cool pearl ----- */
+html[data-theme="midnight"] {
+  --hero-tint: 8, 18, 42;
+  background-color: #F2F3F7;
+}
+html[data-theme="midnight"] body { background-color: #F2F3F7; }
+html[data-theme="midnight"] .bg-mira-900,
+html[data-theme="midnight"] .bg-mira-900\/80,
+html[data-theme="midnight"] .bg-mira-900\/70,
+html[data-theme="midnight"] .bg-mira-900\/95 { background-color: #08122A !important; }
+html[data-theme="midnight"] .supports-\[backdrop-filter\]\:bg-mira-900\/70 { background-color: rgba(8,18,42,.85) !important; }
+html[data-theme="midnight"] .bg-mira-800 { background-color: #0F1B3D !important; }
+html[data-theme="midnight"] .bg-mira-700 { background-color: #1A2A55 !important; }
+html[data-theme="midnight"] .bg-mira-50  { background-color: #DEE0EA !important; }
+html[data-theme="midnight"] .hover\:bg-mira-800:hover { background-color: #0F1B3D !important; }
+html[data-theme="midnight"] .text-mira-900 { color: #08122A !important; }
+html[data-theme="midnight"] .text-mira-800 { color: #0F1B3D !important; }
+html[data-theme="midnight"] .text-mira-700 { color: #1A2A55 !important; }
+html[data-theme="midnight"] .text-mira-600 { color: #3B4D7A !important; }
+html[data-theme="midnight"] .text-mira-500 { color: #5C6E92 !important; }
+html[data-theme="midnight"] .bg-sand-300  { background-color: #EFD080 !important; }
+html[data-theme="midnight"] .hover\:bg-sand-200:hover { background-color: #F4DD9D !important; }
+html[data-theme="midnight"] .bg-sand-50   { background-color: #ECEDF2 !important; }
+html[data-theme="midnight"] .text-sand-300 { color: #EFD080 !important; }
+html[data-theme="midnight"] .text-sand-400 { color: #DBB95F !important; }
+html[data-theme="midnight"] .text-sand-500 { color: #B8932F !important; }
+html[data-theme="midnight"] .text-sand-600 { color: #8A6E1E !important; }
+html[data-theme="midnight"] .hover\:text-sand-600:hover { color: #8A6E1E !important; }
+html[data-theme="midnight"] .border-mira-200 { border-color: #C5C8D5 !important; }
+html[data-theme="midnight"] #siteheader.is-scrolled > div:first-child { background: rgba(8,18,42,.96) !important; }
+
+/* ----- ONYX: pure dark mode — black surfaces, warm gold accent, light text ----- */
+html[data-theme="onyx"] {
+  --hero-tint: 0, 0, 0;
+  background-color: #0E0E10;
+}
+html[data-theme="onyx"] body { background-color: #0E0E10; color: #E8E6E1; }
+html[data-theme="onyx"] .bg-mira-900,
+html[data-theme="onyx"] .bg-mira-900\/80,
+html[data-theme="onyx"] .bg-mira-900\/70,
+html[data-theme="onyx"] .bg-mira-900\/95 { background-color: #000000 !important; }
+html[data-theme="onyx"] .supports-\[backdrop-filter\]\:bg-mira-900\/70 { background-color: rgba(0,0,0,.85) !important; }
+html[data-theme="onyx"] .bg-mira-800 { background-color: #161618 !important; }
+html[data-theme="onyx"] .bg-mira-700 { background-color: #25262A !important; }
+html[data-theme="onyx"] .bg-mira-50  { background-color: #1A1A1C !important; }
+html[data-theme="onyx"] .hover\:bg-mira-800:hover { background-color: #161618 !important; }
+html[data-theme="onyx"] .text-mira-900 { color: #F2EFE7 !important; }
+html[data-theme="onyx"] .text-mira-800 { color: #E8E5DA !important; }
+html[data-theme="onyx"] .text-mira-700 { color: #D2CFC4 !important; }
+html[data-theme="onyx"] .text-mira-600 { color: #A8A59A !important; }
+html[data-theme="onyx"] .text-mira-500 { color: #8B887E !important; }
+html[data-theme="onyx"] .bg-sand-300  { background-color: #D4B971 !important; }
+html[data-theme="onyx"] .hover\:bg-sand-200:hover { background-color: #E2CB89 !important; }
+html[data-theme="onyx"] .bg-sand-50   { background-color: #161618 !important; }
+html[data-theme="onyx"] .bg-white     { background-color: #1C1C1F !important; color: #E8E5DA; }
+html[data-theme="onyx"] .text-sand-300 { color: #D4B971 !important; }
+html[data-theme="onyx"] .text-sand-400 { color: #C9A961 !important; }
+html[data-theme="onyx"] .text-sand-500 { color: #B68F3F !important; }
+html[data-theme="onyx"] .text-sand-600 { color: #9C7625 !important; }
+html[data-theme="onyx"] .hover\:text-sand-600:hover { color: #D4B971 !important; }
+html[data-theme="onyx"] .border-mira-200 { border-color: #2C2C30 !important; }
+html[data-theme="onyx"] #siteheader.is-scrolled > div:first-child { background: rgba(0,0,0,.96) !important; }
+/* In Onyx, the form inputs and small chips need lighter text */
+html[data-theme="onyx"] input, html[data-theme="onyx"] textarea, html[data-theme="onyx"] select {
+  background-color: #1C1C1F !important; color: #E8E5DA !important; border-color: #2C2C30 !important;
+}
+
+/* ------------------------------------------------------------------- */
+/* CUSTOMISER PANEL                                                      */
+/* ------------------------------------------------------------------- */
+
+#customiser .theme-swatch[data-active="true"],
+#customiser .lang-btn[data-active="true"],
+#customiser .vid-btn[data-active="true"],
+#customiser .mus-btn[data-active="true"] {
+  border-color: var(--mira-900) !important;
+  background-color: rgba(0,0,0,.04);
+}
+#cust-panel {
+  max-height: 90vh;
+  overflow-y: auto;
+  /* Slide-from-left animation. Default state is collapsed; the wrapper's
+     [data-open="true"] flips it visible. Hover mode + click both toggle
+     that attribute. */
+  transform: translateX(-100%);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 350ms cubic-bezier(.2,.7,.2,1), opacity 220ms ease;
+  will-change: transform, opacity;
+}
+#customiser[data-open="true"] #cust-panel {
+  transform: translateX(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+/* Subtle visual lift on the toggle tab when the panel is open or hovered */
+#customiser[data-open="true"] #cust-toggle,
+#customiser:hover #cust-toggle {
+  background-color: var(--mira-800, #1D3742);
+}
+
+/* ------------------------------------------------------------------- */
+/* LANGUAGE-AWARE COPYRIGHT TEXT                                         */
+/* ------------------------------------------------------------------- */
+.lang-hidden { display: none !important; }
+
+/* ------------------------------------------------------------------- */
+/* TOP-NAV DROPDOWN MENUS                                                */
+/* ------------------------------------------------------------------- */
+.nav-dd-menu {
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: opacity 200ms ease, transform 200ms ease, visibility 0ms 200ms;
+  pointer-events: none;
+  z-index: 50;
+}
+.nav-dd[data-open="true"] > .nav-dd-menu {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 200ms ease, transform 200ms ease, visibility 0ms 0ms;
+  pointer-events: auto;
+}
+/* The chevron flips up when the menu is open. */
+.nav-dd[data-open="true"] .nav-dd-trigger svg { transform: rotate(180deg); }
+.nav-dd-trigger svg { transition: transform 180ms ease; }
+
+/* ------------------------------------------------------------------- */
+/* ELEGANT BOOK-STYLE MENU — colour-stable across all themes            */
+/* The menu deliberately keeps its warm parchment regardless of theme   */
+/* ------------------------------------------------------------------- */
+
+.menu-card {
+  font-family: 'Cormorant Garamond', serif;
+  background:
+    radial-gradient(circle at top, rgba(212,185,113,.06), transparent 60%),
+    linear-gradient(#fbf8f1, #f5edda);
+  border: 1px solid rgba(180,143,63,.25);
+  box-shadow:
+    inset 0 0 80px rgba(180,143,63,.08),
+    0 30px 60px -25px rgba(19,38,48,.25);
+  padding: 4rem 2.5rem;
+  position: relative;
+  /* Lock parchment colours so theme overrides don't leak in */
+  color: #1D3742;
+}
+.menu-card::before, .menu-card::after {
+  content: "";
+  position: absolute; left: 2.5rem; right: 2.5rem;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(180,143,63,.5), transparent);
+}
+.menu-card::before { top: 1.4rem; }
+.menu-card::after  { bottom: 1.4rem; }
+.menu-card h3 {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #132630 !important;
+  text-align: center;
+  letter-spacing: .04em;
+}
+.menu-card .menu-tag {
+  display: block;
+  text-align: center;
+  font-style: italic;
+  font-size: .9rem;
+  color: #B68F3F !important;
+  margin-top: .35rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.menu-section { margin-top: 2.25rem; }
+.menu-section-title {
+  font-size: 1.35rem;
+  font-weight: 500;
+  color: #B68F3F !important;
+  text-align: center;
+  letter-spacing: .25em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+.menu-section-title::before, .menu-section-title::after {
+  content: "❦";
+  display: inline-block; margin: 0 .8rem;
+  color: rgba(180,143,63,.6);
+  font-size: .9em;
+}
+.menu-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  padding: .55rem 0;
+  align-items: baseline;
+}
+.menu-row > .name {
+  font-size: 1.1rem; color: #132630 !important; font-weight: 500;
+}
+.menu-row > .desc {
+  font-size: .85rem; color: #274551 !important; font-style: italic;
+  font-family: Inter, sans-serif; margin-top: .15rem; line-height: 1.5;
+}
+
+/* Prose in legal pages */
+.prose-mira h2 {
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 600;
+  color: var(--mira-900);
+  font-size: 1.5rem;
+  margin-top: 1.75em;
+  margin-bottom: 0.75em;
+}
+.prose-mira h3 {
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 600;
+  color: var(--mira-800);
+  font-size: 1.2rem;
+  margin-top: 1.25em;
+  margin-bottom: 0.5em;
+}
+.prose-mira p {
+  color: #3a4a58;
+  line-height: 1.7;
+  margin: 0 0 0.9em;
+}
+.prose-mira ul {
+  list-style: disc;
+  padding-left: 1.25rem;
+  color: #3a4a58;
+  line-height: 1.7;
+  margin: 0 0 1em;
+}
+.prose-mira ul li { margin: 0.3em 0; }
+.prose-mira a {
+  color: var(--mira-700);
+  text-decoration: underline;
+  text-decoration-color: var(--sand-400);
+  text-underline-offset: 2px;
+}
+
+/* Gallery masonry columns micro-fix for mid-width layouts */
+@media (max-width: 640px) {
+  .columns-2 { column-count: 2; }
+}
+
+.gal-item { animation: fadeIn .35s ease both; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+
+details > summary::-webkit-details-marker { display: none; }
+
+/* Print */
+@media print {
+  #siteheader, footer, .demo-banner, #demo-banner, [aria-label="WhatsApp"], #customiser { display: none !important; }
+  a[href]:after { content: " (" attr(href) ")"; font-size: 10px; color: #666; }
+}
