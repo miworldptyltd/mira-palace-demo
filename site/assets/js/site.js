@@ -57,14 +57,24 @@
   const DEFAULT_VIDEO = window.MIRA_DEFAULT_VIDEO || (Object.keys(VIDEOS).find(k => k !== 'none') || 'none');
   const DEFAULT_TRACK = window.MIRA_DEFAULT_TRACK || (Object.keys(TRACKS).find(k => k !== 'none') || 'none');
 
-  // Compute root prefix once, robustly. Default to '' for localhost; for nested URLs it'll just work because the audio element is in the page footer with an absolute-style URL.
-  const ROOT = (videoEl && videoEl.dataset.root) ? videoEl.dataset.root : (function () {
-    // For pages like /rooms/standard.html — count slashes after the host
+  // Project root prefix. Python's render_page() writes the right value as
+  // window.MIRA_ROOT (or body[data-root]) for every page, so we use that.
+  // Fall back to the videoEl's data-root or a path-counting heuristic only
+  // if both globals are missing (e.g. someone hand-edited an HTML file).
+  // CRITICAL: empty string IS a valid value (means "root"), so check for
+  // 'undefined' explicitly rather than truthiness.
+  let ROOT;
+  if (typeof window.MIRA_ROOT !== 'undefined') {
+    ROOT = window.MIRA_ROOT;
+  } else if (document.body && typeof document.body.dataset.root !== 'undefined') {
+    ROOT = document.body.dataset.root;
+  } else if (videoEl && typeof videoEl.dataset.root !== 'undefined') {
+    ROOT = videoEl.dataset.root;
+  } else {
     const segs = location.pathname.split('/').filter(Boolean);
-    // If the path ends in a filename like "standard.html", segs has one more level than the directory
     const depth = segs.length - (segs[segs.length - 1] && segs[segs.length - 1].includes('.') ? 1 : 0);
-    return '../'.repeat(Math.max(0, depth));
-  })();
+    ROOT = '../'.repeat(Math.max(0, depth));
+  }
 
   // ----- Video swap (home-page only — videoEl exists) ---------------------
   function applyVideo(key) {

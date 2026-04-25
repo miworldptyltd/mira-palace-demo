@@ -73,9 +73,16 @@ tailwind.config = {{
   }}
 }};
 </script>
-<link rel="stylesheet" href="{root}assets/css/site.css?v=7" />
+<script>
+  // Project root path (e.g. "" for a domain-root site, "../" or "../../"
+  // for nested pages). Python's render_page() computes the depth and
+  // writes the right value here, so site.js never has to guess. Required
+  // because GitHub Pages hosts at /mira-palace-demo/ rather than /.
+  window.MIRA_ROOT = "{root}";
+</script>
+<link rel="stylesheet" href="{root}assets/css/site.css?v=8" />
 </head>
-<body class="font-body text-ink bg-sand-50 antialiased">
+<body class="font-body text-ink bg-sand-50 antialiased" data-root="{root}">
 <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:top-3 focus:left-3 bg-mira-800 text-white px-3 py-2 rounded">Skip to content</a>
 """
 
@@ -302,8 +309,8 @@ def footer(root: str) -> str:
     </div>
 
     {customiser_panel(root)}
-    <script src="{root}assets/js/media-manifest.js?v=14" defer></script>
-    <script src="{root}assets/js/site.js?v=14" defer></script>
+    <script src="{root}assets/js/media-manifest.js?v=15" defer></script>
+    <script src="{root}assets/js/site.js?v=15" defer></script>
     </body></html>
     """)
 

@@ -108,10 +108,12 @@ git push origin --tags 2>$null | Out-Null
 Write-Host "  Repo created + pushed (with tags):  $(gh repo view --json url --jq .url)"
 
 Write-Host "`n[7/7] Enabling GitHub Pages..." -ForegroundColor Cyan
-# Build source = GitHub Actions (our workflow handles it)
+# Pages source = GitHub Actions, because our deploy.yml uses the modern
+# upload-pages-artifact / deploy-pages model. (The older "deploy from a
+# branch" mode is incompatible with that workflow.)
 $owner = gh api user --jq .login
-gh api --method POST -H "Accept: application/vnd.github+json" "repos/$owner/$repo/pages" -f "source[branch]=main" -f "source[path]=/site" 2>$null | Out-Null
-Write-Host "  Pages will build on the next push to main via .github/workflows/deploy.yml."
+gh api --method POST -H "Accept: application/vnd.github+json" "repos/$owner/$repo/pages" -f "build_type=workflow" 2>$null | Out-Null
+Write-Host "  Pages source set to GitHub Actions; deploy.yml will publish on every push to main."
 
 Write-Host "`n  Done. Preview URL will appear in the Actions tab within ~60 seconds:" -ForegroundColor Green
 Write-Host "    https://github.com/$owner/$repo/actions"
