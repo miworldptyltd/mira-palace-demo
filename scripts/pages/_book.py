@@ -7,15 +7,29 @@ IMG_BOOK = "https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=fo
 def book(root: str) -> str:
     m = SITE_META
     h = hero(IMG_BOOK, "Book a stay",
-             "Reserve your room.",
-             "A real-time booking engine will sit here in the production site (Caglatur, HotelRunner, or your preferred provider). For now, fill in your dates and we'll confirm availability and a quote within an hour.",
+             "Reserve your suite.",
+             "Tell us your dates below and our reservations team will confirm availability and a quote as soon as possible.",
              height="58vh")
 
     body = section(f"""
       <div class="max-w-3xl mx-auto">
+
+        <!-- Payment-coming-soon notice (Variation A) -->
+        <div role="status" class="mb-10 rounded-lg border border-sand-300 bg-sand-100/60 p-6 shadow-sm">
+          <div class="flex items-start gap-4">
+            <span aria-hidden="true" class="shrink-0 w-9 h-9 grid place-items-center rounded-full bg-sand-300 text-mira-900 font-display text-lg">i</span>
+            <div>
+              <h3 class="font-display text-xl text-mira-900">Online payment — coming soon</h3>
+              <p class="mt-2 text-sm text-mira-800 leading-relaxed">
+                Secure card payment is on its way to Mira Palace. While we finalise our payment gateway, please send us your booking request below. Our reservations team will reach out as soon as possible to confirm availability and arrange your deposit by bank transfer or card. Thank you for your patience — we look forward to welcoming you.
+              </p>
+            </div>
+          </div>
+        </div>
+
         {eyebrow('Direct-booking enquiry')}
         {heading('Tell us when and how many.', 3)}
-        {lead("Direct guests get our best available rate, plus small extras: a bottle of local wine on arrival and complimentary late check-out when the room can stay open.")}
+        {lead("Direct guests get our best available rate, plus small extras: a bottle of local wine on arrival and complimentary late check-out when the suite can stay open.")}
 
         <form action="mailto:{m['email']}?subject=Booking%20enquiry%20-%20Mira%20Palace" method="post" enctype="text/plain"
               class="mt-10 bg-white rounded-lg shadow-lux p-8 space-y-6"
@@ -39,13 +53,13 @@ def book(root: str) -> str:
               <input type="number" min="0" max="4" value="0" name="children" class="mt-1 block w-full rounded border border-mira-200 px-3 py-2.5 text-sm" />
             </label>
             <label class="block sm:col-span-2">
-              <span class="text-sm font-medium text-mira-800">Room preference</span>
-              <select name="room" class="mt-1 block w-full rounded border border-mira-200 px-3 py-2.5 text-sm">
+              <span class="text-sm font-medium text-mira-800">Suite preference</span>
+              <select name="suite" class="mt-1 block w-full rounded border border-mira-200 px-3 py-2.5 text-sm">
                 <option value="">Recommend the best fit for my dates</option>
-                <option>Standard Room (22 m², garden view)</option>
-                <option>Deluxe Room (28 m², sea view)</option>
-                <option>Family Connecting (34 m²)</option>
-                <option>Junior Suite (42 m², sea view)</option>
+                <option>Standard Suite (22 m², garden view)</option>
+                <option>Deluxe Suite (28 m², sea view)</option>
+                <option>Family Suite (34 m², garden view)</option>
+                <option>King Suite (42 m², sea view)</option>
               </select>
             </label>
           </div>

@@ -38,7 +38,7 @@ def home(root: str) -> str:
       {eyebrow('Three ways to spend a day')}
       {heading('Stay. Eat. Unwind.')}
       <div class="grid md:grid-cols-3 gap-7 mt-12">
-        {card(IMG_ROOM, "Suites", "Four room types from 22 to 42 m² — garden courtyard, sea-view balcony, family connecting, and a junior suite with a sitting room.", f"{root}rooms/", "See our rooms")}
+        {card(IMG_ROOM, "Suites", "Four suite types from 22 to 42 m² — Standard, Deluxe, Family and the King Suite. Garden courtyard or sea-view balcony, all with full en-suite.", f"{root}rooms/", "See our suites")}
         {card(IMG_DINING, "Dining", "Four outlets under one roof — from the open buffet kitchen to à-la-carte evenings by the pool and a lobby bar that stays open late.", f"{root}dining/", "Discover dining")}
         {card(IMG_SPA, "Spa & wellness", "A full Turkish hammam, two saunas, a steam room, cold plunge, and a treatment menu from a 40-minute back massage to a three-hour hammam ritual.", f"{root}spa.html", "Enter the spa")}
       </div>

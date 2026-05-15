@@ -1,5 +1,36 @@
 /* Mira Palace — custom stylesheet */
 
+/* -----------------------------------------------------------------------
+   MOBILE / TOUCH POLISH
+   - iOS safe-area-inset for floating bottom buttons (iPhone X+ home bar)
+   - Stack music cluster above WhatsApp on phones; side-by-side on tablet+
+   ----------------------------------------------------------------------- */
+.whatsapp-bottom-safe {
+  bottom: max(20px, env(safe-area-inset-bottom));
+}
+.music-cluster-pos {
+  /* Phone (< 640px): cluster sits ABOVE the WhatsApp bubble */
+  bottom: calc(max(20px, env(safe-area-inset-bottom)) + 56px);
+}
+@media (min-width: 640px) {
+  .music-cluster-pos {
+    /* Tablet+ (>= 640px): cluster sits on the same bottom row, to the left
+       of the WhatsApp bubble */
+    bottom: max(20px, env(safe-area-inset-bottom));
+  }
+}
+.floating-bottom-safe {
+  bottom: max(20px, env(safe-area-inset-bottom));
+}
+
+/* Tap-target hit-area minimum: 44x44px (Apple's HIG, WCAG AAA).            */
+.music-cluster-pos button,
+#video-cluster button,
+#cust-toggle,
+#mnu-toggle {
+  min-height: 38px;
+}
+
 :root {
   --mira-900: #132630;
   --mira-800: #1D3742;

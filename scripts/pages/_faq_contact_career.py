@@ -14,7 +14,7 @@ def faq(root: str) -> str:
         ("What airport do you recommend?",
          "Antalya International (AYT), 60 km from the hotel. We can arrange a private or shared transfer — see the Location page for options and prices."),
         ("Is the hotel suitable for children?",
-         "Yes — we have a dedicated Family Connecting room type, a children’s pool with a small slide, a kids’ club (4–12) and a teen lounge (13–17). Children under 6 stay free when sharing with two adults; 6–12 at a reduced rate."),
+         "Yes — we have a dedicated Family Suite (two connecting rooms), a children’s pool with a small slide, a kids’ club (4–12) and a teen lounge (13–17). Children under 6 stay free when sharing with two adults; 6–12 at a reduced rate."),
         ("Do you allow pets?",
          "Service dogs are welcome; other pets are not, in line with Turkish food-safety rules for the restaurant and pool areas."),
         ("Is smoking allowed?",
@@ -94,10 +94,10 @@ def contact(root: str) -> str:
               <label class="block sm:col-span-2"><span class="text-sm text-mira-700">Room preference</span>
                 <select name="room" class="mt-1 block w-full rounded border border-mira-200 px-3 py-2 text-sm">
                   <option>Not sure — recommend for my dates</option>
-                  <option>Standard Room</option>
-                  <option>Deluxe Room</option>
-                  <option>Family Connecting</option>
-                  <option>Junior Suite</option>
+                  <option>Standard Suite</option>
+                  <option>Deluxe Suite</option>
+                  <option>Family Suite</option>
+                  <option>King Suite</option>
                 </select>
               </label>
             </div>
@@ -139,7 +139,7 @@ def career(root: str) -> str:
         for t, sub, d in roles
     )
     h = hero(IMG_CAREER, "Careers", "Come and work with us.",
-             "A small team — thirty-four rooms asks about fifty staff — which means every job matters and every person is visible. We pay on time, we train, and most of our seasonal staff come back the following year.",
+             "A small team — thirty-four suites asks about fifty staff — which means every job matters and every person is visible. We pay on time, we train, and most of our seasonal staff come back the following year.",
              height="60vh")
     listings = section(f"""
       {eyebrow('Open positions')}

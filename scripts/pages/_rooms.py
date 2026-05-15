@@ -8,14 +8,16 @@ IMG_SUITE = "https://images.unsplash.com/photo-1590073242678-70ee3fc28e8e?auto=f
 IMG_BATH = "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=1200&q=80"
 IMG_BALCONY = "https://images.unsplash.com/photo-1540541338287-41700207dee6?auto=format&fit=crop&w=1200&q=80"
 
+# NB: "count" is the number of suites in the property (internal use only — the
+# website never displays it). It feeds the FAQ doc in reference\documents\.
 ROOM_TYPES = [
-    {"slug": "standard",  "name": "Standard Room",    "size": "22 m²", "view": "Garden view",   "sleeps": "2 adults",            "img": IMG_STD,
+    {"slug": "standard",  "name": "Standard Suite", "count": 19, "size": "22 m²", "view": "Garden view",   "sleeps": "2 adults",            "img": IMG_STD,
      "tag": "From €130 / night*", "short": "A compact, beautifully made double with a French balcony opening onto the citrus orchard."},
-    {"slug": "deluxe",    "name": "Deluxe Room",      "size": "28 m²", "view": "Sea view",       "sleeps": "2 adults + 1 child",  "img": IMG_DLX,
-     "tag": "From €180 / night*", "short": "A larger room with a full balcony, panoramic sea view, and a walk-in rain shower."},
-    {"slug": "family",    "name": "Family Connecting","size": "34 m²", "view": "Garden view",   "sleeps": "2 adults + 2 children","img": IMG_FAM,
-     "tag": "From €220 / night*", "short": "Two connecting rooms sharing a vestibule and a single en-suite for easy family access."},
-    {"slug": "suite",     "name": "Junior Suite",     "size": "42 m²", "view": "Sea view",       "sleeps": "2 adults + 1 child",  "img": IMG_SUITE,
+    {"slug": "deluxe",    "name": "Deluxe Suite",   "count": 10, "size": "28 m²", "view": "Sea view",       "sleeps": "2 adults + 1 child",  "img": IMG_DLX,
+     "tag": "From €180 / night*", "short": "A larger suite with a full balcony, panoramic sea view, and a walk-in rain shower."},
+    {"slug": "family",    "name": "Family Suite",   "count":  4, "size": "34 m²", "view": "Garden view",   "sleeps": "2 adults + 2 children","img": IMG_FAM,
+     "tag": "From €220 / night*", "short": "Two connecting suites sharing a vestibule and a single en-suite for easy family access."},
+    {"slug": "king",      "name": "King Suite",     "count":  1, "size": "42 m²", "view": "Sea view",       "sleeps": "2 adults + 1 child",  "img": IMG_SUITE,
      "tag": "From €290 / night*", "short": "A sitting-room and a separate bedroom, a deep freestanding tub, and a wrap-around balcony."},
 ]
 
@@ -32,7 +34,7 @@ def rooms_index(root: str) -> str:
               <span>{r['size']}</span><span>•</span><span>{r['view']}</span><span>•</span><span>{r['sleeps']}</span>
             </div>
             <p class="mt-4 text-mira-700 text-sm leading-relaxed">{r['short']}</p>
-            <span class="mt-6 inline-flex items-center gap-2 text-sm font-medium text-mira-700 group-hover:text-sand-500">View the room <span>→</span></span>
+            <span class="mt-6 inline-flex items-center gap-2 text-sm font-medium text-mira-700 group-hover:text-sand-500">View the suite <span>→</span></span>
           </div>
         </a>
         """) for r in ROOM_TYPES
@@ -45,8 +47,8 @@ def rooms_index(root: str) -> str:
         height="68vh",
     )
     body = section(f"""
-      {eyebrow('Choose your room')}
-      {heading('Our room types.')}
+      {eyebrow('Choose your suite')}
+      {heading('Our suite types.')}
       {lead('All rates are illustrative. Final rates depend on season and length of stay; please request a quote for your dates.')}
       <div class="mt-12 grid gap-8">{cards_html}</div>
       <p class="mt-10 text-xs text-mira-600">* Indicative demo rates in EUR, All-Inclusive, double occupancy, shoulder season. Real rates will be supplied by the hotel during content hand-off.</p>
@@ -134,9 +136,9 @@ def _room_detail(r: dict, root: str, long_body: str, extra_imgs: list[str]) -> s
 def standard(root: str) -> str:
     r = next(x for x in ROOM_TYPES if x["slug"] == "standard")
     long_body = """
-      <p>The Standard Room is our most popular category — and our workhorse. Twenty-two square metres of quiet, insulated from the corridor by a thick door and from the garden by double-glazing. One king-size bed (or twin, on request), a French balcony with a small bistro table, and an uninterrupted view into the citrus orchard that wraps the east wing.</p>
+      <p>The Standard Suite is our most popular category — and our workhorse. Twenty-two square metres of quiet, insulated from the corridor by a thick door and from the garden by double-glazing. One king-size bed (or twin, on request), a French balcony with a small bistro table, and an uninterrupted view into the citrus orchard that wraps the east wing.</p>
       <p>The bathroom is a walk-in rain shower with Iznik tiles laid by a family workshop an hour from here, a double vanity, and a mirror the size of a window. The linens are Denizli cotton — the same fabric the hammam uses for peştemals. The desk is oak, from a workshop in Antalya's bazaar district.</p>
-      <p>It is a room designed to be used quietly. Most of the guests who book it spend their days at the pool or the beach and come back in the evening to change. It does that job extremely well — and if you want a little more room, we have three larger categories.</p>
+      <p>It is a suite designed to be used quietly. Most of the guests who book it spend their days at the pool or the beach and come back in the evening to change. It does that job extremely well — and if you want a little more room, we have three larger categories.</p>
     """
     return _room_detail(r, root, long_body, [IMG_STD, IMG_BATH, IMG_BALCONY, IMG_DLX])
 
@@ -144,7 +146,7 @@ def standard(root: str) -> str:
 def deluxe(root: str) -> str:
     r = next(x for x in ROOM_TYPES if x["slug"] == "deluxe")
     long_body = """
-      <p>Six extra square metres buy you a lot at Mira Palace. The Deluxe Room is twenty-eight square metres with a full balcony (two lounge chairs, a small table, a footstool) and a direct Mediterranean view across the orchard. The bed is a king-size; a rollaway for one child is possible on request.</p>
+      <p>Six extra square metres buy you a lot at Mira Palace. The Deluxe Suite is twenty-eight square metres with a full balcony (two lounge chairs, a small table, a footstool) and a direct Mediterranean view across the orchard. The bed is a king-size; a rollaway for one child is possible on request.</p>
       <p>The bathroom adds a long marble bench to the rain shower — a small detail, but the kind that turns a shower into a place you linger. Bathrobes are waffle-textured rather than flat; bedside lighting is individually controlled.</p>
       <p>Our most booked category for couples celebrating something — anniversaries, honeymoons, birthdays with a zero on them. If it's one of those trips, write a note on the booking and we'll arrange a small something on the balcony at turndown.</p>
     """
@@ -154,42 +156,62 @@ def deluxe(root: str) -> str:
 def family(root: str) -> str:
     r = next(x for x in ROOM_TYPES if x["slug"] == "family")
     long_body = """
-      <p>The Family Connecting is two rooms sharing one vestibule and one bathroom — designed specifically for parents who want to hear their children without sharing their sleep. One side has a king-size bed; the other has two twin beds or (on request) bunks for children up to twelve.</p>
+      <p>The Family Suite is two connecting rooms sharing one vestibule and one bathroom — designed specifically for parents who want to hear their children without sharing their sleep. One side has a king-size bed; the other has two twin beds or (on request) bunks for children up to twelve.</p>
       <p>Both rooms open off a small hall with a door that closes. The shared bathroom is larger than the Standard's, with a deep tub alongside the shower and a second sink. Storage is planned for family trips — a wardrobe long enough for adult hanging, deep enough for children's luggage, and a chest with drawers marked with pictograms so small hands can find their own T-shirts.</p>
       <p>Baby cots, high-chairs at the restaurant, childproof socket covers, and a kids' welcome pack (colouring book, pencils, a Mira Palace teddy) all come as standard.</p>
     """
     return _room_detail(r, root, long_body, [IMG_FAM, IMG_BATH, IMG_STD, IMG_BALCONY])
 
 
-def suite(root: str) -> str:
-    r = next(x for x in ROOM_TYPES if x["slug"] == "suite")
+def king(root: str) -> str:
+    r = next(x for x in ROOM_TYPES if x["slug"] == "king")
     long_body = """
-      <p>Our Junior Suites are forty-two square metres organised as two rooms — a sitting room with a sofa, a desk, and a reading chair; and a bedroom with a king-size bed. Between them, a heavy velvet curtain that you can draw when one of you wants to read while the other sleeps.</p>
+      <p>Our King Suite is forty-two square metres organised as two rooms — a sitting room with a sofa, a desk, and a reading chair; and a bedroom with a king-size bed. Between them, a heavy velvet curtain that you can draw when one of you wants to read while the other sleeps.</p>
       <p>The bathroom is the reason many of our returning guests return. A freestanding deep tub, a separate rain shower, a window with a view, and — because this is why you came — a full amenity kit: oils, salts, a bath brush, a bath caddy for a glass of wine.</p>
       <p>The balcony wraps around the corner of the building: twelve square metres with a sun lounger, two chairs, a dining table for two, and planters that change with the season. In summer, jasmine; in winter, rosemary and lavender.</p>
     """
     return _room_detail(r, root, long_body, [IMG_SUITE, IMG_BATH, IMG_BALCONY, IMG_DLX])
 
 
+def _redirect_to_king(root: str) -> str:
+    """Tiny HTML body for the old rooms/suite.html — keeps any external link
+    working by sending visitors on to the new King Suite page."""
+    return f"""
+    <section class="bg-sand-50 py-24"><div class="max-w-2xl mx-auto px-5 text-center">
+      <h1 class="font-display text-3xl text-mira-900">This page has moved</h1>
+      <p class="mt-4 text-mira-700">The Junior Suite is now called the <a href="{root}rooms/king.html" class="underline text-sand-600">King Suite</a>. You'll be redirected automatically in a moment.</p>
+      <noscript><p class="mt-4 text-sm text-mira-600">If your browser doesn't redirect, <a href="{root}rooms/king.html" class="underline">click here</a>.</p></noscript>
+      <meta http-equiv="refresh" content="0; url={root}rooms/king.html" />
+      <link rel="canonical" href="{root}rooms/king.html" />
+      <script>window.location.replace("{root}rooms/king.html");</script>
+    </div></section>
+    """
+
+
 PAGES = [
     {"path": "rooms/index.html", "active": "rooms",
-     "title": "Rooms & Suites · Mira Palace",
-     "description": "Four room types at Mira Palace, from 22 m² Standard to 42 m² Junior Suites. Garden and sea views, all with full en-suite and balcony.",
+     "title": "Suites · Mira Palace",
+     "description": "Four suite types at Mira Palace, from 22 m² Standard Suite to 42 m² King Suite. Garden and sea views, all with full en-suite and balcony.",
      "body": rooms_index},
     {"path": "rooms/standard.html", "active": "rooms",
-     "title": "Standard Room · Mira Palace",
-     "description": "The 22 m² Standard Room at Mira Palace — garden view, French balcony, walk-in rain shower, king-size bed.",
+     "title": "Standard Suite · Mira Palace",
+     "description": "The 22 m² Standard Suite at Mira Palace — garden view, French balcony, walk-in rain shower, king-size bed.",
      "body": standard},
     {"path": "rooms/deluxe.html", "active": "rooms",
-     "title": "Deluxe Room · Mira Palace",
-     "description": "The 28 m² Deluxe Room at Mira Palace — sea-view balcony, marble rain shower, king-size bed.",
+     "title": "Deluxe Suite · Mira Palace",
+     "description": "The 28 m² Deluxe Suite at Mira Palace — sea-view balcony, marble rain shower, king-size bed.",
      "body": deluxe},
     {"path": "rooms/family.html", "active": "rooms",
-     "title": "Family Connecting Rooms · Mira Palace",
-     "description": "34 m² of connecting rooms for families — one king-size bed, two twins, shared en-suite, garden view.",
+     "title": "Family Suite · Mira Palace",
+     "description": "34 m² of connecting suites for families — one king-size bed, two twins, shared en-suite, garden view.",
      "body": family},
+    {"path": "rooms/king.html", "active": "rooms",
+     "title": "King Suite · Mira Palace",
+     "description": "The 42 m² King Suite at Mira Palace — separate sitting room, wrap-around balcony, freestanding bath, sea view.",
+     "body": king},
+    # Legacy URL — quietly forwards visitors of the old Junior Suite link.
     {"path": "rooms/suite.html", "active": "rooms",
-     "title": "Junior Suite · Mira Palace",
-     "description": "The 42 m² Junior Suite at Mira Palace — separate sitting room, wrap-around balcony, freestanding bath, sea view.",
-     "body": suite},
+     "title": "King Suite · Mira Palace",
+     "description": "The King Suite at Mira Palace (formerly Junior Suite).",
+     "body": _redirect_to_king},
 ]

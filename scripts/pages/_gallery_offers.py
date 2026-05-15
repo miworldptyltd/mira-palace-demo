@@ -2,11 +2,11 @@ from common import hero, section
 
 # Single curated set for gallery
 GALLERY = [
-    ("Rooms",   "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=80",  "The Standard Room"),
-    ("Rooms",   "https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&w=1200&q=80",  "Deluxe Room with sea view"),
-    ("Rooms",   "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?auto=format&fit=crop&w=1200&q=80",  "Family connecting"),
-    ("Rooms",   "https://images.unsplash.com/photo-1590073242678-70ee3fc28e8e?auto=format&fit=crop&w=1200&q=80",  "Junior Suite bedroom"),
-    ("Rooms",   "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=1200&q=80",   "Marble bathroom"),
+    ("Suites",  "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=80",  "The Standard Suite"),
+    ("Suites",  "https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&w=1200&q=80",  "Deluxe Suite with sea view"),
+    ("Suites",  "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?auto=format&fit=crop&w=1200&q=80",  "Family Suite (connecting)"),
+    ("Suites",  "https://images.unsplash.com/photo-1590073242678-70ee3fc28e8e?auto=format&fit=crop&w=1200&q=80",  "King Suite bedroom"),
+    ("Suites",  "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=1200&q=80",   "Marble bathroom"),
     ("Pools",   "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80",  "Main pool, afternoon"),
     ("Pools",   "https://images.unsplash.com/photo-1540541338287-41700207dee6?auto=format&fit=crop&w=1200&q=80",  "Pool deck"),
     ("Pools",   "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1200&q=80",  "Infinity pool"),

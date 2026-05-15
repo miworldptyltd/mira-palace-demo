@@ -80,7 +80,7 @@ tailwind.config = {{
   // because GitHub Pages hosts at /mira-palace-demo/ rather than /.
   window.MIRA_ROOT = "{root}";
 </script>
-<link rel="stylesheet" href="{root}assets/css/site.css?v=8" />
+<link rel="stylesheet" href="{root}assets/css/site.css?v=10" />
 </head>
 <body class="font-body text-ink bg-sand-50 antialiased" data-root="{root}">
 <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:top-3 focus:left-3 bg-mira-800 text-white px-3 py-2 rounded">Skip to content</a>
@@ -93,12 +93,12 @@ def nav(active: str, root: str) -> str:
     items = [
         ("home",       "Home",          "index.html",       None),
         ("about",      "About",         "about.html",       None),
-        ("rooms",      "Rooms",         "rooms/",           [
-            ("All rooms",          "rooms/"),
-            ("Standard",           "rooms/standard.html"),
-            ("Deluxe",             "rooms/deluxe.html"),
-            ("Family",             "rooms/family.html"),
-            ("Junior Suite",       "rooms/suite.html"),
+        ("rooms",      "Suites",        "rooms/",           [
+            ("All suites",         "rooms/"),
+            ("Standard Suite",     "rooms/standard.html"),
+            ("Deluxe Suite",       "rooms/deluxe.html"),
+            ("Family Suite",       "rooms/family.html"),
+            ("King Suite",         "rooms/king.html"),
         ]),
         ("concept",    "All-Inclusive", "concept.html",     None),
         ("dining",     "Dining",        "dining/",          [
@@ -198,8 +198,16 @@ def nav(active: str, root: str) -> str:
             </button>
           </div>
         </div>
-        <div id="mobile-menu" class="xl:hidden hidden border-t border-white/5 max-h-[70vh] overflow-y-auto">
+        <div id="mobile-menu" class="xl:hidden hidden border-t border-white/5 max-h-[80vh] overflow-y-auto">
           {''.join(mobile_links)}
+          <!-- Language flags inside the hamburger menu (phone users) -->
+          <div class="px-4 py-3 border-t border-white/10 flex items-center gap-3 bg-mira-900/40">
+            <span class="text-[10px] uppercase tracking-widest text-white/60">Language</span>
+            <button class="nav-flag rounded overflow-hidden ring-1 ring-white/20 hover:ring-white/60 transition" data-lang="en" aria-label="English" data-active="true"><span class="fi fi-gb block" style="width:28px;height:20px;"></span></button>
+            <button class="nav-flag rounded overflow-hidden ring-1 ring-white/20 hover:ring-white/60 transition" data-lang="tr" aria-label="Türkçe"><span class="fi fi-tr block" style="width:28px;height:20px;"></span></button>
+            <button class="nav-flag rounded overflow-hidden ring-1 ring-white/20 hover:ring-white/60 transition" data-lang="de" aria-label="Deutsch"><span class="fi fi-de block" style="width:28px;height:20px;"></span></button>
+            <button class="nav-flag rounded overflow-hidden ring-1 ring-white/20 hover:ring-white/60 transition" data-lang="ru" aria-label="Русский"><span class="fi fi-ru block" style="width:28px;height:20px;"></span></button>
+          </div>
           <a href="{root}book.html" class="block px-4 py-4 text-center bg-sand-300 text-mira-900 font-semibold">Book your stay</a>
         </div>
       </div>
@@ -280,37 +288,40 @@ def footer(root: str) -> str:
       </div>
     </footer>
 
-    <a href="{m['whatsapp']}" rel="noopener" aria-label="WhatsApp" class="fixed bottom-5 right-5 z-30 bg-[#25D366] text-white w-12 h-12 grid place-items-center rounded-full shadow-lg hover:scale-105 transition">
+    <a href="{m['whatsapp']}" rel="noopener" aria-label="WhatsApp" class="fixed right-5 z-30 bg-[#25D366] text-white w-12 h-12 grid place-items-center rounded-full shadow-lg hover:scale-105 transition whatsapp-bottom-safe">
       <svg viewBox="0 0 24 24" class="w-6 h-6" fill="currentColor" aria-hidden="true"><path d="M20.52 3.48A11.9 11.9 0 0 0 12 0C5.37 0 0 5.37 0 12a11.93 11.93 0 0 0 1.64 6L0 24l6.19-1.62A11.94 11.94 0 0 0 12 24c6.63 0 12-5.37 12-12 0-3.2-1.25-6.2-3.48-8.52Zm-8.52 18a9.9 9.9 0 0 1-5.05-1.38l-.36-.22-3.67.96.98-3.58-.23-.37A9.94 9.94 0 1 1 22 12c0 5.5-4.48 9.98-10 9.98Zm5.47-7.46c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.25-.46-2.39-1.47-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.58c-.2 0-.52.07-.8.37-.27.3-1.05 1.02-1.05 2.48s1.08 2.88 1.23 3.08c.15.2 2.13 3.25 5.15 4.56.72.31 1.28.5 1.72.64.72.23 1.38.2 1.9.12.58-.09 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.2-.57-.35Z"/></svg>
     </a>
 
-    <!-- Site-wide music cluster: prev / play-pause / next. -->
-    <div id="music-cluster" class="fixed bottom-5 right-20 z-30 inline-flex items-stretch bg-mira-900/90 backdrop-blur text-white text-xs font-medium rounded-full border border-white/15 shadow-lg overflow-hidden">
-      <button id="music-prev" aria-label="Previous track" class="px-3 py-2 hover:bg-mira-800 transition">&#171;</button>
+    <!-- Site-wide music cluster: prev / play-pause / next. The "Music on/off"
+         text label is hidden on phones (< sm) so the cluster stays compact.
+         On phones, the cluster sits ABOVE the WhatsApp bubble; on tablet+
+         it sits to its left as before. -->
+    <div id="music-cluster" class="fixed right-5 sm:right-20 z-30 inline-flex items-stretch bg-mira-900/90 backdrop-blur text-white text-xs font-medium rounded-full border border-white/15 shadow-lg overflow-hidden music-cluster-pos">
+      <button id="music-prev" aria-label="Previous track" class="px-2.5 sm:px-3 py-2 hover:bg-mira-800 transition">&#171;</button>
       <span class="w-px bg-white/15" aria-hidden="true"></span>
-      <button id="music-toggle" aria-label="Toggle music" class="inline-flex items-center gap-2 px-3 py-2 hover:bg-mira-800 transition">
-        <span aria-hidden="true">♪</span><span id="music-label">Music off</span>
+      <button id="music-toggle" aria-label="Toggle music" class="inline-flex items-center gap-2 px-2.5 sm:px-3 py-2 hover:bg-mira-800 transition">
+        <span aria-hidden="true">♪</span><span id="music-label" class="hidden sm:inline">Music off</span>
       </button>
       <span class="w-px bg-white/15" aria-hidden="true"></span>
-      <button id="music-next" aria-label="Next track" class="px-3 py-2 hover:bg-mira-800 transition">&#187;</button>
+      <button id="music-next" aria-label="Next track" class="px-2.5 sm:px-3 py-2 hover:bg-mira-800 transition">&#187;</button>
     </div>
     <audio id="ambient-audio" loop preload="auto"></audio>
 
-    <!-- Hero-video cluster (only the home page renders #hero-video; site.js
-         hides this control on other pages). -->
-    <div id="video-cluster" class="fixed bottom-5 left-16 z-30 inline-flex items-stretch bg-mira-900/90 backdrop-blur text-white text-xs font-medium rounded-full border border-white/15 shadow-lg overflow-hidden">
-      <button id="video-prev" aria-label="Previous video" class="px-3 py-2 hover:bg-mira-800 transition">&#171;</button>
+    <!-- Hero-video cluster (home page only; site.js hides on others).
+         Label text hidden on phones. -->
+    <div id="video-cluster" class="fixed left-12 sm:left-16 z-30 inline-flex items-stretch bg-mira-900/90 backdrop-blur text-white text-xs font-medium rounded-full border border-white/15 shadow-lg overflow-hidden floating-bottom-safe">
+      <button id="video-prev" aria-label="Previous video" class="px-2.5 sm:px-3 py-2 hover:bg-mira-800 transition">&#171;</button>
       <span class="w-px bg-white/15" aria-hidden="true"></span>
-      <button id="video-toggle" aria-label="Cycle hero video" class="inline-flex items-center gap-2 px-3 py-2 hover:bg-mira-800 transition">
-        <span aria-hidden="true">▶</span><span id="video-label">Video</span>
+      <button id="video-toggle" aria-label="Cycle hero video" class="inline-flex items-center gap-2 px-2.5 sm:px-3 py-2 hover:bg-mira-800 transition">
+        <span aria-hidden="true">▶</span><span id="video-label" class="hidden sm:inline">Video</span>
       </button>
       <span class="w-px bg-white/15" aria-hidden="true"></span>
-      <button id="video-next" aria-label="Next video" class="px-3 py-2 hover:bg-mira-800 transition">&#187;</button>
+      <button id="video-next" aria-label="Next video" class="px-2.5 sm:px-3 py-2 hover:bg-mira-800 transition">&#187;</button>
     </div>
 
     {customiser_panel(root)}
-    <script src="{root}assets/js/media-manifest.js?v=15" defer></script>
-    <script src="{root}assets/js/site.js?v=15" defer></script>
+    <script src="{root}assets/js/media-manifest.js?v=16" defer></script>
+    <script src="{root}assets/js/site.js?v=16" defer></script>
     </body></html>
     """)
 
