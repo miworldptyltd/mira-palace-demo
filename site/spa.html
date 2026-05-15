@@ -45,7 +45,7 @@ tailwind.config = {
   // because GitHub Pages hosts at /mira-palace-demo/ rather than /.
   window.MIRA_ROOT = "";
 </script>
-<link rel="stylesheet" href="assets/css/site.css?v=10" />
+<link rel="stylesheet" href="assets/css/site.css?v=11" />
 </head>
 <body class="font-body text-ink bg-sand-50 antialiased" data-root="">
 <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:top-3 focus:left-3 bg-mira-800 text-white px-3 py-2 rounded">Skip to content</a>
@@ -100,7 +100,10 @@ tailwind.config = {
 </header>
 <main id="main" class="pt-[88px] xl:pt-[96px]">
 <section class="relative hero-section" style="min-height:72vh;">
-  <div class="absolute inset-0 bg-cover bg-center hero-overlay" style="background-image:url('https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=1920&q=80');"></div>
+  <div class="hero-slideshow" data-slideshow data-interval="7000">
+    <div class="slide active" style="background-image:url('assets/img/spa/spa-01.jpg')"></div><div class="slide" style="background-image:url('assets/img/spa/spa-02.jpg')"></div><div class="slide" style="background-image:url('assets/img/spa/spa-03.jpg')"></div><div class="slide" style="background-image:url('assets/img/spa/spa-04.jpg')"></div>
+  </div>
+  <div class="absolute inset-0 hero-overlay pointer-events-none"></div>
   <div class="relative max-w-5xl mx-auto px-5 lg:px-8 pt-40 pb-28 text-white flex flex-col justify-end min-h-[inherit]" style="min-height:72vh;">
     <div class="max-w-3xl">
       <p class="uppercase tracking-[0.22em] text-sand-300 text-xs sm:text-sm font-semibold mb-4">Spa & Wellness</p>
@@ -116,7 +119,7 @@ tailwind.config = {
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-7 mt-10"><div class="p-7 bg-white rounded-lg shadow-lux"><h3 class="font-display text-2xl text-mira-900">Turkish hammam</h3><p class="mt-3 text-mira-700 text-sm leading-relaxed">Marble chamber heated from underneath, round göbek taşı in the centre, cold-water basins along the walls. Peştemal-wrapped attendants with over a decade of experience.</p></div><div class="p-7 bg-white rounded-lg shadow-lux"><h3 class="font-display text-2xl text-mira-900">Saunas & steam</h3><p class="mt-3 text-mira-700 text-sm leading-relaxed">A traditional dry sauna, an aroma sauna scented lightly with eucalyptus, and a steam room with Anatolian herbs.</p></div><div class="p-7 bg-white rounded-lg shadow-lux"><h3 class="font-display text-2xl text-mira-900">Cold plunge</h3><p class="mt-3 text-mira-700 text-sm leading-relaxed">12 °C. The short sharp contrast that people come to Turkish hammams for in the first place.</p></div><div class="p-7 bg-white rounded-lg shadow-lux"><h3 class="font-display text-2xl text-mira-900">Relaxation room</h3><p class="mt-3 text-mira-700 text-sm leading-relaxed">A dim, softly-heated room with reclining chaises, fresh mint water, and stacks of fresh towels. The place to land after a hammam ritual.</p></div><div class="p-7 bg-white rounded-lg shadow-lux"><h3 class="font-display text-2xl text-mira-900">Fitness studio</h3><p class="mt-3 text-mira-700 text-sm leading-relaxed">Cardio (treadmill, rower, bike) and light weights. Two group classes per day — typically yoga in the morning and stretch or aqua-fit in the afternoon.</p></div><div class="p-7 bg-white rounded-lg shadow-lux"><h3 class="font-display text-2xl text-mira-900">Six treatment rooms</h3><p class="mt-3 text-mira-700 text-sm leading-relaxed">Two single, two double, and two specialist rooms (wet room for body scrubs, hammam-side room for scrub + massage combinations). Heated tables, quiet.</p></div></div>
     </div></section><section class="bg-white py-20 lg:py-28 scroll-mt-24"><div class="max-w-7xl mx-auto px-5 lg:px-8">
       <div class="grid lg:grid-cols-2 gap-12 items-center">
-        <div class="aspect-[4/3] bg-cover bg-center rounded-lg shadow-lux" style="background-image:url('https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1600&q=80')"></div>
+        <div class="aspect-[4/3] bg-cover bg-center rounded-lg shadow-lux" style="background-image:url('assets/img/spa/spa-05.jpg')"></div>
         <div><p class="uppercase tracking-[0.22em] text-mira-600 text-xs font-semibold">The hammam ritual</p>
           <h3 class="font-display text-2xl sm:text-3xl text-mira-900 leading-tight ">Ninety minutes, five stages.</h3>
           <ol class="mt-6 space-y-4 text-mira-700">
@@ -314,6 +317,6 @@ tailwind.config = {
   </div>
 </div>
 
-    <script src="assets/js/media-manifest.js?v=16" defer></script>
-    <script src="assets/js/site.js?v=16" defer></script>
+    <script src="assets/js/media-manifest.js?v=17" defer></script>
+    <script src="assets/js/site.js?v=17" defer></script>
     </body></html>

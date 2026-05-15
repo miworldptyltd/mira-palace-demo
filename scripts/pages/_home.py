@@ -1,19 +1,25 @@
-from common import hero, hero_video, section, eyebrow, heading, card, feature_strip, cta_band, quote_block
+from common import hero, hero_video, hero_slideshow, section, eyebrow, heading, card, feature_strip, cta_band, quote_block
 
-IMG_POOL = "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1920&q=80"
-IMG_ROOM = "https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&w=1200&q=80"
+IMG_POOL = "assets/img/garden/garden-01.jpg"
+IMG_GARDEN_2 = "assets/img/garden/garden-02.jpg"
+IMG_GARDEN_3 = "assets/img/garden/garden-03.jpg"
+IMG_GARDEN_4 = "assets/img/garden/garden-04.jpg"
+IMG_ROOM = "assets/img/king/king-01.jpg"   # real King Suite signature shot
 IMG_DINING = "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80"
-IMG_SPA = "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=1200&q=80"
+IMG_SPA = "assets/img/spa/spa-01.jpg"      # real spa hero shot
 IMG_BEACH = "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=80"
 IMG_LOBBY = "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1920&q=80"
 IMG_BREAKFAST = "https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?auto=format&fit=crop&w=1200&q=80"
 
+# HERO_POSTER is the still image visible while the home-page hero video
+# is buffering. Real Mira Palace garden shot looks more inviting than a
+# stock pool photo.
 HERO_POSTER = IMG_POOL
 
 
 def home(root: str) -> str:
     h = hero_video(
-        HERO_POSTER,
+        f"{root}{HERO_POSTER}",
         "Side • Antalya • Türkiye",
         "The Turkish Riviera,<br/>reimagined in quiet luxury.",
         "Thirty-four suites, four pools, and a Mediterranean shoreline 600 metres from your door. Mira Palace is a small, boutique all-inclusive where the entire team knows your name by the second morning.",
@@ -38,9 +44,9 @@ def home(root: str) -> str:
       {eyebrow('Three ways to spend a day')}
       {heading('Stay. Eat. Unwind.')}
       <div class="grid md:grid-cols-3 gap-7 mt-12">
-        {card(IMG_ROOM, "Suites", "Four suite types from 22 to 42 m² — Standard, Deluxe, Family and the King Suite. Garden courtyard or sea-view balcony, all with full en-suite.", f"{root}rooms/", "See our suites")}
+        {card(f"{root}{IMG_ROOM}", "Suites", "Four suite types from 22 to 42 m² — Standard, Deluxe, Family and the King Suite. Garden courtyard or sea-view balcony, all with full en-suite.", f"{root}rooms/", "See our suites")}
         {card(IMG_DINING, "Dining", "Four outlets under one roof — from the open buffet kitchen to à-la-carte evenings by the pool and a lobby bar that stays open late.", f"{root}dining/", "Discover dining")}
-        {card(IMG_SPA, "Spa & wellness", "A full Turkish hammam, two saunas, a steam room, cold plunge, and a treatment menu from a 40-minute back massage to a three-hour hammam ritual.", f"{root}spa.html", "Enter the spa")}
+        {card(f"{root}{IMG_SPA}", "Spa & wellness", "A full Turkish hammam, two saunas, a steam room, cold plunge, and a treatment menu from a 40-minute back massage to a three-hour hammam ritual.", f"{root}spa.html", "Enter the spa")}
       </div>
     """, bg="bg-white")
     concept_band = cta_band(
@@ -62,13 +68,13 @@ def home(root: str) -> str:
         <a href="{root}gallery.html" class="text-sm font-medium text-mira-700 hover:text-sand-500 inline-flex items-center gap-2">Full gallery <span>→</span></a>
       </div>
       <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-        <div class="aspect-[4/5] bg-cover bg-center rounded" style="background-image:url('{IMG_POOL}')"></div>
-        <div class="aspect-[4/5] bg-cover bg-center rounded" style="background-image:url('{IMG_ROOM}')"></div>
+        <div class="aspect-[4/5] bg-cover bg-center rounded" style="background-image:url('{root}{IMG_POOL}')"></div>
+        <div class="aspect-[4/5] bg-cover bg-center rounded" style="background-image:url('{root}assets/img/king/king-03.jpg')"></div>
         <div class="aspect-[4/5] bg-cover bg-center rounded" style="background-image:url('{IMG_DINING}')"></div>
-        <div class="aspect-[4/5] bg-cover bg-center rounded" style="background-image:url('{IMG_SPA}')"></div>
-        <div class="aspect-[4/5] bg-cover bg-center rounded" style="background-image:url('{IMG_BEACH}')"></div>
+        <div class="aspect-[4/5] bg-cover bg-center rounded" style="background-image:url('{root}assets/img/spa/spa-02.jpg')"></div>
+        <div class="aspect-[4/5] bg-cover bg-center rounded" style="background-image:url('{root}assets/img/garden/garden-05.jpg')"></div>
         <div class="aspect-[4/5] bg-cover bg-center rounded" style="background-image:url('{IMG_BREAKFAST}')"></div>
-        <div class="aspect-[4/5] bg-cover bg-center rounded" style="background-image:url('{IMG_LOBBY}')"></div>
+        <div class="aspect-[4/5] bg-cover bg-center rounded" style="background-image:url('{root}assets/img/deluxe/deluxe-02.jpg')"></div>
         <div class="aspect-[4/5] bg-cover bg-center rounded bg-mira-700 grid place-items-center text-sand-200 font-display text-xl"><a href="{root}gallery.html">See all →</a></div>
       </div>
     """, bg="bg-white")
@@ -91,8 +97,10 @@ def home(root: str) -> str:
 
 
 def about(root: str) -> str:
-    h = hero(
-        IMG_LOBBY,
+    # 4-slide garden hero — sweeping, evocative, real Mira Palace photography
+    hero_urls = [f"{root}{u}" for u in (IMG_POOL, IMG_GARDEN_2, IMG_GARDEN_3, IMG_GARDEN_4)]
+    h = hero_slideshow(
+        hero_urls,
         "Our story",
         "Small hotel. Big intent.",
         "Opened in May 2022 by a family who believed the Turkish Riviera deserved a boutique option between the sprawling resorts and the guesthouses — where service feels personal and the design tells a story.",
@@ -124,7 +132,7 @@ def about(root: str) -> str:
         "Every review we read starts with the same sentence: it felt like a home. Book direct and get a bottle of local wine on arrival, a late check-out when it's possible, and a welcome from the owner's family.",
         f"{root}contact.html#enquiry",
         "Plan your stay",
-        IMG_POOL,
+        f"{root}{IMG_POOL}",
     )
     return h + story + values + cta
 

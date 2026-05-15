@@ -1,5 +1,9 @@
 # Changelog
 
+## [R002] - 2026-05-15
+
+feat: Suite rename + real Mira Palace photography + Ken-Burns/slideshow motion + payment-coming-soon notice + mobile polish
+
 All notable changes to the Mira Palace demo website are recorded here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/);
 versions follow [Semantic Versioning](https://semver.org/).
@@ -85,3 +89,4 @@ First publishable build. Sent to the hotel for owner review.
 - LICENSE is all-rights-reserved proprietary.
 
 [0.1.0]: https://github.com/-/-/releases/tag/v0.1.0
+

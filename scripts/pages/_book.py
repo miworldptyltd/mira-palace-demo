@@ -1,12 +1,19 @@
 """Dedicated booking page — distinct from Contact, focused only on the room booking flow."""
-from common import hero, section, eyebrow, heading, lead, SITE_META
+from common import hero_slideshow, section, eyebrow, heading, lead, SITE_META
 
-IMG_BOOK = "https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&w=1920&q=80"
+# Real King Suite + Deluxe + garden photos drive the booking hero
+BOOK_HERO_IMGS = [
+    "assets/img/king/king-01.jpg",
+    "assets/img/deluxe/deluxe-01.jpg",
+    "assets/img/garden/garden-01.jpg",
+    "assets/img/king/king-05.jpg",
+]
 
 
 def book(root: str) -> str:
     m = SITE_META
-    h = hero(IMG_BOOK, "Book a stay",
+    hero_urls = [f"{root}{u}" for u in BOOK_HERO_IMGS]
+    h = hero_slideshow(hero_urls, "Book a stay",
              "Reserve your suite.",
              "Tell us your dates below and our reservations team will confirm availability and a quote as soon as possible.",
              height="58vh")

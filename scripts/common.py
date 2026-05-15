@@ -80,7 +80,7 @@ tailwind.config = {{
   // because GitHub Pages hosts at /mira-palace-demo/ rather than /.
   window.MIRA_ROOT = "{root}";
 </script>
-<link rel="stylesheet" href="{root}assets/css/site.css?v=10" />
+<link rel="stylesheet" href="{root}assets/css/site.css?v=11" />
 </head>
 <body class="font-body text-ink bg-sand-50 antialiased" data-root="{root}">
 <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:top-3 focus:left-3 bg-mira-800 text-white px-3 py-2 rounded">Skip to content</a>
@@ -320,8 +320,8 @@ def footer(root: str) -> str:
     </div>
 
     {customiser_panel(root)}
-    <script src="{root}assets/js/media-manifest.js?v=16" defer></script>
-    <script src="{root}assets/js/site.js?v=16" defer></script>
+    <script src="{root}assets/js/media-manifest.js?v=17" defer></script>
+    <script src="{root}assets/js/site.js?v=17" defer></script>
     </body></html>
     """)
 
@@ -422,7 +422,45 @@ def hero(img_url: str, kicker: str, heading: str, sub: str, primary_href: str = 
                f'rounded-full font-medium tracking-wide hover:bg-sand-200 shadow-lux transition">{primary_label}</a>')
     return dedent(f"""
     <section class="relative hero-section" style="min-height:{height};">
-      <div class="absolute inset-0 bg-cover bg-center hero-overlay" style="background-image:url('{img_url}');"></div>
+      <div class="absolute inset-0 hero-overlay" style="background-image:url('{img_url}'); background-size:cover; background-position:center;"></div>
+      <div class="relative max-w-5xl mx-auto px-5 lg:px-8 pt-40 pb-28 text-white flex flex-col justify-end min-h-[inherit]" style="min-height:{height};">
+        <div class="max-w-3xl">
+          <p class="uppercase tracking-[0.22em] text-sand-300 text-xs sm:text-sm font-semibold mb-4">{kicker}</p>
+          <h1 class="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.05]">{heading}</h1>
+          <p class="mt-5 max-w-2xl text-base sm:text-lg text-white/90 leading-relaxed">{sub}</p>
+          <div class="mt-8 flex flex-wrap gap-3">{cta}</div>
+        </div>
+      </div>
+    </section>
+    """)
+
+
+def hero_slideshow(image_urls, kicker: str, heading: str, sub: str,
+                   primary_href: str = "", primary_label: str = "",
+                   height: str = "80vh", interval_ms: int = 7000) -> str:
+    """Hero with auto-rotating slideshow + Ken-Burns slow zoom on each slide.
+    Pass a list of image URLs; if only one is supplied it renders as a single
+    Ken-Burns still (no rotation). Respects prefers-reduced-motion."""
+    if not image_urls:
+        return ""
+    if isinstance(image_urls, str):
+        image_urls = [image_urls]
+    slides = ""
+    for i, url in enumerate(image_urls):
+        cls = "slide active" if i == 0 else "slide"
+        slides += f'<div class="{cls}" style="background-image:url(\'{url}\')"></div>'
+    multi = len(image_urls) > 1
+    attrs = f'data-slideshow data-interval="{interval_ms}"' if multi else ""
+    cta = ""
+    if primary_href:
+        cta = (f'<a href="{primary_href}" class="inline-flex items-center justify-center px-7 py-3 bg-sand-300 text-mira-900 '
+               f'rounded-full font-medium tracking-wide hover:bg-sand-200 shadow-lux transition">{primary_label}</a>')
+    return dedent(f"""
+    <section class="relative hero-section" style="min-height:{height};">
+      <div class="hero-slideshow" {attrs}>
+        {slides}
+      </div>
+      <div class="absolute inset-0 hero-overlay pointer-events-none"></div>
       <div class="relative max-w-5xl mx-auto px-5 lg:px-8 pt-40 pb-28 text-white flex flex-col justify-end min-h-[inherit]" style="min-height:{height};">
         <div class="max-w-3xl">
           <p class="uppercase tracking-[0.22em] text-sand-300 text-xs sm:text-sm font-semibold mb-4">{kicker}</p>

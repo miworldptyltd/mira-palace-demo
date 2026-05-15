@@ -23,6 +23,45 @@
   bottom: max(20px, env(safe-area-inset-bottom));
 }
 
+/* -----------------------------------------------------------------------
+   HERO SLIDESHOW + KEN-BURNS SLOW ZOOM
+   - Single image: gentle scale 1.0 -> 1.06 over 22s, infinite alternate
+   - Slideshow: cross-fade between layered slides every ~7s + same Ken-Burns
+   - Both honour prefers-reduced-motion (stops all motion).
+   ----------------------------------------------------------------------- */
+.hero-slideshow {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+.hero-slideshow .slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 1.2s ease-in-out;
+  will-change: opacity, transform;
+  animation: hero-kenburns 12s ease-in-out infinite alternate;
+}
+.hero-slideshow .slide.active {
+  opacity: 1;
+}
+/* Single static Ken-Burns image (no slideshow): slower zoom for a calmer feel */
+.kenburns-still {
+  animation: hero-kenburns 22s ease-in-out infinite alternate;
+  transform-origin: center;
+  will-change: transform;
+}
+@keyframes hero-kenburns {
+  0%   { transform: scale(1.00); }
+  100% { transform: scale(1.06); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-slideshow .slide,
+  .kenburns-still { animation: none !important; }
+}
+
 /* Tap-target hit-area minimum: 44x44px (Apple's HIG, WCAG AAA).            */
 .music-cluster-pos button,
 #video-cluster button,

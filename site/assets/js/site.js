@@ -560,4 +560,22 @@
   document.querySelectorAll('.nav-flag').forEach((b) => {
     b.addEventListener('click', () => triggerLang(b.dataset.lang, b));
   });
+
+  // ----- Hero slideshow controller --------------------------------------
+  // Each .hero-slideshow with [data-slideshow] rotates through its .slide
+  // children every `data-interval` ms (default 7000). Honours
+  // prefers-reduced-motion by staying on the first slide if the visitor
+  // has reduced-motion enabled in their OS.
+  const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll('.hero-slideshow[data-slideshow]').forEach((s) => {
+    const slides = Array.prototype.slice.call(s.querySelectorAll('.slide'));
+    if (slides.length < 2 || reduce) return;
+    const ms = parseInt(s.dataset.interval || '7000', 10);
+    let i = 0;
+    setInterval(function () {
+      slides[i].classList.remove('active');
+      i = (i + 1) % slides.length;
+      slides[i].classList.add('active');
+    }, ms);
+  });
 })();

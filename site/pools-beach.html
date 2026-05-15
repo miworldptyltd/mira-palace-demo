@@ -45,7 +45,7 @@ tailwind.config = {
   // because GitHub Pages hosts at /mira-palace-demo/ rather than /.
   window.MIRA_ROOT = "";
 </script>
-<link rel="stylesheet" href="assets/css/site.css?v=10" />
+<link rel="stylesheet" href="assets/css/site.css?v=11" />
 </head>
 <body class="font-body text-ink bg-sand-50 antialiased" data-root="">
 <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:top-3 focus:left-3 bg-mira-800 text-white px-3 py-2 rounded">Skip to content</a>
@@ -100,7 +100,10 @@ tailwind.config = {
 </header>
 <main id="main" class="pt-[88px] xl:pt-[96px]">
 <section class="relative hero-section" style="min-height:72vh;">
-  <div class="absolute inset-0 bg-cover bg-center hero-overlay" style="background-image:url('https://images.unsplash.com/photo-1540541338287-41700207dee6?auto=format&fit=crop&w=1920&q=80');"></div>
+  <div class="hero-slideshow" data-slideshow data-interval="7000">
+    <div class="slide active" style="background-image:url('assets/img/garden/garden-01.jpg')"></div><div class="slide" style="background-image:url('assets/img/garden/garden-02.jpg')"></div><div class="slide" style="background-image:url('assets/img/garden/garden-03.jpg')"></div><div class="slide" style="background-image:url('assets/img/garden/garden-04.jpg')"></div>
+  </div>
+  <div class="absolute inset-0 hero-overlay pointer-events-none"></div>
   <div class="relative max-w-5xl mx-auto px-5 lg:px-8 pt-40 pb-28 text-white flex flex-col justify-end min-h-[inherit]" style="min-height:72vh;">
     <div class="max-w-3xl">
       <p class="uppercase tracking-[0.22em] text-sand-300 text-xs sm:text-sm font-semibold mb-4">Pools & Beach</p>
@@ -127,13 +130,13 @@ tailwind.config = {
             <li class="flex gap-3"><span class="text-sand-500">✓</span>Watersports (jet-ski, banana boat) operated by third-party at surcharge</li>
           </ul>
         </div>
-        <div class="aspect-[4/5] bg-cover bg-center rounded-lg shadow-lux" style="background-image:url('https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1600&q=80')"></div>
+        <div class="aspect-[4/5] bg-cover bg-center rounded-lg shadow-lux" style="background-image:url('assets/img/garden/garden-02.jpg')"></div>
       </div>
     </div></section><section class="bg-sand-50 py-20 lg:py-28 scroll-mt-24"><div class="max-w-7xl mx-auto px-5 lg:px-8">
-      <div class="aspect-[16/6] rounded-lg bg-cover bg-center shadow-lux" style="background-image:url('https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1600&q=80')"></div>
+      <div class="aspect-[16/6] rounded-lg bg-cover bg-center shadow-lux" style="background-image:url('assets/img/garden/garden-03.jpg')"></div>
     </div></section>
 <section class="relative">
-  <div class="absolute inset-0 bg-cover bg-center" style="background-image:linear-gradient(180deg,rgba(19,38,48,.55),rgba(19,38,48,.75)),url('https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=1920&q=80')"></div>
+  <div class="absolute inset-0 bg-cover bg-center" style="background-image:linear-gradient(180deg,rgba(19,38,48,.55),rgba(19,38,48,.75)),url('assets/img/spa/spa-01.jpg')"></div>
   <div class="relative max-w-5xl mx-auto px-5 lg:px-8 py-24 text-center text-white">
     <h2 class="font-display text-3xl sm:text-4xl md:text-5xl">A pool for every mood — and a spa for when the sun is too much.</h2>
     <p class="mt-5 max-w-2xl mx-auto text-white/90">Our Turkish hammam, two saunas, a steam room, a cold plunge and a small but considered treatment menu sit next to the indoor pool.</p>
@@ -325,6 +328,6 @@ tailwind.config = {
   </div>
 </div>
 
-    <script src="assets/js/media-manifest.js?v=16" defer></script>
-    <script src="assets/js/site.js?v=16" defer></script>
+    <script src="assets/js/media-manifest.js?v=17" defer></script>
+    <script src="assets/js/site.js?v=17" defer></script>
     </body></html>

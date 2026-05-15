@@ -1,12 +1,26 @@
-from common import hero, section, eyebrow, heading, lead, card
+from common import hero, hero_slideshow, section, eyebrow, heading, lead, card
 from textwrap import dedent
 
-IMG_STD = "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1600&q=80"
-IMG_DLX = "https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&w=1600&q=80"
-IMG_FAM = "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?auto=format&fit=crop&w=1600&q=80"
-IMG_SUITE = "https://images.unsplash.com/photo-1590073242678-70ee3fc28e8e?auto=format&fit=crop&w=1600&q=80"
-IMG_BATH = "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=1200&q=80"
-IMG_BALCONY = "https://images.unsplash.com/photo-1540541338287-41700207dee6?auto=format&fit=crop&w=1200&q=80"
+# Real Mira Palace photography, copied from reference\gallery by Copy-Photos.ps1
+# and resized to ~1920 px wide JPEGs in site\assets\img\<slug>\.
+# Counts here = how many files exist in each folder after the migration.
+_PHOTO_COUNTS = {"standard": 14, "deluxe": 34, "family": 1, "king": 16}
+
+def _imgs(slug: str, n: int | None = None) -> list[str]:
+    """Build a list of relative image paths for a given room slug. If n is
+    None, returns ALL images in the folder. Otherwise returns the first n."""
+    total = _PHOTO_COUNTS.get(slug, 0)
+    take = total if n is None else min(n, total)
+    return [f"assets/img/{slug}/{slug}-{i:02d}.jpg" for i in range(1, take + 1)]
+
+IMG_STD   = f"assets/img/standard/standard-01.jpg"
+IMG_DLX   = f"assets/img/deluxe/deluxe-01.jpg"
+IMG_FAM   = f"assets/img/family/family-01.jpg"
+IMG_SUITE = f"assets/img/king/king-01.jpg"
+# Fallback (decorative) images — used when a room folder doesn't have enough
+# of its own to fill the inline gallery.
+IMG_BATH    = f"assets/img/king/king-02.jpg"
+IMG_BALCONY = f"assets/img/garden/garden-01.jpg"
 
 # NB: "count" is the number of suites in the property (internal use only — the
 # website never displays it). It feeds the FAQ doc in reference\documents\.
@@ -26,7 +40,7 @@ def rooms_index(root: str) -> str:
     cards_html = "".join(
         dedent(f"""
         <a href="{root}rooms/{r['slug']}.html" class="group grid md:grid-cols-5 gap-0 bg-white rounded-lg overflow-hidden shadow-lux">
-          <div class="md:col-span-3 aspect-[16/10] md:aspect-auto bg-cover bg-center" style="background-image:url('{r['img']}')"></div>
+          <div class="md:col-span-3 aspect-[16/10] md:aspect-auto bg-cover bg-center" style="background-image:url('{root}{r['img']}')"></div>
           <div class="md:col-span-2 p-8 flex flex-col">
             <div class="text-xs uppercase tracking-widest text-sand-600">{r['tag']}</div>
             <h3 class="font-display text-3xl text-mira-900 mt-2">{r['name']}</h3>
@@ -39,11 +53,13 @@ def rooms_index(root: str) -> str:
         </a>
         """) for r in ROOM_TYPES
     )
-    h = hero(
-        IMG_DLX,
-        "Rooms & Suites",
+    # Hero is a slideshow drawn from the strongest folder (deluxe — 34 photos)
+    hero_imgs = [f"{root}assets/img/deluxe/deluxe-{i:02d}.jpg" for i in (1, 6, 14, 22)]
+    h = hero_slideshow(
+        hero_imgs,
+        "Suites",
         "Thirty-four suites.<br/>Four ways to sleep.",
-        "Every room at Mira Palace is individually styled — no two are identical, but all share the same hand-woven linens, the same Turkish ceramics, and the same Mediterranean light through the shutters.",
+        "Every suite at Mira Palace is individually styled — no two are identical, but all share the same hand-woven linens, the same Turkish ceramics, and the same Mediterranean light through the shutters.",
         height="68vh",
     )
     body = section(f"""
@@ -80,12 +96,24 @@ def _room_detail(r: dict, root: str, long_body: str, extra_imgs: list[str]) -> s
     am_l = "".join(f'<li class="flex gap-3"><span class="text-sand-500">✓</span><span>{a}</span></li>' for a in amenities_left)
     am_r = "".join(f'<li class="flex gap-3"><span class="text-sand-500">✓</span><span>{a}</span></li>' for a in amenities_right)
     gallery = "".join(
-        f'<div class="aspect-[4/3] bg-cover bg-center rounded" style="background-image:url(\'{u}\')"></div>'
+        f'<div class="aspect-[4/3] bg-cover bg-center rounded" style="background-image:url(\'{root}{u}\')"></div>'
         for u in extra_imgs
     )
-    h = hero(r["img"], "Rooms & Suites", r["name"],
-             f'{r["size"]} · {r["view"]} · Sleeps {r["sleeps"]}. {r["short"]}',
-             primary_href=f"{root}contact.html#enquiry", primary_label="Enquire for your dates", height="72vh")
+    # Hero — slideshow if the room folder has 3+ photos, otherwise Ken-Burns
+    # still on the single hero image.
+    slug = r["slug"]
+    slideshow_imgs = _imgs(slug, 4)  # up to 4 hero slides
+    if len(slideshow_imgs) >= 2:
+        hero_urls = [f"{root}{u}" for u in slideshow_imgs]
+        h = hero_slideshow(hero_urls, "Suites", r["name"],
+                           f'{r["size"]} · {r["view"]} · Sleeps {r["sleeps"]}. {r["short"]}',
+                           primary_href=f"{root}contact.html#enquiry",
+                           primary_label="Enquire for your dates", height="72vh")
+    else:
+        h = hero(f"{root}{r['img']}", "Suites", r["name"],
+                 f'{r["size"]} · {r["view"]} · Sleeps {r["sleeps"]}. {r["short"]}',
+                 primary_href=f"{root}contact.html#enquiry",
+                 primary_label="Enquire for your dates", height="72vh")
     body = section(f"""
       <div class="grid lg:grid-cols-12 gap-12">
         <div class="lg:col-span-7 text-mira-700 leading-relaxed text-lg space-y-5">
@@ -122,7 +150,7 @@ def _room_detail(r: dict, root: str, long_body: str, extra_imgs: list[str]) -> s
       <div class="mt-8 grid grid-cols-2 md:grid-cols-4 gap-3">{gallery}</div>
     """, bg="bg-white")
     other_rooms_cards = "".join(
-        f'<a href="{root}rooms/{o["slug"]}.html" class="group block"><div class="aspect-[4/3] bg-cover bg-center rounded" style="background-image:url(\'{o["img"]}\')"></div><h4 class="mt-3 font-display text-lg text-mira-900 group-hover:text-sand-600">{o["name"]}</h4><p class="text-xs text-mira-600">{o["size"]} · {o["view"]}</p></a>'
+        f'<a href="{root}rooms/{o["slug"]}.html" class="group block"><div class="aspect-[4/3] bg-cover bg-center rounded" style="background-image:url(\'{root}{o["img"]}\')"></div><h4 class="mt-3 font-display text-lg text-mira-900 group-hover:text-sand-600">{o["name"]}</h4><p class="text-xs text-mira-600">{o["size"]} · {o["view"]}</p></a>'
         for o in ROOM_TYPES if o["slug"] != r["slug"]
     )
     others = section(f"""
@@ -140,7 +168,7 @@ def standard(root: str) -> str:
       <p>The bathroom is a walk-in rain shower with Iznik tiles laid by a family workshop an hour from here, a double vanity, and a mirror the size of a window. The linens are Denizli cotton — the same fabric the hammam uses for peştemals. The desk is oak, from a workshop in Antalya's bazaar district.</p>
       <p>It is a suite designed to be used quietly. Most of the guests who book it spend their days at the pool or the beach and come back in the evening to change. It does that job extremely well — and if you want a little more room, we have three larger categories.</p>
     """
-    return _room_detail(r, root, long_body, [IMG_STD, IMG_BATH, IMG_BALCONY, IMG_DLX])
+    return _room_detail(r, root, long_body, _imgs("standard", 8) or [IMG_STD, IMG_BATH, IMG_BALCONY, IMG_DLX])
 
 
 def deluxe(root: str) -> str:
@@ -150,7 +178,7 @@ def deluxe(root: str) -> str:
       <p>The bathroom adds a long marble bench to the rain shower — a small detail, but the kind that turns a shower into a place you linger. Bathrobes are waffle-textured rather than flat; bedside lighting is individually controlled.</p>
       <p>Our most booked category for couples celebrating something — anniversaries, honeymoons, birthdays with a zero on them. If it's one of those trips, write a note on the booking and we'll arrange a small something on the balcony at turndown.</p>
     """
-    return _room_detail(r, root, long_body, [IMG_DLX, IMG_BATH, IMG_BALCONY, IMG_SUITE])
+    return _room_detail(r, root, long_body, _imgs("deluxe", 8) or [IMG_DLX, IMG_BATH, IMG_BALCONY, IMG_SUITE])
 
 
 def family(root: str) -> str:
@@ -160,7 +188,8 @@ def family(root: str) -> str:
       <p>Both rooms open off a small hall with a door that closes. The shared bathroom is larger than the Standard's, with a deep tub alongside the shower and a second sink. Storage is planned for family trips — a wardrobe long enough for adult hanging, deep enough for children's luggage, and a chest with drawers marked with pictograms so small hands can find their own T-shirts.</p>
       <p>Baby cots, high-chairs at the restaurant, childproof socket covers, and a kids' welcome pack (colouring book, pencils, a Mira Palace teddy) all come as standard.</p>
     """
-    return _room_detail(r, root, long_body, [IMG_FAM, IMG_BATH, IMG_STD, IMG_BALCONY])
+    # Only 1 family-suite photo, pad gallery with related shared spaces
+    return _room_detail(r, root, long_body, [IMG_FAM, IMG_STD, IMG_BATH, IMG_BALCONY])
 
 
 def king(root: str) -> str:
@@ -170,7 +199,7 @@ def king(root: str) -> str:
       <p>The bathroom is the reason many of our returning guests return. A freestanding deep tub, a separate rain shower, a window with a view, and — because this is why you came — a full amenity kit: oils, salts, a bath brush, a bath caddy for a glass of wine.</p>
       <p>The balcony wraps around the corner of the building: twelve square metres with a sun lounger, two chairs, a dining table for two, and planters that change with the season. In summer, jasmine; in winter, rosemary and lavender.</p>
     """
-    return _room_detail(r, root, long_body, [IMG_SUITE, IMG_BATH, IMG_BALCONY, IMG_DLX])
+    return _room_detail(r, root, long_body, _imgs("king", 8) or [IMG_SUITE, IMG_BATH, IMG_BALCONY, IMG_DLX])
 
 
 def _redirect_to_king(root: str) -> str:

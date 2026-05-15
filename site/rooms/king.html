@@ -45,7 +45,7 @@ tailwind.config = {
   // because GitHub Pages hosts at /mira-palace-demo/ rather than /.
   window.MIRA_ROOT = "../";
 </script>
-<link rel="stylesheet" href="../assets/css/site.css?v=10" />
+<link rel="stylesheet" href="../assets/css/site.css?v=11" />
 </head>
 <body class="font-body text-ink bg-sand-50 antialiased" data-root="../">
 <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:top-3 focus:left-3 bg-mira-800 text-white px-3 py-2 rounded">Skip to content</a>
@@ -100,10 +100,13 @@ tailwind.config = {
 </header>
 <main id="main" class="pt-[88px] xl:pt-[96px]">
 <section class="relative hero-section" style="min-height:72vh;">
-  <div class="absolute inset-0 bg-cover bg-center hero-overlay" style="background-image:url('https://images.unsplash.com/photo-1590073242678-70ee3fc28e8e?auto=format&fit=crop&w=1600&q=80');"></div>
+  <div class="hero-slideshow" data-slideshow data-interval="7000">
+    <div class="slide active" style="background-image:url('../assets/img/king/king-01.jpg')"></div><div class="slide" style="background-image:url('../assets/img/king/king-02.jpg')"></div><div class="slide" style="background-image:url('../assets/img/king/king-03.jpg')"></div><div class="slide" style="background-image:url('../assets/img/king/king-04.jpg')"></div>
+  </div>
+  <div class="absolute inset-0 hero-overlay pointer-events-none"></div>
   <div class="relative max-w-5xl mx-auto px-5 lg:px-8 pt-40 pb-28 text-white flex flex-col justify-end min-h-[inherit]" style="min-height:72vh;">
     <div class="max-w-3xl">
-      <p class="uppercase tracking-[0.22em] text-sand-300 text-xs sm:text-sm font-semibold mb-4">Rooms & Suites</p>
+      <p class="uppercase tracking-[0.22em] text-sand-300 text-xs sm:text-sm font-semibold mb-4">Suites</p>
       <h1 class="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.05]">King Suite</h1>
       <p class="mt-5 max-w-2xl text-base sm:text-lg text-white/90 leading-relaxed">42 m² · Sea view · Sleeps 2 adults + 1 child. A sitting-room and a separate bedroom, a deep freestanding tub, and a wrap-around balcony.</p>
       <div class="mt-8 flex flex-wrap gap-3"><a href="../contact.html#enquiry" class="inline-flex items-center justify-center px-7 py-3 bg-sand-300 text-mira-900 rounded-full font-medium tracking-wide hover:bg-sand-200 shadow-lux transition">Enquire for your dates</a></div>
@@ -145,11 +148,11 @@ tailwind.config = {
     </div></section><section class="bg-white py-20 lg:py-28 scroll-mt-24"><div class="max-w-7xl mx-auto px-5 lg:px-8">
       <p class="uppercase tracking-[0.22em] text-mira-600 text-xs font-semibold">Inside the room</p>
       <h3 class="font-display text-2xl sm:text-3xl text-mira-900 leading-tight ">A closer look.</h3>
-      <div class="mt-8 grid grid-cols-2 md:grid-cols-4 gap-3"><div class="aspect-[4/3] bg-cover bg-center rounded" style="background-image:url('https://images.unsplash.com/photo-1590073242678-70ee3fc28e8e?auto=format&fit=crop&w=1600&q=80')"></div><div class="aspect-[4/3] bg-cover bg-center rounded" style="background-image:url('https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=1200&q=80')"></div><div class="aspect-[4/3] bg-cover bg-center rounded" style="background-image:url('https://images.unsplash.com/photo-1540541338287-41700207dee6?auto=format&fit=crop&w=1200&q=80')"></div><div class="aspect-[4/3] bg-cover bg-center rounded" style="background-image:url('https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&w=1600&q=80')"></div></div>
+      <div class="mt-8 grid grid-cols-2 md:grid-cols-4 gap-3"><div class="aspect-[4/3] bg-cover bg-center rounded" style="background-image:url('../assets/img/king/king-01.jpg')"></div><div class="aspect-[4/3] bg-cover bg-center rounded" style="background-image:url('../assets/img/king/king-02.jpg')"></div><div class="aspect-[4/3] bg-cover bg-center rounded" style="background-image:url('../assets/img/king/king-03.jpg')"></div><div class="aspect-[4/3] bg-cover bg-center rounded" style="background-image:url('../assets/img/king/king-04.jpg')"></div><div class="aspect-[4/3] bg-cover bg-center rounded" style="background-image:url('../assets/img/king/king-05.jpg')"></div><div class="aspect-[4/3] bg-cover bg-center rounded" style="background-image:url('../assets/img/king/king-06.jpg')"></div><div class="aspect-[4/3] bg-cover bg-center rounded" style="background-image:url('../assets/img/king/king-07.jpg')"></div><div class="aspect-[4/3] bg-cover bg-center rounded" style="background-image:url('../assets/img/king/king-08.jpg')"></div></div>
     </div></section><section class="bg-sand-50 py-20 lg:py-28 scroll-mt-24"><div class="max-w-7xl mx-auto px-5 lg:px-8">
       <p class="uppercase tracking-[0.22em] text-mira-600 text-xs font-semibold">Other rooms</p>
       <h3 class="font-display text-2xl sm:text-3xl text-mira-900 leading-tight ">You may also like.</h3>
-      <div class="mt-8 grid grid-cols-2 md:grid-cols-3 gap-6"><a href="../rooms/standard.html" class="group block"><div class="aspect-[4/3] bg-cover bg-center rounded" style="background-image:url('https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1600&q=80')"></div><h4 class="mt-3 font-display text-lg text-mira-900 group-hover:text-sand-600">Standard Suite</h4><p class="text-xs text-mira-600">22 m² · Garden view</p></a><a href="../rooms/deluxe.html" class="group block"><div class="aspect-[4/3] bg-cover bg-center rounded" style="background-image:url('https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&w=1600&q=80')"></div><h4 class="mt-3 font-display text-lg text-mira-900 group-hover:text-sand-600">Deluxe Suite</h4><p class="text-xs text-mira-600">28 m² · Sea view</p></a><a href="../rooms/family.html" class="group block"><div class="aspect-[4/3] bg-cover bg-center rounded" style="background-image:url('https://images.unsplash.com/photo-1631049307264-da0ec9d70304?auto=format&fit=crop&w=1600&q=80')"></div><h4 class="mt-3 font-display text-lg text-mira-900 group-hover:text-sand-600">Family Suite</h4><p class="text-xs text-mira-600">34 m² · Garden view</p></a></div>
+      <div class="mt-8 grid grid-cols-2 md:grid-cols-3 gap-6"><a href="../rooms/standard.html" class="group block"><div class="aspect-[4/3] bg-cover bg-center rounded" style="background-image:url('../assets/img/standard/standard-01.jpg')"></div><h4 class="mt-3 font-display text-lg text-mira-900 group-hover:text-sand-600">Standard Suite</h4><p class="text-xs text-mira-600">22 m² · Garden view</p></a><a href="../rooms/deluxe.html" class="group block"><div class="aspect-[4/3] bg-cover bg-center rounded" style="background-image:url('../assets/img/deluxe/deluxe-01.jpg')"></div><h4 class="mt-3 font-display text-lg text-mira-900 group-hover:text-sand-600">Deluxe Suite</h4><p class="text-xs text-mira-600">28 m² · Sea view</p></a><a href="../rooms/family.html" class="group block"><div class="aspect-[4/3] bg-cover bg-center rounded" style="background-image:url('../assets/img/family/family-01.jpg')"></div><h4 class="mt-3 font-display text-lg text-mira-900 group-hover:text-sand-600">Family Suite</h4><p class="text-xs text-mira-600">34 m² · Garden view</p></a></div>
     </div></section></main>
     <footer class="bg-mira-900 text-white/80 mt-24">
       <div class="max-w-7xl mx-auto px-5 lg:px-8 py-14 grid grid-cols-1 md:grid-cols-4 gap-10">
@@ -335,6 +338,6 @@ tailwind.config = {
   </div>
 </div>
 
-    <script src="../assets/js/media-manifest.js?v=16" defer></script>
-    <script src="../assets/js/site.js?v=16" defer></script>
+    <script src="../assets/js/media-manifest.js?v=17" defer></script>
+    <script src="../assets/js/site.js?v=17" defer></script>
     </body></html>

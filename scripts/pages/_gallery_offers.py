@@ -1,29 +1,37 @@
 from common import hero, section
 
-# Single curated set for gallery
+# Gallery — a mix of real Mira Palace photography (suites, spa, garden) and
+# stock placeholders for categories we don't yet have photos for (dining,
+# bar). Real photos use `assets/img/...` paths; the renderer prefixes
+# {root} only on those, leaving full URLs untouched.
 GALLERY = [
-    ("Suites",  "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=80",  "The Standard Suite"),
-    ("Suites",  "https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&w=1200&q=80",  "Deluxe Suite with sea view"),
-    ("Suites",  "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?auto=format&fit=crop&w=1200&q=80",  "Family Suite (connecting)"),
-    ("Suites",  "https://images.unsplash.com/photo-1590073242678-70ee3fc28e8e?auto=format&fit=crop&w=1200&q=80",  "King Suite bedroom"),
-    ("Suites",  "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=1200&q=80",   "Marble bathroom"),
-    ("Pools",   "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80",  "Main pool, afternoon"),
-    ("Pools",   "https://images.unsplash.com/photo-1540541338287-41700207dee6?auto=format&fit=crop&w=1200&q=80",  "Pool deck"),
-    ("Pools",   "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1200&q=80",  "Infinity pool"),
-    ("Beach",   "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80",  "Sunrise at the beach club"),
-    ("Beach",   "https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1200&q=80",  "Beach umbrellas, June"),
+    # Suites — real Mira Palace photos
+    ("Suites",  "assets/img/standard/standard-01.jpg",  "Standard Suite"),
+    ("Suites",  "assets/img/standard/standard-04.jpg",  "Standard Suite — bed"),
+    ("Suites",  "assets/img/deluxe/deluxe-01.jpg",      "Deluxe Suite"),
+    ("Suites",  "assets/img/deluxe/deluxe-04.jpg",      "Deluxe Suite — sitting area"),
+    ("Suites",  "assets/img/deluxe/deluxe-10.jpg",      "Deluxe Suite — view"),
+    ("Suites",  "assets/img/family/family-01.jpg",      "Family Suite"),
+    ("Suites",  "assets/img/king/king-01.jpg",          "King Suite"),
+    ("Suites",  "assets/img/king/king-04.jpg",          "King Suite — bath"),
+    ("Suites",  "assets/img/king/king-09.jpg",          "King Suite — terrace"),
+    # Spa — real Mira Palace photos
+    ("Spa",     "assets/img/spa/spa-01.jpg",            "Hammam chamber"),
+    ("Spa",     "assets/img/spa/spa-03.jpg",            "Marble göbek taşı"),
+    ("Spa",     "assets/img/spa/spa-06.jpg",            "Treatment room"),
+    ("Spa",     "assets/img/spa/spa-08.jpg",            "Relaxation lounge"),
+    ("Spa",     "assets/img/spa/spa-11.jpg",            "Spa entrance"),
+    # Garden / outdoors — real
+    ("Garden",  "assets/img/garden/garden-01.jpg",      "The garden walkway"),
+    ("Garden",  "assets/img/garden/garden-03.jpg",      "Citrus orchard"),
+    ("Garden",  "assets/img/garden/garden-05.jpg",      "Pool deck"),
+    ("Garden",  "assets/img/garden/garden-07.jpg",      "Grounds at golden hour"),
+    # Dining / Bar — placeholder until we have real photos
     ("Dining",  "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80",  "Main restaurant at dinner"),
     ("Dining",  "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1200&q=80",   "Plated starter"),
     ("Dining",  "https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?auto=format&fit=crop&w=1200&q=80", "Breakfast buffet"),
-    ("Dining",  "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=1200&q=80", "Mezze at the pool restaurant"),
     ("Bar",     "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=1200&q=80", "Lobby bar cocktail"),
     ("Bar",     "https://images.unsplash.com/photo-1470337458703-46ad1756a187?auto=format&fit=crop&w=1200&q=80", "Orchard bar at sundown"),
-    ("Spa",     "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=1200&q=80",  "Treatment room"),
-    ("Spa",     "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=80", "Hammam entrance"),
-    ("Spa",     "https://images.unsplash.com/photo-1519823551278-64ac92734fb1?auto=format&fit=crop&w=1200&q=80", "Massage in progress"),
-    ("Hotel",   "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1200&q=80",  "Lobby at dusk"),
-    ("Hotel",   "https://images.unsplash.com/photo-1589489873962-88a30d7aa96c?auto=format&fit=crop&w=1200&q=80", "Side, from the coast"),
-    ("Hotel",   "https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?auto=format&fit=crop&w=1200&q=80", "Breakfast spread"),
 ]
 
 
@@ -33,9 +41,10 @@ def gallery(root: str) -> str:
         f'<button data-cat="{c}" class="gal-filter px-4 py-2 rounded-full border border-mira-300 text-sm text-mira-800 hover:bg-mira-900 hover:text-white transition{" bg-mira-900 text-white border-mira-900" if c == "All" else ""}">{c}</button>'
         for c in cats
     )
+    def _u(u): return u if u.startswith("http") else f"{root}{u}"
     tiles = "".join(
         f'<figure class="gal-item break-inside-avoid mb-4 rounded-lg overflow-hidden shadow group" data-cat="{c}">'
-        f'<div class="aspect-[4/5] bg-cover bg-center transition duration-500 group-hover:scale-[1.03]" style="background-image:url(\'{url}\')"></div>'
+        f'<div class="aspect-[4/5] bg-cover bg-center transition duration-500 group-hover:scale-[1.03]" style="background-image:url(\'{_u(url)}\')"></div>'
         f'<figcaption class="px-3 py-2 bg-white text-xs text-mira-600">{alt}</figcaption></figure>'
         for c, url, alt in GALLERY
     )

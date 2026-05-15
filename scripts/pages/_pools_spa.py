@@ -1,15 +1,22 @@
-from common import hero, section, eyebrow, heading, cta_band
+from common import hero, hero_slideshow, section, eyebrow, heading, cta_band
 
-IMG_POOL = "https://images.unsplash.com/photo-1540541338287-41700207dee6?auto=format&fit=crop&w=1920&q=80"
-IMG_BEACH = "https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1600&q=80"
-IMG_INFINITY = "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1600&q=80"
-IMG_SPA = "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=1920&q=80"
-IMG_HAMMAM = "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1600&q=80"
-IMG_MASSAGE = "https://images.unsplash.com/photo-1519823551278-64ac92734fb1?auto=format&fit=crop&w=1600&q=80"
+# Real Mira Palace photography (copied + resized by Copy-Photos.ps1)
+IMG_GARDEN_1 = "assets/img/garden/garden-01.jpg"
+IMG_GARDEN_2 = "assets/img/garden/garden-02.jpg"
+IMG_GARDEN_3 = "assets/img/garden/garden-03.jpg"
+IMG_GARDEN_4 = "assets/img/garden/garden-04.jpg"
+IMG_SPA_1 = "assets/img/spa/spa-01.jpg"
+IMG_SPA_2 = "assets/img/spa/spa-02.jpg"
+IMG_SPA_3 = "assets/img/spa/spa-03.jpg"
+IMG_SPA_4 = "assets/img/spa/spa-04.jpg"
+IMG_SPA_5 = "assets/img/spa/spa-05.jpg"
+IMG_SPA_6 = "assets/img/spa/spa-06.jpg"
 
 
 def pools(root: str) -> str:
-    h = hero(IMG_POOL, "Pools & Beach",
+    # 4-slide hero from the garden folder
+    hero_urls = [f"{root}{u}" for u in (IMG_GARDEN_1, IMG_GARDEN_2, IMG_GARDEN_3, IMG_GARDEN_4)]
+    h = hero_slideshow(hero_urls, "Pools & Beach",
              "Four pools. One sea.<br/>Your choice of shade.",
              "A main pool for families, an adults-only infinity pool, a heated indoor pool for mornings and winter, and a children's pool with its own small slide. Plus 600 m of shoreline we've made easy to reach.",
              height="72vh")
@@ -41,20 +48,22 @@ def pools(root: str) -> str:
             <li class="flex gap-3"><span class="text-sand-500">✓</span>Watersports (jet-ski, banana boat) operated by third-party at surcharge</li>
           </ul>
         </div>
-        <div class="aspect-[4/5] bg-cover bg-center rounded-lg shadow-lux" style="background-image:url('{IMG_BEACH}')"></div>
+        <div class="aspect-[4/5] bg-cover bg-center rounded-lg shadow-lux" style="background-image:url('{root}{IMG_GARDEN_2}')"></div>
       </div>
     """, bg="bg-white")
     c = section(f"""
-      <div class="aspect-[16/6] rounded-lg bg-cover bg-center shadow-lux" style="background-image:url('{IMG_INFINITY}')"></div>
+      <div class="aspect-[16/6] rounded-lg bg-cover bg-center shadow-lux" style="background-image:url('{root}{IMG_GARDEN_3}')"></div>
     """, bg="bg-sand-50")
     cta = cta_band("A pool for every mood — and a spa for when the sun is too much.",
                    "Our Turkish hammam, two saunas, a steam room, a cold plunge and a small but considered treatment menu sit next to the indoor pool.",
-                   f"{root}spa.html", "Visit the spa", IMG_SPA)
+                   f"{root}spa.html", "Visit the spa", f"{root}{IMG_SPA_1}")
     return h + a + b + c + cta
 
 
 def spa(root: str) -> str:
-    h = hero(IMG_SPA, "Spa & Wellness",
+    # 4-slide hero from the spa folder
+    hero_urls = [f"{root}{u}" for u in (IMG_SPA_1, IMG_SPA_2, IMG_SPA_3, IMG_SPA_4)]
+    h = hero_slideshow(hero_urls, "Spa & Wellness",
              "A hammam in the old way.<br/>A spa menu in the quiet way.",
              "A full Turkish hammam — marble göbek taşı, two saunas, a steam room, a cold plunge, a relaxation room — plus six treatment rooms for massage, facial and body work.",
              primary_href=f"{root}spa-treatments.html", primary_label="See the treatment menu",
@@ -78,7 +87,7 @@ def spa(root: str) -> str:
     """, bg="bg-sand-50")
     b = section(f"""
       <div class="grid lg:grid-cols-2 gap-12 items-center">
-        <div class="aspect-[4/3] bg-cover bg-center rounded-lg shadow-lux" style="background-image:url('{IMG_HAMMAM}')"></div>
+        <div class="aspect-[4/3] bg-cover bg-center rounded-lg shadow-lux" style="background-image:url('{root}{IMG_SPA_5}')"></div>
         <div>{eyebrow('The hammam ritual')}
           {heading('Ninety minutes, five stages.', 3)}
           <ol class="mt-6 space-y-4 text-mira-700">
@@ -128,9 +137,9 @@ def spa_treatments(root: str) -> str:
         )
         blocks += f'<div class="mt-12 first:mt-0"><h3 class="font-display text-2xl text-mira-900">{sec_t}</h3><table class="w-full mt-4"><tbody>{row_html}</tbody></table></div>'
 
-    h = hero(IMG_MASSAGE, "Spa · Treatments",
+    h = hero(f"{root}{IMG_SPA_6}", "Spa · Treatments",
              "The treatment menu.",
-             "Massage, facial, body work, hammam rituals. Prices in Euro. Hammam and facility access are included in your stay; treatments below are priced per serve and can be booked at the spa reception on +9 or via WhatsApp.",
+             "Massage, facial, body work, hammam rituals. Prices in Euro. Hammam and facility access are included in your stay; treatments below are priced per serve and can be booked at the spa reception or via WhatsApp.",
              height="60vh")
     body = section(f"""
       {blocks}
