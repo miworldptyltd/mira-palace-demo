@@ -66,8 +66,157 @@
 .music-cluster-pos button,
 #video-cluster button,
 #cust-toggle,
-#mnu-toggle {
-  min-height: 38px;
+#mnu-toggle,
+.nav-flag {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* -----------------------------------------------------------------------
+   MOBILE + TABLET RESPONSIVE POLISH (R003)
+   Targeted overrides to make phone (< 640) and iPad (640–1279) usable.
+   Desktop (xl, 1280+) is untouched.
+   ----------------------------------------------------------------------- */
+
+/* Horizontal-overflow safety net — keeps a stray wide element from
+   bleeding the whole page on a narrow viewport. */
+html, body { overflow-x: hidden; }
+
+/* === Phone (< 640px) =============================================== */
+@media (max-width: 639px) {
+
+  /* Hide the secondary Mi World copyright strip on phone — the same copy
+     is in the footer, and removing it frees up ~26px of valuable header
+     space (the strip was also scrolling horizontally, which felt broken). */
+  #siteheader > div:first-child { display: none !important; }
+
+  /* With the strip removed, drop the <main> top padding to just the nav row. */
+  #main { padding-top: 64px !important; }
+
+  /* Hide the customiser side-tab on phone. It's a designer/owner tool
+     (theme + music picker) — guests don't need it crowding the screen.
+     Still available on tablet+ where there's room. */
+  #customiser { display: none !important; }
+
+  /* Hide the hero video cluster on phone — only useful on home page and
+     it overlaps the customiser/music clusters. Music + WhatsApp survive. */
+  #video-cluster { display: none !important; }
+
+  /* Hero headline — was text-4xl (36px) which wrapped 3+ lines on a phone.
+     32px reads much better in two lines. */
+  .hero-section h1 {
+    font-size: 2rem !important;
+    line-height: 1.1 !important;
+  }
+  .hero-section h1 br { display: none; }  /* Let the line break naturally */
+  .hero-section p {
+    font-size: 0.95rem !important;
+    line-height: 1.5 !important;
+  }
+  .hero-section .uppercase {
+    font-size: 0.7rem !important;
+    letter-spacing: .18em !important;
+  }
+
+  /* Hero inner padding — pt-40 pb-28 (272px) is far too much on a 530px
+     hero. 96px+48px gives the headline room to breathe. */
+  .hero-section > div.relative {
+    padding-top: 6rem !important;
+    padding-bottom: 3rem !important;
+  }
+  /* Hero min-height — drop a touch so we don't waste an entire screen. */
+  .hero-section[style*="80vh"],
+  .hero-section[style*="88vh"] {
+    min-height: 70vh !important;
+  }
+  .hero-section[style*="80vh"] > div.relative,
+  .hero-section[style*="88vh"] > div.relative {
+    min-height: 70vh !important;
+  }
+
+  /* Section vertical padding — py-20 (160px combined) wastes a phone screen.
+     py-12 (96px combined) feels right at this size. */
+  section[class*="py-20"] {
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+  }
+
+  /* Card / form padding tighten so content doesn't get squeezed. */
+  .menu-card { padding: 1.5rem 1rem !important; }
+  .menu-card::before, .menu-card::after { left: 1rem; right: 1rem; }
+  .menu-card h3 { font-size: 1.55rem !important; }
+  .menu-card .menu-section-title { font-size: 1.1rem !important; letter-spacing: .18em !important; }
+  .menu-card .menu-row > .name { font-size: 1rem !important; }
+
+  /* Stat / feature strip on phone — let cells be 2 per row rather than
+     cramming six into one strip with weird wrap borders. */
+  .feature-strip-cell,
+  .bg-white.rounded-md.shadow-lux > .flex-1 {
+    flex-basis: 50% !important;
+    border-bottom: 1px solid rgba(146, 168, 180, .25);
+  }
+
+  /* Music / WhatsApp clusters — slightly smaller bottom offset since
+     phones have less screen real estate. */
+  .whatsapp-bottom-safe { bottom: max(16px, env(safe-area-inset-bottom)); }
+  .music-cluster-pos { bottom: calc(max(16px, env(safe-area-inset-bottom)) + 56px); }
+
+  /* Tables / wide content — allow horizontal scroll inside cards so a
+     pricing table doesn't break the layout. */
+  table { display: block; width: 100%; overflow-x: auto; }
+
+  /* Footer 4-column grid stacks via grid-cols-1 automatically;
+     just tighten the gap. */
+  footer .grid { gap: 2rem !important; }
+
+  /* Demo banner stays compact */
+  #demo-banner { font-size: 0.65rem; padding: 0.45rem 0.75rem; }
+}
+
+/* === Tablet (640–1279px), incl. iPad portrait + landscape ============= */
+@media (min-width: 640px) and (max-width: 1279px) {
+
+  /* Tablet still uses the hamburger menu (xl: breakpoint = 1280px).
+     The header padding offset stays at 88px (strip + nav row). */
+
+  /* Slightly tighter hero padding on tablet — 160px → 128px top. */
+  .hero-section > div.relative {
+    padding-top: 8rem !important;
+    padding-bottom: 4.5rem !important;
+  }
+
+  /* Hero headline — sm:text-5xl = 48px is the default; keep that.
+     Make sure padding doesn't crowd headlines on landscape iPad. */
+  .hero-section h1 { line-height: 1.1 !important; }
+
+  /* Tighten section padding on tablet too — py-20 stays but lg:py-28
+     only fires from 1024+, so iPad in portrait gets py-20 (5rem). Fine. */
+
+  /* Customiser tab — visible but smaller on tablet so it doesn't crowd. */
+  #cust-toggle .text-\[11px\] {
+    font-size: 0.625rem;
+    letter-spacing: .25em;
+  }
+
+  /* Music + video cluster labels hidden via sm:inline now visible.
+     Hide on tablet portrait too (< md) to keep clusters compact. */
+}
+
+/* === Small phones (< 380px, iPhone SE 1st gen etc.) =================== */
+@media (max-width: 379px) {
+  .hero-section h1 { font-size: 1.75rem !important; }
+  .menu-card { padding: 1.25rem 0.75rem !important; }
+}
+
+/* === Tap-friendly form inputs across the site ========================= */
+input[type="date"],
+input[type="email"],
+input[type="tel"],
+input[type="text"],
+input[type="number"],
+select,
+textarea {
+  font-size: 16px;  /* Prevents iOS Safari from auto-zooming on focus */
 }
 
 :root {
