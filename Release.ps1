@@ -38,6 +38,18 @@ Write-Host "=====================" -ForegroundColor Cyan
 Write-Host "  Message: $Message"
 
 # ---------------------------------------------------------------------------
+# Tidy: remove any stray _*.png test files from site/assets/img/ that may
+# have been written during a previous build session. Underscore-prefixed
+# files are never legitimate site assets — they're scratchpad output.
+$stray = Get-ChildItem -Path "site\assets\img" -Filter "_*.png" -File -ErrorAction SilentlyContinue
+if ($stray) {
+  foreach ($f in $stray) {
+    try { Remove-Item -Path $f.FullName -Force -ErrorAction Stop; Write-Host ("  [tidy] removed " + $f.Name) -ForegroundColor DarkGray }
+    catch { Write-Host ("  [tidy] could not remove " + $f.Name) -ForegroundColor Yellow }
+  }
+}
+
+# ---------------------------------------------------------------------------
 Step "[1/6]  Photo import"
 
 # Sentinel file we check for to decide whether photos have already been imported.

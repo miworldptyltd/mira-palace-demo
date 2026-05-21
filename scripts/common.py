@@ -34,7 +34,7 @@ SITE_META = {
 # ---- Shared fragments ---------------------------------------------------
 
 HEAD = """<!doctype html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="scroll-smooth" data-theme="midnight">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -80,7 +80,7 @@ tailwind.config = {{
   // because GitHub Pages hosts at /mira-palace-demo/ rather than /.
   window.MIRA_ROOT = "{root}";
 </script>
-<link rel="stylesheet" href="{root}assets/css/site.css?v=12" />
+<link rel="stylesheet" href="{root}assets/css/site.css?v=13" />
 </head>
 <body class="font-body text-ink bg-sand-50 antialiased" data-root="{root}">
 <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:top-3 focus:left-3 bg-mira-800 text-white px-3 py-2 rounded">Skip to content</a>
@@ -93,7 +93,7 @@ def nav(active: str, root: str) -> str:
     items = [
         ("home",       "Home",          "index.html",       None),
         ("about",      "About",         "about.html",       None),
-        ("rooms",      "Suites",        "rooms/",           [
+        ("rooms",      "Our Rooms",     "rooms/",           [
             ("All suites",         "rooms/"),
             ("Standard Suite",     "rooms/standard.html"),
             ("Deluxe Suite",       "rooms/deluxe.html"),
@@ -179,7 +179,7 @@ def nav(active: str, root: str) -> str:
       <div class="bg-mira-900/80 backdrop-blur supports-[backdrop-filter]:bg-mira-900/70 text-white border-b border-white/5">
         <div class="max-w-7xl mx-auto px-5 lg:px-8 flex items-center justify-between gap-4 h-16 xl:h-[72px]">
           <a href="{root}index.html" class="flex items-center gap-2 shrink-0">
-            <span class="inline-block w-9 h-9 rounded-full bg-sand-300 text-mira-900 grid place-items-center font-display font-bold text-xl">M</span>
+            <img src="{root}assets/img/mp-monogram-gold.png" alt="Mira Palace logo" class="w-9 h-9 object-contain" />
             <span class="font-display text-xl tracking-wide whitespace-nowrap">Mira Palace</span>
           </a>
           <nav class="hidden xl:flex items-center gap-x-5 flex-1 justify-end" aria-label="Primary">
@@ -320,8 +320,8 @@ def footer(root: str) -> str:
     </div>
 
     {customiser_panel(root)}
-    <script src="{root}assets/js/media-manifest.js?v=17" defer></script>
-    <script src="{root}assets/js/site.js?v=17" defer></script>
+    <script src="{root}assets/js/media-manifest.js?v=18" defer></script>
+    <script src="{root}assets/js/site.js?v=18" defer></script>
     </body></html>
     """)
 
@@ -423,7 +423,7 @@ def hero(img_url: str, kicker: str, heading: str, sub: str, primary_href: str = 
     return dedent(f"""
     <section class="relative hero-section" style="min-height:{height};">
       <div class="absolute inset-0 hero-overlay" style="background-image:url('{img_url}'); background-size:cover; background-position:center;"></div>
-      <div class="relative max-w-5xl mx-auto px-5 lg:px-8 pt-40 pb-28 text-white flex flex-col justify-end min-h-[inherit]" style="min-height:{height};">
+      <div class="relative max-w-5xl mx-auto px-5 lg:px-8 pt-40 pb-28 text-white flex flex-col justify-start min-h-[inherit]" style="min-height:{height};">
         <div class="max-w-3xl">
           <p class="uppercase tracking-[0.22em] text-sand-300 text-xs sm:text-sm font-semibold mb-4">{kicker}</p>
           <h1 class="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.05]">{heading}</h1>
@@ -461,7 +461,7 @@ def hero_slideshow(image_urls, kicker: str, heading: str, sub: str,
         {slides}
       </div>
       <div class="absolute inset-0 hero-overlay pointer-events-none"></div>
-      <div class="relative max-w-5xl mx-auto px-5 lg:px-8 pt-40 pb-28 text-white flex flex-col justify-end min-h-[inherit]" style="min-height:{height};">
+      <div class="relative max-w-5xl mx-auto px-5 lg:px-8 pt-40 pb-28 text-white flex flex-col justify-start min-h-[inherit]" style="min-height:{height};">
         <div class="max-w-3xl">
           <p class="uppercase tracking-[0.22em] text-sand-300 text-xs sm:text-sm font-semibold mb-4">{kicker}</p>
           <h1 class="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.05]">{heading}</h1>
@@ -674,7 +674,7 @@ def hero_video(poster_url: str, kicker: str, heading: str, sub: str,
         <source id="hero-video-source" src="{default_video}" type="video/mp4" />
       </video>
       <div class="absolute inset-0 hero-overlay pointer-events-none"></div>
-      <div class="relative max-w-5xl mx-auto px-5 lg:px-8 pt-40 pb-28 text-white flex flex-col justify-end min-h-[inherit]" style="min-height:{height};">
+      <div class="relative max-w-5xl mx-auto px-5 lg:px-8 pt-40 pb-28 text-white flex flex-col justify-start min-h-[inherit]" style="min-height:{height};">
         <div class="max-w-3xl">
           <p class="uppercase tracking-[0.22em] text-sand-300 text-xs sm:text-sm font-semibold mb-4">{kicker}</p>
           <h1 class="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.05]">{heading}</h1>

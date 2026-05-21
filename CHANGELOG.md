@@ -1,5 +1,9 @@
 # Changelog
 
+## [R004] - 2026-05-21
+
+R004 feat: Midnight theme default + real MP monogram logo + Our Rooms nav + raised hero + green-selected flag border
+
 ## [R003] - 2026-05-17
 
 feat: mobile + tablet responsive polish - hide top strip, tighten hero, bigger tap targets, hide customiser on phone
@@ -93,5 +97,6 @@ First publishable build. Sent to the hotel for owner review.
 - LICENSE is all-rights-reserved proprietary.
 
 [0.1.0]: https://github.com/-/-/releases/tag/v0.1.0
+
 
 

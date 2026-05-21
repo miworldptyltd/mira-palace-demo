@@ -430,6 +430,32 @@ html[data-theme="onyx"] input, html[data-theme="onyx"] textarea, html[data-theme
 .lang-hidden { display: none !important; }
 
 /* ------------------------------------------------------------------- */
+/* LANGUAGE FLAG BUTTONS — base border + selected-state polish         */
+/* Thin neutral border at rest; green 2px border + 18% scale-up when    */
+/* the flag is the active language. Smooth transitions.                 */
+/* ------------------------------------------------------------------- */
+.nav-flag {
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+  box-sizing: border-box;
+}
+.nav-flag:hover {
+  border-color: rgba(255, 255, 255, 0.7);
+}
+.nav-flag[data-active="true"] {
+  border: 2px solid #22C55E;          /* champagne green for the lock-in */
+  transform: scale(1.18);
+  box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.25);
+}
+.nav-flag[data-active="true"]:hover {
+  border-color: #16A34A;
+}
+/* Strip the legacy Tailwind ring so it doesn't fight the new border. */
+.nav-flag { box-shadow: none; }
+.nav-flag.ring-1,
+.nav-flag.ring-white\/20 { box-shadow: none !important; }
+
+/* ------------------------------------------------------------------- */
 /* TOP-NAV DROPDOWN MENUS                                                */
 /* ------------------------------------------------------------------- */
 .nav-dd-menu {

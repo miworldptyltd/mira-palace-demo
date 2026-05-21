@@ -478,11 +478,16 @@
       if (!cust.contains(e.target)) setOpen(false);
     });
 
-    // Apply saved theme on load
-    let savedTheme = 'default';
-    try { savedTheme = localStorage.getItem('mp-theme') || 'default'; } catch (e) {}
+    // Apply saved theme on load. Default is now Midnight (R004) — applied
+    // site-wide unless the user has explicitly picked a different palette
+    // via the customiser. HEAD also sets data-theme="midnight" so the page
+    // renders Midnight from first paint with no theme flash.
+    let savedTheme = 'midnight';
+    try { savedTheme = localStorage.getItem('mp-theme') || 'midnight'; } catch (e) {}
     if (savedTheme && savedTheme !== 'default') {
       document.documentElement.setAttribute('data-theme', savedTheme);
+    } else if (savedTheme === 'default') {
+      document.documentElement.removeAttribute('data-theme');
     }
     document.querySelectorAll('.theme-swatch').forEach((b) => {
       const isActive = b.dataset.theme === savedTheme;
