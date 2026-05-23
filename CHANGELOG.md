@@ -1,3 +1,7 @@
+## [R009] - 2026-05-23
+
+R009 feat: floating Book your stay button bottom-center on every page + desktop nav Book pill removed + bottom-padding on main so content does not hide behind the button + mobile + tablet polish
+
 ## [R008] - 2026-05-23
 
 R008 feat: nav fit at 100 percent zoom (All-Inclusive removed, font shrunk) + flag green ring ON the flag (no rectangle) + Customise moved to right side + site-wide search icon with client-side index of every page
@@ -113,6 +117,7 @@ First publishable build. Sent to the hotel for owner review.
 - LICENSE is all-rights-reserved proprietary.
 
 [0.1.0]: https://github.com/-/-/releases/tag/v0.1.0
+
 
 
 

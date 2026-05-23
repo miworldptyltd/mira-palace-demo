@@ -8,6 +8,40 @@
 .whatsapp-bottom-safe {
   bottom: max(20px, env(safe-area-inset-bottom));
 }
+
+/* R009: Floating "Book your stay" button — bottom-CENTER, every page.
+   Sits at the same vertical level as WhatsApp (right) and the music
+   cluster (right) but in the center, so they never collide on any
+   viewport. iOS safe-area-inset keeps it clear of the home indicator.
+   Hover lifts the pill slightly for affordance. */
+.book-floating-pos {
+  bottom: max(20px, env(safe-area-inset-bottom));
+}
+#book-floating {
+  box-shadow: 0 10px 30px -8px rgba(19, 38, 48, .45), 0 4px 12px -4px rgba(19, 38, 48, .3);
+  letter-spacing: 0.02em;
+  min-height: 44px;
+}
+#book-floating:hover {
+  transform: translateX(-50%) translateY(-2px);
+}
+/* Mobile: slightly smaller pill so it doesn't dominate the screen */
+@media (max-width: 480px) {
+  #book-floating {
+    padding: 11px 18px;
+    font-size: 13px;
+  }
+  #book-floating svg { width: 15px; height: 15px; }
+}
+
+/* Add enough bottom padding to <main> so page content's last few lines
+   are never permanently hidden behind the floating Book button. Footer
+   has its own large py-14 so the bottom-most copyright row clears the
+   button when fully scrolled. */
+main { padding-bottom: 70px; }
+@media (max-width: 480px) {
+  main { padding-bottom: 80px; }
+}
 .music-cluster-pos {
   /* Phone (< 640px): cluster sits ABOVE the WhatsApp bubble */
   bottom: calc(max(20px, env(safe-area-inset-bottom)) + 56px);
