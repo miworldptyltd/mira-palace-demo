@@ -80,7 +80,7 @@ tailwind.config = {{
   // because GitHub Pages hosts at /mira-palace-demo/ rather than /.
   window.MIRA_ROOT = "{root}";
 </script>
-<link rel="stylesheet" href="{root}assets/css/site.css?v=19" />
+<link rel="stylesheet" href="{root}assets/css/site.css?v=20" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/tabler-icons.min.css" />
 </head>
 <body class="font-body text-ink bg-sand-50 antialiased" data-root="{root}">
@@ -179,46 +179,71 @@ def nav(active: str, root: str) -> str:
             )
     return dedent(f"""
     <header id="siteheader" class="fixed top-0 inset-x-0 z-40 transition-all">
-      <!-- Thin Mi World copyright strip — language-switched by the EN/TR flag.
-           Two spans rendered; one is hidden via the .lang-hidden helper. -->
-      <div class="bg-[#0a1820] text-white/70 text-[10px] tracking-widest">
-        <div class="max-w-7xl mx-auto px-5 lg:px-8 py-1.5 flex items-center justify-between gap-3 whitespace-nowrap overflow-x-auto">
-          <span class="font-medium">
+
+      <!-- R011: TWO-ROW HEADER. Top utility strip carries copyright + search
+           + currency + language + Book pill (desktop only; on phone the
+           strip is hidden and those controls live inside the hamburger menu).
+           Main row below has logo + nav menu only — no clutter. -->
+
+      <!-- ============ THIN UTILITY STRIP (desktop only) ============ -->
+      <div class="hidden md:block bg-[#0a1820] text-white/70 text-[10px] tracking-widest border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-5 lg:px-8 h-9 flex items-center justify-between gap-4 whitespace-nowrap">
+          <!-- Left: Mi World copyright -->
+          <span class="font-medium overflow-hidden text-ellipsis">
             <span class="lang-text" data-lang="en">{SITE_META['copyright_short_en']}</span>
             <span class="lang-text lang-hidden" data-lang="tr">{SITE_META['copyright_short_tr']}</span>
           </span>
-          <span class="hidden sm:inline text-sand-300/70 uppercase">Preview · Demo</span>
+
+          <!-- Right: search + currency + language + Book pill -->
+          <div class="flex items-center gap-2.5 shrink-0">
+            <!-- Search icon -->
+            <button id="nav-search-toggle" class="inline-flex items-center justify-center w-7 h-7 rounded text-white/80 hover:text-white hover:bg-white/10 transition" data-i18n-aria-label="nav.search.aria" aria-label="Search the site" aria-expanded="false" aria-controls="nav-search-pop">
+              <svg viewBox="0 0 24 24" fill="none" class="w-4 h-4" aria-hidden="true"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm10 2-5-5"/></svg>
+            </button>
+            <span class="w-px h-3.5 bg-white/15" aria-hidden="true"></span>
+
+            <!-- Currency pills -->
+            <div class="flex items-center gap-1" aria-label="Currency">
+              <button class="nav-cur rounded px-1.5 py-0.5 text-[10px] font-semibold tracking-wider text-white/80 transition" data-cur="try">₺&nbsp;TRY</button>
+              <button class="nav-cur rounded px-1.5 py-0.5 text-[10px] font-semibold tracking-wider text-white/80 transition" data-cur="eur">€&nbsp;EUR</button>
+              <button class="nav-cur rounded px-1.5 py-0.5 text-[10px] font-semibold tracking-wider text-white/80 transition" data-cur="usd">$&nbsp;USD</button>
+            </div>
+            <span class="w-px h-3.5 bg-white/15" aria-hidden="true"></span>
+
+            <!-- Language flags -->
+            <div class="flex items-center gap-1.5" aria-label="Language">
+              <button class="nav-flag rounded overflow-hidden transition" data-lang="en" aria-label="English" data-active="true"><span class="fi fi-gb block" style="width:22px;height:16px;"></span></button>
+              <button class="nav-flag rounded overflow-hidden transition" data-lang="tr" aria-label="Türkçe"><span class="fi fi-tr block" style="width:22px;height:16px;"></span></button>
+              <button class="nav-flag rounded overflow-hidden transition" data-lang="de" aria-label="Deutsch"><span class="fi fi-de block" style="width:22px;height:16px;"></span></button>
+              <button class="nav-flag rounded overflow-hidden transition" data-lang="ru" aria-label="Русский"><span class="fi fi-ru block" style="width:22px;height:16px;"></span></button>
+            </div>
+            <span class="w-px h-3.5 bg-white/15" aria-hidden="true"></span>
+
+            <!-- Book pill — sits at the very top-right, always visible on desktop -->
+            <a href="{root}book.html" class="nav-book-pill inline-flex items-center gap-1.5 px-3 py-1 bg-sand-300 text-mira-900 rounded-full text-[11px] font-semibold tracking-wider hover:bg-sand-200 transition" data-i18n-aria-label="cta.book_your_stay.aria" aria-label="Book your stay">
+              <svg viewBox="0 0 24 24" fill="none" class="w-3 h-3" aria-hidden="true"><path stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M8 2v4m8-4v4M3 10h18M5 6h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Z"/></svg>
+              <span data-i18n="cta.book_your_stay">Book your stay</span>
+            </a>
+          </div>
         </div>
       </div>
-      <div class="bg-mira-900/80 backdrop-blur supports-[backdrop-filter]:bg-mira-900/70 text-white border-b border-white/5">
-        <div class="max-w-7xl mx-auto px-5 lg:px-8 flex items-center justify-between gap-4 h-16 xl:h-[72px]">
+
+      <!-- ============ MAIN NAV ROW (every device) ============ -->
+      <div class="bg-mira-900/85 backdrop-blur supports-[backdrop-filter]:bg-mira-900/75 text-white border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-5 lg:px-8 flex items-center justify-between gap-4 h-16 xl:h-[68px]">
           <a href="{root}index.html" class="flex items-center gap-2 shrink-0">
             <img src="{root}assets/img/mp-monogram-gold.png" alt="Mira Palace logo" class="w-9 h-9 object-contain" />
             <span class="font-display text-xl tracking-wide whitespace-nowrap">Mira Palace</span>
           </a>
-          <nav class="hidden xl:flex items-center gap-x-2 2xl:gap-x-3 flex-1 justify-end" aria-label="Primary">
+          <nav class="hidden xl:flex items-center gap-x-3 2xl:gap-x-4 flex-1 justify-end" aria-label="Primary">
             {''.join(links)}
           </nav>
-          <div class="flex items-center gap-2 shrink-0 xl:ml-6">
-            <!-- R008: Search icon. Click expands the dropdown anchored to this button. -->
-            <button id="nav-search-toggle" class="hidden md:inline-flex items-center justify-center w-8 h-8 rounded text-white/85 hover:text-white hover:bg-white/10 transition mr-1" data-i18n-aria-label="nav.search.aria" aria-label="Search the site" aria-expanded="false" aria-controls="nav-search-pop">
-              <svg viewBox="0 0 24 24" fill="none" class="w-[18px] h-[18px]" aria-hidden="true"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm10 2-5-5"/></svg>
-            </button>
-            <div class="hidden md:flex items-center gap-1 mr-1" aria-label="Currency">
-              <button class="nav-cur rounded px-2 py-1 text-[10px] font-semibold tracking-wider text-white/80 transition" data-cur="try">₺&nbsp;TRY</button>
-              <button class="nav-cur rounded px-2 py-1 text-[10px] font-semibold tracking-wider text-white/80 transition" data-cur="eur">€&nbsp;EUR</button>
-              <button class="nav-cur rounded px-2 py-1 text-[10px] font-semibold tracking-wider text-white/80 transition" data-cur="usd">$&nbsp;USD</button>
-            </div>
-            <span class="hidden md:block w-px h-5 bg-white/15" aria-hidden="true"></span>
-            <div class="hidden md:flex items-center gap-1.5 mr-1" aria-label="Language">
-              <button class="nav-flag rounded overflow-hidden ring-1 ring-white/20 hover:ring-white/60 transition" data-lang="en" aria-label="English" data-active="true"><span class="fi fi-gb block" style="width:24px;height:18px;"></span></button>
-              <button class="nav-flag rounded overflow-hidden ring-1 ring-white/20 hover:ring-white/60 transition" data-lang="tr" aria-label="Türkçe"><span class="fi fi-tr block" style="width:24px;height:18px;"></span></button>
-              <button class="nav-flag rounded overflow-hidden ring-1 ring-white/20 hover:ring-white/60 transition" data-lang="de" aria-label="Deutsch"><span class="fi fi-de block" style="width:24px;height:18px;"></span></button>
-              <button class="nav-flag rounded overflow-hidden ring-1 ring-white/20 hover:ring-white/60 transition" data-lang="ru" aria-label="Русский"><span class="fi fi-ru block" style="width:24px;height:18px;"></span></button>
-            </div>
-            <!-- R009: desktop "Book" nav pill removed — replaced by the
-                 floating "Book your stay" button rendered in footer(). -->
-            <button id="mnu-toggle" class="xl:hidden p-2 -mr-2" data-i18n-aria-label="nav.menu.aria" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+          <!-- Mobile right cluster: compact Book pill + hamburger -->
+          <div class="flex items-center gap-2 shrink-0 xl:hidden">
+            <a href="{root}book.html" class="inline-flex items-center px-3 py-1.5 bg-sand-300 text-mira-900 rounded-full text-xs font-semibold hover:bg-sand-200 transition" data-i18n-aria-label="cta.book_your_stay.aria" aria-label="Book your stay">
+              <span data-i18n="cta.book_your_stay">Book your stay</span>
+            </a>
+            <button id="mnu-toggle" class="p-2 -mr-2" data-i18n-aria-label="nav.menu.aria" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
               <svg viewBox="0 0 24 24" fill="none" class="w-6 h-6"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/></svg>
             </button>
           </div>
@@ -339,16 +364,9 @@ def footer(root: str) -> str:
       </div>
     </footer>
 
-    <!-- R009: Floating "Book your stay" button — the primary CTA, anchored
-         bottom-center and visible on every page on every device. The desktop
-         nav Book pill was removed in the same release; this single floating
-         button is now the canonical entry point to book.html. Uses safe-area
-         insets so the iOS home indicator doesn't push it off-screen. -->
-    <a href="{root}book.html" id="book-floating" data-i18n-aria-label="cta.book_your_stay.aria" aria-label="Book your stay"
-       class="fixed left-1/2 -translate-x-1/2 z-30 inline-flex items-center gap-2 px-6 py-3.5 bg-sand-300 text-mira-900 rounded-full font-medium text-sm shadow-lux hover:bg-sand-200 transition whitespace-nowrap book-floating-pos">
-      <svg viewBox="0 0 24 24" fill="none" class="w-4 h-4" aria-hidden="true"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M8 2v4m8-4v4M3 10h18M5 6h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Z"/></svg>
-      <span data-i18n="cta.book_your_stay">Book your stay</span>
-    </a>
+    <!-- R011: floating bottom-center Book button removed.
+         The Book CTA now lives in the top utility strip (desktop) and as a
+         compact pill in the mobile nav row — see nav() above. -->
 
     <a href="{m['whatsapp']}" rel="noopener" aria-label="WhatsApp" class="fixed right-5 z-30 bg-[#25D366] text-white w-12 h-12 grid place-items-center rounded-full shadow-lg hover:scale-105 transition whatsapp-bottom-safe">
       <svg viewBox="0 0 24 24" class="w-6 h-6" fill="currentColor" aria-hidden="true"><path d="M20.52 3.48A11.9 11.9 0 0 0 12 0C5.37 0 0 5.37 0 12a11.93 11.93 0 0 0 1.64 6L0 24l6.19-1.62A11.94 11.94 0 0 0 12 24c6.63 0 12-5.37 12-12 0-3.2-1.25-6.2-3.48-8.52Zm-8.52 18a9.9 9.9 0 0 1-5.05-1.38l-.36-.22-3.67.96.98-3.58-.23-.37A9.94 9.94 0 1 1 22 12c0 5.5-4.48 9.98-10 9.98Zm5.47-7.46c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.25-.46-2.39-1.47-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.58c-.2 0-.52.07-.8.37-.27.3-1.05 1.02-1.05 2.48s1.08 2.88 1.23 3.08c.15.2 2.13 3.25 5.15 4.56.72.31 1.28.5 1.72.64.72.23 1.38.2 1.9.12.58-.09 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.2-.57-.35Z"/></svg>
@@ -382,10 +400,10 @@ def footer(root: str) -> str:
     </div>
 
     {customiser_panel(root)}
-    <script src="{root}assets/js/media-manifest.js?v=24" defer></script>
-    <script src="{root}assets/js/search-index.js?v=24" defer></script>
-    <script src="{root}assets/js/i18n.js?v=24" defer></script>
-    <script src="{root}assets/js/site.js?v=24" defer></script>
+    <script src="{root}assets/js/media-manifest.js?v=25" defer></script>
+    <script src="{root}assets/js/search-index.js?v=25" defer></script>
+    <script src="{root}assets/js/i18n.js?v=25" defer></script>
+    <script src="{root}assets/js/site.js?v=25" defer></script>
     </body></html>
     """)
 
@@ -798,8 +816,9 @@ def render_page(page: dict) -> str:
         root=root,
     )
     body = page["body"](root) if callable(page["body"]) else page["body"]
-    # Total fixed-header height = thin copyright strip (~26px) + main nav row.
-    main_open = f'<main id="main" class="pt-[88px] xl:pt-[96px]">'
+    # R011: header heights — mobile is just the main 64px row (utility strip
+    # is hidden); desktop is 36px utility strip + 68px main row = 104px.
+    main_open = f'<main id="main" class="pt-16 md:pt-[104px]">'
     # R010: translation-in-progress notice — site.js shows this only on
     # non-EN languages for pages whose body isn't yet translated.
     notice = (

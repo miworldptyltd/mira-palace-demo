@@ -45,53 +45,78 @@ tailwind.config = {
   // because GitHub Pages hosts at /mira-palace-demo/ rather than /.
   window.MIRA_ROOT = "";
 </script>
-<link rel="stylesheet" href="assets/css/site.css?v=19" />
+<link rel="stylesheet" href="assets/css/site.css?v=20" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/tabler-icons.min.css" />
 </head>
 <body class="font-body text-ink bg-sand-50 antialiased" data-root="">
 <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:top-3 focus:left-3 bg-mira-800 text-white px-3 py-2 rounded">Skip to content</a>
 
 <header id="siteheader" class="fixed top-0 inset-x-0 z-40 transition-all">
-  <!-- Thin Mi World copyright strip — language-switched by the EN/TR flag.
-       Two spans rendered; one is hidden via the .lang-hidden helper. -->
-  <div class="bg-[#0a1820] text-white/70 text-[10px] tracking-widest">
-    <div class="max-w-7xl mx-auto px-5 lg:px-8 py-1.5 flex items-center justify-between gap-3 whitespace-nowrap overflow-x-auto">
-      <span class="font-medium">
+
+  <!-- R011: TWO-ROW HEADER. Top utility strip carries copyright + search
+       + currency + language + Book pill (desktop only; on phone the
+       strip is hidden and those controls live inside the hamburger menu).
+       Main row below has logo + nav menu only — no clutter. -->
+
+  <!-- ============ THIN UTILITY STRIP (desktop only) ============ -->
+  <div class="hidden md:block bg-[#0a1820] text-white/70 text-[10px] tracking-widest border-b border-white/5">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8 h-9 flex items-center justify-between gap-4 whitespace-nowrap">
+      <!-- Left: Mi World copyright -->
+      <span class="font-medium overflow-hidden text-ellipsis">
         <span class="lang-text" data-lang="en">© 2026 Mi World Pty Ltd / Mi World Software Technology Limited Company · All rights reserved</span>
         <span class="lang-text lang-hidden" data-lang="tr">© 2026 Mi World Pty Ltd / Mİ WORLD YAZILIM TEKNOLOJİ LİMİTED ŞİRKETİ · Tüm hakları saklıdır</span>
       </span>
-      <span class="hidden sm:inline text-sand-300/70 uppercase">Preview · Demo</span>
+
+      <!-- Right: search + currency + language + Book pill -->
+      <div class="flex items-center gap-2.5 shrink-0">
+        <!-- Search icon -->
+        <button id="nav-search-toggle" class="inline-flex items-center justify-center w-7 h-7 rounded text-white/80 hover:text-white hover:bg-white/10 transition" data-i18n-aria-label="nav.search.aria" aria-label="Search the site" aria-expanded="false" aria-controls="nav-search-pop">
+          <svg viewBox="0 0 24 24" fill="none" class="w-4 h-4" aria-hidden="true"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm10 2-5-5"/></svg>
+        </button>
+        <span class="w-px h-3.5 bg-white/15" aria-hidden="true"></span>
+
+        <!-- Currency pills -->
+        <div class="flex items-center gap-1" aria-label="Currency">
+          <button class="nav-cur rounded px-1.5 py-0.5 text-[10px] font-semibold tracking-wider text-white/80 transition" data-cur="try">₺&nbsp;TRY</button>
+          <button class="nav-cur rounded px-1.5 py-0.5 text-[10px] font-semibold tracking-wider text-white/80 transition" data-cur="eur">€&nbsp;EUR</button>
+          <button class="nav-cur rounded px-1.5 py-0.5 text-[10px] font-semibold tracking-wider text-white/80 transition" data-cur="usd">$&nbsp;USD</button>
+        </div>
+        <span class="w-px h-3.5 bg-white/15" aria-hidden="true"></span>
+
+        <!-- Language flags -->
+        <div class="flex items-center gap-1.5" aria-label="Language">
+          <button class="nav-flag rounded overflow-hidden transition" data-lang="en" aria-label="English" data-active="true"><span class="fi fi-gb block" style="width:22px;height:16px;"></span></button>
+          <button class="nav-flag rounded overflow-hidden transition" data-lang="tr" aria-label="Türkçe"><span class="fi fi-tr block" style="width:22px;height:16px;"></span></button>
+          <button class="nav-flag rounded overflow-hidden transition" data-lang="de" aria-label="Deutsch"><span class="fi fi-de block" style="width:22px;height:16px;"></span></button>
+          <button class="nav-flag rounded overflow-hidden transition" data-lang="ru" aria-label="Русский"><span class="fi fi-ru block" style="width:22px;height:16px;"></span></button>
+        </div>
+        <span class="w-px h-3.5 bg-white/15" aria-hidden="true"></span>
+
+        <!-- Book pill — sits at the very top-right, always visible on desktop -->
+        <a href="book.html" class="nav-book-pill inline-flex items-center gap-1.5 px-3 py-1 bg-sand-300 text-mira-900 rounded-full text-[11px] font-semibold tracking-wider hover:bg-sand-200 transition" data-i18n-aria-label="cta.book_your_stay.aria" aria-label="Book your stay">
+          <svg viewBox="0 0 24 24" fill="none" class="w-3 h-3" aria-hidden="true"><path stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M8 2v4m8-4v4M3 10h18M5 6h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Z"/></svg>
+          <span data-i18n="cta.book_your_stay">Book your stay</span>
+        </a>
+      </div>
     </div>
   </div>
-  <div class="bg-mira-900/80 backdrop-blur supports-[backdrop-filter]:bg-mira-900/70 text-white border-b border-white/5">
-    <div class="max-w-7xl mx-auto px-5 lg:px-8 flex items-center justify-between gap-4 h-16 xl:h-[72px]">
+
+  <!-- ============ MAIN NAV ROW (every device) ============ -->
+  <div class="bg-mira-900/85 backdrop-blur supports-[backdrop-filter]:bg-mira-900/75 text-white border-b border-white/5">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8 flex items-center justify-between gap-4 h-16 xl:h-[68px]">
       <a href="index.html" class="flex items-center gap-2 shrink-0">
         <img src="assets/img/mp-monogram-gold.png" alt="Mira Palace logo" class="w-9 h-9 object-contain" />
         <span class="font-display text-xl tracking-wide whitespace-nowrap">Mira Palace</span>
       </a>
-      <nav class="hidden xl:flex items-center gap-x-2 2xl:gap-x-3 flex-1 justify-end" aria-label="Primary">
+      <nav class="hidden xl:flex items-center gap-x-3 2xl:gap-x-4 flex-1 justify-end" aria-label="Primary">
         <a href="index.html" class="nav-soon-wrap relative py-2 text-[12px] font-medium tracking-normal transition whitespace-nowrap after:absolute after:left-0 after:-bottom-0.5 after:h-0.5 after:w-full after:origin-left after:scale-x-0 after:bg-sand-300 after:transition-transform hover:after:scale-x-100 text-white/85 hover:text-sand-200"><span data-i18n="nav.home">Home</span></a><a href="about.html" class="nav-soon-wrap relative py-2 text-[12px] font-medium tracking-normal transition whitespace-nowrap after:absolute after:left-0 after:-bottom-0.5 after:h-0.5 after:w-full after:origin-left after:scale-x-0 after:bg-sand-300 after:transition-transform hover:after:scale-x-100 text-white/85 hover:text-sand-200"><span data-i18n="nav.about">About</span></a><div class="nav-dd relative" data-open="false">  <a href="rooms/" class="nav-dd-trigger inline-flex items-center gap-1 relative py-2 text-[12px] font-medium tracking-normal transition whitespace-nowrap after:absolute after:left-0 after:-bottom-0.5 after:h-0.5 after:w-full after:origin-left after:scale-x-0 after:bg-sand-300 after:transition-transform hover:after:scale-x-100 text-white/85 hover:text-sand-200"><span data-i18n="nav.our_rooms">Our Rooms</span> <svg class="w-3 h-3 opacity-70" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><path d="M3 5l3 3 3-3z"/></svg></a>  <div class="nav-dd-menu absolute top-full left-0 mt-2 min-w-[210px] bg-white rounded-md shadow-lux border border-mira-200 py-2">    <a href="rooms/" class="block px-4 py-2 text-sm text-mira-800 hover:bg-sand-100 hover:text-mira-900 whitespace-nowrap" data-i18n="nav.sub.all_suites">All suites</a><a href="rooms/standard.html" class="block px-4 py-2 text-sm text-mira-800 hover:bg-sand-100 hover:text-mira-900 whitespace-nowrap" data-i18n="nav.sub.standard">Standard Suite</a><a href="rooms/deluxe.html" class="block px-4 py-2 text-sm text-mira-800 hover:bg-sand-100 hover:text-mira-900 whitespace-nowrap" data-i18n="nav.sub.deluxe">Deluxe Suite</a><a href="rooms/family.html" class="block px-4 py-2 text-sm text-mira-800 hover:bg-sand-100 hover:text-mira-900 whitespace-nowrap" data-i18n="nav.sub.family">Family Suite</a><a href="rooms/king.html" class="block px-4 py-2 text-sm text-mira-800 hover:bg-sand-100 hover:text-mira-900 whitespace-nowrap" data-i18n="nav.sub.king">King Suite</a>  </div></div><div class="nav-dd relative" data-open="false">  <a href="dining/" class="nav-dd-trigger inline-flex items-center gap-1 relative py-2 text-[12px] font-medium tracking-normal transition whitespace-nowrap after:absolute after:left-0 after:-bottom-0.5 after:h-0.5 after:w-full after:origin-left after:scale-x-0 after:bg-sand-300 after:transition-transform hover:after:scale-x-100 text-white/85 hover:text-sand-200"><span data-i18n="nav.dining">Dining</span> <svg class="w-3 h-3 opacity-70" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><path d="M3 5l3 3 3-3z"/></svg></a>  <div class="nav-dd-menu absolute top-full left-0 mt-2 min-w-[210px] bg-white rounded-md shadow-lux border border-mira-200 py-2">    <a href="dining/" class="block px-4 py-2 text-sm text-mira-800 hover:bg-sand-100 hover:text-mira-900 whitespace-nowrap" data-i18n="nav.sub.dining_overview">Dining overview</a><a href="dining/#dining-rooms" class="block px-4 py-2 text-sm text-mira-800 hover:bg-sand-100 hover:text-mira-900 whitespace-nowrap" data-i18n="nav.sub.dining_rooms">Our dining rooms</a><a href="dining/#sample-menu" class="block px-4 py-2 text-sm text-mira-800 hover:bg-sand-100 hover:text-mira-900 whitespace-nowrap" data-i18n="nav.sub.sample_menu">Sample menu</a><a href="dining/main-restaurant.html" class="block px-4 py-2 text-sm text-mira-800 hover:bg-sand-100 hover:text-mira-900 whitespace-nowrap" data-i18n="nav.sub.main_restaurant">Main restaurant</a><a href="dining/pool-bar.html" class="block px-4 py-2 text-sm text-mira-800 hover:bg-sand-100 hover:text-mira-900 whitespace-nowrap" data-i18n="nav.sub.pool_restaurant">Pool restaurant</a><a href="dining/lobby-bar.html" class="block px-4 py-2 text-sm text-mira-800 hover:bg-sand-100 hover:text-mira-900 whitespace-nowrap" data-i18n="nav.sub.lobby_bar">Lobby & Orchard bars</a>  </div></div><div class="nav-dd relative" data-open="false">  <a href="spa.html" class="nav-dd-trigger inline-flex items-center gap-1 relative py-2 text-[12px] font-medium tracking-normal transition whitespace-nowrap after:absolute after:left-0 after:-bottom-0.5 after:h-0.5 after:w-full after:origin-left after:scale-x-0 after:bg-sand-300 after:transition-transform hover:after:scale-x-100 text-sand-300 after:scale-x-100"><span data-i18n="nav.spa">Spa</span> <svg class="w-3 h-3 opacity-70" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><path d="M3 5l3 3 3-3z"/></svg></a>  <div class="nav-dd-menu absolute top-full left-0 mt-2 min-w-[210px] bg-white rounded-md shadow-lux border border-mira-200 py-2">    <a href="spa.html" class="block px-4 py-2 text-sm text-mira-800 hover:bg-sand-100 hover:text-mira-900 whitespace-nowrap" data-i18n="nav.sub.spa_wellness">Spa & wellness</a><a href="spa-treatments.html" class="block px-4 py-2 text-sm text-mira-800 hover:bg-sand-100 hover:text-mira-900 whitespace-nowrap" data-i18n="nav.sub.spa_treatments">Treatments & pricing</a><a href="spa-book.html" class="block px-4 py-2 text-sm text-mira-800 hover:bg-sand-100 hover:text-mira-900 whitespace-nowrap" data-i18n="nav.sub.spa_book">Book a session</a>  </div></div><a href="activities.html" class="nav-soon-wrap relative py-2 text-[12px] font-medium tracking-normal transition whitespace-nowrap after:absolute after:left-0 after:-bottom-0.5 after:h-0.5 after:w-full after:origin-left after:scale-x-0 after:bg-sand-300 after:transition-transform hover:after:scale-x-100 text-white/85 hover:text-sand-200" data-soon="true"><span data-i18n="nav.activities">Activities</span><span class="nav-soon-pill ml-1.5 text-[8px] uppercase tracking-widest bg-sand-300/20 text-sand-300 border border-sand-300/40 rounded px-1.5 py-0.5" data-i18n="nav.coming_soon_pill">Soon</span></a><a href="location.html" class="nav-soon-wrap relative py-2 text-[12px] font-medium tracking-normal transition whitespace-nowrap after:absolute after:left-0 after:-bottom-0.5 after:h-0.5 after:w-full after:origin-left after:scale-x-0 after:bg-sand-300 after:transition-transform hover:after:scale-x-100 text-white/85 hover:text-sand-200"><span data-i18n="nav.location">Location</span></a><a href="gallery.html" class="nav-soon-wrap relative py-2 text-[12px] font-medium tracking-normal transition whitespace-nowrap after:absolute after:left-0 after:-bottom-0.5 after:h-0.5 after:w-full after:origin-left after:scale-x-0 after:bg-sand-300 after:transition-transform hover:after:scale-x-100 text-white/85 hover:text-sand-200"><span data-i18n="nav.gallery">Gallery</span></a><a href="offers.html" class="nav-soon-wrap relative py-2 text-[12px] font-medium tracking-normal transition whitespace-nowrap after:absolute after:left-0 after:-bottom-0.5 after:h-0.5 after:w-full after:origin-left after:scale-x-0 after:bg-sand-300 after:transition-transform hover:after:scale-x-100 text-white/85 hover:text-sand-200"><span data-i18n="nav.offers">Offers</span></a><a href="contact.html" class="nav-soon-wrap relative py-2 text-[12px] font-medium tracking-normal transition whitespace-nowrap after:absolute after:left-0 after:-bottom-0.5 after:h-0.5 after:w-full after:origin-left after:scale-x-0 after:bg-sand-300 after:transition-transform hover:after:scale-x-100 text-white/85 hover:text-sand-200"><span data-i18n="nav.contact">Contact</span></a>
       </nav>
-      <div class="flex items-center gap-2 shrink-0 xl:ml-6">
-        <!-- R008: Search icon. Click expands the dropdown anchored to this button. -->
-        <button id="nav-search-toggle" class="hidden md:inline-flex items-center justify-center w-8 h-8 rounded text-white/85 hover:text-white hover:bg-white/10 transition mr-1" data-i18n-aria-label="nav.search.aria" aria-label="Search the site" aria-expanded="false" aria-controls="nav-search-pop">
-          <svg viewBox="0 0 24 24" fill="none" class="w-[18px] h-[18px]" aria-hidden="true"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm10 2-5-5"/></svg>
-        </button>
-        <div class="hidden md:flex items-center gap-1 mr-1" aria-label="Currency">
-          <button class="nav-cur rounded px-2 py-1 text-[10px] font-semibold tracking-wider text-white/80 transition" data-cur="try">₺&nbsp;TRY</button>
-          <button class="nav-cur rounded px-2 py-1 text-[10px] font-semibold tracking-wider text-white/80 transition" data-cur="eur">€&nbsp;EUR</button>
-          <button class="nav-cur rounded px-2 py-1 text-[10px] font-semibold tracking-wider text-white/80 transition" data-cur="usd">$&nbsp;USD</button>
-        </div>
-        <span class="hidden md:block w-px h-5 bg-white/15" aria-hidden="true"></span>
-        <div class="hidden md:flex items-center gap-1.5 mr-1" aria-label="Language">
-          <button class="nav-flag rounded overflow-hidden ring-1 ring-white/20 hover:ring-white/60 transition" data-lang="en" aria-label="English" data-active="true"><span class="fi fi-gb block" style="width:24px;height:18px;"></span></button>
-          <button class="nav-flag rounded overflow-hidden ring-1 ring-white/20 hover:ring-white/60 transition" data-lang="tr" aria-label="Türkçe"><span class="fi fi-tr block" style="width:24px;height:18px;"></span></button>
-          <button class="nav-flag rounded overflow-hidden ring-1 ring-white/20 hover:ring-white/60 transition" data-lang="de" aria-label="Deutsch"><span class="fi fi-de block" style="width:24px;height:18px;"></span></button>
-          <button class="nav-flag rounded overflow-hidden ring-1 ring-white/20 hover:ring-white/60 transition" data-lang="ru" aria-label="Русский"><span class="fi fi-ru block" style="width:24px;height:18px;"></span></button>
-        </div>
-        <!-- R009: desktop "Book" nav pill removed — replaced by the
-             floating "Book your stay" button rendered in footer(). -->
-        <button id="mnu-toggle" class="xl:hidden p-2 -mr-2" data-i18n-aria-label="nav.menu.aria" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+      <!-- Mobile right cluster: compact Book pill + hamburger -->
+      <div class="flex items-center gap-2 shrink-0 xl:hidden">
+        <a href="book.html" class="inline-flex items-center px-3 py-1.5 bg-sand-300 text-mira-900 rounded-full text-xs font-semibold hover:bg-sand-200 transition" data-i18n-aria-label="cta.book_your_stay.aria" aria-label="Book your stay">
+          <span data-i18n="cta.book_your_stay">Book your stay</span>
+        </a>
+        <button id="mnu-toggle" class="p-2 -mr-2" data-i18n-aria-label="nav.menu.aria" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
           <svg viewBox="0 0 24 24" fill="none" class="w-6 h-6"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/></svg>
         </button>
       </div>
@@ -138,7 +163,7 @@ tailwind.config = {
     </div>
   </div>
 </header>
-<main id="main" class="pt-[88px] xl:pt-[96px]"><div id="mp-i18n-notice" class="hidden bg-sand-100 border-b border-sand-300/40 px-5 py-2 text-center text-xs text-mira-800"><span data-i18n="i18n.in_progress">Page content translation in progress — English shown.</span></div>
+<main id="main" class="pt-16 md:pt-[104px]"><div id="mp-i18n-notice" class="hidden bg-sand-100 border-b border-sand-300/40 px-5 py-2 text-center text-xs text-mira-800"><span data-i18n="i18n.in_progress">Page content translation in progress — English shown.</span></div>
     <div class="bk-page sp-page">
 
       <div class="bk-title">
@@ -313,16 +338,9 @@ tailwind.config = {
       </div>
     </footer>
 
-    <!-- R009: Floating "Book your stay" button — the primary CTA, anchored
-         bottom-center and visible on every page on every device. The desktop
-         nav Book pill was removed in the same release; this single floating
-         button is now the canonical entry point to book.html. Uses safe-area
-         insets so the iOS home indicator doesn't push it off-screen. -->
-    <a href="book.html" id="book-floating" data-i18n-aria-label="cta.book_your_stay.aria" aria-label="Book your stay"
-       class="fixed left-1/2 -translate-x-1/2 z-30 inline-flex items-center gap-2 px-6 py-3.5 bg-sand-300 text-mira-900 rounded-full font-medium text-sm shadow-lux hover:bg-sand-200 transition whitespace-nowrap book-floating-pos">
-      <svg viewBox="0 0 24 24" fill="none" class="w-4 h-4" aria-hidden="true"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M8 2v4m8-4v4M3 10h18M5 6h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Z"/></svg>
-      <span data-i18n="cta.book_your_stay">Book your stay</span>
-    </a>
+    <!-- R011: floating bottom-center Book button removed.
+         The Book CTA now lives in the top utility strip (desktop) and as a
+         compact pill in the mobile nav row — see nav() above. -->
 
     <a href="https://wa.me/905348988405" rel="noopener" aria-label="WhatsApp" class="fixed right-5 z-30 bg-[#25D366] text-white w-12 h-12 grid place-items-center rounded-full shadow-lg hover:scale-105 transition whatsapp-bottom-safe">
       <svg viewBox="0 0 24 24" class="w-6 h-6" fill="currentColor" aria-hidden="true"><path d="M20.52 3.48A11.9 11.9 0 0 0 12 0C5.37 0 0 5.37 0 12a11.93 11.93 0 0 0 1.64 6L0 24l6.19-1.62A11.94 11.94 0 0 0 12 24c6.63 0 12-5.37 12-12 0-3.2-1.25-6.2-3.48-8.52Zm-8.52 18a9.9 9.9 0 0 1-5.05-1.38l-.36-.22-3.67.96.98-3.58-.23-.37A9.94 9.94 0 1 1 22 12c0 5.5-4.48 9.98-10 9.98Zm5.47-7.46c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.25-.46-2.39-1.47-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.58c-.2 0-.52.07-.8.37-.27.3-1.05 1.02-1.05 2.48s1.08 2.88 1.23 3.08c.15.2 2.13 3.25 5.15 4.56.72.31 1.28.5 1.72.64.72.23 1.38.2 1.9.12.58-.09 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.2-.57-.35Z"/></svg>
@@ -438,8 +456,8 @@ tailwind.config = {
   </div>
 </div>
 
-    <script src="assets/js/media-manifest.js?v=24" defer></script>
-    <script src="assets/js/search-index.js?v=24" defer></script>
-    <script src="assets/js/i18n.js?v=24" defer></script>
-    <script src="assets/js/site.js?v=24" defer></script>
+    <script src="assets/js/media-manifest.js?v=25" defer></script>
+    <script src="assets/js/search-index.js?v=25" defer></script>
+    <script src="assets/js/i18n.js?v=25" defer></script>
+    <script src="assets/js/site.js?v=25" defer></script>
     </body></html>

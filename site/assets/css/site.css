@@ -9,38 +9,12 @@
   bottom: max(20px, env(safe-area-inset-bottom));
 }
 
-/* R009: Floating "Book your stay" button — bottom-CENTER, every page.
-   Sits at the same vertical level as WhatsApp (right) and the music
-   cluster (right) but in the center, so they never collide on any
-   viewport. iOS safe-area-inset keeps it clear of the home indicator.
-   Hover lifts the pill slightly for affordance. */
-.book-floating-pos {
-  bottom: max(20px, env(safe-area-inset-bottom));
-}
-#book-floating {
-  box-shadow: 0 10px 30px -8px rgba(19, 38, 48, .45), 0 4px 12px -4px rgba(19, 38, 48, .3);
-  letter-spacing: 0.02em;
-  min-height: 44px;
-}
-#book-floating:hover {
-  transform: translateX(-50%) translateY(-2px);
-}
-/* Mobile: slightly smaller pill so it doesn't dominate the screen */
-@media (max-width: 480px) {
-  #book-floating {
-    padding: 11px 18px;
-    font-size: 13px;
-  }
-  #book-floating svg { width: 15px; height: 15px; }
-}
-
-/* Add enough bottom padding to <main> so page content's last few lines
-   are never permanently hidden behind the floating Book button. Footer
-   has its own large py-14 so the bottom-most copyright row clears the
-   button when fully scrolled. */
-main { padding-bottom: 70px; }
-@media (max-width: 480px) {
-  main { padding-bottom: 80px; }
+/* R011: floating Book button retired — its job moved into the new top
+   utility strip + main-row mobile pill. No bottom-padding workaround
+   needed; pages can use their natural footer spacing again. */
+.nav-book-pill {
+  white-space: nowrap;
+  letter-spacing: 0.04em;
 }
 .music-cluster-pos {
   /* Phone (< 640px): cluster sits ABOVE the WhatsApp bubble */
@@ -119,13 +93,9 @@ html, body { overflow-x: hidden; }
 /* === Phone (< 640px) =============================================== */
 @media (max-width: 639px) {
 
-  /* Hide the secondary Mi World copyright strip on phone — the same copy
-     is in the footer, and removing it frees up ~26px of valuable header
-     space (the strip was also scrolling horizontally, which felt broken). */
-  #siteheader > div:first-child { display: none !important; }
-
-  /* With the strip removed, drop the <main> top padding to just the nav row. */
-  #main { padding-top: 64px !important; }
+  /* R011: utility strip is `hidden md:block` in markup now — no CSS
+     override needed to hide it on phone. Main padding-top is driven by
+     Tailwind pt-16 md:pt-[104px] on <main>. */
 
   /* Hide the customiser side-tab on phone. It's a designer/owner tool
      (theme + music picker) — guests don't need it crowding the screen.
