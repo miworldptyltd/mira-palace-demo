@@ -45,7 +45,7 @@ tailwind.config = {
   // because GitHub Pages hosts at /mira-palace-demo/ rather than /.
   window.MIRA_ROOT = "../";
 </script>
-<link rel="stylesheet" href="../assets/css/site.css?v=21" />
+<link rel="stylesheet" href="../assets/css/site.css?v=22" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/tabler-icons.min.css" />
 </head>
 <body class="font-body text-ink bg-sand-50 antialiased" data-root="../">
@@ -171,71 +171,71 @@ tailwind.config = {
   <div class="absolute inset-0 hero-overlay pointer-events-none"></div>
   <div class="relative max-w-7xl mx-auto px-5 lg:px-8 pt-10 pb-16 text-white flex flex-col justify-start min-h-[inherit]" style="min-height:68vh;">
     <div class="max-w-3xl">
-      <p class="uppercase tracking-[0.22em] text-sand-300 text-xs sm:text-sm font-semibold mb-4">Suites</p>
-      <h1 class="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.05]">Thirty-four suites.<br/>Four ways to sleep.</h1>
-      <p class="mt-5 max-w-2xl text-base sm:text-lg text-white/90 leading-relaxed">Every suite at Mira Palace is individually styled — no two are identical, but all share the same hand-woven linens, the same Turkish ceramics, and the same Mediterranean light through the shutters.</p>
+      <p class="uppercase tracking-[0.22em] text-sand-300 text-xs sm:text-sm font-semibold mb-4"><span data-i18n="rooms.kicker">Suites</span></p>
+      <h1 class="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.05]"><span data-i18n="rooms.index.h1">Thirty-four suites. Four ways to sleep.</span></h1>
+      <p class="mt-5 max-w-2xl text-base sm:text-lg text-white/90 leading-relaxed"><span data-i18n="rooms.index.sub">Every suite at Mira Palace is individually styled — no two are identical, but all share the same hand-woven linens, the same Turkish ceramics, and the same Mediterranean light through the shutters.</span></p>
       <div class="mt-8 flex flex-wrap gap-3"></div>
     </div>
   </div>
 </section>
 <section class="bg-sand-50 py-20 lg:py-28 scroll-mt-24"><div class="max-w-7xl mx-auto px-5 lg:px-8">
-      <p class="uppercase tracking-[0.22em] text-mira-600 text-xs font-semibold">Choose your suite</p>
-      <h2 class="font-display text-3xl sm:text-4xl md:text-5xl text-mira-900 leading-tight ">Our suite types.</h2>
-      <p class="mt-5 max-w-2xl text-lg text-mira-700 leading-relaxed">All rates are illustrative. Final rates depend on season and length of stay; please request a quote for your dates.</p>
+      <p class="uppercase tracking-[0.22em] text-mira-600 text-xs font-semibold" data-i18n="rooms.index.choose">Choose your suite</p>
+      <h2 class="font-display text-3xl sm:text-4xl md:text-5xl text-mira-900 leading-tight" data-i18n="rooms.index.h2">Our suite types.</h2>
+      <p class="mt-5 max-w-2xl text-lg text-mira-700 leading-relaxed" data-i18n="rooms.index.lead">All rates are illustrative. Final rates depend on season and length of stay; please request a quote for your dates.</p>
       <div class="mt-12 grid gap-8">
 <a href="../rooms/standard.html" class="group grid md:grid-cols-5 gap-0 bg-white rounded-lg overflow-hidden shadow-lux">
   <div class="md:col-span-3 aspect-[16/10] md:aspect-auto bg-cover bg-center" style="background-image:url('../assets/img/standard/standard-01.jpg')"></div>
   <div class="md:col-span-2 p-8 flex flex-col">
-    <div class="text-xs uppercase tracking-widest text-sand-600">From €130 / night*</div>
-    <h3 class="font-display text-3xl text-mira-900 mt-2">Standard Suite</h3>
+    <div class="text-xs uppercase tracking-widest text-sand-600" data-i18n="room.tag.standard">From €130 / night*</div>
+    <h3 class="font-display text-3xl text-mira-900 mt-2" data-i18n="nav.sub.standard">Standard Suite</h3>
     <div class="mt-3 flex flex-wrap gap-x-5 gap-y-1 text-sm text-mira-700">
-      <span>22 m²</span><span>•</span><span>Garden view</span><span>•</span><span>2 adults</span>
+      <span>22 m²</span><span>•</span><span data-i18n="room.view.garden">Garden view</span><span>•</span><span data-i18n="room.sleeps.2a">2 adults</span>
     </div>
-    <p class="mt-4 text-mira-700 text-sm leading-relaxed">A compact, beautifully made double with a French balcony opening onto the citrus orchard.</p>
-    <span class="mt-6 inline-flex items-center gap-2 text-sm font-medium text-mira-700 group-hover:text-sand-500">View the suite <span>→</span></span>
+    <p class="mt-4 text-mira-700 text-sm leading-relaxed" data-i18n="room.short.standard">A compact, beautifully made double with a French balcony opening onto the citrus orchard.</p>
+    <span class="mt-6 inline-flex items-center gap-2 text-sm font-medium text-mira-700 group-hover:text-sand-500"><span data-i18n="room.view_suite_cta">View the suite</span> <span>→</span></span>
   </div>
 </a>
 
 <a href="../rooms/deluxe.html" class="group grid md:grid-cols-5 gap-0 bg-white rounded-lg overflow-hidden shadow-lux">
   <div class="md:col-span-3 aspect-[16/10] md:aspect-auto bg-cover bg-center" style="background-image:url('../assets/img/deluxe/deluxe-01.jpg')"></div>
   <div class="md:col-span-2 p-8 flex flex-col">
-    <div class="text-xs uppercase tracking-widest text-sand-600">From €180 / night*</div>
-    <h3 class="font-display text-3xl text-mira-900 mt-2">Deluxe Suite</h3>
+    <div class="text-xs uppercase tracking-widest text-sand-600" data-i18n="room.tag.deluxe">From €180 / night*</div>
+    <h3 class="font-display text-3xl text-mira-900 mt-2" data-i18n="nav.sub.deluxe">Deluxe Suite</h3>
     <div class="mt-3 flex flex-wrap gap-x-5 gap-y-1 text-sm text-mira-700">
-      <span>28 m²</span><span>•</span><span>Sea view</span><span>•</span><span>2 adults + 1 child</span>
+      <span>28 m²</span><span>•</span><span data-i18n="room.view.sea">Sea view</span><span>•</span><span data-i18n="room.sleeps.2a1c">2 adults + 1 child</span>
     </div>
-    <p class="mt-4 text-mira-700 text-sm leading-relaxed">A larger suite with a full balcony, panoramic sea view, and a walk-in rain shower.</p>
-    <span class="mt-6 inline-flex items-center gap-2 text-sm font-medium text-mira-700 group-hover:text-sand-500">View the suite <span>→</span></span>
+    <p class="mt-4 text-mira-700 text-sm leading-relaxed" data-i18n="room.short.deluxe">A larger suite with a full balcony, panoramic sea view, and a walk-in rain shower.</p>
+    <span class="mt-6 inline-flex items-center gap-2 text-sm font-medium text-mira-700 group-hover:text-sand-500"><span data-i18n="room.view_suite_cta">View the suite</span> <span>→</span></span>
   </div>
 </a>
 
 <a href="../rooms/family.html" class="group grid md:grid-cols-5 gap-0 bg-white rounded-lg overflow-hidden shadow-lux">
   <div class="md:col-span-3 aspect-[16/10] md:aspect-auto bg-cover bg-center" style="background-image:url('../assets/img/family/family-01.jpg')"></div>
   <div class="md:col-span-2 p-8 flex flex-col">
-    <div class="text-xs uppercase tracking-widest text-sand-600">From €220 / night*</div>
-    <h3 class="font-display text-3xl text-mira-900 mt-2">Family Suite</h3>
+    <div class="text-xs uppercase tracking-widest text-sand-600" data-i18n="room.tag.family">From €220 / night*</div>
+    <h3 class="font-display text-3xl text-mira-900 mt-2" data-i18n="nav.sub.family">Family Suite</h3>
     <div class="mt-3 flex flex-wrap gap-x-5 gap-y-1 text-sm text-mira-700">
-      <span>34 m²</span><span>•</span><span>Garden view</span><span>•</span><span>2 adults + 2 children</span>
+      <span>34 m²</span><span>•</span><span data-i18n="room.view.garden">Garden view</span><span>•</span><span data-i18n="room.sleeps.2a2c">2 adults + 2 children</span>
     </div>
-    <p class="mt-4 text-mira-700 text-sm leading-relaxed">Two connecting suites sharing a vestibule and a single en-suite for easy family access.</p>
-    <span class="mt-6 inline-flex items-center gap-2 text-sm font-medium text-mira-700 group-hover:text-sand-500">View the suite <span>→</span></span>
+    <p class="mt-4 text-mira-700 text-sm leading-relaxed" data-i18n="room.short.family">Two connecting suites sharing a vestibule and a single en-suite for easy family access.</p>
+    <span class="mt-6 inline-flex items-center gap-2 text-sm font-medium text-mira-700 group-hover:text-sand-500"><span data-i18n="room.view_suite_cta">View the suite</span> <span>→</span></span>
   </div>
 </a>
 
 <a href="../rooms/king.html" class="group grid md:grid-cols-5 gap-0 bg-white rounded-lg overflow-hidden shadow-lux">
   <div class="md:col-span-3 aspect-[16/10] md:aspect-auto bg-cover bg-center" style="background-image:url('../assets/img/king/king-01.jpg')"></div>
   <div class="md:col-span-2 p-8 flex flex-col">
-    <div class="text-xs uppercase tracking-widest text-sand-600">From €290 / night*</div>
-    <h3 class="font-display text-3xl text-mira-900 mt-2">King Suite</h3>
+    <div class="text-xs uppercase tracking-widest text-sand-600" data-i18n="room.tag.king">From €290 / night*</div>
+    <h3 class="font-display text-3xl text-mira-900 mt-2" data-i18n="nav.sub.king">King Suite</h3>
     <div class="mt-3 flex flex-wrap gap-x-5 gap-y-1 text-sm text-mira-700">
-      <span>42 m²</span><span>•</span><span>Sea view</span><span>•</span><span>2 adults + 1 child</span>
+      <span>42 m²</span><span>•</span><span data-i18n="room.view.sea">Sea view</span><span>•</span><span data-i18n="room.sleeps.2a1c">2 adults + 1 child</span>
     </div>
-    <p class="mt-4 text-mira-700 text-sm leading-relaxed">A sitting-room and a separate bedroom, a deep freestanding tub, and a wrap-around balcony.</p>
-    <span class="mt-6 inline-flex items-center gap-2 text-sm font-medium text-mira-700 group-hover:text-sand-500">View the suite <span>→</span></span>
+    <p class="mt-4 text-mira-700 text-sm leading-relaxed" data-i18n="room.short.king">A sitting-room and a separate bedroom, a deep freestanding tub, and a wrap-around balcony.</p>
+    <span class="mt-6 inline-flex items-center gap-2 text-sm font-medium text-mira-700 group-hover:text-sand-500"><span data-i18n="room.view_suite_cta">View the suite</span> <span>→</span></span>
   </div>
 </a>
 </div>
-      <p class="mt-10 text-xs text-mira-600">* Indicative demo rates in EUR, All-Inclusive, double occupancy, shoulder season. Real rates will be supplied by the hotel during content hand-off.</p>
+      <p class="mt-10 text-xs text-mira-600" data-i18n="rooms.index.note">* Indicative demo rates in EUR, All-Inclusive, double occupancy, shoulder season. Real rates will be supplied by the hotel during content hand-off.</p>
     </div></section></main>
     <footer class="bg-mira-900 text-white/80 mt-24">
       <div class="max-w-7xl mx-auto px-5 lg:px-8 py-14 grid grid-cols-1 md:grid-cols-4 gap-10">
@@ -423,8 +423,8 @@ tailwind.config = {
   </div>
 </div>
 
-    <script src="../assets/js/media-manifest.js?v=26" defer></script>
-    <script src="../assets/js/search-index.js?v=26" defer></script>
-    <script src="../assets/js/i18n.js?v=26" defer></script>
-    <script src="../assets/js/site.js?v=26" defer></script>
+    <script src="../assets/js/media-manifest.js?v=27" defer></script>
+    <script src="../assets/js/search-index.js?v=27" defer></script>
+    <script src="../assets/js/i18n.js?v=27" defer></script>
+    <script src="../assets/js/site.js?v=27" defer></script>
     </body></html>

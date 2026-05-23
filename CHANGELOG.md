@@ -1,3 +1,7 @@
+## [R013] - 2026-05-23
+
+R013 feat: rooms_index + Standard + Deluxe + Family + King Suite pages fully translated EN TR DE RU contextually - ~70 new keys per language including 16 shared amenities and 4x3 paragraph room stories
+
 ## [R012] - 2026-05-23
 
 R012 feat: About + Contact + Activities pages fully translated EN TR DE RU contextually - ~60 new keys per language - in-progress notice now correctly hides on these three pages too
@@ -129,6 +133,7 @@ First publishable build. Sent to the hotel for owner review.
 - LICENSE is all-rights-reserved proprietary.
 
 [0.1.0]: https://github.com/-/-/releases/tag/v0.1.0
+
 
 
 

@@ -594,11 +594,14 @@
     // text doesn't yet have data-i18n coverage.
     // R010 covered: shell + home + book + spa-book
     // R012 added:   about + contact + activities
+    // R013 added:   rooms/index + rooms/standard + rooms/deluxe + rooms/family + rooms/king
     var notice = document.getElementById('mp-i18n-notice');
     var pagePath = window.location.pathname || '';
     var translatedPages = [
       'index.html', '/', 'book.html', 'spa-book.html',
-      'about.html', 'contact.html', 'activities.html'
+      'about.html', 'contact.html', 'activities.html',
+      'rooms/', 'rooms/index.html', 'rooms/standard.html',
+      'rooms/deluxe.html', 'rooms/family.html', 'rooms/king.html'
     ];
     var bodyTranslated = translatedPages.some(function (p) { return pagePath === p || pagePath.endsWith('/' + p) || (p === '/' && pagePath.endsWith('/')); });
     if (notice) {

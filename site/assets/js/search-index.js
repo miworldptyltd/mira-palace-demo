@@ -262,7 +262,7 @@ window.MIRA_SEARCH_INDEX = [
     "title": "Suites · Mira Palace",
     "description": "Four suite types at Mira Palace, from 22 m² Standard Suite to 42 m² King Suite. Garden and sea views, all with full en-suite and balcony.",
     "headings": [
-      "Thirty-four suites.Four ways to sleep.",
+      "Thirty-four suites. Four ways to sleep.",
       "Our suite types.",
       "Standard Suite",
       "Deluxe Suite",
