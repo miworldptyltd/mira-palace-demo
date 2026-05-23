@@ -1,4 +1,4 @@
-from common import hero, hero_video, hero_slideshow, section, eyebrow, heading, card, feature_strip, cta_band, quote_block
+from common import hero, hero_video, hero_slideshow, section, eyebrow, heading, card, feature_strip, cta_band, quote_block, specials_card
 
 IMG_POOL = "assets/img/garden/garden-01.jpg"
 IMG_GARDEN_2 = "assets/img/garden/garden-02.jpg"
@@ -27,6 +27,7 @@ def home(root: str) -> str:
         primary_label="Explore our suites",
         height="88vh",
         root=root,
+        extras_html=specials_card(root),
     )
     intro = section(f"""
       <div class="grid lg:grid-cols-12 gap-12 items-start">

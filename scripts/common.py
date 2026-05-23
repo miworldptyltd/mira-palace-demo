@@ -80,7 +80,7 @@ tailwind.config = {{
   // because GitHub Pages hosts at /mira-palace-demo/ rather than /.
   window.MIRA_ROOT = "{root}";
 </script>
-<link rel="stylesheet" href="{root}assets/css/site.css?v=13" />
+<link rel="stylesheet" href="{root}assets/css/site.css?v=14" />
 </head>
 <body class="font-body text-ink bg-sand-50 antialiased" data-root="{root}">
 <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:top-3 focus:left-3 bg-mira-800 text-white px-3 py-2 rounded">Skip to content</a>
@@ -109,7 +109,6 @@ def nav(active: str, root: str) -> str:
             ("Pool restaurant",    "dining/pool-bar.html"),
             ("Lobby & Orchard bars", "dining/lobby-bar.html"),
         ]),
-        ("pools",      "Pools",         "pools-beach.html", None),
         ("spa",        "Spa",           "spa.html",         [
             ("Spa & wellness",     "spa.html"),
             ("Treatments & pricing", "spa-treatments.html"),
@@ -182,7 +181,7 @@ def nav(active: str, root: str) -> str:
             <img src="{root}assets/img/mp-monogram-gold.png" alt="Mira Palace logo" class="w-9 h-9 object-contain" />
             <span class="font-display text-xl tracking-wide whitespace-nowrap">Mira Palace</span>
           </a>
-          <nav class="hidden xl:flex items-center gap-x-5 flex-1 justify-end" aria-label="Primary">
+          <nav class="hidden xl:flex items-center gap-x-3 2xl:gap-x-4 flex-1 justify-end" aria-label="Primary">
             {''.join(links)}
           </nav>
           <div class="flex items-center gap-3 shrink-0 xl:ml-6">
@@ -320,8 +319,8 @@ def footer(root: str) -> str:
     </div>
 
     {customiser_panel(root)}
-    <script src="{root}assets/js/media-manifest.js?v=18" defer></script>
-    <script src="{root}assets/js/site.js?v=18" defer></script>
+    <script src="{root}assets/js/media-manifest.js?v=19" defer></script>
+    <script src="{root}assets/js/site.js?v=19" defer></script>
     </body></html>
     """)
 
@@ -423,7 +422,7 @@ def hero(img_url: str, kicker: str, heading: str, sub: str, primary_href: str = 
     return dedent(f"""
     <section class="relative hero-section" style="min-height:{height};">
       <div class="absolute inset-0 hero-overlay" style="background-image:url('{img_url}'); background-size:cover; background-position:center;"></div>
-      <div class="relative max-w-5xl mx-auto px-5 lg:px-8 pt-40 pb-28 text-white flex flex-col justify-start min-h-[inherit]" style="min-height:{height};">
+      <div class="relative max-w-7xl mx-auto px-5 lg:px-8 pt-10 pb-16 text-white flex flex-col justify-start min-h-[inherit]" style="min-height:{height};">
         <div class="max-w-3xl">
           <p class="uppercase tracking-[0.22em] text-sand-300 text-xs sm:text-sm font-semibold mb-4">{kicker}</p>
           <h1 class="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.05]">{heading}</h1>
@@ -461,7 +460,7 @@ def hero_slideshow(image_urls, kicker: str, heading: str, sub: str,
         {slides}
       </div>
       <div class="absolute inset-0 hero-overlay pointer-events-none"></div>
-      <div class="relative max-w-5xl mx-auto px-5 lg:px-8 pt-40 pb-28 text-white flex flex-col justify-start min-h-[inherit]" style="min-height:{height};">
+      <div class="relative max-w-7xl mx-auto px-5 lg:px-8 pt-10 pb-16 text-white flex flex-col justify-start min-h-[inherit]" style="min-height:{height};">
         <div class="max-w-3xl">
           <p class="uppercase tracking-[0.22em] text-sand-300 text-xs sm:text-sm font-semibold mb-4">{kicker}</p>
           <h1 class="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.05]">{heading}</h1>
@@ -656,9 +655,12 @@ def write_media_manifest(out_path: pathlib.Path) -> None:
 
 
 def hero_video(poster_url: str, kicker: str, heading: str, sub: str,
-               primary_href: str = "", primary_label: str = "", height: str = "88vh", root: str = "") -> str:
+               primary_href: str = "", primary_label: str = "", height: str = "88vh", root: str = "",
+               extras_html: str = "") -> str:
     """Video-backed hero. Video autoplays muted (browser rule); music is opt-in via a toggle.
-       Both video source and music source are swappable from the Customise panel — see site.js."""
+       Both video source and music source are swappable from the Customise panel — see site.js.
+       Optional `extras_html` is injected inside the hero section (typically an
+       absolutely-positioned card overlay like the home page Specials card)."""
     cta = ""
     if primary_href:
         cta = (f'<a href="{primary_href}" class="inline-flex items-center justify-center px-7 py-3 bg-sand-300 text-mira-900 '
@@ -674,7 +676,7 @@ def hero_video(poster_url: str, kicker: str, heading: str, sub: str,
         <source id="hero-video-source" src="{default_video}" type="video/mp4" />
       </video>
       <div class="absolute inset-0 hero-overlay pointer-events-none"></div>
-      <div class="relative max-w-5xl mx-auto px-5 lg:px-8 pt-40 pb-28 text-white flex flex-col justify-start min-h-[inherit]" style="min-height:{height};">
+      <div class="relative max-w-7xl mx-auto px-5 lg:px-8 pt-10 pb-16 text-white flex flex-col justify-start min-h-[inherit]" style="min-height:{height};">
         <div class="max-w-3xl">
           <p class="uppercase tracking-[0.22em] text-sand-300 text-xs sm:text-sm font-semibold mb-4">{kicker}</p>
           <h1 class="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.05]">{heading}</h1>
@@ -682,7 +684,40 @@ def hero_video(poster_url: str, kicker: str, heading: str, sub: str,
           <div class="mt-8 flex flex-wrap gap-3">{cta}</div>
         </div>
       </div>
+      {extras_html}
     </section>
+    """)
+
+
+def specials_card(root: str, items=None) -> str:
+    """Transparent overlay card for the home hero. Backend can toggle its
+    visibility later by flipping the [data-show] attribute via the booking
+    admin. For now, items are hard-coded (illustrative) and the card shows
+    by default."""
+    if items is None:
+        items = [
+            ("Early bird", "Up to 25% off", "Book by 31 May 2026 for arrivals before 15 July."),
+            ("Stay 7, pay 6", "Late-summer escape", "Arrivals 1–30 September. Complimentary airport transfer."),
+            ("Honeymoon", "Included extras", "Sparkling wine on arrival, private hammam session for two."),
+        ]
+    rows = "".join(
+        f'<li class="border-t border-white/15 first:border-t-0 py-3">'
+        f'  <div class="text-[11px] uppercase tracking-[0.18em] text-sand-300 font-semibold">{tag}</div>'
+        f'  <div class="font-display text-lg text-white leading-tight mt-0.5">{title}</div>'
+        f'  <div class="text-xs text-white/80 mt-1 leading-relaxed">{desc}</div>'
+        f'</li>'
+        for tag, title, desc in items
+    )
+    return dedent(f"""
+    <aside id="specials-card" data-show="true" class="hidden lg:block absolute right-6 xl:right-12 top-1/2 -translate-y-1/2 w-[300px] xl:w-[340px] z-10 backdrop-blur-md bg-mira-900/40 border border-white/20 rounded-lg shadow-lux p-5 text-white">
+      <div class="flex items-baseline justify-between mb-3">
+        <h2 class="font-display text-2xl leading-none">Our specials</h2>
+        <span class="text-[10px] uppercase tracking-widest text-sand-300/90">Direct only</span>
+      </div>
+      <p class="text-xs text-white/75 leading-relaxed mb-2">Best rates are always direct. These are reserved for guests who book through us.</p>
+      <ul class="m-0 p-0 list-none">{rows}</ul>
+      <a href="{root}offers.html" class="mt-4 inline-flex items-center justify-center w-full px-4 py-2.5 bg-sand-300 text-mira-900 rounded-full font-medium text-sm hover:bg-sand-200 transition">See all offers <span class="ml-2">→</span></a>
+    </aside>
     """)
 
 

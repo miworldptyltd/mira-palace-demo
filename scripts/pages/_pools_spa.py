@@ -150,10 +150,8 @@ def spa_treatments(root: str) -> str:
 
 
 PAGES = [
-    {"path": "pools-beach.html", "active": "pools",
-     "title": "Pools & Beach · Mira Palace",
-     "description": "Four pools and a private Mediterranean beach 600 metres from your room.",
-     "body": pools},
+    # Pools & Beach page retired in R005 — owner removed it from the nav.
+    # Pools content now surfaces on the home page + dining/pool-bar page.
     {"path": "spa.html", "active": "spa",
      "title": "Spa & Wellness · Mira Palace",
      "description": "Turkish hammam, saunas, steam room, cold plunge, fitness studio, and a treatment menu of massage, facial and body work.",

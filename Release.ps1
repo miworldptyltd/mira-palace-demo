@@ -49,6 +49,17 @@ if ($stray) {
   }
 }
 
+# Retired pages: pages that used to be generated but have since been removed
+# from the build. The build doesn't sweep these — list them here so a stale
+# file from a previous build doesn't linger and stay reachable by direct URL.
+$retiredPages = @("site\pools-beach.html")
+foreach ($p in $retiredPages) {
+  if (Test-Path $p) {
+    try { Remove-Item -Path $p -Force -ErrorAction Stop; Write-Host ("  [tidy] retired page removed: " + $p) -ForegroundColor DarkGray }
+    catch { Write-Host ("  [tidy] could not remove retired page: " + $p) -ForegroundColor Yellow }
+  }
+}
+
 # ---------------------------------------------------------------------------
 Step "[1/6]  Photo import"
 
