@@ -80,7 +80,7 @@ tailwind.config = {{
   // because GitHub Pages hosts at /mira-palace-demo/ rather than /.
   window.MIRA_ROOT = "{root}";
 </script>
-<link rel="stylesheet" href="{root}assets/css/site.css?v=16" />
+<link rel="stylesheet" href="{root}assets/css/site.css?v=17" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/tabler-icons.min.css" />
 </head>
 <body class="font-body text-ink bg-sand-50 antialiased" data-root="{root}">
@@ -101,7 +101,8 @@ def nav(active: str, root: str) -> str:
             ("Family Suite",       "rooms/family.html"),
             ("King Suite",         "rooms/king.html"),
         ]),
-        ("concept",    "All-Inclusive", "concept.html",     None),
+        # "All-Inclusive" removed from nav in R008 — concept.html still
+        # reachable from the home page card grid and the footer.
         ("dining",     "Dining",        "dining/",          [
             ("Dining overview",    "dining/"),
             ("Our dining rooms",   "dining/#dining-rooms"),
@@ -126,7 +127,7 @@ def nav(active: str, root: str) -> str:
 
     def _link_classes(key: str) -> str:
         is_active = "text-sand-300 after:scale-x-100" if active == key else "text-white/85 hover:text-sand-200"
-        return ("relative py-2 text-[13px] font-medium tracking-wide transition whitespace-nowrap "
+        return ("relative py-2 text-[12px] font-medium tracking-normal transition whitespace-nowrap "
                 "after:absolute after:left-0 after:-bottom-0.5 after:h-0.5 after:w-full after:origin-left "
                 "after:scale-x-0 after:bg-sand-300 after:transition-transform hover:after:scale-x-100 ") + is_active
 
@@ -194,10 +195,14 @@ def nav(active: str, root: str) -> str:
             <img src="{root}assets/img/mp-monogram-gold.png" alt="Mira Palace logo" class="w-9 h-9 object-contain" />
             <span class="font-display text-xl tracking-wide whitespace-nowrap">Mira Palace</span>
           </a>
-          <nav class="hidden xl:flex items-center gap-x-3 2xl:gap-x-4 flex-1 justify-end" aria-label="Primary">
+          <nav class="hidden xl:flex items-center gap-x-2 2xl:gap-x-3 flex-1 justify-end" aria-label="Primary">
             {''.join(links)}
           </nav>
           <div class="flex items-center gap-2 shrink-0 xl:ml-6">
+            <!-- R008: Search icon. Click expands the dropdown anchored to this button. -->
+            <button id="nav-search-toggle" class="hidden md:inline-flex items-center justify-center w-8 h-8 rounded text-white/85 hover:text-white hover:bg-white/10 transition mr-1" aria-label="Search the site" aria-expanded="false" aria-controls="nav-search-pop">
+              <svg viewBox="0 0 24 24" fill="none" class="w-[18px] h-[18px]" aria-hidden="true"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm10 2-5-5"/></svg>
+            </button>
             <div class="hidden md:flex items-center gap-1 mr-1" aria-label="Currency">
               <button class="nav-cur rounded px-2 py-1 text-[10px] font-semibold tracking-wider text-white/80 transition" data-cur="try">₺&nbsp;TRY</button>
               <button class="nav-cur rounded px-2 py-1 text-[10px] font-semibold tracking-wider text-white/80 transition" data-cur="eur">€&nbsp;EUR</button>
@@ -216,7 +221,29 @@ def nav(active: str, root: str) -> str:
             </button>
           </div>
         </div>
+
+        <!-- R008: Search popup — anchored under the search icon, hidden until expanded. -->
+        <div id="nav-search-pop" class="hidden absolute right-4 lg:right-8 top-full mt-2 w-[360px] max-w-[92vw] bg-white rounded-md shadow-lux border border-mira-200 overflow-hidden">
+          <div class="flex items-center gap-2 px-3 py-2 border-b border-mira-100">
+            <svg viewBox="0 0 24 24" fill="none" class="w-4 h-4 text-mira-600" aria-hidden="true"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm10 2-5-5"/></svg>
+            <input id="nav-search-input" type="search" placeholder="Search the site — rooms, spa, dining…" class="flex-1 bg-transparent border-none outline-none text-sm text-mira-900 placeholder:text-mira-500" autocomplete="off" />
+            <button id="nav-search-close" class="text-mira-600 hover:text-mira-900 p-1" aria-label="Close search">
+              <svg viewBox="0 0 24 24" fill="none" class="w-4 h-4"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M6 6l12 12M18 6L6 18"/></svg>
+            </button>
+          </div>
+          <ul id="nav-search-results" class="max-h-[60vh] overflow-y-auto py-1 m-0 list-none"></ul>
+          <p id="nav-search-empty" class="hidden px-4 py-3 text-xs text-mira-600 italic">No matches — try "rooms", "spa", "dining", "offers", "book"…</p>
+        </div>
+
         <div id="mobile-menu" class="xl:hidden hidden border-t border-white/5 max-h-[80vh] overflow-y-auto">
+          <!-- R008: Search row at the top of the mobile menu -->
+          <div class="px-4 py-3 border-b border-white/10 bg-mira-900/40">
+            <div class="flex items-center gap-2 bg-white/8 border border-white/15 rounded px-3 py-2">
+              <svg viewBox="0 0 24 24" fill="none" class="w-4 h-4 text-white/60" aria-hidden="true"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm10 2-5-5"/></svg>
+              <input id="mnu-search-input" type="search" placeholder="Search the site…" class="flex-1 bg-transparent border-none outline-none text-sm text-white placeholder:text-white/50" autocomplete="off" />
+            </div>
+            <ul id="mnu-search-results" class="mt-2 max-h-[40vh] overflow-y-auto m-0 list-none"></ul>
+          </div>
           {''.join(mobile_links)}
           <!-- Currency + Language inside the hamburger menu (phone users) -->
           <div class="px-4 py-3 border-t border-white/10 flex items-center flex-wrap gap-2 bg-mira-900/40">
@@ -344,8 +371,9 @@ def footer(root: str) -> str:
     </div>
 
     {customiser_panel(root)}
-    <script src="{root}assets/js/media-manifest.js?v=21" defer></script>
-    <script src="{root}assets/js/site.js?v=21" defer></script>
+    <script src="{root}assets/js/media-manifest.js?v=22" defer></script>
+    <script src="{root}assets/js/search-index.js?v=22" defer></script>
+    <script src="{root}assets/js/site.js?v=22" defer></script>
     </body></html>
     """)
 
@@ -371,11 +399,11 @@ def customiser_panel(root: str) -> str:
     n_videos = sum(1 for k, _, _ in VIDEO_OPTIONS if k != "none")
     n_tracks = sum(1 for k, _, _ in MUSIC_OPTIONS if k != "none")
     return dedent(f"""
-    <div id="customiser" data-open="false" class="fixed left-0 top-1/2 -translate-y-1/2 z-30 flex items-stretch">
-      <button id="cust-toggle" aria-label="Open customiser" aria-expanded="false" class="relative z-10 bg-mira-900 text-sand-300 rounded-r-md py-3 px-2 shadow-lux flex flex-col items-center gap-1 hover:bg-mira-800 transition" style="writing-mode:vertical-rl; transform:rotate(180deg);">
+    <div id="customiser" data-open="false" class="fixed right-0 top-1/2 -translate-y-1/2 z-30 flex items-stretch flex-row-reverse">
+      <button id="cust-toggle" aria-label="Open customiser" aria-expanded="false" class="relative z-10 bg-mira-900 text-sand-300 rounded-l-md py-3 px-2 shadow-lux flex flex-col items-center gap-1 hover:bg-mira-800 transition" style="writing-mode:vertical-rl;">
         <span class="text-[11px] tracking-widest uppercase">Customise</span>
       </button>
-      <div id="cust-panel" class="bg-white border-r border-y border-mira-200 rounded-r-lg shadow-lux p-5 w-72 max-w-[85vw] -ml-px">
+      <div id="cust-panel" class="bg-white border-l border-y border-mira-200 rounded-l-lg shadow-lux p-5 w-72 max-w-[85vw] -mr-px">
         <div>
           <div class="text-[11px] uppercase tracking-widest text-mira-600 font-semibold">Colour palette</div>
           <p class="mt-1 text-xs text-mira-600">Click a swatch — every page recolours instantly. Your choice is remembered for this browser.</p>

@@ -585,6 +585,139 @@
   });
 
   // =====================================================================
+  // SITE-WIDE SEARCH (R008)
+  // - Toggle button opens / closes a popup with an input
+  // - Client-side filter against window.MIRA_SEARCH_INDEX (built at compile time)
+  // - Matches against title + description + headings
+  // - Highlights matched substrings, links to the page
+  // - Esc closes; click outside closes
+  // - Same data + render shared with the mobile menu search input
+  // =====================================================================
+
+  const SEARCH_INDEX = window.MIRA_SEARCH_INDEX || [];
+  const SEARCH_ROOT = (document.body && document.body.dataset.root) || '';
+
+  function escHtml(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c];
+    });
+  }
+  function highlight(text, terms) {
+    if (!text) return '';
+    var safe = escHtml(text);
+    if (!terms.length) return safe;
+    // Build a regex that matches any of the terms (case-insensitive)
+    var pattern = terms
+      .map(function (t) { return t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); })
+      .filter(function (t) { return t.length > 0; })
+      .join('|');
+    if (!pattern) return safe;
+    var re = new RegExp('(' + pattern + ')', 'gi');
+    return safe.replace(re, '<mark>$1</mark>');
+  }
+  function searchPages(query) {
+    var q = (query || '').trim().toLowerCase();
+    if (!q) return [];
+    var terms = q.split(/\s+/).filter(function (t) { return t.length > 0; });
+    var results = [];
+    SEARCH_INDEX.forEach(function (p) {
+      var hay = (p.title + ' ' + (p.description || '') + ' ' + (p.headings || []).join(' ')).toLowerCase();
+      // Every term must appear somewhere in this page's haystack
+      var allMatch = terms.every(function (t) { return hay.indexOf(t) !== -1; });
+      if (!allMatch) return;
+      // Score: title hit > heading hit > description hit
+      var score = 0;
+      var titleLc = p.title.toLowerCase();
+      var descLc = (p.description || '').toLowerCase();
+      var headingHit = false;
+      terms.forEach(function (t) {
+        if (titleLc.indexOf(t) !== -1) score += 10;
+        if ((p.headings || []).some(function (h) { return h.toLowerCase().indexOf(t) !== -1; })) { score += 5; headingHit = true; }
+        if (descLc.indexOf(t) !== -1) score += 1;
+      });
+      // Find the best heading to show as the result subtitle (first match wins)
+      var bestHeading = null;
+      for (var i = 0; i < (p.headings || []).length; i++) {
+        var h = p.headings[i];
+        if (terms.some(function (t) { return h.toLowerCase().indexOf(t) !== -1; })) {
+          bestHeading = h; break;
+        }
+      }
+      results.push({
+        path: p.path,
+        title: p.title,
+        sub: bestHeading || p.description || '',
+        score: score,
+      });
+    });
+    results.sort(function (a, b) { return b.score - a.score; });
+    return results.slice(0, 10);
+  }
+  function renderResults(results, terms, container, emptyEl) {
+    if (!container) return;
+    if (!results.length) {
+      container.innerHTML = '';
+      if (emptyEl) emptyEl.classList.remove('hidden');
+      return;
+    }
+    if (emptyEl) emptyEl.classList.add('hidden');
+    container.innerHTML = results.map(function (r, i) {
+      var url = SEARCH_ROOT + r.path;
+      return '<li><a class="res" href="' + escHtml(url) + '"' + (i === 0 ? ' data-active="true"' : '') + '>' +
+             '<span class="res-title">' + highlight(r.title, terms) + '</span>' +
+             (r.sub ? '<span class="res-sub">' + highlight(r.sub, terms) + '</span>' : '') +
+             '</a></li>';
+    }).join('');
+  }
+  function wireSearch(toggleId, popId, inputId, resultsId, closeId, emptyId) {
+    var toggle = document.getElementById(toggleId);
+    var pop = document.getElementById(popId);
+    var input = document.getElementById(inputId);
+    var results = document.getElementById(resultsId);
+    var closeBtn = closeId ? document.getElementById(closeId) : null;
+    var emptyEl = emptyId ? document.getElementById(emptyId) : null;
+    if (!input || !results) return;
+
+    function open() {
+      if (pop) pop.classList.remove('hidden');
+      if (toggle) toggle.setAttribute('aria-expanded', 'true');
+      setTimeout(function () { input.focus(); }, 0);
+    }
+    function close() {
+      if (pop) pop.classList.add('hidden');
+      if (toggle) toggle.setAttribute('aria-expanded', 'false');
+    }
+    if (toggle) toggle.addEventListener('click', function (e) {
+      e.preventDefault();
+      if (pop && pop.classList.contains('hidden')) open(); else close();
+    });
+    if (closeBtn) closeBtn.addEventListener('click', close);
+    input.addEventListener('input', function () {
+      var q = input.value;
+      var terms = q.trim().toLowerCase().split(/\s+/).filter(function (t) { return t.length > 0; });
+      var found = searchPages(q);
+      renderResults(found, terms, results, emptyEl);
+    });
+    input.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') { close(); return; }
+      if (e.key === 'Enter') {
+        var first = results.querySelector('.res');
+        if (first) { e.preventDefault(); window.location.href = first.getAttribute('href'); }
+      }
+    });
+    // Click outside to close (desktop only; mobile menu has its own toggle)
+    if (pop && toggle) {
+      document.addEventListener('click', function (e) {
+        if (pop.contains(e.target) || toggle.contains(e.target)) return;
+        if (!pop.classList.contains('hidden')) close();
+      });
+    }
+  }
+  wireSearch('nav-search-toggle', 'nav-search-pop', 'nav-search-input', 'nav-search-results', 'nav-search-close', 'nav-search-empty');
+  // Mobile menu search (input is permanently visible; no toggle button)
+  wireSearch(null, null, 'mnu-search-input', 'mnu-search-results', null, null);
+
+  // =====================================================================
   // CURRENCY SELECTOR (site-wide nav)
   // - Auto-detects from browser locale on first visit
   // - Persists to localStorage as 'mp-currency'

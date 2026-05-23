@@ -404,10 +404,10 @@ html[data-theme="onyx"] input, html[data-theme="onyx"] textarea, html[data-theme
 #cust-panel {
   max-height: 90vh;
   overflow-y: auto;
-  /* Slide-from-left animation. Default state is collapsed; the wrapper's
-     [data-open="true"] flips it visible. Hover mode + click both toggle
-     that attribute. */
-  transform: translateX(-100%);
+  /* R008: Slide-from-RIGHT animation. Default state is collapsed off-screen
+     to the right; the wrapper's [data-open="true"] flips it visible.
+     Hover mode + click both toggle that attribute. */
+  transform: translateX(100%);
   opacity: 0;
   pointer-events: none;
   transition: transform 350ms cubic-bezier(.2,.7,.2,1), opacity 220ms ease;
@@ -430,30 +430,40 @@ html[data-theme="onyx"] input, html[data-theme="onyx"] textarea, html[data-theme
 .lang-hidden { display: none !important; }
 
 /* ------------------------------------------------------------------- */
-/* LANGUAGE FLAG BUTTONS — base border + selected-state polish         */
-/* Thin neutral border at rest; green 2px border + 18% scale-up when    */
-/* the flag is the active language. Smooth transitions.                 */
+/* LANGUAGE FLAG BUTTONS (R008) — green is ON the flag, not around it  */
+/* No button-level border (so there's no rectangle wrapping the flag).  */
+/* The selected flag gets a tight INSET green ring directly on its own  */
+/* edge via box-shadow on the inner .fi span, plus a subtle scale-up.   */
 /* ------------------------------------------------------------------- */
 .nav-flag {
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+  border: none !important;
+  background: transparent;
+  padding: 0;
+  border-radius: 3px;
+  transition: transform 200ms ease;
   box-sizing: border-box;
+  box-shadow: none !important;
 }
-.nav-flag:hover {
-  border-color: rgba(255, 255, 255, 0.7);
+.nav-flag .fi {
+  display: block;
+  border-radius: 2px;
+  transition: box-shadow 200ms ease;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.25);  /* subtle definition at rest */
+}
+.nav-flag:hover .fi {
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.6);
 }
 .nav-flag[data-active="true"] {
-  border: 1.5px solid #22C55E;          /* tight green hugging the flag edge */
-  transform: scale(1.15);
-  box-shadow: none;                     /* no halo — border only */
+  transform: scale(1.12);
 }
-.nav-flag[data-active="true"]:hover {
-  border-color: #16A34A;
+.nav-flag[data-active="true"] .fi {
+  box-shadow: inset 0 0 0 1.5px #22C55E;   /* the green IS the flag's edge */
 }
-/* Strip the legacy Tailwind ring so it doesn't create a halo around the flag. */
-.nav-flag { box-shadow: none !important; }
-.nav-flag.ring-1,
-.nav-flag.ring-white\/20 { box-shadow: none !important; }
+.nav-flag[data-active="true"]:hover .fi {
+  box-shadow: inset 0 0 0 1.5px #16A34A;
+}
+/* Strip any legacy Tailwind ring/shadow that could re-introduce a frame. */
+.nav-flag.ring-1, .nav-flag.ring-white\/20 { box-shadow: none !important; }
 
 /* ------------------------------------------------------------------- */
 /* TOP-NAV DROPDOWN MENUS                                                */
@@ -803,6 +813,60 @@ details > summary::-webkit-details-marker { display: none; }
   .bk-tabs { grid-template-columns: 1fr; }
   .bk-tiles { grid-template-columns: 1fr; }
 }
+
+/* =====================================================================
+   SITE-WIDE SEARCH (R008) — nav popup + mobile search results
+   ===================================================================== */
+
+#nav-search-pop { z-index: 60; }
+#nav-search-input {
+  font-size: 14px;
+  height: 32px;
+}
+#nav-search-results .res {
+  display: block;
+  padding: 9px 14px;
+  border-top: 1px solid #F0EBDD;
+  text-decoration: none;
+  color: #08122A;
+}
+#nav-search-results .res:first-child { border-top: none; }
+#nav-search-results .res:hover,
+#nav-search-results .res[data-active="true"] { background: #FBF8F1; }
+#nav-search-results .res-title {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  color: #08122A;
+  line-height: 1.3;
+}
+#nav-search-results .res-sub {
+  display: block;
+  font-size: 11px;
+  color: #5C6E92;
+  margin-top: 2px;
+  line-height: 1.4;
+}
+#nav-search-results mark {
+  background: #EFD080;
+  color: #08122A;
+  padding: 0 2px;
+  border-radius: 2px;
+}
+
+/* Mobile search inside hamburger menu */
+#mnu-search-results .res {
+  display: block;
+  padding: 8px 12px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 4px;
+  margin-top: 4px;
+  text-decoration: none;
+}
+#mnu-search-results .res-title { color: #fff; font-size: 13px; font-weight: 500; }
+#mnu-search-results .res-sub { color: rgba(255,255,255,0.65); font-size: 11px; margin-top: 2px; }
+#mnu-search-results mark { background: #EFD080; color: #08122A; padding: 0 2px; border-radius: 2px; }
 
 /* =====================================================================
    "COMING SOON" NAV TREATMENT (R007)

@@ -1,3 +1,7 @@
+## [R008] - 2026-05-23
+
+R008 feat: nav fit at 100 percent zoom (All-Inclusive removed, font shrunk) + flag green ring ON the flag (no rectangle) + Customise moved to right side + site-wide search icon with client-side index of every page
+
 ## [R007] - 2026-05-23
 
 R007 feat: spa booking page (3 packages) + Activities silenced as Coming Soon + Release.ps1 safety guard (detects working-dir + untracked changes)
@@ -109,6 +113,7 @@ First publishable build. Sent to the hotel for owner review.
 - LICENSE is all-rights-reserved proprietary.
 
 [0.1.0]: https://github.com/-/-/releases/tag/v0.1.0
+
 
 
 
