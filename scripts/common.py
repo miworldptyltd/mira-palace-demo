@@ -80,7 +80,7 @@ tailwind.config = {{
   // because GitHub Pages hosts at /mira-palace-demo/ rather than /.
   window.MIRA_ROOT = "{root}";
 </script>
-<link rel="stylesheet" href="{root}assets/css/site.css?v=18" />
+<link rel="stylesheet" href="{root}assets/css/site.css?v=19" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/tabler-icons.min.css" />
 </head>
 <body class="font-body text-ink bg-sand-50 antialiased" data-root="{root}">
@@ -89,40 +89,41 @@ tailwind.config = {{
 
 
 def nav(active: str, root: str) -> str:
-    # Each item: (key, label, href, sub_items_or_None). sub_items is a list of
-    # (label, relative-href) tuples; if present the item renders as a dropdown.
+    # Each item: (key, label, href, sub_items_or_None, i18n_key).
+    # The i18n_key is what site.js uses to swap text on language change.
+    # Sub items are tuples of (label, href, i18n_key).
     items = [
-        ("home",       "Home",          "index.html",       None),
-        ("about",      "About",         "about.html",       None),
+        ("home",       "Home",          "index.html",       None, "nav.home"),
+        ("about",      "About",         "about.html",       None, "nav.about"),
         ("rooms",      "Our Rooms",     "rooms/",           [
-            ("All suites",         "rooms/"),
-            ("Standard Suite",     "rooms/standard.html"),
-            ("Deluxe Suite",       "rooms/deluxe.html"),
-            ("Family Suite",       "rooms/family.html"),
-            ("King Suite",         "rooms/king.html"),
-        ]),
+            ("All suites",         "rooms/",                "nav.sub.all_suites"),
+            ("Standard Suite",     "rooms/standard.html",   "nav.sub.standard"),
+            ("Deluxe Suite",       "rooms/deluxe.html",     "nav.sub.deluxe"),
+            ("Family Suite",       "rooms/family.html",     "nav.sub.family"),
+            ("King Suite",         "rooms/king.html",       "nav.sub.king"),
+        ], "nav.our_rooms"),
         # "All-Inclusive" removed from nav in R008 — concept.html still
         # reachable from the home page card grid and the footer.
         ("dining",     "Dining",        "dining/",          [
-            ("Dining overview",    "dining/"),
-            ("Our dining rooms",   "dining/#dining-rooms"),
-            ("Sample menu",        "dining/#sample-menu"),
-            ("Main restaurant",    "dining/main-restaurant.html"),
-            ("Pool restaurant",    "dining/pool-bar.html"),
-            ("Lobby & Orchard bars", "dining/lobby-bar.html"),
-        ]),
+            ("Dining overview",    "dining/",                          "nav.sub.dining_overview"),
+            ("Our dining rooms",   "dining/#dining-rooms",             "nav.sub.dining_rooms"),
+            ("Sample menu",        "dining/#sample-menu",              "nav.sub.sample_menu"),
+            ("Main restaurant",    "dining/main-restaurant.html",      "nav.sub.main_restaurant"),
+            ("Pool restaurant",    "dining/pool-bar.html",             "nav.sub.pool_restaurant"),
+            ("Lobby & Orchard bars", "dining/lobby-bar.html",          "nav.sub.lobby_bar"),
+        ], "nav.dining"),
         ("spa",        "Spa",           "spa.html",         [
-            ("Spa & wellness",     "spa.html"),
-            ("Treatments & pricing", "spa-treatments.html"),
-            ("Book a session",     "spa-book.html"),
-        ]),
+            ("Spa & wellness",     "spa.html",          "nav.sub.spa_wellness"),
+            ("Treatments & pricing", "spa-treatments.html", "nav.sub.spa_treatments"),
+            ("Book a session",     "spa-book.html",     "nav.sub.spa_book"),
+        ], "nav.spa"),
         # Activities flagged with the "soon" marker — rendered with reduced
         # opacity + a "Coming soon" pill. Page routes to a polite holding page.
-        ("activities", "Activities",    "activities.html",  None),
-        ("location",   "Location",      "location.html",    None),
-        ("gallery",    "Gallery",       "gallery.html",     None),
-        ("offers",     "Offers",        "offers.html",      None),
-        ("contact",    "Contact",       "contact.html",     None),
+        ("activities", "Activities",    "activities.html",  None, "nav.activities"),
+        ("location",   "Location",      "location.html",    None, "nav.location"),
+        ("gallery",    "Gallery",       "gallery.html",     None, "nav.gallery"),
+        ("offers",     "Offers",        "offers.html",      None, "nav.offers"),
+        ("contact",    "Contact",       "contact.html",     None, "nav.contact"),
     ]
 
     def _link_classes(key: str) -> str:
@@ -134,47 +135,47 @@ def nav(active: str, root: str) -> str:
     # Keys for nav items that should render with the "Coming soon" treatment:
     # reduced opacity, small champagne pill next to the label.
     SOON_KEYS = {"activities"}
-    soon_pill = '<span class="nav-soon-pill ml-1.5 text-[8px] uppercase tracking-widest bg-sand-300/20 text-sand-300 border border-sand-300/40 rounded px-1.5 py-0.5">Soon</span>'
+    soon_pill = '<span class="nav-soon-pill ml-1.5 text-[8px] uppercase tracking-widest bg-sand-300/20 text-sand-300 border border-sand-300/40 rounded px-1.5 py-0.5" data-i18n="nav.coming_soon_pill">Soon</span>'
 
     links = []
-    for key, label, href, subs in items:
+    for key, label, href, subs, i18n_key in items:
         soon_attrs = ' data-soon="true"' if key in SOON_KEYS else ""
         soon_html = soon_pill if key in SOON_KEYS else ""
         if subs:
             sub_html = "".join(
-                f'<a href="{root}{sh}" class="block px-4 py-2 text-sm text-mira-800 hover:bg-sand-100 hover:text-mira-900 whitespace-nowrap">{slabel}</a>'
-                for slabel, sh in subs
+                f'<a href="{root}{sh}" class="block px-4 py-2 text-sm text-mira-800 hover:bg-sand-100 hover:text-mira-900 whitespace-nowrap" data-i18n="{si18n}">{slabel}</a>'
+                for slabel, sh, si18n in subs
             )
             chevron = '<svg class="w-3 h-3 opacity-70" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><path d="M3 5l3 3 3-3z"/></svg>'
             links.append(
                 f'<div class="nav-dd relative"{soon_attrs} data-open="false">'
-                f'  <a href="{root}{href}" class="nav-dd-trigger inline-flex items-center gap-1 {_link_classes(key)}">{label}{soon_html} {chevron}</a>'
+                f'  <a href="{root}{href}" class="nav-dd-trigger inline-flex items-center gap-1 {_link_classes(key)}"><span data-i18n="{i18n_key}">{label}</span>{soon_html} {chevron}</a>'
                 f'  <div class="nav-dd-menu absolute top-full left-0 mt-2 min-w-[210px] bg-white rounded-md shadow-lux border border-mira-200 py-2">'
                 f'    {sub_html}'
                 f'  </div>'
                 f'</div>'
             )
         else:
-            links.append(f'<a href="{root}{href}" class="nav-soon-wrap {_link_classes(key)}"{soon_attrs}>{label}{soon_html}</a>')
+            links.append(f'<a href="{root}{href}" class="nav-soon-wrap {_link_classes(key)}"{soon_attrs}><span data-i18n="{i18n_key}">{label}</span>{soon_html}</a>')
 
     # Mobile menu — flatten the dropdowns into nested groups for tap navigation.
     mobile_links = []
-    for key, label, href, subs in items:
+    for key, label, href, subs, i18n_key in items:
         ac = "bg-mira-900 text-sand-200" if active == key else ""
         soon_attrs = ' data-soon="true"' if key in SOON_KEYS else ""
         soon_html = soon_pill if key in SOON_KEYS else ""
         if subs:
             sub_mobile = "".join(
-                f'<a href="{root}{sh}" class="block pl-8 pr-4 py-2 text-xs text-white/70 hover:bg-mira-800 hover:text-white">{slabel}</a>'
-                for slabel, sh in subs
+                f'<a href="{root}{sh}" class="block pl-8 pr-4 py-2 text-xs text-white/70 hover:bg-mira-800 hover:text-white" data-i18n="{si18n}">{slabel}</a>'
+                for slabel, sh, si18n in subs
             )
             mobile_links.append(
-                f'<a href="{root}{href}" class="nav-soon-wrap block px-4 py-3 text-sm font-medium text-white/90 hover:bg-mira-800 {ac}"{soon_attrs}>{label}{soon_html}</a>'
+                f'<a href="{root}{href}" class="nav-soon-wrap block px-4 py-3 text-sm font-medium text-white/90 hover:bg-mira-800 {ac}"{soon_attrs}><span data-i18n="{i18n_key}">{label}</span>{soon_html}</a>'
                 f'{sub_mobile}'
             )
         else:
             mobile_links.append(
-                f'<a href="{root}{href}" class="nav-soon-wrap block px-4 py-3 text-sm font-medium text-white/90 hover:bg-mira-800 {ac}"{soon_attrs}>{label}{soon_html}</a>'
+                f'<a href="{root}{href}" class="nav-soon-wrap block px-4 py-3 text-sm font-medium text-white/90 hover:bg-mira-800 {ac}"{soon_attrs}><span data-i18n="{i18n_key}">{label}</span>{soon_html}</a>'
             )
     return dedent(f"""
     <header id="siteheader" class="fixed top-0 inset-x-0 z-40 transition-all">
@@ -200,7 +201,7 @@ def nav(active: str, root: str) -> str:
           </nav>
           <div class="flex items-center gap-2 shrink-0 xl:ml-6">
             <!-- R008: Search icon. Click expands the dropdown anchored to this button. -->
-            <button id="nav-search-toggle" class="hidden md:inline-flex items-center justify-center w-8 h-8 rounded text-white/85 hover:text-white hover:bg-white/10 transition mr-1" aria-label="Search the site" aria-expanded="false" aria-controls="nav-search-pop">
+            <button id="nav-search-toggle" class="hidden md:inline-flex items-center justify-center w-8 h-8 rounded text-white/85 hover:text-white hover:bg-white/10 transition mr-1" data-i18n-aria-label="nav.search.aria" aria-label="Search the site" aria-expanded="false" aria-controls="nav-search-pop">
               <svg viewBox="0 0 24 24" fill="none" class="w-[18px] h-[18px]" aria-hidden="true"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm10 2-5-5"/></svg>
             </button>
             <div class="hidden md:flex items-center gap-1 mr-1" aria-label="Currency">
@@ -217,7 +218,7 @@ def nav(active: str, root: str) -> str:
             </div>
             <!-- R009: desktop "Book" nav pill removed — replaced by the
                  floating "Book your stay" button rendered in footer(). -->
-            <button id="mnu-toggle" class="xl:hidden p-2 -mr-2" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+            <button id="mnu-toggle" class="xl:hidden p-2 -mr-2" data-i18n-aria-label="nav.menu.aria" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
               <svg viewBox="0 0 24 24" fill="none" class="w-6 h-6"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/></svg>
             </button>
           </div>
@@ -227,13 +228,13 @@ def nav(active: str, root: str) -> str:
         <div id="nav-search-pop" class="hidden absolute right-4 lg:right-8 top-full mt-2 w-[360px] max-w-[92vw] bg-white rounded-md shadow-lux border border-mira-200 overflow-hidden">
           <div class="flex items-center gap-2 px-3 py-2 border-b border-mira-100">
             <svg viewBox="0 0 24 24" fill="none" class="w-4 h-4 text-mira-600" aria-hidden="true"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm10 2-5-5"/></svg>
-            <input id="nav-search-input" type="search" placeholder="Search the site — rooms, spa, dining…" class="flex-1 bg-transparent border-none outline-none text-sm text-mira-900 placeholder:text-mira-500" autocomplete="off" />
+            <input id="nav-search-input" type="search" placeholder="Search the site — rooms, spa, dining…" data-i18n-placeholder="nav.search.placeholder" class="flex-1 bg-transparent border-none outline-none text-sm text-mira-900 placeholder:text-mira-500" autocomplete="off" />
             <button id="nav-search-close" class="text-mira-600 hover:text-mira-900 p-1" aria-label="Close search">
               <svg viewBox="0 0 24 24" fill="none" class="w-4 h-4"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M6 6l12 12M18 6L6 18"/></svg>
             </button>
           </div>
           <ul id="nav-search-results" class="max-h-[60vh] overflow-y-auto py-1 m-0 list-none"></ul>
-          <p id="nav-search-empty" class="hidden px-4 py-3 text-xs text-mira-600 italic">No matches — try "rooms", "spa", "dining", "offers", "book"…</p>
+          <p id="nav-search-empty" class="hidden px-4 py-3 text-xs text-mira-600 italic" data-i18n="nav.search.empty">No matches — try "rooms", "spa", "dining", "offers", "book"…</p>
         </div>
 
         <div id="mobile-menu" class="xl:hidden hidden border-t border-white/5 max-h-[80vh] overflow-y-auto">
@@ -241,20 +242,20 @@ def nav(active: str, root: str) -> str:
           <div class="px-4 py-3 border-b border-white/10 bg-mira-900/40">
             <div class="flex items-center gap-2 bg-white/8 border border-white/15 rounded px-3 py-2">
               <svg viewBox="0 0 24 24" fill="none" class="w-4 h-4 text-white/60" aria-hidden="true"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm10 2-5-5"/></svg>
-              <input id="mnu-search-input" type="search" placeholder="Search the site…" class="flex-1 bg-transparent border-none outline-none text-sm text-white placeholder:text-white/50" autocomplete="off" />
+              <input id="mnu-search-input" type="search" placeholder="Search the site…" data-i18n-placeholder="nav.search.placeholder_mobile" class="flex-1 bg-transparent border-none outline-none text-sm text-white placeholder:text-white/50" autocomplete="off" />
             </div>
             <ul id="mnu-search-results" class="mt-2 max-h-[40vh] overflow-y-auto m-0 list-none"></ul>
           </div>
           {''.join(mobile_links)}
           <!-- Currency + Language inside the hamburger menu (phone users) -->
           <div class="px-4 py-3 border-t border-white/10 flex items-center flex-wrap gap-2 bg-mira-900/40">
-            <span class="text-[10px] uppercase tracking-widest text-white/60 w-full">Currency</span>
+            <span class="text-[10px] uppercase tracking-widest text-white/60 w-full" data-i18n="nav.label.currency">Currency</span>
             <button class="nav-cur rounded px-3 py-1.5 text-xs font-semibold tracking-wider text-white/80 transition" data-cur="try">₺&nbsp;TRY</button>
             <button class="nav-cur rounded px-3 py-1.5 text-xs font-semibold tracking-wider text-white/80 transition" data-cur="eur">€&nbsp;EUR</button>
             <button class="nav-cur rounded px-3 py-1.5 text-xs font-semibold tracking-wider text-white/80 transition" data-cur="usd">$&nbsp;USD</button>
           </div>
           <div class="px-4 py-3 border-t border-white/10 flex items-center flex-wrap gap-3 bg-mira-900/40">
-            <span class="text-[10px] uppercase tracking-widest text-white/60 w-full">Language</span>
+            <span class="text-[10px] uppercase tracking-widest text-white/60 w-full" data-i18n="nav.label.language">Language</span>
             <button class="nav-flag rounded overflow-hidden ring-1 ring-white/20 hover:ring-white/60 transition" data-lang="en" aria-label="English" data-active="true"><span class="fi fi-gb block" style="width:28px;height:20px;"></span></button>
             <button class="nav-flag rounded overflow-hidden ring-1 ring-white/20 hover:ring-white/60 transition" data-lang="tr" aria-label="Türkçe"><span class="fi fi-tr block" style="width:28px;height:20px;"></span></button>
             <button class="nav-flag rounded overflow-hidden ring-1 ring-white/20 hover:ring-white/60 transition" data-lang="de" aria-label="Deutsch"><span class="fi fi-de block" style="width:28px;height:20px;"></span></button>
@@ -277,21 +278,20 @@ def footer(root: str) -> str:
             <span class="inline-block w-9 h-9 rounded-full bg-sand-300 text-mira-900 grid place-items-center font-display font-bold text-xl">M</span>
             <span class="font-display text-2xl text-white">Mira Palace</span>
           </div>
-          <p class="mt-4 text-sm leading-relaxed">{m['tagline']}. Thirty-four suites, 600 metres from the Mediterranean, on the Turkish Riviera.</p>
+          <p class="mt-4 text-sm leading-relaxed" data-i18n="footer.tagline">{m['tagline']}. Thirty-four suites, 600 metres from the Mediterranean, on the Turkish Riviera.</p>
         </div>
         <div>
-          <h4 class="font-display text-lg text-white">Explore</h4>
+          <h4 class="font-display text-lg text-white" data-i18n="footer.explore">Explore</h4>
           <ul class="mt-4 space-y-2 text-sm">
-            <li><a href="{root}rooms/" class="hover:text-sand-300">Rooms &amp; Suites</a></li>
-            <li><a href="{root}concept.html" class="hover:text-sand-300">All-Inclusive concept</a></li>
-            <li><a href="{root}dining/" class="hover:text-sand-300">Dining</a></li>
-            <li><a href="{root}spa.html" class="hover:text-sand-300">Spa &amp; Wellness</a></li>
-            <li><a href="{root}offers.html" class="hover:text-sand-300">Offers</a></li>
-            <li><a href="{root}gallery.html" class="hover:text-sand-300">Gallery</a></li>
+            <li><a href="{root}rooms/" class="hover:text-sand-300" data-i18n="nav.our_rooms">Rooms &amp; Suites</a></li>
+            <li><a href="{root}dining/" class="hover:text-sand-300" data-i18n="nav.dining">Dining</a></li>
+            <li><a href="{root}spa.html" class="hover:text-sand-300" data-i18n="nav.sub.spa_wellness">Spa &amp; Wellness</a></li>
+            <li><a href="{root}offers.html" class="hover:text-sand-300" data-i18n="nav.offers">Offers</a></li>
+            <li><a href="{root}gallery.html" class="hover:text-sand-300" data-i18n="nav.gallery">Gallery</a></li>
           </ul>
         </div>
         <div>
-          <h4 class="font-display text-lg text-white">Contact</h4>
+          <h4 class="font-display text-lg text-white" data-i18n="footer.contact">Contact</h4>
           <address class="mt-4 not-italic text-sm space-y-2">
             <div>{m['address_line1']}<br/>{m['address_line2']}</div>
             <div><a class="hover:text-sand-300" href="tel:{m['phone_tel']}">{m['phone_display']}</a></div>
@@ -300,13 +300,13 @@ def footer(root: str) -> str:
           </address>
         </div>
         <div>
-          <h4 class="font-display text-lg text-white">Newsletter</h4>
-          <p class="mt-4 text-sm">Seasonal offers and stories from the Turkish Riviera. We&apos;ll email you now and then — never more than once a month.</p>
+          <h4 class="font-display text-lg text-white" data-i18n="footer.newsletter">Newsletter</h4>
+          <p class="mt-4 text-sm" data-i18n="footer.newsletter_blurb">Seasonal offers and stories from the Turkish Riviera. We&apos;ll email you now and then — never more than once a month.</p>
           <form class="mt-4 flex gap-2" onsubmit="event.preventDefault(); this.querySelector('button').innerText='Thanks!';">
             <input type="email" required placeholder="you@example.com" class="flex-1 bg-mira-800 border border-white/10 rounded px-3 py-2 text-sm text-white placeholder:text-white/40 focus:border-sand-300 focus:ring-0" />
-            <button class="bg-sand-300 text-mira-900 rounded px-4 py-2 text-sm font-medium hover:bg-sand-200">Sign up</button>
+            <button class="bg-sand-300 text-mira-900 rounded px-4 py-2 text-sm font-medium hover:bg-sand-200" data-i18n="footer.newsletter_btn">Sign up</button>
           </form>
-          <p class="mt-3 text-[11px] text-white/50">By subscribing you consent to receive marketing emails. Unsubscribe any time. See our <a href="{root}legal/privacy.html" class="underline">Privacy Notice</a>.</p>
+          <p class="mt-3 text-[11px] text-white/50" data-i18n="footer.newsletter_consent">By subscribing you consent to receive marketing emails. Unsubscribe any time. See our Privacy Notice.</p>
         </div>
       </div>
       <div class="border-t border-white/10">
@@ -327,16 +327,15 @@ def footer(root: str) -> str:
             </div>
           </div>
           <div class="flex gap-5 shrink-0">
-            <a href="{root}legal/privacy.html" class="hover:text-white">Privacy</a>
-            <a href="{root}legal/cookies.html" class="hover:text-white">Cookies</a>
-            <a href="{root}legal/hotel-policies.html" class="hover:text-white">Hotel Policies</a>
-            <a href="{root}career.html" class="hover:text-white">Careers</a>
+            <a href="{root}legal/privacy.html" class="hover:text-white" data-i18n="footer.privacy">Privacy</a>
+            <a href="{root}legal/cookies.html" class="hover:text-white" data-i18n="footer.cookies">Cookies</a>
+            <a href="{root}legal/hotel-policies.html" class="hover:text-white" data-i18n="footer.policies">Hotel Policies</a>
+            <a href="{root}career.html" class="hover:text-white" data-i18n="footer.careers">Careers</a>
           </div>
         </div>
       </div>
       <div id="demo-banner" class="bg-red-700 text-white text-center text-xs py-2 px-4 font-semibold tracking-wide uppercase">
-        <span class="lang-text" data-lang="en">DEMONSTRATION SITE — preview build for review. Content is illustrative until finalised with the hotel.</span>
-        <span class="lang-text lang-hidden" data-lang="tr">TANITIM SİTESİ — inceleme amaçlı önizleme sürümü. İçerikler, otelle birlikte nihai hale getirilinceye kadar yalnızca örnek niteliğindedir.</span>
+        <span data-i18n="demo.banner">DEMONSTRATION SITE — preview build for review. Content is illustrative until finalised with the hotel.</span>
       </div>
     </footer>
 
@@ -345,10 +344,10 @@ def footer(root: str) -> str:
          nav Book pill was removed in the same release; this single floating
          button is now the canonical entry point to book.html. Uses safe-area
          insets so the iOS home indicator doesn't push it off-screen. -->
-    <a href="{root}book.html" id="book-floating" aria-label="Book your stay"
+    <a href="{root}book.html" id="book-floating" data-i18n-aria-label="cta.book_your_stay.aria" aria-label="Book your stay"
        class="fixed left-1/2 -translate-x-1/2 z-30 inline-flex items-center gap-2 px-6 py-3.5 bg-sand-300 text-mira-900 rounded-full font-medium text-sm shadow-lux hover:bg-sand-200 transition whitespace-nowrap book-floating-pos">
       <svg viewBox="0 0 24 24" fill="none" class="w-4 h-4" aria-hidden="true"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M8 2v4m8-4v4M3 10h18M5 6h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Z"/></svg>
-      <span>Book your stay</span>
+      <span data-i18n="cta.book_your_stay">Book your stay</span>
     </a>
 
     <a href="{m['whatsapp']}" rel="noopener" aria-label="WhatsApp" class="fixed right-5 z-30 bg-[#25D366] text-white w-12 h-12 grid place-items-center rounded-full shadow-lg hover:scale-105 transition whatsapp-bottom-safe">
@@ -383,9 +382,10 @@ def footer(root: str) -> str:
     </div>
 
     {customiser_panel(root)}
-    <script src="{root}assets/js/media-manifest.js?v=23" defer></script>
-    <script src="{root}assets/js/search-index.js?v=23" defer></script>
-    <script src="{root}assets/js/site.js?v=23" defer></script>
+    <script src="{root}assets/js/media-manifest.js?v=24" defer></script>
+    <script src="{root}assets/js/search-index.js?v=24" defer></script>
+    <script src="{root}assets/js/i18n.js?v=24" defer></script>
+    <script src="{root}assets/js/site.js?v=24" defer></script>
     </body></html>
     """)
 
@@ -413,12 +413,12 @@ def customiser_panel(root: str) -> str:
     return dedent(f"""
     <div id="customiser" data-open="false" class="fixed right-0 top-1/2 -translate-y-1/2 z-30 flex items-stretch flex-row-reverse">
       <button id="cust-toggle" aria-label="Open customiser" aria-expanded="false" class="relative z-10 bg-mira-900 text-sand-300 rounded-l-md py-3 px-2 shadow-lux flex flex-col items-center gap-1 hover:bg-mira-800 transition" style="writing-mode:vertical-rl;">
-        <span class="text-[11px] tracking-widest uppercase">Customise</span>
+        <span class="text-[11px] tracking-widest uppercase" data-i18n="cust.toggle">Customise</span>
       </button>
       <div id="cust-panel" class="bg-white border-l border-y border-mira-200 rounded-l-lg shadow-lux p-5 w-72 max-w-[85vw] -mr-px">
         <div>
-          <div class="text-[11px] uppercase tracking-widest text-mira-600 font-semibold">Colour palette</div>
-          <p class="mt-1 text-xs text-mira-600">Click a swatch — every page recolours instantly. Your choice is remembered for this browser.</p>
+          <div class="text-[11px] uppercase tracking-widest text-mira-600 font-semibold" data-i18n="cust.colour_palette">Colour palette</div>
+          <p class="mt-1 text-xs text-mira-600" data-i18n="cust.colour_help">Click a swatch — every page recolours instantly. Your choice is remembered for this browser.</p>
           <div class="mt-3 grid grid-cols-2 gap-2">
             <button data-theme="default" class="theme-swatch text-left p-3 rounded border border-mira-200 hover:border-mira-700 transition" data-active="true">
               <div class="flex gap-1"><span class="w-5 h-5 rounded-full" style="background:#1D3742"></span><span class="w-5 h-5 rounded-full" style="background:#D4B971"></span></div>
@@ -448,8 +448,8 @@ def customiser_panel(root: str) -> str:
           </div>
         </div>
         <div class="mt-5 pt-5 border-t border-mira-200">
-          <div class="text-[11px] uppercase tracking-widest text-mira-600 font-semibold">Language</div>
-          <p class="mt-1 text-xs text-mira-600">English is live; the others are stubbed for content sign-off.</p>
+          <div class="text-[11px] uppercase tracking-widest text-mira-600 font-semibold" data-i18n="cust.lang_section">Language</div>
+          <p class="mt-1 text-xs text-mira-600" data-i18n="cust.lang_help">English is the source. Other languages are translated contextually.</p>
           <div class="mt-3 grid grid-cols-4 gap-2">
             <button data-lang="en" class="lang-btn text-center p-2 rounded border border-mira-200 hover:border-mira-700 text-xs font-medium" data-active="true">EN</button>
             <button data-lang="tr" class="lang-btn text-center p-2 rounded border border-mira-200 hover:border-mira-700 text-xs font-medium">TR</button>
@@ -459,21 +459,21 @@ def customiser_panel(root: str) -> str:
           <div id="lang-msg" class="mt-3 text-[11px] text-mira-600 italic hidden"></div>
         </div>
         <div class="mt-5 pt-5 border-t border-mira-200">
-          <div class="text-[11px] uppercase tracking-widest text-mira-600 font-semibold">Hero video (home page) <span class="text-mira-400 font-normal">{n_videos} loops</span></div>
-          <p class="mt-1 text-xs text-mira-600">Pick which loop plays behind the headline. "No video" falls back to the still photo.</p>
+          <div class="text-[11px] uppercase tracking-widest text-mira-600 font-semibold"><span data-i18n="cust.video_section">Hero video (home page)</span> <span class="text-mira-400 font-normal">{n_videos} loops</span></div>
+          <p class="mt-1 text-xs text-mira-600" data-i18n="cust.video_help">Pick which loop plays behind the headline. "No video" falls back to the still photo.</p>
           <div class="mt-3 grid grid-cols-2 gap-2">
             {vid_html}
           </div>
         </div>
         <div class="mt-5 pt-5 border-t border-mira-200">
-          <div class="text-[11px] uppercase tracking-widest text-mira-600 font-semibold">Ambient music (site-wide) <span class="text-mira-400 font-normal">{n_tracks} tracks</span></div>
-          <p class="mt-1 text-xs text-mira-600">Pick a track, then use the ♪ button bottom-right to play / pause. Plays on every page.</p>
+          <div class="text-[11px] uppercase tracking-widest text-mira-600 font-semibold"><span data-i18n="cust.music_section">Ambient music (site-wide)</span> <span class="text-mira-400 font-normal">{n_tracks} tracks</span></div>
+          <p class="mt-1 text-xs text-mira-600" data-i18n="cust.music_help">Pick a track, then use the ♪ button bottom-right to play / pause. Plays on every page.</p>
           <div class="mt-3 grid grid-cols-2 gap-2">
             {mus_html}
           </div>
           <p class="mt-2 text-[10px] text-mira-500 italic">★ marks the default. The hotel will swap these for licensed tracks before launch.</p>
         </div>
-        <p class="mt-5 text-[10px] text-mira-500">DEMO — these controls won't ship in the live site. They're here so the hotel can review options before sign-off.</p>
+        <p class="mt-5 text-[10px] text-mira-500" data-i18n="cust.demo_note">DEMO — these controls won't ship in the live site. They're here so the hotel can review options before sign-off.</p>
       </div>
     </div>
     """)
@@ -776,12 +776,12 @@ def specials_card(root: str, items=None) -> str:
     return dedent(f"""
     <aside id="specials-card" data-show="true" class="hidden lg:block absolute right-6 xl:right-12 top-1/2 -translate-y-1/2 w-[300px] xl:w-[340px] z-10 backdrop-blur-md bg-mira-900/40 border border-white/20 rounded-lg shadow-lux p-5 text-white">
       <div class="flex items-baseline justify-between mb-3">
-        <h2 class="font-display text-2xl leading-none">Our specials</h2>
-        <span class="text-[10px] uppercase tracking-widest text-sand-300/90">Direct only</span>
+        <h2 class="font-display text-2xl leading-none" data-i18n="home.specials.heading">Our specials</h2>
+        <span class="text-[10px] uppercase tracking-widest text-sand-300/90" data-i18n="home.specials.subtitle">Direct only</span>
       </div>
-      <p class="text-xs text-white/75 leading-relaxed mb-2">Best rates are always direct. These are reserved for guests who book through us.</p>
+      <p class="text-xs text-white/75 leading-relaxed mb-2" data-i18n="home.specials.blurb">Best rates are always direct. These are reserved for guests who book through us.</p>
       <ul class="m-0 p-0 list-none">{rows}</ul>
-      <a href="{root}offers.html" class="mt-4 inline-flex items-center justify-center w-full px-4 py-2.5 bg-sand-300 text-mira-900 rounded-full font-medium text-sm hover:bg-sand-200 transition">See all offers <span class="ml-2">→</span></a>
+      <a href="{root}offers.html" class="mt-4 inline-flex items-center justify-center w-full px-4 py-2.5 bg-sand-300 text-mira-900 rounded-full font-medium text-sm hover:bg-sand-200 transition"><span data-i18n="home.specials.see_all">See all offers</span> <span class="ml-2">→</span></a>
     </aside>
     """)
 
@@ -800,7 +800,14 @@ def render_page(page: dict) -> str:
     body = page["body"](root) if callable(page["body"]) else page["body"]
     # Total fixed-header height = thin copyright strip (~26px) + main nav row.
     main_open = f'<main id="main" class="pt-[88px] xl:pt-[96px]">'
-    return head + nav(page.get("active", ""), root) + main_open + body + "</main>" + footer(root)
+    # R010: translation-in-progress notice — site.js shows this only on
+    # non-EN languages for pages whose body isn't yet translated.
+    notice = (
+        '<div id="mp-i18n-notice" class="hidden bg-sand-100 border-b border-sand-300/40 px-5 py-2 text-center text-xs text-mira-800">'
+        '<span data-i18n="i18n.in_progress">Page content translation in progress — English shown.</span>'
+        '</div>'
+    )
+    return head + nav(page.get("active", ""), root) + main_open + notice + body + "</main>" + footer(root)
 
 
 # ---- Re-usable UI atoms -------------------------------------------------

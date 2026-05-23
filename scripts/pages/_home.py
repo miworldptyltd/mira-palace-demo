@@ -20,11 +20,11 @@ HERO_POSTER = IMG_POOL
 def home(root: str) -> str:
     h = hero_video(
         f"{root}{HERO_POSTER}",
-        "Side • Antalya • Türkiye",
-        "The Turkish Riviera,<br/>reimagined in quiet luxury.",
-        "Thirty-four suites, four pools, and a Mediterranean shoreline 600 metres from your door. Mira Palace is a small, boutique all-inclusive where the entire team knows your name by the second morning.",
+        '<span data-i18n="home.hero.kicker">Side • Antalya • Türkiye</span>',
+        '<span data-i18n="home.hero.h1">The Turkish Riviera, reimagined in quiet luxury.</span>',
+        '<span data-i18n="home.hero.sub">Thirty-four suites, four pools, and a Mediterranean shoreline 600 metres from your door. Mira Palace is a small, boutique all-inclusive where the entire team knows your name by the second morning.</span>',
         primary_href=f"{root}rooms/",
-        primary_label="Explore our suites",
+        primary_label='<span data-i18n="home.hero.cta_suites">Explore our suites</span>',
         height="88vh",
         root=root,
         extras_html=specials_card(root),

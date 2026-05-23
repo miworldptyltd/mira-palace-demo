@@ -504,66 +504,21 @@
       });
     });
 
-    // Language buttons (stub for non-EN)
+    // R010: Language buttons in the customiser panel now route through
+    // setLang() — the i18n handler set up at the top of the file. No
+    // separate stub or "coming soon" banner is needed.
     document.querySelectorAll('.lang-btn').forEach((b) => {
-      b.addEventListener('click', () => triggerLang(b.dataset.lang, b));
+      b.addEventListener('click', () => {
+        if (typeof setLang === 'function') setLang(b.dataset.lang);
+      });
     });
   }
-
-  // Apply EN/TR copyright text. The site has English and Turkish copyright
-  // strings rendered side-by-side; we toggle .lang-hidden so only one shows.
-  // For DE/RU we don't have translated copyright — fall through to English.
-  function applyCopyrightLang(lang) {
-    const effective = (lang === 'tr') ? 'tr' : 'en';
-    document.querySelectorAll('.lang-text').forEach((el) => {
-      const elLang = el.dataset.lang;
-      if (elLang === effective) el.classList.remove('lang-hidden');
-      else el.classList.add('lang-hidden');
-    });
-  }
-  // Restore previously selected language on page load (before any clicks).
-  let initialLang = 'en';
-  try { initialLang = localStorage.getItem('mp-lang') || 'en'; } catch (e) {}
-  applyCopyrightLang(initialLang);
-  document.querySelectorAll('.lang-btn,.nav-flag').forEach((x) => {
-    x.dataset.active = (x.dataset.lang === initialLang ? 'true' : 'false');
-  });
-
-  // Nav flag buttons + customiser language buttons drive the same handler.
-  function triggerLang(lang, sourceBtn) {
-    document.querySelectorAll('.lang-btn,.nav-flag').forEach((x) => {
-      x.dataset.active = (x.dataset.lang === lang ? 'true' : 'false');
-    });
-    try { localStorage.setItem('mp-lang', lang); } catch (e) {}
-    applyCopyrightLang(lang);
-    if (lang === 'en' || lang === 'tr') {
-      // Both languages have first-class copyright text on the site already —
-      // no banner needed.
-      const lm = document.getElementById('lang-msg');
-      if (lm) { lm.classList.add('hidden'); lm.textContent = ''; }
-      const oldBanner = document.getElementById('lang-banner');
-      if (oldBanner) oldBanner.remove();
-      return;
-    }
-    const messages = {
-      de: 'Deutsche Version folgt — der Sprachumschalter funktioniert in diesem Mock; echte deutsche Inhalte folgen vor dem Launch.',
-      ru: 'Русская версия скоро — переключатель языка работает в этом макете; настоящий русский контент будет добавлен перед запуском.'
-    };
-    let banner = document.getElementById('lang-banner');
-    if (!banner) {
-      banner = document.createElement('div');
-      banner.id = 'lang-banner';
-      banner.className = 'fixed top-20 left-1/2 -translate-x-1/2 z-40 bg-mira-900 text-white text-sm px-4 py-3 rounded-lg shadow-lux max-w-md text-center';
-      banner.style.cursor = 'pointer';
-      banner.title = 'Click to dismiss';
-      banner.addEventListener('click', () => banner.remove());
-      document.body.appendChild(banner);
-      setTimeout(() => banner && banner.remove(), 6000);
-    }
-    banner.textContent = messages[lang] || '';
-  }
-  document.querySelectorAll('.nav-flag').forEach((b) => {
-    b.addEventListener('click', () => triggerLang(b.dataset.lang, b));
+  // R010: The bilingual EN/TR copyright dual-render is superseded by
+  // data-i18n on a single string. Hide any leftover .lang-text duplicates
+  // that may still be on the page (only the EN one stays visible because
+  // its content is now swapped by applyI18n based on the active language).
+  document.querySelectorAll('.lang-text[data-lang]:not([data-lang="en"])').forEach((el) => {
+    el.classList.add('lang-hidden');
   });
 
   // ----- Hero slideshow controller --------------------------------------
@@ -582,6 +537,81 @@
       i = (i + 1) % slides.length;
       slides[i].classList.add('active');
     }, ms);
+  });
+
+  // =====================================================================
+  // I18N — language detect + apply translations (R010)
+  // - Reads active language from localStorage (or auto-detects from browser)
+  // - Looks up [data-i18n] keys in window.MIRA_I18N[lang], swaps textContent
+  // - Also handles [data-i18n-placeholder] and [data-i18n-aria-label]
+  // - Re-applies whenever the language flag is clicked
+  // =====================================================================
+
+  const I18N = window.MIRA_I18N || {};
+  const I18N_SUPPORTED = ['en', 'tr', 'de', 'ru'];
+  function detectLang() {
+    var saved = null;
+    try { saved = localStorage.getItem('mp-lang'); } catch (e) {}
+    if (saved && I18N_SUPPORTED.indexOf(saved) !== -1) return saved;
+    var locale = (navigator.language || 'en').toLowerCase();
+    for (var i = 0; i < I18N_SUPPORTED.length; i++) {
+      if (locale.indexOf(I18N_SUPPORTED[i]) === 0) return I18N_SUPPORTED[i];
+    }
+    return 'en';
+  }
+  function applyI18n(lang) {
+    var dict = I18N[lang] || I18N.en || {};
+    var fallback = I18N.en || {};
+    function lookup(key) {
+      if (dict[key] != null) return dict[key];
+      if (fallback[key] != null) return fallback[key];
+      return null;
+    }
+    document.querySelectorAll('[data-i18n]').forEach(function (el) {
+      var v = lookup(el.dataset.i18n);
+      if (v != null) el.textContent = v;
+    });
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(function (el) {
+      var v = lookup(el.dataset.i18nPlaceholder);
+      if (v != null) el.setAttribute('placeholder', v);
+    });
+    document.querySelectorAll('[data-i18n-aria-label]').forEach(function (el) {
+      var v = lookup(el.dataset.i18nAriaLabel);
+      if (v != null) el.setAttribute('aria-label', v);
+    });
+    document.documentElement.setAttribute('lang', lang);
+    // Reflect "active" state on every flag button on the page
+    document.querySelectorAll('.nav-flag,.lang-btn').forEach(function (b) {
+      b.dataset.active = (b.dataset.lang === lang ? 'true' : 'false');
+    });
+    // Legacy bilingual copyright spans — toggle visibility EN/TR (others fall back to EN)
+    var copyLang = (lang === 'tr') ? 'tr' : 'en';
+    document.querySelectorAll('.lang-text[data-lang]').forEach(function (el) {
+      if (el.dataset.lang === copyLang) el.classList.remove('lang-hidden');
+      else el.classList.add('lang-hidden');
+    });
+    // Show the "translation in progress" notice on non-EN pages whose body
+    // text doesn't yet have data-i18n coverage (R010 covers shell + home + booking).
+    var notice = document.getElementById('mp-i18n-notice');
+    var pagePath = window.location.pathname || '';
+    var translatedPages = ['index.html', '/', 'book.html', 'spa-book.html'];
+    var bodyTranslated = translatedPages.some(function (p) { return pagePath === p || pagePath.endsWith('/' + p) || (p === '/' && pagePath.endsWith('/')); });
+    if (notice) {
+      if (lang !== 'en' && !bodyTranslated) notice.classList.remove('hidden');
+      else notice.classList.add('hidden');
+    }
+  }
+  function setLang(lang) {
+    if (I18N_SUPPORTED.indexOf(lang) === -1) return;
+    try { localStorage.setItem('mp-lang', lang); } catch (e) {}
+    applyI18n(lang);
+    document.dispatchEvent(new CustomEvent('mp-lang-changed', { detail: { lang: lang } }));
+  }
+  var currentLang = detectLang();
+  applyI18n(currentLang);
+  // Flag click handlers (both nav-flag in header and lang-btn in customiser)
+  document.querySelectorAll('.nav-flag,.lang-btn').forEach(function (b) {
+    b.addEventListener('click', function () { setLang(b.dataset.lang); });
   });
 
   // =====================================================================

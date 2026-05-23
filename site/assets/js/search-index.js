@@ -157,7 +157,7 @@ window.MIRA_SEARCH_INDEX = [
     "title": "Mira Palace · Boutique all-inclusive on the Turkish Riviera",
     "description": "A 34-suite boutique all-inclusive hotel in Side, Antalya. Four pools, full Turkish hammam, private beach 600 metres from reception.",
     "headings": [
-      "The Turkish Riviera,reimagined in quiet luxury.",
+      "The Turkish Riviera, reimagined in quiet luxury.",
       "Our specials",
       "Big-hotel comfort, small-hotel soul.",
       "Stay. Eat. Unwind.",

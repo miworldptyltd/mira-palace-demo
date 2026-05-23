@@ -1,3 +1,7 @@
+## [R010] - 2026-05-23
+
+R010 feat: translations live for EN TR DE RU - 127 contextual keys per language - site shell + home hero + booking forms fully translated - clicking flag swaps text instantly - other page bodies show translation-in-progress notice
+
 ## [R009] - 2026-05-23
 
 R009 feat: floating Book your stay button bottom-center on every page + desktop nav Book pill removed + bottom-padding on main so content does not hide behind the button + mobile + tablet polish
@@ -117,6 +121,7 @@ First publishable build. Sent to the hotel for owner review.
 - LICENSE is all-rights-reserved proprietary.
 
 [0.1.0]: https://github.com/-/-/releases/tag/v0.1.0
+
 
 
 
