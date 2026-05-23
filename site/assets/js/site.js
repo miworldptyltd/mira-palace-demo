@@ -591,10 +591,15 @@
       else el.classList.add('lang-hidden');
     });
     // Show the "translation in progress" notice on non-EN pages whose body
-    // text doesn't yet have data-i18n coverage (R010 covers shell + home + booking).
+    // text doesn't yet have data-i18n coverage.
+    // R010 covered: shell + home + book + spa-book
+    // R012 added:   about + contact + activities
     var notice = document.getElementById('mp-i18n-notice');
     var pagePath = window.location.pathname || '';
-    var translatedPages = ['index.html', '/', 'book.html', 'spa-book.html'];
+    var translatedPages = [
+      'index.html', '/', 'book.html', 'spa-book.html',
+      'about.html', 'contact.html', 'activities.html'
+    ];
     var bodyTranslated = translatedPages.some(function (p) { return pagePath === p || pagePath.endsWith('/' + p) || (p === '/' && pagePath.endsWith('/')); });
     if (notice) {
       if (lang !== 'en' && !bodyTranslated) notice.classList.remove('hidden');

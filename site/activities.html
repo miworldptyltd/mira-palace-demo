@@ -45,7 +45,7 @@ tailwind.config = {
   // because GitHub Pages hosts at /mira-palace-demo/ rather than /.
   window.MIRA_ROOT = "";
 </script>
-<link rel="stylesheet" href="assets/css/site.css?v=20" />
+<link rel="stylesheet" href="assets/css/site.css?v=21" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/tabler-icons.min.css" />
 </head>
 <body class="font-body text-ink bg-sand-50 antialiased" data-root="">
@@ -168,29 +168,31 @@ tailwind.config = {
   <div class="absolute inset-0 hero-overlay" style="background-image:url('https://images.unsplash.com/photo-1545205597-3d9d02c29597?auto=format&fit=crop&w=1920&q=80'); background-size:cover; background-position:center;"></div>
   <div class="relative max-w-7xl mx-auto px-5 lg:px-8 pt-10 pb-16 text-white flex flex-col justify-start min-h-[inherit]" style="min-height:62vh;">
     <div class="max-w-3xl">
-      <p class="uppercase tracking-[0.22em] text-sand-300 text-xs sm:text-sm font-semibold mb-4">Activities & entertainment</p>
-      <h1 class="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.05]">Coming soon.</h1>
-      <p class="mt-5 max-w-2xl text-base sm:text-lg text-white/90 leading-relaxed">Our activities programme is being polished before launch — kids' club, daily wellness classes and an evening line-up are on their way. Pools, beach, spa, dining and the All-Inclusive concept are all live; come back here in a few weeks for the full schedule.</p>
+      <p class="uppercase tracking-[0.22em] text-sand-300 text-xs sm:text-sm font-semibold mb-4"><span data-i18n="activities.hero.kicker">Activities &amp; entertainment</span></p>
+      <h1 class="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.05]"><span data-i18n="activities.hero.h1">Coming soon.</span></h1>
+      <p class="mt-5 max-w-2xl text-base sm:text-lg text-white/90 leading-relaxed"><span data-i18n="activities.hero.sub">Our activities programme is being polished before launch — kids' club, daily wellness classes and an evening line-up are on their way. Pools, beach, spa, dining and the All-Inclusive concept are all live; come back here in a few weeks for the full schedule.</span></p>
       <div class="mt-8 flex flex-wrap gap-3"></div>
     </div>
   </div>
 </section>
 <section class="bg-white py-20 lg:py-28 scroll-mt-24"><div class="max-w-7xl mx-auto px-5 lg:px-8">
       <div class="max-w-2xl mx-auto text-center">
-        <p class="uppercase tracking-[0.22em] text-sand-600 text-xs font-semibold">Coming soon</p>
-        <h2 class="font-display text-4xl sm:text-5xl text-mira-900 mt-3 leading-tight">An activities programme worth waiting for.</h2>
-        <p class="mt-6 text-mira-700 leading-relaxed">
+        <p class="uppercase tracking-[0.22em] text-sand-600 text-xs font-semibold" data-i18n="activities.body.kicker">Coming soon</p>
+        <h2 class="font-display text-4xl sm:text-5xl text-mira-900 mt-3 leading-tight" data-i18n="activities.body.h2">An activities programme worth waiting for.</h2>
+        <p class="mt-6 text-mira-700 leading-relaxed" data-i18n="activities.body.p1">
           We're working with the hotel team on a deliberately soft daily programme — wellness classes by the pool, a kids' club for guests with children, live acoustic music in the lobby before dinner, and themed evenings twice a week.
           Until that's finalised, we've taken this page down to avoid sharing dates and times we can't guarantee.
         </p>
         <p class="mt-6 text-mira-700 leading-relaxed">
-          In the meantime, the rest of the experience is fully live: <a href="rooms/" class="underline underline-offset-2 text-sand-600 hover:text-sand-500">explore the suites</a>,
-          read about <a href="concept.html" class="underline underline-offset-2 text-sand-600 hover:text-sand-500">our All-Inclusive concept</a>,
-          or <a href="book.html" class="underline underline-offset-2 text-sand-600 hover:text-sand-500">book a stay</a> and we'll send the full activities schedule to you a week before arrival.
+          <span data-i18n="activities.body.p2_pre">In the meantime, the rest of the experience is fully live:</span>
+          <a href="rooms/" class="underline underline-offset-2 text-sand-600 hover:text-sand-500" data-i18n="activities.body.p2.explore">explore the suites</a>,
+          <a href="concept.html" class="underline underline-offset-2 text-sand-600 hover:text-sand-500" data-i18n="activities.body.p2.concept">read about our All-Inclusive concept</a>,
+          <span>or</span>
+          <a href="book.html" class="underline underline-offset-2 text-sand-600 hover:text-sand-500" data-i18n="activities.body.p2.book">book a stay</a><span data-i18n="activities.body.p2_post">, and we'll send the full activities schedule to you a week before arrival.</span>
         </p>
         <div class="mt-10 inline-flex items-center gap-2 px-5 py-3 bg-sand-100 border border-sand-300/50 rounded-full text-sm text-mira-800">
           <span class="w-2 h-2 rounded-full bg-sand-400"></span>
-          Want to know the moment it goes live? <a href="contact.html" class="ml-1 underline underline-offset-2 font-medium hover:text-mira-900">Drop us a line.</a>
+          <span data-i18n="activities.body.chip">Want to know the moment it goes live?</span> <a href="contact.html" class="ml-1 underline underline-offset-2 font-medium hover:text-mira-900" data-i18n="activities.body.chip.cta">Drop us a line.</a>
         </div>
       </div>
     </div></section></main>
@@ -380,8 +382,8 @@ tailwind.config = {
   </div>
 </div>
 
-    <script src="assets/js/media-manifest.js?v=25" defer></script>
-    <script src="assets/js/search-index.js?v=25" defer></script>
-    <script src="assets/js/i18n.js?v=25" defer></script>
-    <script src="assets/js/site.js?v=25" defer></script>
+    <script src="assets/js/media-manifest.js?v=26" defer></script>
+    <script src="assets/js/search-index.js?v=26" defer></script>
+    <script src="assets/js/i18n.js?v=26" defer></script>
+    <script src="assets/js/site.js?v=26" defer></script>
     </body></html>

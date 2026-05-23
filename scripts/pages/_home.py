@@ -102,37 +102,38 @@ def about(root: str) -> str:
     hero_urls = [f"{root}{u}" for u in (IMG_POOL, IMG_GARDEN_2, IMG_GARDEN_3, IMG_GARDEN_4)]
     h = hero_slideshow(
         hero_urls,
-        "Our story",
-        "Small hotel. Big intent.",
-        "Opened in May 2022 by a family who believed the Turkish Riviera deserved a boutique option between the sprawling resorts and the guesthouses — where service feels personal and the design tells a story.",
+        '<span data-i18n="about.hero.kicker">Our story</span>',
+        '<span data-i18n="about.hero.h1">Small hotel. Big intent.</span>',
+        '<span data-i18n="about.hero.sub">Opened in May 2022 by a family who believed the Turkish Riviera deserved a boutique option between the sprawling resorts and the guesthouses — where service feels personal and the design tells a story.</span>',
         height="70vh",
     )
     story = section(f"""
       <div class="grid lg:grid-cols-12 gap-12">
-        <div class="lg:col-span-4">{eyebrow('Since 2022')}
-          {heading('How Mira Palace began.')}
+        <div class="lg:col-span-4">
+          <p class="uppercase tracking-[0.22em] text-mira-600 text-xs font-semibold" data-i18n="about.story.eyebrow">Since 2022</p>
+          <h2 class="font-display text-3xl sm:text-4xl md:text-5xl text-mira-900 leading-tight" data-i18n="about.story.h2">How Mira Palace began.</h2>
         </div>
         <div class="lg:col-span-8 text-mira-700 leading-relaxed space-y-5 text-lg">
-          <p>The property opened its doors in May 2022 after three years of design and construction. Thirty-four suites were built instead of a hundred — because we wanted a kitchen that could cook to order, a pool team that could remember how your family likes its towels, and a front desk that never feels overwhelmed.</p>
-          <p>The building sits in Evrenseki, a quiet village east of Side, surrounded by citrus orchards and pomegranate trees. Many of those were there before the hotel was; some have been planted since. The restaurant's winter menu leans heavily on what the orchard gives us — pomegranate molasses, bitter orange marmalade, quince paste, lemon curd.</p>
-          <p>We are open twelve months of the year. Summer is pools and beach; winter is the lobby fireplace, the hammam, and the quiet. Both seasons have the same number of smiles at reception.</p>
+          <p data-i18n="about.story.p1">The property opened its doors in May 2022 after three years of design and construction. Thirty-four suites were built instead of a hundred — because we wanted a kitchen that could cook to order, a pool team that could remember how your family likes its towels, and a front desk that never feels overwhelmed.</p>
+          <p data-i18n="about.story.p2">The building sits in Evrenseki, a quiet village east of Side, surrounded by citrus orchards and pomegranate trees. Many of those were there before the hotel was; some have been planted since. The restaurant's winter menu leans heavily on what the orchard gives us — pomegranate molasses, bitter orange marmalade, quince paste, lemon curd.</p>
+          <p data-i18n="about.story.p3">We are open twelve months of the year. Summer is pools and beach; winter is the lobby fireplace, the hammam, and the quiet. Both seasons have the same number of smiles at reception.</p>
         </div>
       </div>
     """, bg="bg-white")
     values = section(f"""
-      {eyebrow('What we care about', 'text-sand-600')}
-      {heading('Three promises, kept quietly.')}
+      <p class="uppercase tracking-[0.22em] text-sand-600 text-xs font-semibold" data-i18n="about.values.eyebrow">What we care about</p>
+      <h2 class="font-display text-3xl sm:text-4xl md:text-5xl text-mira-900 leading-tight" data-i18n="about.values.h2">Three promises, kept quietly.</h2>
       <div class="grid md:grid-cols-3 gap-7 mt-12">
-        <div class="p-8 bg-white rounded-lg shadow-lux"><div class="font-display text-3xl text-sand-500">01</div><h3 class="mt-4 font-display text-2xl text-mira-900">Small enough to notice</h3><p class="mt-3 text-mira-700 text-sm leading-relaxed">Thirty-four suites means the bar knows your drink, the kitchen remembers your allergy, the spa recognises your voice. Not because of a system — because there are only thirty-four of you.</p></div>
-        <div class="p-8 bg-white rounded-lg shadow-lux"><div class="font-display text-3xl text-sand-500">02</div><h3 class="mt-4 font-display text-2xl text-mira-900">Honest all-inclusive</h3><p class="mt-3 text-mira-700 text-sm leading-relaxed">No wristbands, no fine print, no up-sell. The food you see on the menu is the food included. The wine poured at dinner is the same wine poured at lunch. Extras are clearly marked; almost nothing is an extra.</p></div>
-        <div class="p-8 bg-white rounded-lg shadow-lux"><div class="font-display text-3xl text-sand-500">03</div><h3 class="mt-4 font-display text-2xl text-mira-900">Of the place</h3><p class="mt-3 text-mira-700 text-sm leading-relaxed">Furniture from Antalya workshops. Linens from Denizli cotton. Olive oil from a single grove eight kilometres away. Tiles from a ceramicist in Iznik. If we can source it locally, we do.</p></div>
+        <div class="p-8 bg-white rounded-lg shadow-lux"><div class="font-display text-3xl text-sand-500">01</div><h3 class="mt-4 font-display text-2xl text-mira-900" data-i18n="about.values.1.title">Small enough to notice</h3><p class="mt-3 text-mira-700 text-sm leading-relaxed" data-i18n="about.values.1.body">Thirty-four suites means the bar knows your drink, the kitchen remembers your allergy, the spa recognises your voice. Not because of a system — because there are only thirty-four of you.</p></div>
+        <div class="p-8 bg-white rounded-lg shadow-lux"><div class="font-display text-3xl text-sand-500">02</div><h3 class="mt-4 font-display text-2xl text-mira-900" data-i18n="about.values.2.title">Honest all-inclusive</h3><p class="mt-3 text-mira-700 text-sm leading-relaxed" data-i18n="about.values.2.body">No wristbands, no fine print, no up-sell. The food you see on the menu is the food included. The wine poured at dinner is the same wine poured at lunch. Extras are clearly marked; almost nothing is an extra.</p></div>
+        <div class="p-8 bg-white rounded-lg shadow-lux"><div class="font-display text-3xl text-sand-500">03</div><h3 class="mt-4 font-display text-2xl text-mira-900" data-i18n="about.values.3.title">Of the place</h3><p class="mt-3 text-mira-700 text-sm leading-relaxed" data-i18n="about.values.3.body">Furniture from Antalya workshops. Linens from Denizli cotton. Olive oil from a single grove eight kilometres away. Tiles from a ceramicist in Iznik. If we can source it locally, we do.</p></div>
       </div>
     """, bg="bg-mira-50")
     cta = cta_band(
-        "Come and meet us.",
-        "Every review we read starts with the same sentence: it felt like a home. Book direct and get a bottle of local wine on arrival, a late check-out when it's possible, and a welcome from the owner's family.",
+        '<span data-i18n="about.cta.h2">Come and meet us.</span>',
+        '<span data-i18n="about.cta.body">Every review we read starts with the same sentence: it felt like a home. Book direct and get a bottle of local wine on arrival, a late check-out when it\'s possible, and a welcome from the owner\'s family.</span>',
         f"{root}contact.html#enquiry",
-        "Plan your stay",
+        '<span data-i18n="about.cta.btn">Plan your stay</span>',
         f"{root}{IMG_POOL}",
     )
     return h + story + values + cta

@@ -19,26 +19,29 @@ def activities(root: str) -> str:
     The original daily programme + kids' club + wellness blocks live in
     git history; restore by reverting the R007 commit when the activities
     programme is ready to publish."""
-    h = hero(IMG_ACT, "Activities & entertainment",
-             "Coming soon.",
-             "Our activities programme is being polished before launch — kids' club, daily wellness classes and an evening line-up are on their way. Pools, beach, spa, dining and the All-Inclusive concept are all live; come back here in a few weeks for the full schedule.",
+    h = hero(IMG_ACT,
+             '<span data-i18n="activities.hero.kicker">Activities &amp; entertainment</span>',
+             '<span data-i18n="activities.hero.h1">Coming soon.</span>',
+             '<span data-i18n="activities.hero.sub">Our activities programme is being polished before launch — kids\' club, daily wellness classes and an evening line-up are on their way. Pools, beach, spa, dining and the All-Inclusive concept are all live; come back here in a few weeks for the full schedule.</span>',
              height="62vh")
     body = section(f"""
       <div class="max-w-2xl mx-auto text-center">
-        <p class="uppercase tracking-[0.22em] text-sand-600 text-xs font-semibold">Coming soon</p>
-        <h2 class="font-display text-4xl sm:text-5xl text-mira-900 mt-3 leading-tight">An activities programme worth waiting for.</h2>
-        <p class="mt-6 text-mira-700 leading-relaxed">
+        <p class="uppercase tracking-[0.22em] text-sand-600 text-xs font-semibold" data-i18n="activities.body.kicker">Coming soon</p>
+        <h2 class="font-display text-4xl sm:text-5xl text-mira-900 mt-3 leading-tight" data-i18n="activities.body.h2">An activities programme worth waiting for.</h2>
+        <p class="mt-6 text-mira-700 leading-relaxed" data-i18n="activities.body.p1">
           We're working with the hotel team on a deliberately soft daily programme — wellness classes by the pool, a kids' club for guests with children, live acoustic music in the lobby before dinner, and themed evenings twice a week.
           Until that's finalised, we've taken this page down to avoid sharing dates and times we can't guarantee.
         </p>
         <p class="mt-6 text-mira-700 leading-relaxed">
-          In the meantime, the rest of the experience is fully live: <a href="{root}rooms/" class="underline underline-offset-2 text-sand-600 hover:text-sand-500">explore the suites</a>,
-          read about <a href="{root}concept.html" class="underline underline-offset-2 text-sand-600 hover:text-sand-500">our All-Inclusive concept</a>,
-          or <a href="{root}book.html" class="underline underline-offset-2 text-sand-600 hover:text-sand-500">book a stay</a> and we'll send the full activities schedule to you a week before arrival.
+          <span data-i18n="activities.body.p2_pre">In the meantime, the rest of the experience is fully live:</span>
+          <a href="{root}rooms/" class="underline underline-offset-2 text-sand-600 hover:text-sand-500" data-i18n="activities.body.p2.explore">explore the suites</a>,
+          <a href="{root}concept.html" class="underline underline-offset-2 text-sand-600 hover:text-sand-500" data-i18n="activities.body.p2.concept">read about our All-Inclusive concept</a>,
+          <span>or</span>
+          <a href="{root}book.html" class="underline underline-offset-2 text-sand-600 hover:text-sand-500" data-i18n="activities.body.p2.book">book a stay</a><span data-i18n="activities.body.p2_post">, and we'll send the full activities schedule to you a week before arrival.</span>
         </p>
         <div class="mt-10 inline-flex items-center gap-2 px-5 py-3 bg-sand-100 border border-sand-300/50 rounded-full text-sm text-mira-800">
           <span class="w-2 h-2 rounded-full bg-sand-400"></span>
-          Want to know the moment it goes live? <a href="{root}contact.html" class="ml-1 underline underline-offset-2 font-medium hover:text-mira-900">Drop us a line.</a>
+          <span data-i18n="activities.body.chip">Want to know the moment it goes live?</span> <a href="{root}contact.html" class="ml-1 underline underline-offset-2 font-medium hover:text-mira-900" data-i18n="activities.body.chip.cta">Drop us a line.</a>
         </div>
       </div>
     """, bg="bg-white")

@@ -46,58 +46,62 @@ def faq(root: str) -> str:
 
 def contact(root: str) -> str:
     m = SITE_META
-    h = hero(IMG_CONTACT, "Contact & enquiries", "We’ll reply within the hour.",
-             "WhatsApp is the fastest way to reach us; email if you’d prefer the detail on paper. Phones are answered 24/7 — we are a small team and one of us is always on.", height="58vh")
+    h = hero(IMG_CONTACT,
+             '<span data-i18n="contact.hero.kicker">Contact &amp; enquiries</span>',
+             '<span data-i18n="contact.hero.h1">We’ll reply within the hour.</span>',
+             '<span data-i18n="contact.hero.sub">WhatsApp is the fastest way to reach us; email if you’d prefer the detail on paper. Phones are answered 24/7 — we are a small team and one of us is always on.</span>',
+             height="58vh")
     body = section(f"""
       <div class="grid lg:grid-cols-12 gap-12">
-        <div class="lg:col-span-5">{eyebrow('Reach us')}
-          {heading('Four ways to write.', 3)}
+        <div class="lg:col-span-5">
+          <p class="uppercase tracking-[0.22em] text-mira-600 text-xs font-semibold" data-i18n="contact.reach.eyebrow">Reach us</p>
+          <h3 class="font-display text-2xl sm:text-3xl text-mira-900 leading-tight" data-i18n="contact.reach.h3">Four ways to write.</h3>
           <ul class="mt-6 space-y-4 text-mira-800">
-            <li><div class="text-xs uppercase tracking-widest text-mira-500">Phone</div><a href="tel:{m['phone_tel']}" class="font-display text-2xl hover:text-sand-600">{m['phone_display']}</a></li>
-            <li><div class="text-xs uppercase tracking-widest text-mira-500">Email</div><a href="mailto:{m['email']}" class="font-display text-2xl hover:text-sand-600">{m['email']}</a></li>
-            <li><div class="text-xs uppercase tracking-widest text-mira-500">WhatsApp</div><a href="{m['whatsapp']}" class="font-display text-2xl hover:text-sand-600">+90 534 898 84 05</a></li>
-            <li><div class="text-xs uppercase tracking-widest text-mira-500">Address</div><address class="not-italic">{m['address_line1']}<br/>{m['address_line2']}</address></li>
+            <li><div class="text-xs uppercase tracking-widest text-mira-500" data-i18n="contact.label.phone">Phone</div><a href="tel:{m['phone_tel']}" class="font-display text-2xl hover:text-sand-600">{m['phone_display']}</a></li>
+            <li><div class="text-xs uppercase tracking-widest text-mira-500" data-i18n="contact.label.email">Email</div><a href="mailto:{m['email']}" class="font-display text-2xl hover:text-sand-600">{m['email']}</a></li>
+            <li><div class="text-xs uppercase tracking-widest text-mira-500" data-i18n="contact.label.whatsapp">WhatsApp</div><a href="{m['whatsapp']}" class="font-display text-2xl hover:text-sand-600">+90 534 898 84 05</a></li>
+            <li><div class="text-xs uppercase tracking-widest text-mira-500" data-i18n="contact.label.address">Address</div><address class="not-italic">{m['address_line1']}<br/>{m['address_line2']}</address></li>
           </ul>
           <div class="mt-6">
-            <div class="text-xs uppercase tracking-widest text-mira-500 mb-2">Find us on the map</div>
+            <div class="text-xs uppercase tracking-widest text-mira-500 mb-2" data-i18n="contact.map.label">Find us on the map</div>
             <iframe src="https://www.google.com/maps?q=36.7748,31.3888&amp;hl=en&amp;z=14&amp;output=embed" class="w-full aspect-[4/3] rounded-lg shadow-lux border-0" loading="lazy" title="Map of Mira Palace"></iframe>
-            <a href="{m['google_maps']}" rel="noopener" class="mt-3 inline-flex items-center gap-2 text-sm text-mira-700 hover:text-sand-600 font-medium">Open in Google Maps for directions <span>→</span></a>
+            <a href="{m['google_maps']}" rel="noopener" class="mt-3 inline-flex items-center gap-2 text-sm text-mira-700 hover:text-sand-600 font-medium"><span data-i18n="contact.map.cta">Open in Google Maps for directions</span> <span>→</span></a>
           </div>
         </div>
         <div class="lg:col-span-7">
           <form id="enquiry" action="mailto:{m['email']}" method="post" enctype="text/plain" class="bg-white rounded-lg shadow-lux p-7 space-y-5">
-            <h3 class="font-display text-2xl text-mira-900">Send an enquiry</h3>
+            <h3 class="font-display text-2xl text-mira-900" data-i18n="contact.form.h3">Send an enquiry</h3>
 
             <label class="block">
-              <span class="text-sm font-medium text-mira-800">Reason for getting in touch</span>
+              <span class="text-sm font-medium text-mira-800" data-i18n="contact.form.reason">Reason for getting in touch</span>
               <select id="enq-reason" name="reason" class="mt-1 block w-full rounded border border-mira-200 px-3 py-2.5 text-sm focus:border-mira-500 focus:ring-0">
-                <option value="reservation">Room reservation enquiry</option>
-                <option value="group">Group booking (10+ rooms)</option>
-                <option value="wedding">Wedding or private event</option>
-                <option value="career">Career / job opportunity</option>
-                <option value="press">Press, partnership or media</option>
-                <option value="lost">Lost &amp; found / past stay</option>
-                <option value="other">Something else</option>
+                <option value="reservation" data-i18n="contact.form.reason.reservation">Room reservation enquiry</option>
+                <option value="group" data-i18n="contact.form.reason.group">Group booking (10+ rooms)</option>
+                <option value="wedding" data-i18n="contact.form.reason.wedding">Wedding or private event</option>
+                <option value="career" data-i18n="contact.form.reason.career">Career / job opportunity</option>
+                <option value="press" data-i18n="contact.form.reason.press">Press, partnership or media</option>
+                <option value="lost" data-i18n="contact.form.reason.lost">Lost &amp; found / past stay</option>
+                <option value="other" data-i18n="contact.form.reason.other">Something else</option>
               </select>
             </label>
 
             <div class="grid sm:grid-cols-2 gap-5">
-              <label class="block"><span class="text-sm text-mira-700">Your name</span><input required name="name" class="mt-1 block w-full rounded border border-mira-200 px-3 py-2 text-sm focus:border-mira-500 focus:ring-0" /></label>
-              <label class="block"><span class="text-sm text-mira-700">Email</span><input required type="email" name="email" class="mt-1 block w-full rounded border border-mira-200 px-3 py-2 text-sm focus:border-mira-500 focus:ring-0" /></label>
+              <label class="block"><span class="text-sm text-mira-700" data-i18n="contact.form.name">Your name</span><input required name="name" class="mt-1 block w-full rounded border border-mira-200 px-3 py-2 text-sm focus:border-mira-500 focus:ring-0" /></label>
+              <label class="block"><span class="text-sm text-mira-700" data-i18n="contact.form.email">Email</span><input required type="email" name="email" class="mt-1 block w-full rounded border border-mira-200 px-3 py-2 text-sm focus:border-mira-500 focus:ring-0" /></label>
             </div>
 
             <div id="enq-reservation-fields" class="grid sm:grid-cols-2 gap-5">
-              <label class="block"><span class="text-sm text-mira-700">Arrival date</span><input type="date" name="arrival" class="mt-1 block w-full rounded border border-mira-200 px-3 py-2 text-sm" /></label>
-              <label class="block"><span class="text-sm text-mira-700">Departure date</span><input type="date" name="departure" class="mt-1 block w-full rounded border border-mira-200 px-3 py-2 text-sm" /></label>
-              <label class="block"><span class="text-sm text-mira-700">Adults</span><input type="number" min="1" value="2" name="adults" class="mt-1 block w-full rounded border border-mira-200 px-3 py-2 text-sm" /></label>
-              <label class="block"><span class="text-sm text-mira-700">Children</span><input type="number" min="0" value="0" name="children" class="mt-1 block w-full rounded border border-mira-200 px-3 py-2 text-sm" /></label>
-              <label class="block sm:col-span-2"><span class="text-sm text-mira-700">Room preference</span>
+              <label class="block"><span class="text-sm text-mira-700" data-i18n="contact.form.arrival">Arrival date</span><input type="date" name="arrival" class="mt-1 block w-full rounded border border-mira-200 px-3 py-2 text-sm" /></label>
+              <label class="block"><span class="text-sm text-mira-700" data-i18n="contact.form.departure">Departure date</span><input type="date" name="departure" class="mt-1 block w-full rounded border border-mira-200 px-3 py-2 text-sm" /></label>
+              <label class="block"><span class="text-sm text-mira-700" data-i18n="contact.form.adults">Adults</span><input type="number" min="1" value="2" name="adults" class="mt-1 block w-full rounded border border-mira-200 px-3 py-2 text-sm" /></label>
+              <label class="block"><span class="text-sm text-mira-700" data-i18n="contact.form.children">Children</span><input type="number" min="0" value="0" name="children" class="mt-1 block w-full rounded border border-mira-200 px-3 py-2 text-sm" /></label>
+              <label class="block sm:col-span-2"><span class="text-sm text-mira-700" data-i18n="contact.form.room">Room preference</span>
                 <select name="room" class="mt-1 block w-full rounded border border-mira-200 px-3 py-2 text-sm">
-                  <option>Not sure — recommend for my dates</option>
-                  <option>Standard Suite</option>
-                  <option>Deluxe Suite</option>
-                  <option>Family Suite</option>
-                  <option>King Suite</option>
+                  <option data-i18n="contact.form.room.recommend">Not sure — recommend for my dates</option>
+                  <option data-i18n="nav.sub.standard">Standard Suite</option>
+                  <option data-i18n="nav.sub.deluxe">Deluxe Suite</option>
+                  <option data-i18n="nav.sub.family">Family Suite</option>
+                  <option data-i18n="nav.sub.king">King Suite</option>
                 </select>
               </label>
             </div>
@@ -113,12 +117,12 @@ def contact(root: str) -> str:
             </script>
 
             <div class="grid sm:grid-cols-2 gap-5">
-              <label class="block sm:col-span-2"><span class="text-sm text-mira-700">Message</span><textarea name="message" rows="4" class="mt-1 block w-full rounded border border-mira-200 px-3 py-2 text-sm focus:border-mira-500 focus:ring-0" placeholder="Anniversaries, dietary needs, accessibility, anything else worth us knowing."></textarea></label>
+              <label class="block sm:col-span-2"><span class="text-sm text-mira-700" data-i18n="contact.form.message">Message</span><textarea name="message" rows="4" class="mt-1 block w-full rounded border border-mira-200 px-3 py-2 text-sm focus:border-mira-500 focus:ring-0" placeholder="Anniversaries, dietary needs, accessibility, anything else worth us knowing." data-i18n-placeholder="contact.form.message.placeholder"></textarea></label>
             </div>
-            <label class="flex items-start gap-3 text-xs text-mira-700"><input type="checkbox" required class="mt-1" /><span>I consent to Mira Palace using my details to reply to this enquiry, in line with the <a href="{root}legal/privacy.html" class="underline">Privacy Notice</a>. (This is the required consent — it is kept separate from marketing, per data-protection rules.)</span></label>
-            <label class="flex items-start gap-3 text-xs text-mira-700"><input type="checkbox" class="mt-1" /><span>Also sign me up for occasional seasonal offers and news from the hotel (optional, separate consent).</span></label>
-            <button class="inline-flex items-center justify-center px-6 py-3 bg-mira-700 text-white rounded-full font-medium hover:bg-mira-800">Send enquiry</button>
-            <p class="text-xs text-mira-500">This demonstration form opens your email client. In the production site, submissions go directly to the hotel’s reservations inbox.</p>
+            <label class="flex items-start gap-3 text-xs text-mira-700"><input type="checkbox" required class="mt-1" /><span data-i18n="contact.form.consent.privacy">I consent to Mira Palace using my details to reply to this enquiry, in line with the Privacy Notice. (This is the required consent — it is kept separate from marketing, per data-protection rules.)</span></label>
+            <label class="flex items-start gap-3 text-xs text-mira-700"><input type="checkbox" class="mt-1" /><span data-i18n="contact.form.consent.marketing">Also sign me up for occasional seasonal offers and news from the hotel (optional, separate consent).</span></label>
+            <button class="inline-flex items-center justify-center px-6 py-3 bg-mira-700 text-white rounded-full font-medium hover:bg-mira-800" data-i18n="contact.form.submit">Send enquiry</button>
+            <p class="text-xs text-mira-500" data-i18n="contact.form.demo_note">This demonstration form opens your email client. In the production site, submissions go directly to the hotel’s reservations inbox.</p>
           </form>
         </div>
       </div>
