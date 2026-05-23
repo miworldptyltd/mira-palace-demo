@@ -38,6 +38,38 @@ Write-Host "=====================" -ForegroundColor Cyan
 Write-Host "  Message: $Message"
 
 # ---------------------------------------------------------------------------
+# Safety: refuse to cut a release if no source files have changed since the
+# last R-tag. CHANGELOG.md and VERSION are written BY this script, so they're
+# not counted. Prevents accidental empty releases from re-running the script.
+#
+# Checks THREE places (committed changes + working dir + untracked) so the
+# guard catches a release where source has been edited but not yet committed.
+$lastTag = git tag -l "R[0-9][0-9][0-9]" 2>$null | Sort-Object -Descending | Select-Object -First 1
+if ($lastTag) {
+  $diffVsTag   = git diff --name-only $lastTag 2>$null      # tag → working dir (committed + unstaged)
+  $stagedDiff  = git diff --name-only --cached 2>$null      # staged-but-uncommitted
+  $untracked   = git ls-files --others --exclude-standard 2>$null  # new files not yet in git
+
+  $allChanges = @()
+  if ($diffVsTag)  { $allChanges += $diffVsTag }
+  if ($stagedDiff) { $allChanges += $stagedDiff }
+  if ($untracked)  { $allChanges += $untracked }
+  $allChanges = $allChanges | Sort-Object -Unique
+
+  $sourceChanged = $allChanges | Where-Object { $_ -and ($_ -notmatch '^(CHANGELOG\.md|VERSION)$') }
+  if (-not $sourceChanged) {
+    Write-Host ""
+    Write-Host "  [STOP] No source changes since $lastTag." -ForegroundColor Yellow
+    Write-Host "  Nothing new to release. Run is aborting before any commits or tags." -ForegroundColor Yellow
+    Write-Host ""
+    Write-Host "  If you really want to re-deploy the same build (e.g. a force-rebuild)," -ForegroundColor DarkGray
+    Write-Host "  delete the last tag first: git tag -d $lastTag" -ForegroundColor DarkGray
+    Write-Host ""
+    exit 0
+  }
+}
+
+# ---------------------------------------------------------------------------
 # Tidy: remove any stray _*.png test files from site/assets/img/ that may
 # have been written during a previous build session. Underscore-prefixed
 # files are never legitimate site assets — they're scratchpad output.

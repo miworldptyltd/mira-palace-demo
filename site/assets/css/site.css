@@ -803,3 +803,44 @@ details > summary::-webkit-details-marker { display: none; }
   .bk-tabs { grid-template-columns: 1fr; }
   .bk-tiles { grid-template-columns: 1fr; }
 }
+
+/* =====================================================================
+   "COMING SOON" NAV TREATMENT (R007)
+   Nav items flagged data-soon="true" render at reduced opacity with a
+   small champagne "Soon" pill next to the label. Hover restores opacity.
+   ===================================================================== */
+.nav-dd[data-soon="true"] > .nav-dd-trigger,
+.nav-soon-wrap[data-soon="true"] {
+  opacity: 0.55;
+}
+.nav-dd[data-soon="true"]:hover > .nav-dd-trigger,
+.nav-soon-wrap[data-soon="true"]:hover {
+  opacity: 0.85;
+}
+.nav-soon-pill {
+  display: inline-block;
+  vertical-align: middle;
+  white-space: nowrap;
+  line-height: 1.2;
+}
+
+/* =====================================================================
+   SPA BOOKING (R007) — additions on top of bk-* room booking classes
+   Spa booking uses the same .bk-* layout but with a few extras:
+   - bullet list inside an info card (Included in this package)
+   ===================================================================== */
+.sp-page .bk-form-pr small { display: block; margin-top: 2px; font-size: 10px; color: #5C6E92; letter-spacing: 0.04em; font-family: Inter, sans-serif; }
+.bk-bullets-list {
+  list-style: none; padding: 0; margin: 0;
+  display: flex; flex-direction: column; gap: 4px;
+}
+.bk-bullets-list li {
+  position: relative; padding-left: 14px;
+  font-size: 12px; color: #08122A; line-height: 1.5;
+}
+.bk-bullets-list li::before {
+  content: "";
+  position: absolute; left: 0; top: 7px;
+  width: 5px; height: 5px; border-radius: 50%;
+  background: #B8932F;
+}

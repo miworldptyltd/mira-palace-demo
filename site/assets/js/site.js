@@ -903,4 +903,161 @@
     }
   }
 
+  // =====================================================================
+  // SPA BOOKING PAGE (spa-book.html) — interactions
+  // Similar to room booking but simpler: 3 package tabs, single date/time,
+  // no nightly multiplier (price × people instead).
+  // =====================================================================
+
+  const spDataEl = document.getElementById('sp-data');
+  if (spDataEl) {
+    var SP_DATA;
+    try { SP_DATA = JSON.parse(spDataEl.textContent); } catch (e) { SP_DATA = null; }
+
+    if (SP_DATA) {
+      var spCurrentPkg = 'classic';
+      var spCurrentCur = initialCur;
+
+      function spFmt(prices, cur) {
+        if (!prices) return '';
+        var sym = CUR_SYMBOLS[cur] || CUR_SYMBOLS.eur;
+        var val = prices[cur] != null ? prices[cur] : prices.eur;
+        return sym + val.toLocaleString();
+      }
+
+      function spRecalcTotal() {
+        var p = SP_DATA.packages[spCurrentPkg];
+        if (!p) return;
+        var peopleEl = document.getElementById('sp-people');
+        var n = peopleEl ? parseInt(peopleEl.value, 10) || 1 : 1;
+        var grand = { try: p.prices.try * n, eur: p.prices.eur * n, usd: p.prices.usd * n };
+        var totEl = document.getElementById('sp-total');
+        if (totEl) {
+          totEl.dataset.prices = JSON.stringify(grand);
+          totEl.textContent = spFmt(grand, spCurrentCur);
+        }
+        var subEl = document.getElementById('sp-tot-sub');
+        if (subEl) {
+          subEl.textContent = p.name + ' · ' + n + ' person' + (n === 1 ? '' : 's') + ' · ' + p.duration_min + ' min';
+        }
+      }
+
+      function spRefreshAllPrices() {
+        // Package tab prices
+        document.querySelectorAll('#sp-tabs .bk-tab-pr[data-prices]').forEach(function (el) {
+          try {
+            var p = JSON.parse(el.dataset.prices);
+            var prefix = el.textContent.split('· from')[0];
+            el.textContent = prefix + '· from ' + spFmt(p, spCurrentCur);
+          } catch (e) {}
+        });
+        // Form header price
+        var fp = document.getElementById('sp-form-price');
+        if (fp && fp.dataset.prices) {
+          try { fp.textContent = spFmt(JSON.parse(fp.dataset.prices), spCurrentCur); } catch (e) {}
+        }
+        spRecalcTotal();
+      }
+
+      function spRebuildInfo(p) {
+        var info = document.getElementById('sp-info');
+        if (!info) return;
+        // Rebuild bullets card; bring + facilities cards stay the same (they're package-agnostic)
+        var bulletsHtml = '<div class="bk-card"><h3>Included in this package</h3><ul class="bk-bullets-list">' +
+          p.bullets.map(function (b) { return '<li>' + b + '</li>'; }).join('') +
+          '</ul></div>';
+        // Keep cards 2 and 3 (bring + facilities) intact
+        var cards = info.querySelectorAll('.bk-card');
+        if (cards.length >= 1) {
+          cards[0].outerHTML = bulletsHtml;
+        }
+      }
+
+      function spRebuildTiles(p) {
+        var host = document.getElementById('sp-tiles-host');
+        if (!host) return;
+        host.innerHTML = '<div class="bk-tiles">' + p.photos.map(function (ph) {
+          return '<button type="button" class="bk-tile" data-photo="' + ph.path + '" data-label="' + ph.label + '" aria-label="' + ph.label + '">' +
+                 '<span class="bk-tile-img" style="background-image:url(\'' + ph.path + '\')"></span>' +
+                 '<span class="bk-tile-tag">' + ph.label + '</span></button>';
+        }).join('') + '</div>';
+        spAttachTileClicks(p);
+        var pc = document.getElementById('sp-photo-count');
+        if (pc) pc.textContent = p.photos.length;
+      }
+
+      function spAttachTileClicks(p) {
+        document.querySelectorAll('#sp-tiles-host .bk-tile').forEach(function (t) {
+          t.addEventListener('click', function () {
+            document.querySelectorAll('#sp-tiles-host .bk-tile').forEach(function (x) { x.dataset.active = 'false'; });
+            t.dataset.active = 'true';
+            var hero = document.getElementById('sp-hero');
+            var tag = document.getElementById('sp-hero-tag');
+            if (hero) hero.style.backgroundImage = "url('" + t.dataset.photo + "')";
+            if (tag) tag.textContent = t.dataset.label + ' · ' + p.name;
+          });
+        });
+      }
+
+      function spSelectPackage(key) {
+        if (!SP_DATA.packages[key]) return;
+        spCurrentPkg = key;
+        var p = SP_DATA.packages[key];
+        document.querySelectorAll('#sp-tabs .bk-tab').forEach(function (t) {
+          t.dataset.sel = (t.dataset.pkg === key) ? 'true' : 'false';
+        });
+        var nm = document.getElementById('sp-form-nm');
+        var sub = document.getElementById('sp-form-sub');
+        if (nm) nm.textContent = p.name;
+        if (sub) sub.textContent = p.duration_min + ' min · ' + p.tagline.toLowerCase();
+        var fp = document.getElementById('sp-form-price');
+        if (fp) { fp.dataset.prices = JSON.stringify(p.prices); fp.textContent = spFmt(p.prices, spCurrentCur); }
+        spRebuildInfo(p);
+        spRebuildTiles(p);
+        var hero = document.getElementById('sp-hero');
+        var tag = document.getElementById('sp-hero-tag');
+        if (hero && p.photos[0]) hero.style.backgroundImage = "url('" + p.photos[0].path + "')";
+        if (tag && p.photos[0]) tag.textContent = p.photos[0].label + ' · ' + p.name;
+        spRecalcTotal();
+      }
+
+      // Tab click
+      document.querySelectorAll('#sp-tabs .bk-tab').forEach(function (t) {
+        t.addEventListener('click', function () { spSelectPackage(t.dataset.pkg); });
+      });
+
+      // People dropdown change → recalc
+      var peopleEl = document.getElementById('sp-people');
+      if (peopleEl) peopleEl.addEventListener('change', spRecalcTotal);
+
+      // Currency change
+      document.addEventListener('mp-currency-changed', function (e) {
+        spCurrentCur = e.detail.currency;
+        spRefreshAllPrices();
+      });
+
+      // Default the date to today
+      var dateEl = document.getElementById('sp-date');
+      if (dateEl && !dateEl.value) {
+        dateEl.value = new Date().toISOString().substring(0, 10);
+      }
+
+      // Show/hide room number field based on "Hotel guest?" answer
+      var guestEl = document.getElementById('sp-guest');
+      var roomEl = document.getElementById('sp-room');
+      if (guestEl && roomEl) {
+        var roomWrap = roomEl.closest('.bk-fld');
+        function syncRoom() {
+          if (roomWrap) roomWrap.style.display = (guestEl.value === 'yes') ? '' : 'none';
+        }
+        guestEl.addEventListener('change', syncRoom);
+        syncRoom();
+      }
+
+      // Initial wire-up
+      spAttachTileClicks(SP_DATA.packages[spCurrentPkg]);
+      spRefreshAllPrices();
+    }
+  }
+
 })();

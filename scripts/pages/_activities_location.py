@@ -14,42 +14,35 @@ IMG_HARBOR   = "https://images.unsplash.com/photo-1583244532610-2a234b5b8e7a?aut
 
 
 def activities(root: str) -> str:
-    daily = [
-        ("09:00", "Morning yoga (pool deck)",      "Beginners welcome. Mats provided. 45 min."),
-        ("10:30", "Aqua-fit class",                "In the main pool. 30 min."),
-        ("11:30", "Kids’ club opens",         "Age 4–12. Art, games, short walks, swim coaching."),
-        ("14:00", "Pilates / stretch (studio)",    "Level 1–2. 45 min."),
-        ("15:00", "Darts / table tennis tournament","Prizes for the winners. Every afternoon."),
-        ("16:30", "Beach volleyball",              "Friendly, on the beach-club court."),
-        ("18:00", "Live acoustic guitar, lobby bar", "30 min, then a set break before dinner."),
-        ("21:30", "Evening programme",             "Varies by night — live music, folk night, themed DJ, cinema under the stars."),
-    ]
-    rows = "".join(
-        f'<tr class="border-t border-mira-200"><td class="py-4 pr-6 font-medium text-mira-900 whitespace-nowrap">{t}</td><td class="py-4 pr-6 text-mira-800">{n}</td><td class="py-4 text-mira-600 text-sm">{d}</td></tr>'
-        for t, n, d in daily
-    )
+    """Activities holding page — content disabled in R007.
+
+    The original daily programme + kids' club + wellness blocks live in
+    git history; restore by reverting the R007 commit when the activities
+    programme is ready to publish."""
     h = hero(IMG_ACT, "Activities & entertainment",
-             "Do as much or as little as you like.",
-             "A deliberately soft programme: no microphones at the pool, no mandatory animation, but enough going on that you never look for something to do. Kids' club, evening entertainment, wellness classes.", height="68vh")
-    a = section(f"""
-      {eyebrow('A typical day')}
-      {heading('Today’s programme.', 3)}
-      <div class="mt-8 overflow-x-auto"><table class="w-full text-left"><tbody>{rows}</tbody></table></div>
-      <p class="mt-8 text-xs text-mira-500 italic">Programme rotates weekly. A full schedule is posted each Sunday on your room TV and at the lobby.</p>
+             "Coming soon.",
+             "Our activities programme is being polished before launch — kids' club, daily wellness classes and an evening line-up are on their way. Pools, beach, spa, dining and the All-Inclusive concept are all live; come back here in a few weeks for the full schedule.",
+             height="62vh")
+    body = section(f"""
+      <div class="max-w-2xl mx-auto text-center">
+        <p class="uppercase tracking-[0.22em] text-sand-600 text-xs font-semibold">Coming soon</p>
+        <h2 class="font-display text-4xl sm:text-5xl text-mira-900 mt-3 leading-tight">An activities programme worth waiting for.</h2>
+        <p class="mt-6 text-mira-700 leading-relaxed">
+          We're working with the hotel team on a deliberately soft daily programme — wellness classes by the pool, a kids' club for guests with children, live acoustic music in the lobby before dinner, and themed evenings twice a week.
+          Until that's finalised, we've taken this page down to avoid sharing dates and times we can't guarantee.
+        </p>
+        <p class="mt-6 text-mira-700 leading-relaxed">
+          In the meantime, the rest of the experience is fully live: <a href="{root}rooms/" class="underline underline-offset-2 text-sand-600 hover:text-sand-500">explore the suites</a>,
+          read about <a href="{root}concept.html" class="underline underline-offset-2 text-sand-600 hover:text-sand-500">our All-Inclusive concept</a>,
+          or <a href="{root}book.html" class="underline underline-offset-2 text-sand-600 hover:text-sand-500">book a stay</a> and we'll send the full activities schedule to you a week before arrival.
+        </p>
+        <div class="mt-10 inline-flex items-center gap-2 px-5 py-3 bg-sand-100 border border-sand-300/50 rounded-full text-sm text-mira-800">
+          <span class="w-2 h-2 rounded-full bg-sand-400"></span>
+          Want to know the moment it goes live? <a href="{root}contact.html" class="ml-1 underline underline-offset-2 font-medium hover:text-mira-900">Drop us a line.</a>
+        </div>
+      </div>
     """, bg="bg-white")
-    cards = [
-        (IMG_KIDS, "Kids’ club (4–12)", "Our kids’ team runs a daily programme from 10:30 to 17:00 with a lunch break. Art, games, short nature walks, swim coaching, a weekly movie-and-popcorn afternoon. Parents can drop in any time."),
-        (IMG_ACT, "Wellness classes", "Two classes a day — yoga, pilates, aqua-fit, stretch. Levels are labelled. Mats, blocks, straps and weights are all provided."),
-        (IMG_EVE, "Evenings", "Live acoustic music before dinner. Piano in the lobby every evening. Twice a week, a guest performer: jazz duo, Turkish folk, or a string trio from the Antalya conservatoire."),
-    ]
-    blocks = "".join(
-        f'<div class="grid md:grid-cols-2 gap-8 items-center"><div class="aspect-[4/3] bg-cover bg-center rounded-lg shadow-lux" style="background-image:url(\'{img}\')"></div><div><h3 class="font-display text-3xl text-mira-900">{t}</h3><p class="mt-4 text-mira-700 leading-relaxed">{d}</p></div></div>'
-        for img, t, d in cards
-    )
-    b = section(f"""
-      <div class="space-y-16">{blocks}</div>
-    """, bg="bg-sand-50")
-    return h + a + b
+    return h + body
 
 
 def location(root: str) -> str:

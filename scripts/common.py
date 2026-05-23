@@ -80,7 +80,7 @@ tailwind.config = {{
   // because GitHub Pages hosts at /mira-palace-demo/ rather than /.
   window.MIRA_ROOT = "{root}";
 </script>
-<link rel="stylesheet" href="{root}assets/css/site.css?v=15" />
+<link rel="stylesheet" href="{root}assets/css/site.css?v=16" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/tabler-icons.min.css" />
 </head>
 <body class="font-body text-ink bg-sand-50 antialiased" data-root="{root}">
@@ -113,7 +113,10 @@ def nav(active: str, root: str) -> str:
         ("spa",        "Spa",           "spa.html",         [
             ("Spa & wellness",     "spa.html"),
             ("Treatments & pricing", "spa-treatments.html"),
+            ("Book a session",     "spa-book.html"),
         ]),
+        # Activities flagged with the "soon" marker — rendered with reduced
+        # opacity + a "Coming soon" pill. Page routes to a polite holding page.
         ("activities", "Activities",    "activities.html",  None),
         ("location",   "Location",      "location.html",    None),
         ("gallery",    "Gallery",       "gallery.html",     None),
@@ -127,8 +130,15 @@ def nav(active: str, root: str) -> str:
                 "after:absolute after:left-0 after:-bottom-0.5 after:h-0.5 after:w-full after:origin-left "
                 "after:scale-x-0 after:bg-sand-300 after:transition-transform hover:after:scale-x-100 ") + is_active
 
+    # Keys for nav items that should render with the "Coming soon" treatment:
+    # reduced opacity, small champagne pill next to the label.
+    SOON_KEYS = {"activities"}
+    soon_pill = '<span class="nav-soon-pill ml-1.5 text-[8px] uppercase tracking-widest bg-sand-300/20 text-sand-300 border border-sand-300/40 rounded px-1.5 py-0.5">Soon</span>'
+
     links = []
     for key, label, href, subs in items:
+        soon_attrs = ' data-soon="true"' if key in SOON_KEYS else ""
+        soon_html = soon_pill if key in SOON_KEYS else ""
         if subs:
             sub_html = "".join(
                 f'<a href="{root}{sh}" class="block px-4 py-2 text-sm text-mira-800 hover:bg-sand-100 hover:text-mira-900 whitespace-nowrap">{slabel}</a>'
@@ -136,32 +146,34 @@ def nav(active: str, root: str) -> str:
             )
             chevron = '<svg class="w-3 h-3 opacity-70" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><path d="M3 5l3 3 3-3z"/></svg>'
             links.append(
-                f'<div class="nav-dd relative" data-open="false">'
-                f'  <a href="{root}{href}" class="nav-dd-trigger inline-flex items-center gap-1 {_link_classes(key)}">{label} {chevron}</a>'
+                f'<div class="nav-dd relative"{soon_attrs} data-open="false">'
+                f'  <a href="{root}{href}" class="nav-dd-trigger inline-flex items-center gap-1 {_link_classes(key)}">{label}{soon_html} {chevron}</a>'
                 f'  <div class="nav-dd-menu absolute top-full left-0 mt-2 min-w-[210px] bg-white rounded-md shadow-lux border border-mira-200 py-2">'
                 f'    {sub_html}'
                 f'  </div>'
                 f'</div>'
             )
         else:
-            links.append(f'<a href="{root}{href}" class="{_link_classes(key)}">{label}</a>')
+            links.append(f'<a href="{root}{href}" class="nav-soon-wrap {_link_classes(key)}"{soon_attrs}>{label}{soon_html}</a>')
 
     # Mobile menu — flatten the dropdowns into nested groups for tap navigation.
     mobile_links = []
     for key, label, href, subs in items:
         ac = "bg-mira-900 text-sand-200" if active == key else ""
+        soon_attrs = ' data-soon="true"' if key in SOON_KEYS else ""
+        soon_html = soon_pill if key in SOON_KEYS else ""
         if subs:
             sub_mobile = "".join(
                 f'<a href="{root}{sh}" class="block pl-8 pr-4 py-2 text-xs text-white/70 hover:bg-mira-800 hover:text-white">{slabel}</a>'
                 for slabel, sh in subs
             )
             mobile_links.append(
-                f'<a href="{root}{href}" class="block px-4 py-3 text-sm font-medium text-white/90 hover:bg-mira-800 {ac}">{label}</a>'
+                f'<a href="{root}{href}" class="nav-soon-wrap block px-4 py-3 text-sm font-medium text-white/90 hover:bg-mira-800 {ac}"{soon_attrs}>{label}{soon_html}</a>'
                 f'{sub_mobile}'
             )
         else:
             mobile_links.append(
-                f'<a href="{root}{href}" class="block px-4 py-3 text-sm font-medium text-white/90 hover:bg-mira-800 {ac}">{label}</a>'
+                f'<a href="{root}{href}" class="nav-soon-wrap block px-4 py-3 text-sm font-medium text-white/90 hover:bg-mira-800 {ac}"{soon_attrs}>{label}{soon_html}</a>'
             )
     return dedent(f"""
     <header id="siteheader" class="fixed top-0 inset-x-0 z-40 transition-all">
@@ -332,8 +344,8 @@ def footer(root: str) -> str:
     </div>
 
     {customiser_panel(root)}
-    <script src="{root}assets/js/media-manifest.js?v=20" defer></script>
-    <script src="{root}assets/js/site.js?v=20" defer></script>
+    <script src="{root}assets/js/media-manifest.js?v=21" defer></script>
+    <script src="{root}assets/js/site.js?v=21" defer></script>
     </body></html>
     """)
 
