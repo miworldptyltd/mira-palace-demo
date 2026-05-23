@@ -80,7 +80,8 @@ tailwind.config = {{
   // because GitHub Pages hosts at /mira-palace-demo/ rather than /.
   window.MIRA_ROOT = "{root}";
 </script>
-<link rel="stylesheet" href="{root}assets/css/site.css?v=14" />
+<link rel="stylesheet" href="{root}assets/css/site.css?v=15" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/tabler-icons.min.css" />
 </head>
 <body class="font-body text-ink bg-sand-50 antialiased" data-root="{root}">
 <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:top-3 focus:left-3 bg-mira-800 text-white px-3 py-2 rounded">Skip to content</a>
@@ -184,7 +185,13 @@ def nav(active: str, root: str) -> str:
           <nav class="hidden xl:flex items-center gap-x-3 2xl:gap-x-4 flex-1 justify-end" aria-label="Primary">
             {''.join(links)}
           </nav>
-          <div class="flex items-center gap-3 shrink-0 xl:ml-6">
+          <div class="flex items-center gap-2 shrink-0 xl:ml-6">
+            <div class="hidden md:flex items-center gap-1 mr-1" aria-label="Currency">
+              <button class="nav-cur rounded px-2 py-1 text-[10px] font-semibold tracking-wider text-white/80 transition" data-cur="try">₺&nbsp;TRY</button>
+              <button class="nav-cur rounded px-2 py-1 text-[10px] font-semibold tracking-wider text-white/80 transition" data-cur="eur">€&nbsp;EUR</button>
+              <button class="nav-cur rounded px-2 py-1 text-[10px] font-semibold tracking-wider text-white/80 transition" data-cur="usd">$&nbsp;USD</button>
+            </div>
+            <span class="hidden md:block w-px h-5 bg-white/15" aria-hidden="true"></span>
             <div class="hidden md:flex items-center gap-1.5 mr-1" aria-label="Language">
               <button class="nav-flag rounded overflow-hidden ring-1 ring-white/20 hover:ring-white/60 transition" data-lang="en" aria-label="English" data-active="true"><span class="fi fi-gb block" style="width:24px;height:18px;"></span></button>
               <button class="nav-flag rounded overflow-hidden ring-1 ring-white/20 hover:ring-white/60 transition" data-lang="tr" aria-label="Türkçe"><span class="fi fi-tr block" style="width:24px;height:18px;"></span></button>
@@ -199,9 +206,15 @@ def nav(active: str, root: str) -> str:
         </div>
         <div id="mobile-menu" class="xl:hidden hidden border-t border-white/5 max-h-[80vh] overflow-y-auto">
           {''.join(mobile_links)}
-          <!-- Language flags inside the hamburger menu (phone users) -->
-          <div class="px-4 py-3 border-t border-white/10 flex items-center gap-3 bg-mira-900/40">
-            <span class="text-[10px] uppercase tracking-widest text-white/60">Language</span>
+          <!-- Currency + Language inside the hamburger menu (phone users) -->
+          <div class="px-4 py-3 border-t border-white/10 flex items-center flex-wrap gap-2 bg-mira-900/40">
+            <span class="text-[10px] uppercase tracking-widest text-white/60 w-full">Currency</span>
+            <button class="nav-cur rounded px-3 py-1.5 text-xs font-semibold tracking-wider text-white/80 transition" data-cur="try">₺&nbsp;TRY</button>
+            <button class="nav-cur rounded px-3 py-1.5 text-xs font-semibold tracking-wider text-white/80 transition" data-cur="eur">€&nbsp;EUR</button>
+            <button class="nav-cur rounded px-3 py-1.5 text-xs font-semibold tracking-wider text-white/80 transition" data-cur="usd">$&nbsp;USD</button>
+          </div>
+          <div class="px-4 py-3 border-t border-white/10 flex items-center flex-wrap gap-3 bg-mira-900/40">
+            <span class="text-[10px] uppercase tracking-widest text-white/60 w-full">Language</span>
             <button class="nav-flag rounded overflow-hidden ring-1 ring-white/20 hover:ring-white/60 transition" data-lang="en" aria-label="English" data-active="true"><span class="fi fi-gb block" style="width:28px;height:20px;"></span></button>
             <button class="nav-flag rounded overflow-hidden ring-1 ring-white/20 hover:ring-white/60 transition" data-lang="tr" aria-label="Türkçe"><span class="fi fi-tr block" style="width:28px;height:20px;"></span></button>
             <button class="nav-flag rounded overflow-hidden ring-1 ring-white/20 hover:ring-white/60 transition" data-lang="de" aria-label="Deutsch"><span class="fi fi-de block" style="width:28px;height:20px;"></span></button>
@@ -319,8 +332,8 @@ def footer(root: str) -> str:
     </div>
 
     {customiser_panel(root)}
-    <script src="{root}assets/js/media-manifest.js?v=19" defer></script>
-    <script src="{root}assets/js/site.js?v=19" defer></script>
+    <script src="{root}assets/js/media-manifest.js?v=20" defer></script>
+    <script src="{root}assets/js/site.js?v=20" defer></script>
     </body></html>
     """)
 

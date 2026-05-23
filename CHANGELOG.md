@@ -1,5 +1,9 @@
 # Changelog
 
+## [R006] - 2026-05-23
+
+R006 feat: booking page rebuild - 4-suite tabs + 3-info cards + photo grid + expandable smart add-ons (Airport+flight, Otogar+bus line, Late checkout, Spa packages, Wine) + currency selector (TRY/EUR/USD) + multi-currency pricing + mobile responsive
+
 ## [R005] - 2026-05-23
 
 R005 feat: white MP logo + tight green flag + midnight default + raised left-aligned hero + Specials card + Pools removed + mobile and tablet fit
@@ -101,6 +105,7 @@ First publishable build. Sent to the hotel for owner review.
 - LICENSE is all-rights-reserved proprietary.
 
 [0.1.0]: https://github.com/-/-/releases/tag/v0.1.0
+
 
 
 

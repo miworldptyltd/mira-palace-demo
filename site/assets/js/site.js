@@ -583,4 +583,324 @@
       slides[i].classList.add('active');
     }, ms);
   });
+
+  // =====================================================================
+  // CURRENCY SELECTOR (site-wide nav)
+  // - Auto-detects from browser locale on first visit
+  // - Persists to localStorage as 'mp-currency'
+  // - Emits a 'mp-currency-changed' event so per-page code (booking form)
+  //   can re-render its prices
+  // =====================================================================
+
+  const CUR_SYMBOLS = { try: '₺', eur: '€', usd: '$' };
+  function detectCurrency() {
+    var saved = null;
+    try { saved = localStorage.getItem('mp-currency'); } catch (e) {}
+    if (saved && CUR_SYMBOLS[saved]) return saved;
+    // Auto-detect from browser locale
+    var locale = (navigator.language || 'en-US').toLowerCase();
+    if (locale.indexOf('tr') === 0) return 'try';
+    if (locale.indexOf('en-us') === 0 || locale.indexOf('en-ca') === 0 ||
+        locale.indexOf('en-au') === 0 || locale === 'en') return 'usd';
+    return 'eur';  // safe default for European + everyone else
+  }
+  function applyCurrencyPills(cur) {
+    document.querySelectorAll('.nav-cur').forEach(function (b) {
+      b.dataset.active = (b.dataset.cur === cur) ? 'true' : 'false';
+    });
+  }
+  function setCurrency(cur) {
+    if (!CUR_SYMBOLS[cur]) return;
+    try { localStorage.setItem('mp-currency', cur); } catch (e) {}
+    applyCurrencyPills(cur);
+    document.dispatchEvent(new CustomEvent('mp-currency-changed', { detail: { currency: cur } }));
+  }
+  var initialCur = detectCurrency();
+  applyCurrencyPills(initialCur);
+  document.querySelectorAll('.nav-cur').forEach(function (b) {
+    b.addEventListener('click', function () { setCurrency(b.dataset.cur); });
+  });
+
+  // =====================================================================
+  // BOOKING PAGE (book.html) — interactions
+  // =====================================================================
+
+  const bkDataEl = document.getElementById('bk-data');
+  if (bkDataEl) {
+
+    var BOOK_DATA;
+    try { BOOK_DATA = JSON.parse(bkDataEl.textContent); } catch (e) { BOOK_DATA = null; }
+
+    if (BOOK_DATA) {
+      var currentSuite = 'king';
+      var currentCur = initialCur;
+      var heroPhotos = []; // photos array for currently selected suite
+
+      // --- Price formatting -------------------------------------------------
+      function fmtPrice(prices, cur) {
+        if (!prices) return '';
+        var sym = CUR_SYMBOLS[cur] || CUR_SYMBOLS.eur;
+        var val = prices[cur] != null ? prices[cur] : prices.eur;
+        return sym + val.toLocaleString();
+      }
+      function fmtPlus(prices, cur) {
+        return '+' + fmtPrice(prices, cur);
+      }
+
+      // --- Nights calc ------------------------------------------------------
+      function nightsBetween() {
+        var a = document.getElementById('bk-arrival');
+        var d = document.getElementById('bk-departure');
+        if (!a || !d || !a.value || !d.value) return 7;
+        var ad = new Date(a.value), dd = new Date(d.value);
+        var diff = Math.round((dd - ad) / 86400000);
+        return diff > 0 ? diff : 7;
+      }
+
+      // --- Total calculation ------------------------------------------------
+      function recalcTotal() {
+        var n = nightsBetween();
+        var suitePrices = BOOK_DATA.suites[currentSuite].prices;
+        var roomTotal = { try: suitePrices.try * n, eur: suitePrices.eur * n, usd: suitePrices.usd * n };
+
+        var add = { try: 0, eur: 0, usd: 0 };
+        document.querySelectorAll('.bk-x').forEach(function (box) {
+          var addon = box.dataset.addon;
+          var chk = box.querySelector('.bk-x-chk');
+          if (!chk || !chk.checked) return;
+          // If this add-on has a direct prices attribute, use it
+          if (box.dataset.prices) {
+            try {
+              var p = JSON.parse(box.dataset.prices);
+              add.try += p.try || 0; add.eur += p.eur || 0; add.usd += p.usd || 0;
+            } catch (e) {}
+          }
+          // Plus a selected sub-option (radio with prices)
+          var selOpt = box.querySelector('[data-sel="true"]');
+          if (selOpt) {
+            var pxEl = selOpt.querySelector('[data-prices]') || (selOpt.matches('[data-prices]') ? selOpt : null);
+            if (pxEl) {
+              try {
+                var p2 = JSON.parse(pxEl.dataset.prices);
+                add.try += p2.try || 0; add.eur += p2.eur || 0; add.usd += p2.usd || 0;
+              } catch (e) {}
+            }
+          }
+        });
+
+        var grand = {
+          try: roomTotal.try + add.try,
+          eur: roomTotal.eur + add.eur,
+          usd: roomTotal.usd + add.usd,
+        };
+        var totEl = document.getElementById('bk-total');
+        if (totEl) {
+          totEl.dataset.prices = JSON.stringify(grand);
+          totEl.textContent = fmtPrice(grand, currentCur);
+        }
+        // Update sub-line
+        var subEl = document.getElementById('bk-tot-sub');
+        if (subEl) {
+          var sname = BOOK_DATA.suites[currentSuite].name;
+          var adults = (document.getElementById('bk-adults') || {}).value || '2';
+          var children = (document.getElementById('bk-children') || {}).value || '0';
+          var gtxt = adults + ' adult' + (adults === '1' ? '' : 's');
+          if (parseInt(children, 10) > 0) gtxt += ' + ' + children + ' child' + (children === '1' ? '' : 'ren');
+          subEl.textContent = sname + ' · ' + n + ' night' + (n === 1 ? '' : 's') + ' · ' + gtxt + ' · all-inclusive';
+        }
+      }
+
+      // --- Re-render all prices in active currency --------------------------
+      function refreshAllPrices() {
+        // Suite tab prices
+        document.querySelectorAll('.bk-tab-pr[data-prices]').forEach(function (el) {
+          try {
+            var p = JSON.parse(el.dataset.prices);
+            var prefix = el.textContent.split('· from')[0];  // keep the "sub" prefix
+            el.textContent = prefix + '· from ' + fmtPrice(p, currentCur);
+          } catch (e) {}
+        });
+        // Form header price
+        var fp = document.getElementById('bk-form-price');
+        if (fp && fp.dataset.prices) {
+          try { fp.textContent = fmtPrice(JSON.parse(fp.dataset.prices), currentCur); } catch (e) {}
+        }
+        // Add-on row prices
+        document.querySelectorAll('.bk-x-px[data-prices]').forEach(function (el) {
+          try {
+            var p = JSON.parse(el.dataset.prices);
+            // Preserve the "from" prefix or flat suffix
+            if (el.querySelector('.bk-x-from')) {
+              el.innerHTML = '<span class="bk-x-from">from</span> +' + fmtPrice(p, currentCur);
+            } else if (el.textContent.indexOf('flat') !== -1) {
+              el.textContent = '+' + fmtPrice(p, currentCur) + ' flat';
+            } else {
+              el.textContent = '+' + fmtPrice(p, currentCur);
+            }
+          } catch (e) {}
+        });
+        // Radio sub-option prices
+        document.querySelectorAll('.bk-radio-px[data-prices]').forEach(function (el) {
+          try {
+            var p = JSON.parse(el.dataset.prices);
+            el.textContent = '+' + fmtPrice(p, currentCur);
+          } catch (e) {}
+        });
+        // Spa package prices
+        document.querySelectorAll('.bk-spa-px').forEach(function (el) {
+          var parent = el.closest('.bk-spa-opt');
+          if (!parent || !parent.dataset.prices) return;
+          try {
+            var p = JSON.parse(parent.dataset.prices);
+            el.textContent = '+' + fmtPrice(p, currentCur);
+          } catch (e) {}
+        });
+        // Total
+        recalcTotal();
+      }
+
+      // --- Suite tab swap ---------------------------------------------------
+      function rebuildInfoCards(s) {
+        var info = document.getElementById('bk-info');
+        if (!info) return;
+        function rows(arr) {
+          return arr.map(function (r) {
+            return '<div class="bk-row"><span class="k">' + r[0] + '</span><span class="v">' + r[1] + '</span></div>';
+          }).join('');
+        }
+        function chips(arr) {
+          return arr.map(function (c) {
+            return '<span class="bk-chip"><i class="ti ti-' + c[0] + '" aria-hidden="true"></i>' + c[1] + '</span>';
+          }).join('');
+        }
+        info.innerHTML =
+          '<div class="bk-card"><h3>Basic Details</h3>' + rows(s.basics) + '</div>' +
+          '<div class="bk-card"><h3>Capacity &amp; Beds</h3>' + rows(s.capacity) + '</div>' +
+          '<div class="bk-card bk-card-full"><h3>Features &amp; Amenities</h3><div class="bk-chips">' + chips(s.amenities) + '</div></div>';
+      }
+      function rebuildTiles(s) {
+        var host = document.getElementById('bk-tiles-host');
+        if (!host) return;
+        host.innerHTML = '<div class="bk-tiles">' + s.photos.map(function (p) {
+          return '<button type="button" class="bk-tile" data-photo="' + p.path + '" data-label="' + p.label + '" aria-label="' + p.label + '">' +
+                 '<span class="bk-tile-img" style="background-image:url(\'' + p.path + '\')"></span>' +
+                 '<span class="bk-tile-tag">' + p.label + '</span></button>';
+        }).join('') + '</div>';
+        attachTileClicks(s);
+        var pc = document.getElementById('bk-photo-count');
+        if (pc) pc.textContent = s.photos.length;
+      }
+      function attachTileClicks(s) {
+        heroPhotos = s.photos;
+        document.querySelectorAll('#bk-tiles-host .bk-tile').forEach(function (t) {
+          t.addEventListener('click', function () {
+            document.querySelectorAll('#bk-tiles-host .bk-tile').forEach(function (x) { x.dataset.active = 'false'; });
+            t.dataset.active = 'true';
+            var hero = document.getElementById('bk-hero');
+            var tag = document.getElementById('bk-hero-tag');
+            if (hero) hero.style.backgroundImage = "url('" + t.dataset.photo + "')";
+            if (tag) tag.textContent = t.dataset.label + ' · ' + s.name;
+          });
+        });
+      }
+      function selectSuite(key) {
+        if (!BOOK_DATA.suites[key]) return;
+        currentSuite = key;
+        var s = BOOK_DATA.suites[key];
+        // Tabs
+        document.querySelectorAll('.bk-tab').forEach(function (t) {
+          t.dataset.sel = (t.dataset.suite === key) ? 'true' : 'false';
+        });
+        // Form header
+        var nm = document.getElementById('bk-form-nm');
+        var sub = document.getElementById('bk-form-sub');
+        if (nm) nm.textContent = s.name;
+        if (sub) sub.textContent = s.rooms_label;
+        var fp = document.getElementById('bk-form-price');
+        if (fp) { fp.dataset.prices = JSON.stringify(s.prices); fp.textContent = fmtPrice(s.prices, currentCur); }
+        // Info + tiles
+        rebuildInfoCards(s);
+        rebuildTiles(s);
+        // Hero
+        var hero = document.getElementById('bk-hero');
+        var tag = document.getElementById('bk-hero-tag');
+        if (hero && s.photos[0]) hero.style.backgroundImage = "url('" + s.photos[0].path + "')";
+        if (tag && s.photos[0]) tag.textContent = s.photos[0].label + ' · ' + s.name;
+        // Recalc
+        recalcTotal();
+      }
+
+      // --- Add-on expand/collapse + sub-form handling -----------------------
+      document.querySelectorAll('.bk-x .bk-x-chk').forEach(function (chk) {
+        chk.addEventListener('change', function () {
+          var box = chk.closest('.bk-x');
+          if (!box) return;
+          if (box.dataset.available === 'false') { chk.checked = false; return; }
+          box.dataset.on = chk.checked ? 'true' : 'false';
+          recalcTotal();
+        });
+      });
+
+      // Radio selection inside sub-forms (airport, otogar, spa)
+      document.querySelectorAll('.bk-radio-grp, .bk-spa-grp').forEach(function (grp) {
+        var optClass = grp.classList.contains('bk-spa-grp') ? '.bk-spa-opt' : '.bk-radio-opt';
+        grp.querySelectorAll(optClass).forEach(function (opt) {
+          opt.addEventListener('click', function (e) {
+            e.preventDefault();
+            grp.querySelectorAll(optClass).forEach(function (x) { x.removeAttribute('data-sel'); });
+            opt.setAttribute('data-sel', 'true');
+            recalcTotal();
+          });
+        });
+      });
+
+      // Flight number → airline auto-fill
+      var flightInput = document.querySelector('.bk-flight-input');
+      var airlineOut = document.querySelector('.bk-airline-out');
+      if (flightInput && airlineOut) {
+        flightInput.addEventListener('input', function () {
+          var v = flightInput.value.trim().toUpperCase();
+          if (!v) { airlineOut.value = ''; return; }
+          // Try 3-letter ICAO first, then 2-letter IATA
+          var prefix3 = v.substring(0, 3).replace(/[^A-Z]/g, '');
+          var prefix2 = v.substring(0, 2).replace(/[^A-Z]/g, '');
+          var name = BOOK_DATA.airline_lookup[prefix3] || BOOK_DATA.airline_lookup[prefix2] || '';
+          airlineOut.value = name;
+        });
+      }
+
+      // Tab click
+      document.querySelectorAll('.bk-tab').forEach(function (t) {
+        t.addEventListener('click', function () { selectSuite(t.dataset.suite); });
+      });
+
+      // Date/guest changes → recalc total
+      ['bk-arrival', 'bk-departure', 'bk-adults', 'bk-children'].forEach(function (id) {
+        var el = document.getElementById(id);
+        if (el) el.addEventListener('change', recalcTotal);
+      });
+
+      // React to currency change from anywhere on the page
+      document.addEventListener('mp-currency-changed', function (e) {
+        currentCur = e.detail.currency;
+        refreshAllPrices();
+      });
+
+      // Set sensible default dates (today + 7) only if empty
+      var arrEl = document.getElementById('bk-arrival');
+      var depEl = document.getElementById('bk-departure');
+      if (arrEl && !arrEl.value) {
+        var today = new Date();
+        var nextWeek = new Date();
+        nextWeek.setDate(today.getDate() + 7);
+        arrEl.value = today.toISOString().substring(0, 10);
+        depEl.value = nextWeek.toISOString().substring(0, 10);
+      }
+
+      // Initial wire-up
+      attachTileClicks(BOOK_DATA.suites[currentSuite]);
+      refreshAllPrices();
+    }
+  }
+
 })();
