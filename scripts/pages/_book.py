@@ -537,12 +537,6 @@ def book(root: str) -> str:
         _addon_wine(),
     ])
 
-    initial_total_prices = {
-        "try": s["prices"]["try"] * 7,
-        "eur": s["prices"]["eur"] * 7,
-        "usd": s["prices"]["usd"] * 7,
-    }
-
     data_blob = _data_json(root)
 
     return f"""
@@ -550,8 +544,8 @@ def book(root: str) -> str:
 
       <!-- Title bar -->
       <div class="bk-title">
-        <h1>Book your stay</h1>
-        <p class="bk-title-note">Direct rates always · we confirm availability within the hour · all prices shown in your selected currency</p>
+        <h1>Send an enquiry</h1>
+        <p class="bk-title-note">No payment, no commitment · we confirm availability and a direct quote within the hour · prices on this page are indicative until we confirm</p>
       </div>
 
       <!-- Suite tabs (full width) -->
@@ -615,16 +609,8 @@ def book(root: str) -> str:
             {addons_html}
           </div>
 
-          <div class="bk-tot">
-            <div class="bk-tot-rows">
-              <span class="bk-tot-lbl">Estimated total</span>
-              <span class="bk-tot-num" id="bk-total" data-prices='{json.dumps(initial_total_prices)}'>{_fmt_price(initial_total_prices)}</span>
-            </div>
-            <span class="bk-tot-sub" id="bk-tot-sub">{s['name']} · 7 nights · 2 guests · all-inclusive</span>
-          </div>
-
-          <button type="submit" class="bk-go">Request booking →</button>
-          <p class="bk-foot">Payment by card or bank transfer after we confirm · all prices admin-managed</p>
+          <button type="submit" class="bk-go">Send enquiry →</button>
+          <p class="bk-foot">This is an enquiry, not a confirmed booking. No payment now. We reply with availability and a direct rate within the hour — usually faster.</p>
 
         </form>
 

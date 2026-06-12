@@ -1,3 +1,7 @@
+## [R014] - 2026-06-12
+
+R014 feat: booking + spa-book reshaped as enquiry forms - removed Estimated total card - softened hero copy - submit button now Send enquiry - footer note clarifies no payment / no commitment - i18n updated in all 4 languages
+
 ## [R013] - 2026-05-23
 
 R013 feat: rooms_index + Standard + Deluxe + Family + King Suite pages fully translated EN TR DE RU contextually - ~70 new keys per language including 16 shared amenities and 4x3 paragraph room stories
@@ -133,6 +137,7 @@ First publishable build. Sent to the hotel for owner review.
 - LICENSE is all-rights-reserved proprietary.
 
 [0.1.0]: https://github.com/-/-/releases/tag/v0.1.0
+
 
 
 

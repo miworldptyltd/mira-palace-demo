@@ -80,7 +80,7 @@ tailwind.config = {{
   // because GitHub Pages hosts at /mira-palace-demo/ rather than /.
   window.MIRA_ROOT = "{root}";
 </script>
-<link rel="stylesheet" href="{root}assets/css/site.css?v=22" />
+<link rel="stylesheet" href="{root}assets/css/site.css?v=23" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/tabler-icons.min.css" />
 </head>
 <body class="font-body text-ink bg-sand-50 antialiased" data-root="{root}">
@@ -400,10 +400,10 @@ def footer(root: str) -> str:
     </div>
 
     {customiser_panel(root)}
-    <script src="{root}assets/js/media-manifest.js?v=27" defer></script>
-    <script src="{root}assets/js/search-index.js?v=27" defer></script>
-    <script src="{root}assets/js/i18n.js?v=27" defer></script>
-    <script src="{root}assets/js/site.js?v=27" defer></script>
+    <script src="{root}assets/js/media-manifest.js?v=28" defer></script>
+    <script src="{root}assets/js/search-index.js?v=28" defer></script>
+    <script src="{root}assets/js/i18n.js?v=28" defer></script>
+    <script src="{root}assets/js/site.js?v=28" defer></script>
     </body></html>
     """)
 

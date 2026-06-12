@@ -859,26 +859,11 @@
           }
         });
 
-        var grand = {
-          try: roomTotal.try + add.try,
-          eur: roomTotal.eur + add.eur,
-          usd: roomTotal.usd + add.usd,
-        };
-        var totEl = document.getElementById('bk-total');
-        if (totEl) {
-          totEl.dataset.prices = JSON.stringify(grand);
-          totEl.textContent = fmtPrice(grand, currentCur);
-        }
-        // Update sub-line
-        var subEl = document.getElementById('bk-tot-sub');
-        if (subEl) {
-          var sname = BOOK_DATA.suites[currentSuite].name;
-          var adults = (document.getElementById('bk-adults') || {}).value || '2';
-          var children = (document.getElementById('bk-children') || {}).value || '0';
-          var gtxt = adults + ' adult' + (adults === '1' ? '' : 's');
-          if (parseInt(children, 10) > 0) gtxt += ' + ' + children + ' child' + (children === '1' ? '' : 'ren');
-          subEl.textContent = sname + ' · ' + n + ' night' + (n === 1 ? '' : 's') + ' · ' + gtxt + ' · all-inclusive';
-        }
+        // R014: total card removed from the page; this function now only
+        // updates add-on selected-state visuals (radios, prices, etc.) via
+        // the data-attrs each row already exposes. Kept the function in
+        // place so other handlers (date change, suite swap, etc.) don't break.
+        void roomTotal; void add; void n;
       }
 
       // --- Re-render all prices in active currency --------------------------
@@ -1097,20 +1082,8 @@
       }
 
       function spRecalcTotal() {
-        var p = SP_DATA.packages[spCurrentPkg];
-        if (!p) return;
-        var peopleEl = document.getElementById('sp-people');
-        var n = peopleEl ? parseInt(peopleEl.value, 10) || 1 : 1;
-        var grand = { try: p.prices.try * n, eur: p.prices.eur * n, usd: p.prices.usd * n };
-        var totEl = document.getElementById('sp-total');
-        if (totEl) {
-          totEl.dataset.prices = JSON.stringify(grand);
-          totEl.textContent = spFmt(grand, spCurrentCur);
-        }
-        var subEl = document.getElementById('sp-tot-sub');
-        if (subEl) {
-          subEl.textContent = p.name + ' · ' + n + ' person' + (n === 1 ? '' : 's') + ' · ' + p.duration_min + ' min';
-        }
+        // R014: spa total card removed from the page. Function kept as a no-op
+        // so other handlers (tab swap, currency change) continue to call it.
       }
 
       function spRefreshAllPrices() {

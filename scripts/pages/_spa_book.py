@@ -216,8 +216,8 @@ def spa_book(root: str) -> str:
     <div class="bk-page sp-page">
 
       <div class="bk-title">
-        <h1>Book a spa session</h1>
-        <p class="bk-title-note">Open daily 10:00–19:00 · free shuttle from the hotel · packages designed for solo or couples</p>
+        <h1>Spa enquiry</h1>
+        <p class="bk-title-note">Open daily 10:00–19:00 · free shuttle from the hotel · we confirm availability for your chosen slot within the hour, no payment now</p>
       </div>
 
       <div class="bk-tabs" id="sp-tabs" role="tablist" aria-label="Spa package">
@@ -271,16 +271,8 @@ def spa_book(root: str) -> str:
           <div class="bk-fld"><label for="sp-room">Room number <span class="bk-hint">(if a hotel guest)</span></label><input type="text" id="sp-room" name="room" placeholder="A6 / B7 / C12..." /></div>
           <div class="bk-fld"><label for="sp-notes">Notes (optional)</label><input type="text" id="sp-notes" name="notes" placeholder="Pregnancy, injuries, allergies, preferred therapist gender..." /></div>
 
-          <div class="bk-tot">
-            <div class="bk-tot-rows">
-              <span class="bk-tot-lbl">Estimated total</span>
-              <span class="bk-tot-num" id="sp-total" data-prices='{json.dumps(p["prices"])}'>{_fmt(p["prices"])}</span>
-            </div>
-            <span class="bk-tot-sub" id="sp-tot-sub">{p['name']} · 1 person · {p['duration_min']} min</span>
-          </div>
-
-          <button type="submit" class="bk-go">Request session →</button>
-          <p class="bk-foot">We confirm within the hour during spa hours · free shuttle from the hotel · all prices admin-managed</p>
+          <button type="submit" class="bk-go">Send enquiry →</button>
+          <p class="bk-foot">This is an enquiry, not a confirmed booking. No payment now. We reply with availability for your chosen slot within the hour during spa hours.</p>
 
         </form>
 

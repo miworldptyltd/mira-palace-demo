@@ -30,7 +30,7 @@ window.MIRA_SEARCH_INDEX = [
     "title": "Book a stay · Mira Palace",
     "description": "Direct-booking enquiry form for Mira Palace — confirm your dates, suite preference, and any specific requirements.",
     "headings": [
-      "Book your stay",
+      "Send an enquiry",
       "Enquiry sent.",
       "Basic Details",
       "Capacity Beds",
@@ -331,7 +331,7 @@ window.MIRA_SEARCH_INDEX = [
     "title": "Book a spa session · Mira Palace",
     "description": "Book a spa session at Mira Palace — Classic, Relax or Aromatherapy package. Hammam, sauna, steam room and treatment included. Open to hotel guests and visitors.",
     "headings": [
-      "Book a spa session",
+      "Spa enquiry",
       "Request sent.",
       "Included in this package",
       "What to bring",
