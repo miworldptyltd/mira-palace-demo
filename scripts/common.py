@@ -10,14 +10,29 @@ SITE_META = {
     "brand": "Mira Palace",
     "brand_full": "Mira Palace — Side, Antalya",
     "tagline": "A boutique Turkish Riviera escape",
+    # Mobile = WhatsApp number (per R015 contact rules)
     "phone_display": "+90 534 898 84 05",
     "phone_tel": "+905348988405",
-    "email": "info@sidemirapalace.com",  # mocked canonical — owner to confirm
+    # Landline pulled from the existing live sidemirapalace.com site (R015).
+    # Shown alongside mobile in the footer and on any contact-list surface.
+    "phone_landline_display": "+90 242 642 09 13",
+    "phone_landline_tel": "+902426420913",
+    # Demo phase: routes to working test inbox so enquiry forms actually
+    # land somewhere. Production cutover (R021) flips this single line to
+    # `info@mirapalace.com` (the hotel's real address per the live site).
+    "email": "info@miworld.tech",  # test email — production = info@mirapalace.com
     "address_line1": "Evrenseki Mahallesi, Kömürcüler Küme Evleri No:96",
     "address_line2": "Manavgat / Antalya, Türkiye",
+    # Geo coordinates for Hotel JSON-LD (Google rich result)
+    "geo_lat": "36.7748",
+    "geo_lon": "31.3888",
+    "country": "TR",
+    "postal_code": "07600",
+    "city": "Manavgat",
+    "region": "Antalya",
     "google_maps": "https://maps.app.goo.gl/psUsJCW22broH4nQ8",
     "whatsapp": "https://wa.me/905348988405",
-    "base_url": "https://mi-world.github.io/mira-palace-demo",  # placeholder; update when repo created
+    "base_url": "https://miworldptyltd.github.io/mira-palace-demo",  # demo phase — flips to https://sidemirapalace.com at R021 cutover
     # Mi World owns the source tree, design, copy and assets of this
     # demonstration site. Mira Palace is the eventual customer — until they
     # accept and acquire the work, the copyright stays with Mi World.
@@ -41,12 +56,30 @@ HEAD = """<!doctype html>
 <title>{title}</title>
 <meta name="description" content="{description}" />
 <meta name="robots" content="noindex,nofollow" />
+<link rel="canonical" href="{canonical}" />
+<!-- R015: layered security via meta tags (HSTS / X-Frame-Options need HTTP headers, set at Cloudflare proxy in R021) -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob: https:; img-src 'self' data: blob: https:; font-src 'self' https://fonts.gstatic.com data:; style-src 'self' 'unsafe-inline' https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https:; frame-src 'self' https://www.google.com https://challenges.cloudflare.com; connect-src 'self' https:; object-src 'none'; base-uri 'self';" />
+<meta name="referrer" content="strict-origin-when-cross-origin" />
+<meta http-equiv="X-Content-Type-Options" content="nosniff" />
+<meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=(), payment=()" />
+<!-- R015: rich Open Graph + Twitter Card for proper link previews on shares -->
+<meta property="og:site_name" content="Mira Palace" />
 <meta property="og:title" content="{title}" />
 <meta property="og:description" content="{description}" />
 <meta property="og:type" content="website" />
 <meta property="og:image" content="{og_image}" />
+<meta property="og:image:width" content="1600" />
+<meta property="og:image:height" content="900" />
+<meta property="og:image:alt" content="Mira Palace — Side, Antalya · Turkish Riviera boutique hotel" />
 <meta property="og:url" content="{canonical}" />
+<meta property="og:locale" content="en_GB" />
+<meta property="og:locale:alternate" content="tr_TR" />
+<meta property="og:locale:alternate" content="de_DE" />
+<meta property="og:locale:alternate" content="ru_RU" />
 <meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="{title}" />
+<meta name="twitter:description" content="{description}" />
+<meta name="twitter:image" content="{og_image}" />
 <link rel="icon" type="image/svg+xml" href="{root}assets/img/favicon.svg" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -80,8 +113,10 @@ tailwind.config = {{
   // because GitHub Pages hosts at /mira-palace-demo/ rather than /.
   window.MIRA_ROOT = "{root}";
 </script>
-<link rel="stylesheet" href="{root}assets/css/site.css?v=23" />
+<link rel="stylesheet" href="{root}assets/css/site.css?v=24" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/tabler-icons.min.css" />
+<!-- R015: Hotel structured data — feeds Google's rich result (hotel card with star rating, location, photos, contact, amenities). One source of truth lives in render_page so every page carries it. -->
+<script type="application/ld+json">{hotel_jsonld}</script>
 </head>
 <body class="font-body text-ink bg-sand-50 antialiased" data-root="{root}">
 <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:top-3 focus:left-3 bg-mira-800 text-white px-3 py-2 rounded">Skip to content</a>
@@ -319,7 +354,8 @@ def footer(root: str) -> str:
           <h4 class="font-display text-lg text-white" data-i18n="footer.contact">Contact</h4>
           <address class="mt-4 not-italic text-sm space-y-2">
             <div>{m['address_line1']}<br/>{m['address_line2']}</div>
-            <div><a class="hover:text-sand-300" href="tel:{m['phone_tel']}">{m['phone_display']}</a></div>
+            <div><a class="hover:text-sand-300" href="tel:{m['phone_tel']}">{m['phone_display']}</a> <span class="text-white/40 text-[10px] uppercase tracking-widest">Mobile / WhatsApp</span></div>
+            <div><a class="hover:text-sand-300" href="tel:{m['phone_landline_tel']}">{m['phone_landline_display']}</a> <span class="text-white/40 text-[10px] uppercase tracking-widest">Landline</span></div>
             <div><a class="hover:text-sand-300" href="mailto:{m['email']}">{m['email']}</a></div>
             <div><a class="hover:text-sand-300" href="{m['whatsapp']}" rel="noopener">WhatsApp</a></div>
           </address>
@@ -400,10 +436,10 @@ def footer(root: str) -> str:
     </div>
 
     {customiser_panel(root)}
-    <script src="{root}assets/js/media-manifest.js?v=28" defer></script>
-    <script src="{root}assets/js/search-index.js?v=28" defer></script>
-    <script src="{root}assets/js/i18n.js?v=28" defer></script>
-    <script src="{root}assets/js/site.js?v=28" defer></script>
+    <script src="{root}assets/js/media-manifest.js?v=29" defer></script>
+    <script src="{root}assets/js/search-index.js?v=29" defer></script>
+    <script src="{root}assets/js/i18n.js?v=29" defer></script>
+    <script src="{root}assets/js/site.js?v=29" defer></script>
     </body></html>
     """)
 
@@ -804,6 +840,59 @@ def specials_card(root: str, items=None) -> str:
     """)
 
 
+def _hotel_jsonld(page_url: str) -> str:
+    """Hotel schema.org JSON-LD (R015) — feeds Google's hotel rich result.
+    Same blob on every page (Google expects organisation-level data to be
+    consistent). When admin pricing comes online (R022+) we extend this to
+    include offers/aggregateRating with real data."""
+    m = SITE_META
+    blob = {
+        "@context": "https://schema.org",
+        "@type": "Hotel",
+        "name": m["brand"],
+        "alternateName": m["brand_full"],
+        "description": m["tagline"] + ". Thirty-four suites, 600 metres from the Mediterranean, on the Turkish Riviera.",
+        "url": m["base_url"].rstrip("/") + "/",
+        "logo": m["base_url"].rstrip("/") + "/assets/img/mp-monogram-gold.png",
+        "image": m["og_image"],
+        "telephone": m["phone_display"],
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": m["address_line1"],
+            "addressLocality": m["city"],
+            "addressRegion": m["region"],
+            "postalCode": m["postal_code"],
+            "addressCountry": m["country"],
+        },
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": m["geo_lat"],
+            "longitude": m["geo_lon"],
+        },
+        "starRating": {"@type": "Rating", "ratingValue": "4"},
+        "priceRange": "€€€",
+        "numberOfRooms": 34,
+        "petsAllowed": False,
+        "smokingAllowed": False,
+        "amenityFeature": [
+            {"@type": "LocationFeatureSpecification", "name": "Free Wi-Fi", "value": True},
+            {"@type": "LocationFeatureSpecification", "name": "Swimming pool", "value": True},
+            {"@type": "LocationFeatureSpecification", "name": "Private beach", "value": True},
+            {"@type": "LocationFeatureSpecification", "name": "Spa", "value": True},
+            {"@type": "LocationFeatureSpecification", "name": "Turkish hammam", "value": True},
+            {"@type": "LocationFeatureSpecification", "name": "All-inclusive", "value": True},
+            {"@type": "LocationFeatureSpecification", "name": "Free parking", "value": True},
+            {"@type": "LocationFeatureSpecification", "name": "Airport transfer", "value": True},
+        ],
+        "checkinTime": "14:00",
+        "checkoutTime": "12:00",
+        "sameAs": [
+            m["base_url"].rstrip("/") + "/",
+        ],
+    }
+    return json.dumps(blob, ensure_ascii=False, indent=2)
+
+
 def render_page(page: dict) -> str:
     depth = page["path"].count("/")
     root = "../" * depth
@@ -814,6 +903,7 @@ def render_page(page: dict) -> str:
         og_image=SITE_META["og_image"],
         canonical=canonical,
         root=root,
+        hotel_jsonld=_hotel_jsonld(canonical),
     )
     body = page["body"](root) if callable(page["body"]) else page["body"]
     # R011: header heights — mobile is just the main 64px row (utility strip

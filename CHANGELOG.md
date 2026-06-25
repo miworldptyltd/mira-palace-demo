@@ -1,3 +1,7 @@
+## [R015] - 2026-06-25
+
+R015 feat: SEO foundations - Hotel JSON-LD schema on every page (Google rich results ready) - expanded Open Graph + Twitter Card with locale alternates - CSP + Referrer-Policy + Permissions-Policy meta - landline added to footer and Contact - test email swap so enquiry forms reach miworld.tech inbox
+
 ## [R014] - 2026-06-12
 
 R014 feat: booking + spa-book reshaped as enquiry forms - removed Estimated total card - softened hero copy - submit button now Send enquiry - footer note clarifies no payment / no commitment - i18n updated in all 4 languages
@@ -137,6 +141,7 @@ First publishable build. Sent to the hotel for owner review.
 - LICENSE is all-rights-reserved proprietary.
 
 [0.1.0]: https://github.com/-/-/releases/tag/v0.1.0
+
 
 
 

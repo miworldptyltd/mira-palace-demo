@@ -57,9 +57,13 @@ def contact(root: str) -> str:
           <p class="uppercase tracking-[0.22em] text-mira-600 text-xs font-semibold" data-i18n="contact.reach.eyebrow">Reach us</p>
           <h3 class="font-display text-2xl sm:text-3xl text-mira-900 leading-tight" data-i18n="contact.reach.h3">Four ways to write.</h3>
           <ul class="mt-6 space-y-4 text-mira-800">
-            <li><div class="text-xs uppercase tracking-widest text-mira-500" data-i18n="contact.label.phone">Phone</div><a href="tel:{m['phone_tel']}" class="font-display text-2xl hover:text-sand-600">{m['phone_display']}</a></li>
+            <li>
+              <div class="text-xs uppercase tracking-widest text-mira-500" data-i18n="contact.label.phone">Phone</div>
+              <a href="tel:{m['phone_tel']}" class="font-display text-2xl hover:text-sand-600 block">{m['phone_display']} <span class="text-sm text-mira-500 font-body">— mobile / WhatsApp</span></a>
+              <a href="tel:{m['phone_landline_tel']}" class="font-display text-2xl hover:text-sand-600 block mt-1">{m['phone_landline_display']} <span class="text-sm text-mira-500 font-body">— landline</span></a>
+            </li>
             <li><div class="text-xs uppercase tracking-widest text-mira-500" data-i18n="contact.label.email">Email</div><a href="mailto:{m['email']}" class="font-display text-2xl hover:text-sand-600">{m['email']}</a></li>
-            <li><div class="text-xs uppercase tracking-widest text-mira-500" data-i18n="contact.label.whatsapp">WhatsApp</div><a href="{m['whatsapp']}" class="font-display text-2xl hover:text-sand-600">+90 534 898 84 05</a></li>
+            <li><div class="text-xs uppercase tracking-widest text-mira-500" data-i18n="contact.label.whatsapp">WhatsApp</div><a href="{m['whatsapp']}" class="font-display text-2xl hover:text-sand-600">{m['phone_display']}</a></li>
             <li><div class="text-xs uppercase tracking-widest text-mira-500" data-i18n="contact.label.address">Address</div><address class="not-italic">{m['address_line1']}<br/>{m['address_line2']}</address></li>
           </ul>
           <div class="mt-6">
