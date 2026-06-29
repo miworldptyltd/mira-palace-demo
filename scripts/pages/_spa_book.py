@@ -226,8 +226,16 @@ def spa_book(root: str) -> str:
 
       <div class="bk-cols">
 
+        <!-- R016: form posts intercepted by site.js submitEnquiry() handler. -->
         <form class="bk-form" id="sp-form" novalidate
-              onsubmit="event.preventDefault(); document.getElementById('sp-thanks').classList.remove('bk-hidden'); this.style.display='none';">
+              data-enquiry-kind="spa"
+              action="https://mira-palace-enquiry.apps-224.workers.dev"
+              method="POST">
+
+          <!-- R016: honeypot -->
+          <div style="position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;overflow:hidden" aria-hidden="true">
+            <label>If you are human, leave this empty: <input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
+          </div>
 
           <div class="bk-form-head">
             <div>
@@ -271,10 +279,25 @@ def spa_book(root: str) -> str:
           <div class="bk-fld"><label for="sp-room">Room number <span class="bk-hint">(if a hotel guest)</span></label><input type="text" id="sp-room" name="room" placeholder="A6 / B7 / C12..." /></div>
           <div class="bk-fld"><label for="sp-notes">Notes (optional)</label><input type="text" id="sp-notes" name="notes" placeholder="Pregnancy, injuries, allergies, preferred therapist gender..." /></div>
 
+          <!-- R016: Cloudflare Turnstile bot-check -->
+          <div class="bk-turnstile-wrap">
+            <div class="cf-turnstile" data-sitekey="1x00000000000000000000AA" data-callback="bkTurnstileOK" data-theme="light"></div>
+          </div>
+
           <button type="submit" class="bk-go">Send enquiry →</button>
           <p class="bk-foot">This is an enquiry, not a confirmed booking. No payment now. We reply with availability for your chosen slot within the hour during spa hours.</p>
 
         </form>
+
+        <!-- R016: email preview panel -->
+        <div id="sp-email-preview" class="bk-hidden bk-email-preview">
+          <div class="bk-email-preview-head">
+            <span class="bk-email-preview-tag">DEMO PREVIEW</span>
+            <h3>What the spa staff inbox will receive</h3>
+            <p class="bk-email-preview-note">This is the formatted email that Resend will deliver once the email wiring is connected. During the stub phase, the form does not actually send — it shows you this preview so you can verify the format.</p>
+          </div>
+          <pre id="sp-email-preview-body" class="bk-email-preview-body"></pre>
+        </div>
 
         <div id="sp-thanks" class="bk-hidden bk-thanks">
           <div class="bk-thanks-tick">

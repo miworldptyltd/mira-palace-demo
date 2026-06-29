@@ -557,8 +557,19 @@ def book(root: str) -> str:
       <div class="bk-cols">
 
         <!-- LEFT: form -->
+        <!-- R016: form posts intercepted by site.js submitEnquiry() handler.
+             Action URL becomes real Cloudflare Worker once user confirms wiring;
+             during stub phase the handler just shows the email preview panel. -->
         <form class="bk-form" id="bk-form" novalidate
-              onsubmit="event.preventDefault(); document.getElementById('bk-thanks').classList.remove('bk-hidden'); this.style.display='none';">
+              data-enquiry-kind="room"
+              action="https://mira-palace-enquiry.apps-224.workers.dev"
+              method="POST">
+
+          <!-- R016: honeypot — hidden field bots fill in but humans don't.
+               Submit handler rejects the form silently if this is non-empty. -->
+          <div style="position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;overflow:hidden" aria-hidden="true">
+            <label>If you are human, leave this empty: <input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
+          </div>
 
           <div class="bk-form-head">
             <div>
@@ -609,10 +620,29 @@ def book(root: str) -> str:
             {addons_html}
           </div>
 
+          <!-- R016: Cloudflare Turnstile bot-check. Test sitekey "always pass"
+               during stub phase — swaps to real sitekey once user creates the
+               Turnstile widget in Cloudflare. -->
+          <div class="bk-turnstile-wrap">
+            <div class="cf-turnstile" data-sitekey="1x00000000000000000000AA" data-callback="bkTurnstileOK" data-theme="light"></div>
+          </div>
+
           <button type="submit" class="bk-go">Send enquiry →</button>
           <p class="bk-foot">This is an enquiry, not a confirmed booking. No payment now. We reply with availability and a direct rate within the hour — usually faster.</p>
 
         </form>
+
+        <!-- R016: email preview panel — shows on submit, displays the staff
+             email exactly as Resend will deliver it. Visible during stub phase
+             so user can verify format before real email wiring goes live. -->
+        <div id="bk-email-preview" class="bk-hidden bk-email-preview">
+          <div class="bk-email-preview-head">
+            <span class="bk-email-preview-tag">DEMO PREVIEW</span>
+            <h3>What the hotel staff inbox will receive</h3>
+            <p class="bk-email-preview-note">This is the formatted email that Resend will deliver to the hotel once the email wiring is connected. During the stub phase, the form does not actually send — it shows you this preview so you can verify the format.</p>
+          </div>
+          <pre id="bk-email-preview-body" class="bk-email-preview-body"></pre>
+        </div>
 
         <!-- Confirmation panel (hidden until submit) -->
         <div id="bk-thanks" class="bk-hidden bk-thanks">

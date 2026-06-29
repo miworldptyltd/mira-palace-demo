@@ -1,3 +1,7 @@
+## [R016] - 2026-06-29
+
+R016 feat: enquiry form stubs + security harness - Turnstile widget (test sitekey) on booking + spa-book - honeypot bot trap - input sanitization - submit handler builds formatted staff email - DEMO preview panel shows what staff will receive once Resend is live - real Worker POST commented and ready to wire later
+
 ## [R015] - 2026-06-25
 
 R015 feat: SEO foundations - Hotel JSON-LD schema on every page (Google rich results ready) - expanded Open Graph + Twitter Card with locale alternates - CSP + Referrer-Policy + Permissions-Policy meta - landline added to footer and Contact - test email swap so enquiry forms reach miworld.tech inbox
@@ -141,6 +145,7 @@ First publishable build. Sent to the hotel for owner review.
 - LICENSE is all-rights-reserved proprietary.
 
 [0.1.0]: https://github.com/-/-/releases/tag/v0.1.0
+
 
 
 

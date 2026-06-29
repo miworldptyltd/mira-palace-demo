@@ -1204,4 +1204,209 @@
     }
   }
 
+  // =====================================================================
+  // ENQUIRY FORM SUBMIT HANDLER (R016 — stub phase)
+  // - Intercepts form submit on book.html and spa-book.html
+  // - Validates honeypot (silent reject if filled)
+  // - Validates Turnstile token (test sitekey "always pass" during stub)
+  // - Builds the formatted staff-email payload
+  // - Shows the email preview panel (DEMO mode)
+  // - Console-logs the payload for inspection
+  // - Will POST to Cloudflare Worker once real wiring lands (commented below)
+  // =====================================================================
+
+  // Turnstile callback — Cloudflare calls this when the widget gets a token
+  window.bkTurnstileOK = function (token) {
+    var btns = document.querySelectorAll('.bk-go');
+    btns.forEach(function (b) { b.dataset.turnstileOk = 'true'; });
+  };
+
+  function sanitize(s) {
+    if (s == null) return '';
+    return String(s).slice(0, 2000)
+      .replace(/[<>]/g, function (c) { return c === '<' ? '&lt;' : '&gt;'; });
+  }
+  function pad2(n) { return n < 10 ? '0' + n : '' + n; }
+  function nowIso() {
+    var d = new Date();
+    return d.getUTCFullYear() + '-' + pad2(d.getUTCMonth()+1) + '-' + pad2(d.getUTCDate()) +
+           ' ' + pad2(d.getUTCHours()) + ':' + pad2(d.getUTCMinutes()) + ':' + pad2(d.getUTCSeconds()) + ' UTC';
+  }
+  function fmtDate(s) {
+    if (!s) return '(not set)';
+    try {
+      var d = new Date(s + 'T00:00:00');
+      var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+      var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+      return days[d.getDay()] + ' ' + d.getDate() + ' ' + months[d.getMonth()] + ' ' + d.getFullYear();
+    } catch (e) { return s; }
+  }
+
+  function buildRoomEmail(form) {
+    var d = function (id) { var el = document.getElementById(id); return el ? sanitize(el.value) : ''; };
+    var arrival = d('bk-arrival'), departure = d('bk-departure');
+    var nights = 0;
+    if (arrival && departure) {
+      var a = new Date(arrival), b = new Date(departure);
+      nights = Math.round((b - a) / 86400000);
+    }
+    var suite = (document.querySelector('.bk-tab[data-sel="true"] .bk-tab-nm') || {}).textContent || 'Standard';
+    var name = d('bk-name') || '(no name)';
+    var email = d('bk-email') || '(no email)';
+    var phone = d('bk-phone') || '(no phone)';
+    var notes = d('bk-notes');
+    var adults = d('bk-adults') || '2';
+    var children = d('bk-children') || '0';
+
+    // Selected add-ons
+    var addons = [];
+    document.querySelectorAll('.bk-x').forEach(function (box) {
+      var chk = box.querySelector('.bk-x-chk');
+      if (!chk || !chk.checked) return;
+      var name = (box.querySelector('.bk-x-ttl') || {}).textContent || '';
+      var sel = box.querySelector('[data-sel="true"]');
+      var selText = sel ? ((sel.querySelector('.bk-radio-lbl') || sel.querySelector('.bk-spa-name') || sel).textContent || '').trim() : '';
+      var flight = (box.querySelector('.bk-flight-input') || {}).value || '';
+      var airline = (box.querySelector('.bk-airline-out') || {}).value || '';
+      var line = '  ✓ ' + sanitize(name);
+      if (selText) line += '\n      Choice: ' + sanitize(selText);
+      if (flight) line += '\n      Flight: ' + sanitize(flight) + (airline ? ' (' + sanitize(airline) + ')' : '');
+      addons.push(line);
+    });
+
+    var subject = 'Mira Palace enquiry · ' + suite + ' · ' + (arrival || '?') + '–' + (departure || '?') + ' · ' + name;
+    var body = [
+      'A new enquiry has arrived from the website.',
+      'This is a guest request, NOT a confirmed booking. Please reply within the hour.',
+      '',
+      '────── GUEST ──────',
+      'Name:   ' + name,
+      'Email:  ' + email,
+      'Phone:  ' + phone,
+      '',
+      '────── DATES ──────',
+      'Arrival:    ' + fmtDate(arrival),
+      'Departure:  ' + fmtDate(departure),
+      'Nights:     ' + (nights || '(?)'),
+      '',
+      '────── PARTY ──────',
+      'Adults:    ' + adults,
+      'Children:  ' + children,
+      '',
+      '────── SUITE PREFERENCE ──────',
+      suite,
+      '',
+      '────── ADD-ONS REQUESTED ──────',
+      addons.length ? addons.join('\n') : '(none selected)',
+      '',
+      '────── GUEST NOTES ──────',
+      notes ? '"' + notes + '"' : '(no notes)',
+      '',
+      '──────────────────────────────────',
+      'Sent from: ' + window.location.href,
+      'Submitted: ' + nowIso(),
+    ].join('\n');
+
+    return { subject: subject, body: body, to: 'info@miworld.tech (test inbox)', from: 'Mira Palace Bookings <bookings@miworld.tech>' };
+  }
+
+  function buildSpaEmail(form) {
+    var d = function (id) { var el = document.getElementById(id); return el ? sanitize(el.value) : ''; };
+    var pkg = (document.querySelector('.bk-tab[data-sel="true"] .bk-tab-nm') || {}).textContent || 'Classic';
+    var name = d('sp-name') || '(no name)';
+    var email = d('sp-email') || '(no email)';
+    var phone = d('sp-phone') || '(no phone)';
+    var notes = d('sp-notes');
+    var date = d('sp-date');
+    var time = d('sp-time') || '(not chosen)';
+    var people = d('sp-people') || '1';
+    var guest = d('sp-guest') || 'yes';
+    var room = d('sp-room');
+
+    var subject = 'Mira Palace SPA enquiry · ' + pkg + ' · ' + (date || '?') + ' ' + time + ' · ' + name;
+    var body = [
+      'A new spa enquiry has arrived from the website.',
+      'This is a guest request, NOT a confirmed booking. Please reply within the hour.',
+      '',
+      '────── GUEST ──────',
+      'Name:   ' + name,
+      'Email:  ' + email,
+      'Phone:  ' + phone,
+      'Status: ' + (guest === 'yes' ? 'Hotel guest' + (room ? ' (room ' + room + ')' : '') : 'External visitor'),
+      '',
+      '────── WHEN ──────',
+      'Date:        ' + fmtDate(date),
+      'Time slot:   ' + time,
+      'Party size:  ' + people + ' person' + (people === '1' ? '' : 's'),
+      '',
+      '────── PACKAGE ──────',
+      pkg,
+      '',
+      '────── GUEST NOTES ──────',
+      notes ? '"' + notes + '"' : '(no notes)',
+      '',
+      '──────────────────────────────────',
+      'Sent from: ' + window.location.href,
+      'Submitted: ' + nowIso(),
+    ].join('\n');
+
+    return { subject: subject, body: body, to: 'info@miworld.tech (test inbox)', from: 'Mira Palace Bookings <bookings@miworld.tech>' };
+  }
+
+  function handleEnquirySubmit(form) {
+    // Honeypot — silently reject if filled
+    var honey = form.querySelector('input[name="website"]');
+    if (honey && honey.value) {
+      console.warn('[enquiry] honeypot triggered — submission silently dropped');
+      return;
+    }
+    // Turnstile token check — test sitekey always passes so this is fine in stub
+    var turnstileToken = (form.querySelector('[name="cf-turnstile-response"]') || {}).value || '';
+    if (!turnstileToken) {
+      alert('Please complete the security check before sending.');
+      return;
+    }
+
+    var kind = form.dataset.enquiryKind || 'room';
+    var email = (kind === 'spa') ? buildSpaEmail(form) : buildRoomEmail(form);
+
+    // R016 STUB: render the preview, console-log the payload, show thanks.
+    // R017+: replace this block with a real fetch() to the Worker.
+    var previewBody = document.getElementById(kind === 'spa' ? 'sp-email-preview-body' : 'bk-email-preview-body');
+    var previewPanel = document.getElementById(kind === 'spa' ? 'sp-email-preview' : 'bk-email-preview');
+    var thanksPanel = document.getElementById(kind === 'spa' ? 'sp-thanks' : 'bk-thanks');
+    if (previewBody) {
+      previewBody.textContent =
+        'From:    ' + email.from + '\n' +
+        'To:      ' + email.to + '\n' +
+        'Subject: ' + email.subject + '\n' +
+        '\n' + email.body;
+    }
+    if (previewPanel) previewPanel.classList.remove('bk-hidden');
+    if (thanksPanel) thanksPanel.classList.remove('bk-hidden');
+    form.style.display = 'none';
+
+    console.info('[enquiry] payload (stub — not sent):', email);
+
+    /* === Real Worker submit — uncomment in R017 when Worker is wired ===
+    fetch(form.action, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ kind: kind, email: email, turnstileToken: turnstileToken })
+    }).then(function (r) {
+      if (!r.ok) throw new Error('Worker rejected: ' + r.status);
+      console.info('[enquiry] sent OK');
+    }).catch(function (e) {
+      console.error('[enquiry] send failed:', e);
+      alert('Sorry — the enquiry could not be sent right now. Please email info@mirapalace.com directly or try again in a moment.');
+    });
+    === */
+  }
+
+  // Wire to both forms
+  var bkForm = document.getElementById('bk-form');
+  if (bkForm) bkForm.addEventListener('submit', function (e) { e.preventDefault(); handleEnquirySubmit(bkForm); });
+  var spForm = document.getElementById('sp-form');
+  if (spForm) spForm.addEventListener('submit', function (e) { e.preventDefault(); handleEnquirySubmit(spForm); });
+
 })();

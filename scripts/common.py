@@ -113,8 +113,11 @@ tailwind.config = {{
   // because GitHub Pages hosts at /mira-palace-demo/ rather than /.
   window.MIRA_ROOT = "{root}";
 </script>
-<link rel="stylesheet" href="{root}assets/css/site.css?v=24" />
+<link rel="stylesheet" href="{root}assets/css/site.css?v=25" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/tabler-icons.min.css" />
+<!-- R016: Cloudflare Turnstile (bot-check on forms). Test sitekey "always pass"
+     during the stub phase; real sitekey swaps in once user creates the widget. -->
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" defer></script>
 <!-- R015: Hotel structured data — feeds Google's rich result (hotel card with star rating, location, photos, contact, amenities). One source of truth lives in render_page so every page carries it. -->
 <script type="application/ld+json">{hotel_jsonld}</script>
 </head>
@@ -436,10 +439,10 @@ def footer(root: str) -> str:
     </div>
 
     {customiser_panel(root)}
-    <script src="{root}assets/js/media-manifest.js?v=29" defer></script>
-    <script src="{root}assets/js/search-index.js?v=29" defer></script>
-    <script src="{root}assets/js/i18n.js?v=29" defer></script>
-    <script src="{root}assets/js/site.js?v=29" defer></script>
+    <script src="{root}assets/js/media-manifest.js?v=30" defer></script>
+    <script src="{root}assets/js/search-index.js?v=30" defer></script>
+    <script src="{root}assets/js/i18n.js?v=30" defer></script>
+    <script src="{root}assets/js/site.js?v=30" defer></script>
     </body></html>
     """)
 

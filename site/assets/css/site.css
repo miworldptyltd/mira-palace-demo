@@ -818,6 +818,63 @@ details > summary::-webkit-details-marker { display: none; }
   .bk-tiles { grid-template-columns: 1fr; }
 }
 
+/* R016: Turnstile widget container + email preview panel */
+.bk-turnstile-wrap {
+  margin: 12px 0 8px;
+  display: flex;
+  justify-content: center;
+}
+.bk-email-preview {
+  margin-top: 14px;
+  background: #FBF8F1;
+  border: 1px solid #D4B971;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.bk-email-preview-head {
+  padding: 14px 18px;
+  background: linear-gradient(135deg, #08122A, #1A2A55);
+  color: #fff;
+  position: relative;
+}
+.bk-email-preview-tag {
+  display: inline-block;
+  background: #EFD080;
+  color: #08122A;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  padding: 3px 9px;
+  border-radius: 4px;
+  margin-bottom: 8px;
+}
+.bk-email-preview-head h3 {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 22px;
+  margin: 0;
+  color: #fff;
+  font-weight: 500;
+}
+.bk-email-preview-note {
+  font-size: 12px;
+  color: rgba(255,255,255,0.75);
+  margin: 6px 0 0;
+  line-height: 1.5;
+}
+.bk-email-preview-body {
+  margin: 0;
+  padding: 18px 22px;
+  background: #fff;
+  color: #08122A;
+  font-family: ui-monospace, "SF Mono", Consolas, monospace;
+  font-size: 12px;
+  line-height: 1.65;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  max-height: 540px;
+  overflow-y: auto;
+}
+
 /* =====================================================================
    SITE-WIDE SEARCH (R008) — nav popup + mobile search results
    ===================================================================== */
