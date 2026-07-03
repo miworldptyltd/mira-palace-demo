@@ -63,7 +63,7 @@ tailwind.config = {
   // because GitHub Pages hosts at /mira-palace-demo/ rather than /.
   window.MIRA_ROOT = "";
 </script>
-<link rel="stylesheet" href="assets/css/site.css?v=25" />
+<link rel="stylesheet" href="assets/css/site.css?v=26" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/tabler-icons.min.css" />
 <!-- R016: Cloudflare Turnstile (bot-check on forms). Test sitekey "always pass"
      during the stub phase; real sitekey swaps in once user creates the widget. -->
@@ -265,37 +265,256 @@ tailwind.config = {
   </div>
 </header>
 <main id="main" class="pt-16 md:pt-[104px]"><div id="mp-i18n-notice" class="hidden bg-sand-100 border-b border-sand-300/40 px-5 py-2 text-center text-xs text-mira-800"><span data-i18n="i18n.in_progress">Page content translation in progress — English shown.</span></div>
-<section class="relative hero-section" style="min-height:72vh;">
+<section class="relative hero-section" style="min-height:76vh;">
   <div class="hero-slideshow" data-slideshow data-interval="7000">
-    <div class="slide active" style="background-image:url('assets/img/spa/spa-01.jpg')"></div><div class="slide" style="background-image:url('assets/img/spa/spa-02.jpg')"></div><div class="slide" style="background-image:url('assets/img/spa/spa-03.jpg')"></div><div class="slide" style="background-image:url('assets/img/spa/spa-04.jpg')"></div>
+    <div class="slide active" style="background-image:url('assets/img/spa/spa-01.jpg')"></div><div class="slide" style="background-image:url('assets/img/spa/spa-08.jpg')"></div><div class="slide" style="background-image:url('assets/img/spa/spa-03.jpg')"></div><div class="slide" style="background-image:url('assets/img/spa/spa-11.jpg')"></div>
   </div>
   <div class="absolute inset-0 hero-overlay pointer-events-none"></div>
-  <div class="relative max-w-7xl mx-auto px-5 lg:px-8 pt-10 pb-16 text-white flex flex-col justify-start min-h-[inherit]" style="min-height:72vh;">
+  <div class="relative max-w-7xl mx-auto px-5 lg:px-8 pt-10 pb-16 text-white flex flex-col justify-start min-h-[inherit]" style="min-height:76vh;">
     <div class="max-w-3xl">
-      <p class="uppercase tracking-[0.22em] text-sand-300 text-xs sm:text-sm font-semibold mb-4">Spa & Wellness</p>
+      <p class="uppercase tracking-[0.22em] text-sand-300 text-xs sm:text-sm font-semibold mb-4">Spa &amp; Wellness</p>
       <h1 class="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.05]">A hammam in the old way.<br/>A spa menu in the quiet way.</h1>
-      <p class="mt-5 max-w-2xl text-base sm:text-lg text-white/90 leading-relaxed">A full Turkish hammam — marble göbek taşı, two saunas, a steam room, a cold plunge, a relaxation room — plus six treatment rooms for massage, facial and body work.</p>
-      <div class="mt-8 flex flex-wrap gap-3"><a href="spa-treatments.html" class="inline-flex items-center justify-center px-7 py-3 bg-sand-300 text-mira-900 rounded-full font-medium tracking-wide hover:bg-sand-200 shadow-lux transition">See the treatment menu</a></div>
+      <p class="mt-5 max-w-2xl text-base sm:text-lg text-white/90 leading-relaxed">A full Turkish hammam — marble göbek taşı, two saunas, a steam room, a cold plunge, a relaxation lounge — and three curated packages designed around the ritual, not the clock.</p>
+      <div class="mt-8 flex flex-wrap gap-3"><a href="spa-book.html" class="inline-flex items-center justify-center px-7 py-3 bg-sand-300 text-mira-900 rounded-full font-medium tracking-wide hover:bg-sand-200 shadow-lux transition">Book a spa session</a></div>
     </div>
   </div>
 </section>
-<section class="bg-sand-50 py-20 lg:py-28 scroll-mt-24"><div class="max-w-7xl mx-auto px-5 lg:px-8">
-      <p class="uppercase tracking-[0.22em] text-mira-600 text-xs font-semibold">What’s in the spa</p>
-      <h2 class="font-display text-3xl sm:text-4xl md:text-5xl text-mira-900 leading-tight ">Facilities (included in your stay).</h2>
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-7 mt-10"><div class="p-7 bg-white rounded-lg shadow-lux"><h3 class="font-display text-2xl text-mira-900">Turkish hammam</h3><p class="mt-3 text-mira-700 text-sm leading-relaxed">Marble chamber heated from underneath, round göbek taşı in the centre, cold-water basins along the walls. Peştemal-wrapped attendants with over a decade of experience.</p></div><div class="p-7 bg-white rounded-lg shadow-lux"><h3 class="font-display text-2xl text-mira-900">Saunas & steam</h3><p class="mt-3 text-mira-700 text-sm leading-relaxed">A traditional dry sauna, an aroma sauna scented lightly with eucalyptus, and a steam room with Anatolian herbs.</p></div><div class="p-7 bg-white rounded-lg shadow-lux"><h3 class="font-display text-2xl text-mira-900">Cold plunge</h3><p class="mt-3 text-mira-700 text-sm leading-relaxed">12 °C. The short sharp contrast that people come to Turkish hammams for in the first place.</p></div><div class="p-7 bg-white rounded-lg shadow-lux"><h3 class="font-display text-2xl text-mira-900">Relaxation room</h3><p class="mt-3 text-mira-700 text-sm leading-relaxed">A dim, softly-heated room with reclining chaises, fresh mint water, and stacks of fresh towels. The place to land after a hammam ritual.</p></div><div class="p-7 bg-white rounded-lg shadow-lux"><h3 class="font-display text-2xl text-mira-900">Fitness studio</h3><p class="mt-3 text-mira-700 text-sm leading-relaxed">Cardio (treadmill, rower, bike) and light weights. Two group classes per day — typically yoga in the morning and stretch or aqua-fit in the afternoon.</p></div><div class="p-7 bg-white rounded-lg shadow-lux"><h3 class="font-display text-2xl text-mira-900">Six treatment rooms</h3><p class="mt-3 text-mira-700 text-sm leading-relaxed">Two single, two double, and two specialist rooms (wet room for body scrubs, hammam-side room for scrub + massage combinations). Heated tables, quiet.</p></div></div>
+<section class="bg-white py-20 lg:py-28 scroll-mt-24"><div class="max-w-7xl mx-auto px-5 lg:px-8">
+      <div class="grid lg:grid-cols-12 gap-12 items-start">
+        <div class="lg:col-span-4">
+          <p class="uppercase tracking-[0.22em] text-mira-600 text-xs font-semibold">Our approach</p>
+          <h2 class="font-display text-3xl sm:text-4xl md:text-5xl text-mira-900 leading-tight ">An old ritual, done properly.</h2>
+        </div>
+        <div class="lg:col-span-8 text-mira-700 leading-relaxed space-y-4 text-lg">
+          <p>The Turkish hammam is not a spa treatment. It is a way of being still, together, in warm marble. Everything we do at the Mira Palace Spa is arranged around that idea — the heat is deliberate, the pace is unhurried, and the attendants have been doing this for a decade or more.</p>
+          <p>We keep the menu short on purpose. Three packages, each built on the same foundation of scrub, foam, sauna, steam and rest — with a treatment of your choice layered in. Nothing is added that isn't going to help.</p>
+        </div>
+      </div>
+    </div></section><section class="bg-sand-50 py-20 lg:py-28 scroll-mt-24"><div class="max-w-7xl mx-auto px-5 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto">
+        <p class="uppercase tracking-[0.22em] text-sand-600 text-xs font-semibold">Spa packages</p>
+        <h2 class="font-display text-3xl sm:text-4xl md:text-5xl text-mira-900 leading-tight ">Three ways to spend an afternoon.</h2>
+        <p class="mt-5 text-mira-700 leading-relaxed">
+          Every package includes the hammam ritual (scrub &amp; foam), sauna, steam, herbal tea, and our complimentary shuttle both ways from the hotel. Pick the layer that suits you.
+        </p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-7 mt-14">
+        <article class="relative bg-white rounded-2xl overflow-hidden shadow-lux flex flex-col">
+          
+          <div class="aspect-[16/10] bg-cover bg-center" style="background-image:url('assets/img/spa/spa-01.jpg')"></div>
+          <div class="p-8 flex-1 flex flex-col">
+            <div class="flex items-baseline justify-between gap-4 mb-1">
+              <h3 class="font-display text-3xl text-mira-900 leading-none">Classic Package</h3>
+              <div class="text-right shrink-0">
+                <div class="font-display text-4xl text-mira-900 leading-none">€32</div>
+                <div class="text-[11px] uppercase tracking-widest text-mira-500 mt-1">per person · 60 min</div>
+              </div>
+            </div>
+            <p class="mt-2 text-sm italic text-sand-600">The introduction — the ritual in its simplest, most honest form.</p>
+            <div class="mt-6 pt-6 border-t border-mira-100">
+              <div class="text-[10px] uppercase tracking-widest text-mira-500 font-semibold mb-3">Included</div>
+              <ul class="space-y-2"><li class="flex gap-3 text-sm text-mira-700 leading-relaxed"><span class="text-sand-500 shrink-0 mt-0.5">✓</span><span>20 min Turkish scrub &amp; foam</span></li><li class="flex gap-3 text-sm text-mira-700 leading-relaxed"><span class="text-sand-500 shrink-0 mt-0.5">✓</span><span>40 min classic massage</span></li><li class="flex gap-3 text-sm text-mira-700 leading-relaxed"><span class="text-sand-500 shrink-0 mt-0.5">✓</span><span>Sauna and steam room access</span></li><li class="flex gap-3 text-sm text-mira-700 leading-relaxed"><span class="text-sand-500 shrink-0 mt-0.5">✓</span><span>Face mask after each massage</span></li><li class="flex gap-3 text-sm text-mira-700 leading-relaxed"><span class="text-sand-500 shrink-0 mt-0.5">✓</span><span>Herbal tea or coffee service</span></li><li class="flex gap-3 text-sm text-mira-700 leading-relaxed"><span class="text-sand-500 shrink-0 mt-0.5">✓</span><span>Free shuttle service — round trip</span></li></ul>
+            </div>
+            <a href="spa-book.html?package=classic"
+               class="mt-8 w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-mira-800 text-white rounded-full font-medium text-sm hover:bg-mira-900 transition">
+              Book the Classic package <span>→</span>
+            </a>
+          </div>
+        </article>
+        
+        <article class="relative bg-white rounded-2xl overflow-hidden ring-2 ring-sand-300 shadow-2xl flex flex-col">
+          <span class="absolute top-4 right-4 bg-sand-300 text-mira-900 text-[10px] font-semibold tracking-widest uppercase px-3 py-1 rounded-full">Most booked</span>
+          <div class="aspect-[16/10] bg-cover bg-center" style="background-image:url('assets/img/spa/spa-06.jpg')"></div>
+          <div class="p-8 flex-1 flex flex-col">
+            <div class="flex items-baseline justify-between gap-4 mb-1">
+              <h3 class="font-display text-3xl text-mira-900 leading-none">Relax Package</h3>
+              <div class="text-right shrink-0">
+                <div class="font-display text-4xl text-mira-900 leading-none">€43</div>
+                <div class="text-[11px] uppercase tracking-widest text-mira-500 mt-1">per person · 80 min</div>
+              </div>
+            </div>
+            <p class="mt-2 text-sm italic text-sand-600">Longer, deeper, more therapeutic — for those who want to properly unwind.</p>
+            <div class="mt-6 pt-6 border-t border-mira-100">
+              <div class="text-[10px] uppercase tracking-widest text-mira-500 font-semibold mb-3">Included</div>
+              <ul class="space-y-2"><li class="flex gap-3 text-sm text-mira-700 leading-relaxed"><span class="text-sand-500 shrink-0 mt-0.5">✓</span><span>20 min Turkish scrub &amp; foam</span></li><li class="flex gap-3 text-sm text-mira-700 leading-relaxed"><span class="text-sand-500 shrink-0 mt-0.5">✓</span><span>60 min mix therapy</span></li><li class="flex gap-3 text-sm text-mira-700 leading-relaxed"><span class="text-sand-500 shrink-0 mt-0.5">✓</span><span>Sauna and steam room access</span></li><li class="flex gap-3 text-sm text-mira-700 leading-relaxed"><span class="text-sand-500 shrink-0 mt-0.5">✓</span><span>Face mask after each massage</span></li><li class="flex gap-3 text-sm text-mira-700 leading-relaxed"><span class="text-sand-500 shrink-0 mt-0.5">✓</span><span>Herbal tea or coffee service</span></li><li class="flex gap-3 text-sm text-mira-700 leading-relaxed"><span class="text-sand-500 shrink-0 mt-0.5">✓</span><span>Free shuttle service — round trip</span></li></ul>
+            </div>
+            <a href="spa-book.html?package=relax"
+               class="mt-8 w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-mira-800 text-white rounded-full font-medium text-sm hover:bg-mira-900 transition">
+              Book the Relax package <span>→</span>
+            </a>
+          </div>
+        </article>
+        
+        <article class="relative bg-white rounded-2xl overflow-hidden shadow-lux flex flex-col">
+          
+          <div class="aspect-[16/10] bg-cover bg-center" style="background-image:url('assets/img/spa/spa-09.jpg')"></div>
+          <div class="p-8 flex-1 flex flex-col">
+            <div class="flex items-baseline justify-between gap-4 mb-1">
+              <h3 class="font-display text-3xl text-mira-900 leading-none">Aromatherapy Package</h3>
+              <div class="text-right shrink-0">
+                <div class="font-display text-4xl text-mira-900 leading-none">€59</div>
+                <div class="text-[11px] uppercase tracking-widest text-mira-500 mt-1">per person · 110 min</div>
+              </div>
+            </div>
+            <p class="mt-2 text-sm italic text-sand-600">Our most indulgent ritual, with a long aromatherapy massage using essential oils.</p>
+            <div class="mt-6 pt-6 border-t border-mira-100">
+              <div class="text-[10px] uppercase tracking-widest text-mira-500 font-semibold mb-3">Included</div>
+              <ul class="space-y-2"><li class="flex gap-3 text-sm text-mira-700 leading-relaxed"><span class="text-sand-500 shrink-0 mt-0.5">✓</span><span>20 min Turkish scrub &amp; foam</span></li><li class="flex gap-3 text-sm text-mira-700 leading-relaxed"><span class="text-sand-500 shrink-0 mt-0.5">✓</span><span>90 min aromatherapy</span></li><li class="flex gap-3 text-sm text-mira-700 leading-relaxed"><span class="text-sand-500 shrink-0 mt-0.5">✓</span><span>Sauna and steam room access</span></li><li class="flex gap-3 text-sm text-mira-700 leading-relaxed"><span class="text-sand-500 shrink-0 mt-0.5">✓</span><span>Face mask after each massage</span></li><li class="flex gap-3 text-sm text-mira-700 leading-relaxed"><span class="text-sand-500 shrink-0 mt-0.5">✓</span><span>Freshly squeezed orange juice</span></li><li class="flex gap-3 text-sm text-mira-700 leading-relaxed"><span class="text-sand-500 shrink-0 mt-0.5">✓</span><span>Free shuttle service — round trip</span></li></ul>
+            </div>
+            <a href="spa-book.html?package=aroma"
+               class="mt-8 w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-mira-800 text-white rounded-full font-medium text-sm hover:bg-mira-900 transition">
+              Book the Aromatherapy package <span>→</span>
+            </a>
+          </div>
+        </article>
+        </div>
+      <p class="mt-8 text-center text-xs text-mira-500 italic">
+        Prices shown in Euro. Turkish Lira and USD available at the reception desk.
+        Couples arrangements &amp; private hammam sessions available on request —
+        please call <a class="underline hover:text-sand-500" href="tel:+905325431590">+90 532 543 15 90</a>.
+      </p>
     </div></section><section class="bg-white py-20 lg:py-28 scroll-mt-24"><div class="max-w-7xl mx-auto px-5 lg:px-8">
-      <div class="grid lg:grid-cols-2 gap-12 items-center">
-        <div class="aspect-[4/3] bg-cover bg-center rounded-lg shadow-lux" style="background-image:url('assets/img/spa/spa-05.jpg')"></div>
-        <div><p class="uppercase tracking-[0.22em] text-mira-600 text-xs font-semibold">The hammam ritual</p>
-          <h3 class="font-display text-2xl sm:text-3xl text-mira-900 leading-tight ">Ninety minutes, five stages.</h3>
-          <ol class="mt-6 space-y-4 text-mira-700">
-            <li><span class="font-semibold text-mira-900">1. Warm.</span> Fifteen minutes on the heated marble, lying on a cotton peştemal. The room is quiet; the heat is soft but thorough.</li>
-            <li><span class="font-semibold text-mira-900">2. Exfoliate.</span> An attendant works with a kese glove — the Turkish coarse silk mitt. Nothing stays that wasn’t going to.</li>
-            <li><span class="font-semibold text-mira-900">3. Foam.</span> A soap-cloud bath, olive-oil soap whipped to meringue, poured over you in waves.</li>
-            <li><span class="font-semibold text-mira-900">4. Rinse.</span> Warm then cooler, in the marble basins.</li>
-            <li><span class="font-semibold text-mira-900">5. Rest.</span> Wrapped in a fresh dry peştemal, laid on a chaise, offered a mint tea. Fifteen to thirty minutes — stay as long as you want.</li>
+      <div class="max-w-5xl mx-auto text-center">
+        <p class="uppercase tracking-[0.22em] text-mira-600 text-xs font-semibold">In every visit</p>
+        <h2 class="font-display text-3xl sm:text-4xl md:text-5xl text-mira-900 leading-tight ">What you always get.</h2>
+        <p class="mt-5 text-mira-700 leading-relaxed">
+          Regardless of the package you pick — these are on the house, every time.
+        </p>
+        <div class="mt-12 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+          <div class="text-center">
+            <div class="text-4xl">🧖</div>
+            <div class="mt-2 font-display text-lg text-mira-900">Hammam access</div>
+            <div class="text-xs text-mira-600 mt-1">Marble chamber, göbek taşı</div>
+          </div>
+          <div class="text-center">
+            <div class="text-4xl">🔥</div>
+            <div class="mt-2 font-display text-lg text-mira-900">Two saunas</div>
+            <div class="text-xs text-mira-600 mt-1">Dry + aroma</div>
+          </div>
+          <div class="text-center">
+            <div class="text-4xl">💨</div>
+            <div class="mt-2 font-display text-lg text-mira-900">Steam room</div>
+            <div class="text-xs text-mira-600 mt-1">Anatolian herbs</div>
+          </div>
+          <div class="text-center">
+            <div class="text-4xl">🧊</div>
+            <div class="mt-2 font-display text-lg text-mira-900">Cold plunge</div>
+            <div class="text-xs text-mira-600 mt-1">12 °C — brief &amp; sharp</div>
+          </div>
+          <div class="text-center">
+            <div class="text-4xl">🍵</div>
+            <div class="mt-2 font-display text-lg text-mira-900">Herbal tea</div>
+            <div class="text-xs text-mira-600 mt-1">Or freshly-pressed juice</div>
+          </div>
+          <div class="text-center">
+            <div class="text-4xl">🚐</div>
+            <div class="mt-2 font-display text-lg text-mira-900">Shuttle service</div>
+            <div class="text-xs text-mira-600 mt-1">From your room, both ways</div>
+          </div>
+        </div>
+      </div>
+    </div></section><section class="bg-sand-50 py-20 lg:py-28 scroll-mt-24"><div class="max-w-7xl mx-auto px-5 lg:px-8">
+      <p class="uppercase tracking-[0.22em] text-mira-600 text-xs font-semibold">Facilities</p>
+      <h2 class="font-display text-3xl sm:text-4xl md:text-5xl text-mira-900 leading-tight ">Everything under one roof.</h2>
+      <p class="mt-5 max-w-2xl text-mira-700 leading-relaxed">
+        The spa is on the ground floor of the main building, adjoining the indoor pool. Enter from reception in a robe and slippers — we'll take you the rest of the way.
+      </p>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-7 mt-10"><article class="bg-white rounded-lg overflow-hidden shadow-lux group">  <div class="aspect-[4/3] bg-cover bg-center transition duration-500 group-hover:scale-[1.03]" style="background-image:url('assets/img/spa/spa-01.jpg')"></div>  <div class="p-6">    <h3 class="font-display text-xl text-mira-900">Turkish hammam</h3>    <p class="mt-2 text-sm text-mira-700 leading-relaxed">Marble chamber heated from underneath, round göbek taşı in the centre, cold-water basins along the walls. Peştemal-wrapped attendants with over a decade of experience.</p>  </div></article><article class="bg-white rounded-lg overflow-hidden shadow-lux group">  <div class="aspect-[4/3] bg-cover bg-center transition duration-500 group-hover:scale-[1.03]" style="background-image:url('assets/img/spa/spa-07.jpg')"></div>  <div class="p-6">    <h3 class="font-display text-xl text-mira-900">Two saunas</h3>    <p class="mt-2 text-sm text-mira-700 leading-relaxed">A traditional dry sauna and an aroma sauna scented lightly with eucalyptus. Both quiet, both timed at 75-85 °C — hot enough to matter, gentle enough to stay.</p>  </div></article><article class="bg-white rounded-lg overflow-hidden shadow-lux group">  <div class="aspect-[4/3] bg-cover bg-center transition duration-500 group-hover:scale-[1.03]" style="background-image:url('assets/img/spa/spa-02.jpg')"></div>  <div class="p-6">    <h3 class="font-display text-xl text-mira-900">Steam room</h3>    <p class="mt-2 text-sm text-mira-700 leading-relaxed">Anatolian herbs infused into the steam — pine, sage, lavender rotated through the week. 100% humidity, ~45 °C.</p>  </div></article><article class="bg-white rounded-lg overflow-hidden shadow-lux group">  <div class="aspect-[4/3] bg-cover bg-center transition duration-500 group-hover:scale-[1.03]" style="background-image:url('assets/img/spa/spa-12.jpg')"></div>  <div class="p-6">    <h3 class="font-display text-xl text-mira-900">Cold plunge</h3>    <p class="mt-2 text-sm text-mira-700 leading-relaxed">12 °C. The short sharp contrast that people come to Turkish hammams for in the first place. Twenty seconds is plenty.</p>  </div></article><article class="bg-white rounded-lg overflow-hidden shadow-lux group">  <div class="aspect-[4/3] bg-cover bg-center transition duration-500 group-hover:scale-[1.03]" style="background-image:url('assets/img/spa/spa-08.jpg')"></div>  <div class="p-6">    <h3 class="font-display text-xl text-mira-900">Relaxation lounge</h3>    <p class="mt-2 text-sm text-mira-700 leading-relaxed">A dim, softly-heated room with reclining chaises, fresh mint water, and stacks of fresh towels. The place to land after a hammam ritual.</p>  </div></article><article class="bg-white rounded-lg overflow-hidden shadow-lux group">  <div class="aspect-[4/3] bg-cover bg-center transition duration-500 group-hover:scale-[1.03]" style="background-image:url('assets/img/spa/spa-04.jpg')"></div>  <div class="p-6">    <h3 class="font-display text-xl text-mira-900">Treatment rooms</h3>    <p class="mt-2 text-sm text-mira-700 leading-relaxed">Six rooms — two single, two double, plus specialist rooms for wet-room body scrubs and hammam-side scrub-and-massage combinations. Heated tables, quiet.</p>  </div></article></div>
+    </div></section><section class="bg-white py-20 lg:py-28 scroll-mt-24"><div class="max-w-7xl mx-auto px-5 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div class="aspect-[4/5] bg-cover bg-center rounded-lg shadow-lux" style="background-image:url('assets/img/spa/spa-03.jpg')"></div>
+        <div>
+          <p class="uppercase tracking-[0.22em] text-mira-600 text-xs font-semibold">The hammam ritual</p>
+          <h3 class="font-display text-2xl sm:text-3xl text-mira-900 leading-tight ">Five stages, roughly ninety minutes.</h3>
+          <ol class="mt-8 space-y-6 text-mira-700">
+            <li class="flex gap-5">
+              <span class="font-display text-3xl text-sand-500 shrink-0 leading-none w-8">1</span>
+              <div>
+                <div class="font-medium text-mira-900">Warm.</div>
+                <p class="text-sm mt-1">Fifteen minutes on the heated marble, lying on a cotton peştemal. The room is quiet; the heat is soft but thorough.</p>
+              </div>
+            </li>
+            <li class="flex gap-5">
+              <span class="font-display text-3xl text-sand-500 shrink-0 leading-none w-8">2</span>
+              <div>
+                <div class="font-medium text-mira-900">Exfoliate.</div>
+                <p class="text-sm mt-1">An attendant works with a kese glove — the Turkish coarse silk mitt. Nothing stays that wasn't going to.</p>
+              </div>
+            </li>
+            <li class="flex gap-5">
+              <span class="font-display text-3xl text-sand-500 shrink-0 leading-none w-8">3</span>
+              <div>
+                <div class="font-medium text-mira-900">Foam.</div>
+                <p class="text-sm mt-1">A soap-cloud bath, olive-oil soap whipped to meringue, poured over you in waves.</p>
+              </div>
+            </li>
+            <li class="flex gap-5">
+              <span class="font-display text-3xl text-sand-500 shrink-0 leading-none w-8">4</span>
+              <div>
+                <div class="font-medium text-mira-900">Rinse.</div>
+                <p class="text-sm mt-1">Warm then cooler, in the marble basins.</p>
+              </div>
+            </li>
+            <li class="flex gap-5">
+              <span class="font-display text-3xl text-sand-500 shrink-0 leading-none w-8">5</span>
+              <div>
+                <div class="font-medium text-mira-900">Rest.</div>
+                <p class="text-sm mt-1">Wrapped in a fresh dry peştemal, laid on a chaise, offered a mint tea. Fifteen to thirty minutes — stay as long as you want.</p>
+              </div>
+            </li>
           </ol>
-          <a href="spa-treatments.html" class="mt-8 inline-flex items-center gap-2 text-mira-700 font-medium hover:text-sand-600">Full treatment menu &amp; prices <span>→</span></a>
+        </div>
+      </div>
+    </div></section><section class="bg-sand-50 py-20 lg:py-28 scroll-mt-24"><div class="max-w-7xl mx-auto px-5 lg:px-8">
+      <div class="max-w-4xl mx-auto">
+        <p class="uppercase tracking-[0.22em] text-mira-600 text-xs font-semibold">Before you visit</p>
+        <h3 class="font-display text-2xl sm:text-3xl text-mira-900 leading-tight ">A few small things to know.</h3>
+        <div class="mt-10 grid md:grid-cols-2 gap-x-12 gap-y-6 text-mira-700 text-sm leading-relaxed">
+          <div class="flex gap-3"><span class="text-sand-500 shrink-0">✓</span><div><span class="font-medium text-mira-900">Robe, slippers &amp; towels are provided.</span> Come from your room in a robe; we'll do the rest.</div></div>
+          <div class="flex gap-3"><span class="text-sand-500 shrink-0">✓</span><div><span class="font-medium text-mira-900">Wear a swimsuit if you prefer.</span> In the hammam and pool areas, swimwear is normal; disposable underwear is available for treatments.</div></div>
+          <div class="flex gap-3"><span class="text-sand-500 shrink-0">✓</span><div><span class="font-medium text-mira-900">Arrive 15 minutes early.</span> The spa reception has cold herbal water and a quiet lounge to change out of the outside world.</div></div>
+          <div class="flex gap-3"><span class="text-sand-500 shrink-0">✓</span><div><span class="font-medium text-mira-900">Phones stay in the locker.</span> The spa is a quiet zone.</div></div>
+          <div class="flex gap-3"><span class="text-sand-500 shrink-0">✓</span><div><span class="font-medium text-mira-900">Tell us about pregnancy, injury or allergy at booking.</span> We adjust every ritual to your body.</div></div>
+          <div class="flex gap-3"><span class="text-sand-500 shrink-0">✓</span><div><span class="font-medium text-mira-900">Cancellations 24 hours before.</span> Same-day changes are fine — text the WhatsApp on the sidebar.</div></div>
+        </div>
+      </div>
+    </div></section><section class="bg-white py-20 lg:py-28 scroll-mt-24"><div class="max-w-7xl mx-auto px-5 lg:px-8">
+      <div class="max-w-5xl mx-auto bg-mira-900 text-white rounded-2xl overflow-hidden shadow-lux">
+        <div class="grid lg:grid-cols-2 items-stretch">
+          <div class="aspect-[4/3] lg:aspect-auto bg-cover bg-center" style="background-image:url('assets/img/spa/spa-11.jpg')"></div>
+          <div class="p-10 lg:p-12">
+            <div class="text-[10px] uppercase tracking-widest text-sand-300 font-semibold">Reserve your session</div>
+            <h3 class="font-display text-4xl mt-3">The spa desk answers directly.</h3>
+            <p class="mt-5 text-white/80 leading-relaxed">
+              Book online in ninety seconds, or call the spa reception straight — different number to the front desk so we can dispatch without tying up the main line.
+            </p>
+            <div class="mt-8 space-y-4">
+              <a href="tel:+905325431590" class="flex items-center gap-4 group">
+                <div class="w-12 h-12 rounded-full bg-white/10 grid place-items-center text-2xl">☎</div>
+                <div>
+                  <div class="text-xs uppercase tracking-widest text-sand-300">Spa reception</div>
+                  <div class="font-display text-2xl group-hover:text-sand-200 transition">+90 532 543 15 90</div>
+                </div>
+              </a>
+              <a href="https://wa.me/905325431590" rel="noopener" class="flex items-center gap-4 group">
+                <div class="w-12 h-12 rounded-full bg-white/10 grid place-items-center text-2xl">💬</div>
+                <div>
+                  <div class="text-xs uppercase tracking-widest text-sand-300">WhatsApp</div>
+                  <div class="font-display text-2xl group-hover:text-sand-200 transition">Same number, faster</div>
+                </div>
+              </a>
+              <a href="https://www.instagram.com/sidemirapalacespawellness/" rel="noopener" class="flex items-center gap-4 group">
+                <div class="w-12 h-12 rounded-full bg-white/10 grid place-items-center text-2xl">📷</div>
+                <div>
+                  <div class="text-xs uppercase tracking-widest text-sand-300">Instagram</div>
+                  <div class="font-display text-2xl group-hover:text-sand-200 transition">@sidemirapalacespawellness</div>
+                </div>
+              </a>
+            </div>
+            <a href="spa-book.html" class="mt-10 inline-flex items-center gap-3 px-8 py-4 bg-sand-300 text-mira-900 rounded-full font-semibold hover:bg-sand-200 transition">
+              Book online <span>→</span>
+            </a>
+          </div>
         </div>
       </div>
     </div></section></main>
@@ -486,8 +705,8 @@ tailwind.config = {
   </div>
 </div>
 
-    <script src="assets/js/media-manifest.js?v=30" defer></script>
-    <script src="assets/js/search-index.js?v=30" defer></script>
-    <script src="assets/js/i18n.js?v=30" defer></script>
-    <script src="assets/js/site.js?v=30" defer></script>
+    <script src="assets/js/media-manifest.js?v=31" defer></script>
+    <script src="assets/js/search-index.js?v=31" defer></script>
+    <script src="assets/js/i18n.js?v=31" defer></script>
+    <script src="assets/js/site.js?v=31" defer></script>
     </body></html>

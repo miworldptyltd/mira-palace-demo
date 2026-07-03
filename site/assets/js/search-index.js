@@ -237,13 +237,13 @@ window.MIRA_SEARCH_INDEX = [
     "description": "Turkish hammam, saunas, steam room, cold plunge, fitness studio, and a treatment menu of massage, facial and body work.",
     "headings": [
       "A hammam in the old way.A spa menu in the quiet way.",
-      "Facilities (included in your stay).",
-      "Turkish hammam",
-      "Saunas & steam",
-      "Cold plunge",
-      "Relaxation room",
-      "Fitness studio",
-      "Six treatment rooms"
+      "An old ritual, done properly.",
+      "Three ways to spend an afternoon.",
+      "Classic Package",
+      "Relax Package",
+      "Aromatherapy Package",
+      "What you always get.",
+      "Everything under one roof."
     ]
   },
   {

@@ -1,3 +1,7 @@
+## [R017] - 2026-07-03
+
+R017 feat: world-class Spa and Wellness page rebuild - 3 package cards (Classic 32 Relax 43 Aromatherapy 59) from the printed menu PDF - what every visit includes - 6 facility cards - 5-stage hammam ritual journey - visitor etiquette - direct spa reception contact with dedicated phone WhatsApp Instagram - CTA to spa-book page
+
 ## [R016] - 2026-06-29
 
 R016 feat: enquiry form stubs + security harness - Turnstile widget (test sitekey) on booking + spa-book - honeypot bot trap - input sanitization - submit handler builds formatted staff email - DEMO preview panel shows what staff will receive once Resend is live - real Worker POST commented and ready to wire later
@@ -145,6 +149,7 @@ First publishable build. Sent to the hotel for owner review.
 - LICENSE is all-rights-reserved proprietary.
 
 [0.1.0]: https://github.com/-/-/releases/tag/v0.1.0
+
 
 
 

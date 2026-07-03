@@ -17,6 +17,14 @@ SITE_META = {
     # Shown alongside mobile in the footer and on any contact-list surface.
     "phone_landline_display": "+90 242 642 09 13",
     "phone_landline_tel": "+902426420913",
+    # Spa & Wellness has its OWN reservation number (from the printed spa menu
+    # PDF, R017). Different mobile so the spa reception can dispatch without
+    # tying up the main hotel line. Instagram is the spa's own handle.
+    "spa_phone_display": "+90 532 543 15 90",
+    "spa_phone_tel": "+905325431590",
+    "spa_whatsapp": "https://wa.me/905325431590",
+    "spa_instagram_handle": "SIDEMIRAPALACESPAWELLNESS",
+    "spa_instagram_url": "https://www.instagram.com/sidemirapalacespawellness/",
     # Demo phase: routes to working test inbox so enquiry forms actually
     # land somewhere. Production cutover (R021) flips this single line to
     # `info@mirapalace.com` (the hotel's real address per the live site).
@@ -113,7 +121,7 @@ tailwind.config = {{
   // because GitHub Pages hosts at /mira-palace-demo/ rather than /.
   window.MIRA_ROOT = "{root}";
 </script>
-<link rel="stylesheet" href="{root}assets/css/site.css?v=25" />
+<link rel="stylesheet" href="{root}assets/css/site.css?v=26" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/tabler-icons.min.css" />
 <!-- R016: Cloudflare Turnstile (bot-check on forms). Test sitekey "always pass"
      during the stub phase; real sitekey swaps in once user creates the widget. -->
@@ -439,10 +447,10 @@ def footer(root: str) -> str:
     </div>
 
     {customiser_panel(root)}
-    <script src="{root}assets/js/media-manifest.js?v=30" defer></script>
-    <script src="{root}assets/js/search-index.js?v=30" defer></script>
-    <script src="{root}assets/js/i18n.js?v=30" defer></script>
-    <script src="{root}assets/js/site.js?v=30" defer></script>
+    <script src="{root}assets/js/media-manifest.js?v=31" defer></script>
+    <script src="{root}assets/js/search-index.js?v=31" defer></script>
+    <script src="{root}assets/js/i18n.js?v=31" defer></script>
+    <script src="{root}assets/js/site.js?v=31" defer></script>
     </body></html>
     """)
 
