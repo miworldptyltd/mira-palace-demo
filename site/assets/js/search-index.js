@@ -236,7 +236,7 @@ window.MIRA_SEARCH_INDEX = [
     "title": "Spa & Wellness · Mira Palace",
     "description": "Turkish hammam, saunas, steam room, cold plunge, fitness studio, and a treatment menu of massage, facial and body work.",
     "headings": [
-      "A hammam in the old way.A spa menu in the quiet way.",
+      "A hammam in the old way. A spa menu in the quiet way.",
       "An old ritual, done properly.",
       "Three ways to spend an afternoon.",
       "Classic Package",

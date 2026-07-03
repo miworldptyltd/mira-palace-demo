@@ -81,11 +81,11 @@ def spa(root: str) -> str:
     hero_urls = [f"{root}{u}" for u in (IMG_SPA_1, IMG_SPA_8, IMG_SPA_3, IMG_SPA_11)]
     h = hero_slideshow(
         hero_urls,
-        "Spa &amp; Wellness",
-        "A hammam in the old way.<br/>A spa menu in the quiet way.",
-        "A full Turkish hammam — marble göbek taşı, two saunas, a steam room, a cold plunge, a relaxation lounge — and three curated packages designed around the ritual, not the clock.",
+        '<span data-i18n="spa.hero.kicker">Spa &amp; Wellness</span>',
+        '<span data-i18n="spa.hero.h1">A hammam in the old way. A spa menu in the quiet way.</span>',
+        '<span data-i18n="spa.hero.sub">A full Turkish hammam — marble göbek taşı, two saunas, a steam room, a cold plunge, a relaxation lounge — and three curated packages designed around the ritual, not the clock.</span>',
         primary_href=f"{root}spa-book.html",
-        primary_label="Book a spa session",
+        primary_label='<span data-i18n="spa.hero.cta">Book a spa session</span>',
         height="76vh",
     )
 
@@ -93,80 +93,87 @@ def spa(root: str) -> str:
     intro = section(f"""
       <div class="grid lg:grid-cols-12 gap-12 items-start">
         <div class="lg:col-span-4">
-          {eyebrow('Our approach')}
-          {heading('An old ritual, done properly.')}
+          <p class="uppercase tracking-[0.22em] text-mira-600 text-xs font-semibold" data-i18n="spa.intro.eyebrow">Our approach</p>
+          <h2 class="font-display text-3xl sm:text-4xl md:text-5xl text-mira-900 leading-tight" data-i18n="spa.intro.h2">An old ritual, done properly.</h2>
         </div>
         <div class="lg:col-span-8 text-mira-700 leading-relaxed space-y-4 text-lg">
-          <p>The Turkish hammam is not a spa treatment. It is a way of being still, together, in warm marble. Everything we do at the Mira Palace Spa is arranged around that idea — the heat is deliberate, the pace is unhurried, and the attendants have been doing this for a decade or more.</p>
-          <p>We keep the menu short on purpose. Three packages, each built on the same foundation of scrub, foam, sauna, steam and rest — with a treatment of your choice layered in. Nothing is added that isn't going to help.</p>
+          <p data-i18n="spa.intro.p1">The Turkish hammam is not a spa treatment. It is a way of being still, together, in warm marble. Everything we do at the Mira Palace Spa is arranged around that idea — the heat is deliberate, the pace is unhurried, and the attendants have been doing this for a decade or more.</p>
+          <p data-i18n="spa.intro.p2">We keep the menu short on purpose. Three packages, each built on the same foundation of scrub, foam, sauna, steam and rest — with a treatment of your choice layered in. Nothing is added that isn't going to help.</p>
         </div>
       </div>
     """, bg="bg-white")
 
     # ------------------- The three packages (from the printed menu PDF) -------------------
     # Kept identical to _spa_book.py to keep names + prices + inclusions in
-    # sync across the spa page and the booking page.
+    # sync across the spa page and the booking page. Each bullet carries an
+    # i18n key so the same list translates cleanly per language (R018).
     packages = [
         {
             "key": "classic",
             "name": "Classic",
+            "name_i18n": "spa.pkg.classic.name",
             "long_name": "Classic Package",
             "price": "€32",
             "duration": "60 min",
             "img": IMG_SPA_1,
+            "tag_i18n": "spa.pkg.classic.tag",
             "tagline": "The introduction — the ritual in its simplest, most honest form.",
-            "included": [
-                "20 min Turkish scrub &amp; foam",
-                "40 min classic massage",
-                "Sauna and steam room access",
-                "Face mask after each massage",
-                "Herbal tea or coffee service",
-                "Free shuttle service — round trip",
+            "bullets": [
+                ("spa.pkg.b.scrub20",  "20 min Turkish scrub &amp; foam"),
+                ("spa.pkg.b.classic40", "40 min classic massage"),
+                ("spa.pkg.b.sauna",     "Sauna and steam room access"),
+                ("spa.pkg.b.mask",      "Face mask after each massage"),
+                ("spa.pkg.b.tea",       "Herbal tea or coffee service"),
+                ("spa.pkg.b.shuttle",   "Free shuttle service — round trip"),
             ],
         },
         {
             "key": "relax",
             "name": "Relax",
+            "name_i18n": "spa.pkg.relax.name",
             "long_name": "Relax Package",
             "price": "€43",
             "duration": "80 min",
             "img": IMG_SPA_6,
+            "tag_i18n": "spa.pkg.relax.tag",
             "tagline": "Longer, deeper, more therapeutic — for those who want to properly unwind.",
-            "included": [
-                "20 min Turkish scrub &amp; foam",
-                "60 min mix therapy",
-                "Sauna and steam room access",
-                "Face mask after each massage",
-                "Herbal tea or coffee service",
-                "Free shuttle service — round trip",
+            "bullets": [
+                ("spa.pkg.b.scrub20",  "20 min Turkish scrub &amp; foam"),
+                ("spa.pkg.b.mix60",     "60 min mix therapy"),
+                ("spa.pkg.b.sauna",     "Sauna and steam room access"),
+                ("spa.pkg.b.mask",      "Face mask after each massage"),
+                ("spa.pkg.b.tea",       "Herbal tea or coffee service"),
+                ("spa.pkg.b.shuttle",   "Free shuttle service — round trip"),
             ],
         },
         {
             "key": "aroma",
             "name": "Aromatherapy",
+            "name_i18n": "spa.pkg.aroma.name",
             "long_name": "Aromatherapy Package",
             "price": "€59",
             "duration": "110 min",
             "img": IMG_SPA_9,
+            "tag_i18n": "spa.pkg.aroma.tag",
             "tagline": "Our most indulgent ritual, with a long aromatherapy massage using essential oils.",
-            "included": [
-                "20 min Turkish scrub &amp; foam",
-                "90 min aromatherapy",
-                "Sauna and steam room access",
-                "Face mask after each massage",
-                "Freshly squeezed orange juice",
-                "Free shuttle service — round trip",
+            "bullets": [
+                ("spa.pkg.b.scrub20",  "20 min Turkish scrub &amp; foam"),
+                ("spa.pkg.b.aroma90",   "90 min aromatherapy"),
+                ("spa.pkg.b.sauna",     "Sauna and steam room access"),
+                ("spa.pkg.b.mask",      "Face mask after each massage"),
+                ("spa.pkg.b.oj",        "Freshly squeezed orange juice"),
+                ("spa.pkg.b.shuttle",   "Free shuttle service — round trip"),
             ],
         },
     ]
 
     def _package_card(p, is_middle=False):
         badge = ('<span class="absolute top-4 right-4 bg-sand-300 text-mira-900 text-[10px] font-semibold '
-                 'tracking-widest uppercase px-3 py-1 rounded-full">Most booked</span>' if is_middle else '')
+                 'tracking-widest uppercase px-3 py-1 rounded-full" data-i18n="spa.pkgs.most_booked">Most booked</span>' if is_middle else '')
         bullets = "".join(
             f'<li class="flex gap-3 text-sm text-mira-700 leading-relaxed">'
-            f'<span class="text-sand-500 shrink-0 mt-0.5">✓</span><span>{item}</span></li>'
-            for item in p["included"]
+            f'<span class="text-sand-500 shrink-0 mt-0.5">✓</span><span data-i18n="{k}">{item}</span></li>'
+            for k, item in p["bullets"]
         )
         highlight_ring = 'ring-2 ring-sand-300 shadow-2xl' if is_middle else 'shadow-lux'
         return f"""
@@ -175,20 +182,20 @@ def spa(root: str) -> str:
           <div class="aspect-[16/10] bg-cover bg-center" style="background-image:url('{root}{p['img']}')"></div>
           <div class="p-8 flex-1 flex flex-col">
             <div class="flex items-baseline justify-between gap-4 mb-1">
-              <h3 class="font-display text-3xl text-mira-900 leading-none">{p['long_name']}</h3>
+              <h3 class="font-display text-3xl text-mira-900 leading-none" data-i18n="{p['name_i18n']}">{p['long_name']}</h3>
               <div class="text-right shrink-0">
                 <div class="font-display text-4xl text-mira-900 leading-none">{p['price']}</div>
-                <div class="text-[11px] uppercase tracking-widest text-mira-500 mt-1">per person · {p['duration']}</div>
+                <div class="text-[11px] uppercase tracking-widest text-mira-500 mt-1"><span data-i18n="spa.pkgs.pp">per person</span> · {p['duration']}</div>
               </div>
             </div>
-            <p class="mt-2 text-sm italic text-sand-600">{p['tagline']}</p>
+            <p class="mt-2 text-sm italic text-sand-600" data-i18n="{p['tag_i18n']}">{p['tagline']}</p>
             <div class="mt-6 pt-6 border-t border-mira-100">
-              <div class="text-[10px] uppercase tracking-widest text-mira-500 font-semibold mb-3">Included</div>
+              <div class="text-[10px] uppercase tracking-widest text-mira-500 font-semibold mb-3" data-i18n="spa.pkgs.included">Included</div>
               <ul class="space-y-2">{bullets}</ul>
             </div>
             <a href="{root}spa-book.html?package={p['key']}"
                class="mt-8 w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-mira-800 text-white rounded-full font-medium text-sm hover:bg-mira-900 transition">
-              Book the {p['name']} package <span>→</span>
+              <span data-i18n="spa.pkgs.book_prefix">Book the</span> <span data-i18n="{p['name_i18n']}">{p['long_name']}</span> <span data-i18n="spa.pkgs.book_suffix">package</span> <span>→</span>
             </a>
           </div>
         </article>
@@ -200,58 +207,57 @@ def spa(root: str) -> str:
 
     packages_section = section(f"""
       <div class="text-center max-w-2xl mx-auto">
-        {eyebrow('Spa packages', 'text-sand-600')}
-        {heading('Three ways to spend an afternoon.')}
-        <p class="mt-5 text-mira-700 leading-relaxed">
+        <p class="uppercase tracking-[0.22em] text-sand-600 text-xs font-semibold" data-i18n="spa.pkgs.eyebrow">Spa packages</p>
+        <h2 class="font-display text-3xl sm:text-4xl md:text-5xl text-mira-900 leading-tight" data-i18n="spa.pkgs.h2">Three ways to spend an afternoon.</h2>
+        <p class="mt-5 text-mira-700 leading-relaxed" data-i18n="spa.pkgs.lead">
           Every package includes the hammam ritual (scrub &amp; foam), sauna, steam, herbal tea, and our complimentary shuttle both ways from the hotel. Pick the layer that suits you.
         </p>
       </div>
       <div class="grid md:grid-cols-3 gap-7 mt-14">{package_cards}</div>
       <p class="mt-8 text-center text-xs text-mira-500 italic">
-        Prices shown in Euro. Turkish Lira and USD available at the reception desk.
-        Couples arrangements &amp; private hammam sessions available on request —
-        please call <a class="underline hover:text-sand-500" href="tel:{m['spa_phone_tel']}">{m['spa_phone_display']}</a>.
+        <span data-i18n="spa.pkgs.foot">Prices shown in Euro. Turkish Lira and USD available at the reception desk. Couples arrangements &amp; private hammam sessions available on request — please call</span>
+        <a class="underline hover:text-sand-500" href="tel:{m['spa_phone_tel']}">{m['spa_phone_display']}</a>.
       </p>
     """, bg="bg-sand-50")
 
     # ------------------- Included in every visit (reassurance) -------------------
     included_every = section(f"""
       <div class="max-w-5xl mx-auto text-center">
-        {eyebrow('In every visit')}
-        {heading('What you always get.')}
-        <p class="mt-5 text-mira-700 leading-relaxed">
+        <p class="uppercase tracking-[0.22em] text-mira-600 text-xs font-semibold" data-i18n="spa.every.eyebrow">In every visit</p>
+        <h2 class="font-display text-3xl sm:text-4xl md:text-5xl text-mira-900 leading-tight" data-i18n="spa.every.h2">What you always get.</h2>
+        <p class="mt-5 text-mira-700 leading-relaxed" data-i18n="spa.every.lead">
           Regardless of the package you pick — these are on the house, every time.
         </p>
         <div class="mt-12 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
           <div class="text-center">
             <div class="text-4xl">🧖</div>
-            <div class="mt-2 font-display text-lg text-mira-900">Hammam access</div>
-            <div class="text-xs text-mira-600 mt-1">Marble chamber, göbek taşı</div>
+            <div class="mt-2 font-display text-lg text-mira-900" data-i18n="spa.every.hammam.t">Hammam access</div>
+            <div class="text-xs text-mira-600 mt-1" data-i18n="spa.every.hammam.s">Marble chamber, göbek taşı</div>
           </div>
           <div class="text-center">
             <div class="text-4xl">🔥</div>
-            <div class="mt-2 font-display text-lg text-mira-900">Two saunas</div>
-            <div class="text-xs text-mira-600 mt-1">Dry + aroma</div>
+            <div class="mt-2 font-display text-lg text-mira-900" data-i18n="spa.every.sauna.t">Two saunas</div>
+            <div class="text-xs text-mira-600 mt-1" data-i18n="spa.every.sauna.s">Dry + aroma</div>
           </div>
           <div class="text-center">
             <div class="text-4xl">💨</div>
-            <div class="mt-2 font-display text-lg text-mira-900">Steam room</div>
-            <div class="text-xs text-mira-600 mt-1">Anatolian herbs</div>
+            <div class="mt-2 font-display text-lg text-mira-900" data-i18n="spa.every.steam.t">Steam room</div>
+            <div class="text-xs text-mira-600 mt-1" data-i18n="spa.every.steam.s">Anatolian herbs</div>
           </div>
           <div class="text-center">
             <div class="text-4xl">🧊</div>
-            <div class="mt-2 font-display text-lg text-mira-900">Cold plunge</div>
-            <div class="text-xs text-mira-600 mt-1">12 °C — brief &amp; sharp</div>
+            <div class="mt-2 font-display text-lg text-mira-900" data-i18n="spa.every.plunge.t">Cold plunge</div>
+            <div class="text-xs text-mira-600 mt-1" data-i18n="spa.every.plunge.s">12 °C — brief &amp; sharp</div>
           </div>
           <div class="text-center">
             <div class="text-4xl">🍵</div>
-            <div class="mt-2 font-display text-lg text-mira-900">Herbal tea</div>
-            <div class="text-xs text-mira-600 mt-1">Or freshly-pressed juice</div>
+            <div class="mt-2 font-display text-lg text-mira-900" data-i18n="spa.every.tea.t">Herbal tea</div>
+            <div class="text-xs text-mira-600 mt-1" data-i18n="spa.every.tea.s">Or freshly-pressed juice</div>
           </div>
           <div class="text-center">
             <div class="text-4xl">🚐</div>
-            <div class="mt-2 font-display text-lg text-mira-900">Shuttle service</div>
-            <div class="text-xs text-mira-600 mt-1">From your room, both ways</div>
+            <div class="mt-2 font-display text-lg text-mira-900" data-i18n="spa.every.shuttle.t">Shuttle service</div>
+            <div class="text-xs text-mira-600 mt-1" data-i18n="spa.every.shuttle.s">From your room, both ways</div>
           </div>
         </div>
       </div>
@@ -259,39 +265,39 @@ def spa(root: str) -> str:
 
     # ------------------- Facilities showcase -------------------
     facilities = [
-        ("Turkish hammam",
-         "Marble chamber heated from underneath, round göbek taşı in the centre, cold-water basins along the walls. Peştemal-wrapped attendants with over a decade of experience.",
+        ("spa.fac.hammam.t", "Turkish hammam",
+         "spa.fac.hammam.d", "Marble chamber heated from underneath, round göbek taşı in the centre, cold-water basins along the walls. Peştemal-wrapped attendants with over a decade of experience.",
          IMG_SPA_1),
-        ("Two saunas",
-         "A traditional dry sauna and an aroma sauna scented lightly with eucalyptus. Both quiet, both timed at 75-85 °C — hot enough to matter, gentle enough to stay.",
+        ("spa.fac.saunas.t", "Two saunas",
+         "spa.fac.saunas.d", "A traditional dry sauna and an aroma sauna scented lightly with eucalyptus. Both quiet, both timed at 75-85 °C — hot enough to matter, gentle enough to stay.",
          IMG_SPA_7),
-        ("Steam room",
-         "Anatolian herbs infused into the steam — pine, sage, lavender rotated through the week. 100% humidity, ~45 °C.",
+        ("spa.fac.steam.t", "Steam room",
+         "spa.fac.steam.d", "Anatolian herbs infused into the steam — pine, sage, lavender rotated through the week. 100% humidity, ~45 °C.",
          IMG_SPA_2),
-        ("Cold plunge",
-         "12 °C. The short sharp contrast that people come to Turkish hammams for in the first place. Twenty seconds is plenty.",
+        ("spa.fac.plunge.t", "Cold plunge",
+         "spa.fac.plunge.d", "12 °C. The short sharp contrast that people come to Turkish hammams for in the first place. Twenty seconds is plenty.",
          IMG_SPA_12),
-        ("Relaxation lounge",
-         "A dim, softly-heated room with reclining chaises, fresh mint water, and stacks of fresh towels. The place to land after a hammam ritual.",
+        ("spa.fac.lounge.t", "Relaxation lounge",
+         "spa.fac.lounge.d", "A dim, softly-heated room with reclining chaises, fresh mint water, and stacks of fresh towels. The place to land after a hammam ritual.",
          IMG_SPA_8),
-        ("Treatment rooms",
-         "Six rooms — two single, two double, plus specialist rooms for wet-room body scrubs and hammam-side scrub-and-massage combinations. Heated tables, quiet.",
+        ("spa.fac.rooms.t", "Treatment rooms",
+         "spa.fac.rooms.d", "Six rooms — two single, two double, plus specialist rooms for wet-room body scrubs and hammam-side scrub-and-massage combinations. Heated tables, quiet.",
          IMG_SPA_4),
     ]
     fac_cards = "".join(
         f'<article class="bg-white rounded-lg overflow-hidden shadow-lux group">'
         f'  <div class="aspect-[4/3] bg-cover bg-center transition duration-500 group-hover:scale-[1.03]" style="background-image:url(\'{root}{img}\')"></div>'
         f'  <div class="p-6">'
-        f'    <h3 class="font-display text-xl text-mira-900">{title}</h3>'
-        f'    <p class="mt-2 text-sm text-mira-700 leading-relaxed">{body}</p>'
+        f'    <h3 class="font-display text-xl text-mira-900" data-i18n="{ti}">{title}</h3>'
+        f'    <p class="mt-2 text-sm text-mira-700 leading-relaxed" data-i18n="{bi}">{body}</p>'
         f'  </div>'
         f'</article>'
-        for title, body, img in facilities
+        for ti, title, bi, body, img in facilities
     )
     facilities_section = section(f"""
-      {eyebrow('Facilities')}
-      {heading('Everything under one roof.')}
-      <p class="mt-5 max-w-2xl text-mira-700 leading-relaxed">
+      <p class="uppercase tracking-[0.22em] text-mira-600 text-xs font-semibold" data-i18n="spa.fac.eyebrow">Facilities</p>
+      <h2 class="font-display text-3xl sm:text-4xl md:text-5xl text-mira-900 leading-tight" data-i18n="spa.fac.h2">Everything under one roof.</h2>
+      <p class="mt-5 max-w-2xl text-mira-700 leading-relaxed" data-i18n="spa.fac.lead">
         The spa is on the ground floor of the main building, adjoining the indoor pool. Enter from reception in a robe and slippers — we'll take you the rest of the way.
       </p>
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-7 mt-10">{fac_cards}</div>
@@ -302,42 +308,42 @@ def spa(root: str) -> str:
       <div class="grid lg:grid-cols-2 gap-16 items-center">
         <div class="aspect-[4/5] bg-cover bg-center rounded-lg shadow-lux" style="background-image:url('{root}{IMG_SPA_3}')"></div>
         <div>
-          {eyebrow('The hammam ritual')}
-          {heading('Five stages, roughly ninety minutes.', 3)}
+          <p class="uppercase tracking-[0.22em] text-mira-600 text-xs font-semibold" data-i18n="spa.rit.eyebrow">The hammam ritual</p>
+          <h3 class="font-display text-2xl sm:text-3xl text-mira-900 leading-tight" data-i18n="spa.rit.h2">Five stages, roughly ninety minutes.</h3>
           <ol class="mt-8 space-y-6 text-mira-700">
             <li class="flex gap-5">
               <span class="font-display text-3xl text-sand-500 shrink-0 leading-none w-8">1</span>
               <div>
-                <div class="font-medium text-mira-900">Warm.</div>
-                <p class="text-sm mt-1">Fifteen minutes on the heated marble, lying on a cotton peştemal. The room is quiet; the heat is soft but thorough.</p>
+                <div class="font-medium text-mira-900" data-i18n="spa.rit.1.t">Warm.</div>
+                <p class="text-sm mt-1" data-i18n="spa.rit.1.d">Fifteen minutes on the heated marble, lying on a cotton peştemal. The room is quiet; the heat is soft but thorough.</p>
               </div>
             </li>
             <li class="flex gap-5">
               <span class="font-display text-3xl text-sand-500 shrink-0 leading-none w-8">2</span>
               <div>
-                <div class="font-medium text-mira-900">Exfoliate.</div>
-                <p class="text-sm mt-1">An attendant works with a kese glove — the Turkish coarse silk mitt. Nothing stays that wasn't going to.</p>
+                <div class="font-medium text-mira-900" data-i18n="spa.rit.2.t">Exfoliate.</div>
+                <p class="text-sm mt-1" data-i18n="spa.rit.2.d">An attendant works with a kese glove — the Turkish coarse silk mitt. Nothing stays that wasn't going to.</p>
               </div>
             </li>
             <li class="flex gap-5">
               <span class="font-display text-3xl text-sand-500 shrink-0 leading-none w-8">3</span>
               <div>
-                <div class="font-medium text-mira-900">Foam.</div>
-                <p class="text-sm mt-1">A soap-cloud bath, olive-oil soap whipped to meringue, poured over you in waves.</p>
+                <div class="font-medium text-mira-900" data-i18n="spa.rit.3.t">Foam.</div>
+                <p class="text-sm mt-1" data-i18n="spa.rit.3.d">A soap-cloud bath, olive-oil soap whipped to meringue, poured over you in waves.</p>
               </div>
             </li>
             <li class="flex gap-5">
               <span class="font-display text-3xl text-sand-500 shrink-0 leading-none w-8">4</span>
               <div>
-                <div class="font-medium text-mira-900">Rinse.</div>
-                <p class="text-sm mt-1">Warm then cooler, in the marble basins.</p>
+                <div class="font-medium text-mira-900" data-i18n="spa.rit.4.t">Rinse.</div>
+                <p class="text-sm mt-1" data-i18n="spa.rit.4.d">Warm then cooler, in the marble basins.</p>
               </div>
             </li>
             <li class="flex gap-5">
               <span class="font-display text-3xl text-sand-500 shrink-0 leading-none w-8">5</span>
               <div>
-                <div class="font-medium text-mira-900">Rest.</div>
-                <p class="text-sm mt-1">Wrapped in a fresh dry peştemal, laid on a chaise, offered a mint tea. Fifteen to thirty minutes — stay as long as you want.</p>
+                <div class="font-medium text-mira-900" data-i18n="spa.rit.5.t">Rest.</div>
+                <p class="text-sm mt-1" data-i18n="spa.rit.5.d">Wrapped in a fresh dry peştemal, laid on a chaise, offered a mint tea. Fifteen to thirty minutes — stay as long as you want.</p>
               </div>
             </li>
           </ol>
@@ -348,15 +354,15 @@ def spa(root: str) -> str:
     # ------------------- Before you visit (etiquette / what to bring) -------------------
     etiquette = section(f"""
       <div class="max-w-4xl mx-auto">
-        {eyebrow('Before you visit')}
-        {heading('A few small things to know.', 3)}
+        <p class="uppercase tracking-[0.22em] text-mira-600 text-xs font-semibold" data-i18n="spa.etq.eyebrow">Before you visit</p>
+        <h3 class="font-display text-2xl sm:text-3xl text-mira-900 leading-tight" data-i18n="spa.etq.h2">A few small things to know.</h3>
         <div class="mt-10 grid md:grid-cols-2 gap-x-12 gap-y-6 text-mira-700 text-sm leading-relaxed">
-          <div class="flex gap-3"><span class="text-sand-500 shrink-0">✓</span><div><span class="font-medium text-mira-900">Robe, slippers &amp; towels are provided.</span> Come from your room in a robe; we'll do the rest.</div></div>
-          <div class="flex gap-3"><span class="text-sand-500 shrink-0">✓</span><div><span class="font-medium text-mira-900">Wear a swimsuit if you prefer.</span> In the hammam and pool areas, swimwear is normal; disposable underwear is available for treatments.</div></div>
-          <div class="flex gap-3"><span class="text-sand-500 shrink-0">✓</span><div><span class="font-medium text-mira-900">Arrive 15 minutes early.</span> The spa reception has cold herbal water and a quiet lounge to change out of the outside world.</div></div>
-          <div class="flex gap-3"><span class="text-sand-500 shrink-0">✓</span><div><span class="font-medium text-mira-900">Phones stay in the locker.</span> The spa is a quiet zone.</div></div>
-          <div class="flex gap-3"><span class="text-sand-500 shrink-0">✓</span><div><span class="font-medium text-mira-900">Tell us about pregnancy, injury or allergy at booking.</span> We adjust every ritual to your body.</div></div>
-          <div class="flex gap-3"><span class="text-sand-500 shrink-0">✓</span><div><span class="font-medium text-mira-900">Cancellations 24 hours before.</span> Same-day changes are fine — text the WhatsApp on the sidebar.</div></div>
+          <div class="flex gap-3"><span class="text-sand-500 shrink-0">✓</span><div><span class="font-medium text-mira-900" data-i18n="spa.etq.1.t">Robe, slippers &amp; towels are provided.</span> <span data-i18n="spa.etq.1.d">Come from your room in a robe; we'll do the rest.</span></div></div>
+          <div class="flex gap-3"><span class="text-sand-500 shrink-0">✓</span><div><span class="font-medium text-mira-900" data-i18n="spa.etq.2.t">Wear a swimsuit if you prefer.</span> <span data-i18n="spa.etq.2.d">In the hammam and pool areas, swimwear is normal; disposable underwear is available for treatments.</span></div></div>
+          <div class="flex gap-3"><span class="text-sand-500 shrink-0">✓</span><div><span class="font-medium text-mira-900" data-i18n="spa.etq.3.t">Arrive 15 minutes early.</span> <span data-i18n="spa.etq.3.d">The spa reception has cold herbal water and a quiet lounge to change out of the outside world.</span></div></div>
+          <div class="flex gap-3"><span class="text-sand-500 shrink-0">✓</span><div><span class="font-medium text-mira-900" data-i18n="spa.etq.4.t">Phones stay in the locker.</span> <span data-i18n="spa.etq.4.d">The spa is a quiet zone.</span></div></div>
+          <div class="flex gap-3"><span class="text-sand-500 shrink-0">✓</span><div><span class="font-medium text-mira-900" data-i18n="spa.etq.5.t">Tell us about pregnancy, injury or allergy at booking.</span> <span data-i18n="spa.etq.5.d">We adjust every ritual to your body.</span></div></div>
+          <div class="flex gap-3"><span class="text-sand-500 shrink-0">✓</span><div><span class="font-medium text-mira-900" data-i18n="spa.etq.6.t">Cancellations 24 hours before.</span> <span data-i18n="spa.etq.6.d">Same-day changes are fine — text the WhatsApp on the sidebar.</span></div></div>
         </div>
       </div>
     """, bg="bg-sand-50")
@@ -367,36 +373,36 @@ def spa(root: str) -> str:
         <div class="grid lg:grid-cols-2 items-stretch">
           <div class="aspect-[4/3] lg:aspect-auto bg-cover bg-center" style="background-image:url('{root}{IMG_SPA_11}')"></div>
           <div class="p-10 lg:p-12">
-            <div class="text-[10px] uppercase tracking-widest text-sand-300 font-semibold">Reserve your session</div>
-            <h3 class="font-display text-4xl mt-3">The spa desk answers directly.</h3>
-            <p class="mt-5 text-white/80 leading-relaxed">
+            <div class="text-[10px] uppercase tracking-widest text-sand-300 font-semibold" data-i18n="spa.contact.eyebrow">Reserve your session</div>
+            <h3 class="font-display text-4xl mt-3" data-i18n="spa.contact.h3">The spa desk answers directly.</h3>
+            <p class="mt-5 text-white/80 leading-relaxed" data-i18n="spa.contact.p">
               Book online in ninety seconds, or call the spa reception straight — different number to the front desk so we can dispatch without tying up the main line.
             </p>
             <div class="mt-8 space-y-4">
               <a href="tel:{m['spa_phone_tel']}" class="flex items-center gap-4 group">
                 <div class="w-12 h-12 rounded-full bg-white/10 grid place-items-center text-2xl">☎</div>
                 <div>
-                  <div class="text-xs uppercase tracking-widest text-sand-300">Spa reception</div>
+                  <div class="text-xs uppercase tracking-widest text-sand-300" data-i18n="spa.contact.reception">Spa reception</div>
                   <div class="font-display text-2xl group-hover:text-sand-200 transition">{m['spa_phone_display']}</div>
                 </div>
               </a>
               <a href="{m['spa_whatsapp']}" rel="noopener" class="flex items-center gap-4 group">
                 <div class="w-12 h-12 rounded-full bg-white/10 grid place-items-center text-2xl">💬</div>
                 <div>
-                  <div class="text-xs uppercase tracking-widest text-sand-300">WhatsApp</div>
-                  <div class="font-display text-2xl group-hover:text-sand-200 transition">Same number, faster</div>
+                  <div class="text-xs uppercase tracking-widest text-sand-300" data-i18n="spa.contact.whatsapp_label">WhatsApp</div>
+                  <div class="font-display text-2xl group-hover:text-sand-200 transition" data-i18n="spa.contact.whatsapp_v">Same number, faster</div>
                 </div>
               </a>
               <a href="{m['spa_instagram_url']}" rel="noopener" class="flex items-center gap-4 group">
                 <div class="w-12 h-12 rounded-full bg-white/10 grid place-items-center text-2xl">📷</div>
                 <div>
-                  <div class="text-xs uppercase tracking-widest text-sand-300">Instagram</div>
+                  <div class="text-xs uppercase tracking-widest text-sand-300" data-i18n="spa.contact.instagram">Instagram</div>
                   <div class="font-display text-2xl group-hover:text-sand-200 transition">@{m['spa_instagram_handle'].lower()}</div>
                 </div>
               </a>
             </div>
             <a href="{root}spa-book.html" class="mt-10 inline-flex items-center gap-3 px-8 py-4 bg-sand-300 text-mira-900 rounded-full font-semibold hover:bg-sand-200 transition">
-              Book online <span>→</span>
+              <span data-i18n="spa.contact.cta">Book online</span> <span>→</span>
             </a>
           </div>
         </div>

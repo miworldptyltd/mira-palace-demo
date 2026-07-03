@@ -1,3 +1,7 @@
+## [R018] - 2026-07-03
+
+R018 feat: spa and wellness page fully translated EN TR DE RU contextually - hero philosophy 3 packages every visit strip 6 facilities 5 stage ritual etiquette contact block - approx 65 new keys per language - translation-in-progress notice now hides on spa page too
+
 ## [R017] - 2026-07-03
 
 R017 feat: world-class Spa and Wellness page rebuild - 3 package cards (Classic 32 Relax 43 Aromatherapy 59) from the printed menu PDF - what every visit includes - 6 facility cards - 5-stage hammam ritual journey - visitor etiquette - direct spa reception contact with dedicated phone WhatsApp Instagram - CTA to spa-book page
@@ -149,6 +153,7 @@ First publishable build. Sent to the hotel for owner review.
 - LICENSE is all-rights-reserved proprietary.
 
 [0.1.0]: https://github.com/-/-/releases/tag/v0.1.0
+
 
 
 
