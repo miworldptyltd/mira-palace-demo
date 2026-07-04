@@ -34,28 +34,13 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.2.3/css/flag-icons.min.css" />
-<script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
-<script>
-tailwind.config = {
-  theme: {
-    extend: {
-      colors: {
-        mira: { 50:'#F2F6F7',100:'#E0EBEE',200:'#BDD4DA',300:'#90B5BF',400:'#628F9C',500:'#456E7B',600:'#345661',700:'#274551',800:'#1D3742',900:'#132630' },
-        sand: { 50:'#FBF8F1',100:'#F4EDDD',200:'#E8D4A0',300:'#D4B971',400:'#C9A961',500:'#B68F3F',600:'#8E6D2F' },
-        ink:  '#111827',
-      },
-      fontFamily: {
-        display: ['"Cormorant Garamond"','serif'],
-        body:    ['Inter','sans-serif'],
-      },
-      boxShadow: {
-        lux: '0 20px 60px -20px rgba(19,38,48,.35)',
-      },
-    }
-  }
-};
-</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.5.0/css/flag-icons.min.css" />
+<!-- R020: Tailwind v4 compiled build.
+     Was: <script src="cdn.tailwindcss.com?plugins=..."> (~350 KB Play CDN,
+     runtime JIT). Now: a pre-compiled site.css (~15-30 KB minified) built
+     by tools/tailwindcss.exe from scripts/tailwind/input.css. The @theme
+     block that used to live inline as `tailwind.config = {...}` is now
+     CSS-first in scripts/tailwind/input.css. -->
 <script>
   // Project root path (e.g. "" for a domain-root site, "../" or "../../"
   // for nested pages). Python's render_page() computes the depth and
@@ -63,8 +48,9 @@ tailwind.config = {
   // because GitHub Pages hosts at /mira-palace-demo/ rather than /.
   window.MIRA_ROOT = "../";
 </script>
-<link rel="stylesheet" href="../assets/css/site.css?v=28" />
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/tabler-icons.min.css" />
+<link rel="stylesheet" href="../assets/css/site.css?v=29" />
+<!-- R020: Tabler Icons bumped 2.47.0 → 3.44.0 (v3 kept the ti- prefix; classes we use — ti-chevron-down, ti-maximize — verified to still exist). -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.44.0/dist/tabler-icons.min.css" />
 <!-- R016: Cloudflare Turnstile (bot-check on forms). Test sitekey "always pass"
      during the stub phase; real sitekey swaps in once user creates the widget. -->
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" defer></script>
@@ -227,7 +213,7 @@ tailwind.config = {
     <div id="nav-search-pop" class="hidden absolute right-4 lg:right-8 top-full mt-2 w-[360px] max-w-[92vw] bg-white rounded-md shadow-lux border border-mira-200 overflow-hidden">
       <div class="flex items-center gap-2 px-3 py-2 border-b border-mira-100">
         <svg viewBox="0 0 24 24" fill="none" class="w-4 h-4 text-mira-600" aria-hidden="true"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm10 2-5-5"/></svg>
-        <input id="nav-search-input" type="search" placeholder="Search the site — rooms, spa, dining…" data-i18n-placeholder="nav.search.placeholder" class="flex-1 bg-transparent border-none outline-none text-sm text-mira-900 placeholder:text-mira-500" autocomplete="off" />
+        <input id="nav-search-input" type="search" placeholder="Search the site — rooms, spa, dining…" data-i18n-placeholder="nav.search.placeholder" class="flex-1 bg-transparent border-none outline-hidden text-sm text-mira-900 placeholder:text-mira-500" autocomplete="off" />
         <button id="nav-search-close" class="text-mira-600 hover:text-mira-900 p-1" aria-label="Close search">
           <svg viewBox="0 0 24 24" fill="none" class="w-4 h-4"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M6 6l12 12M18 6L6 18"/></svg>
         </button>
@@ -241,7 +227,7 @@ tailwind.config = {
       <div class="px-4 py-3 border-b border-white/10 bg-mira-900/40">
         <div class="flex items-center gap-2 bg-white/8 border border-white/15 rounded px-3 py-2">
           <svg viewBox="0 0 24 24" fill="none" class="w-4 h-4 text-white/60" aria-hidden="true"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm10 2-5-5"/></svg>
-          <input id="mnu-search-input" type="search" placeholder="Search the site…" data-i18n-placeholder="nav.search.placeholder_mobile" class="flex-1 bg-transparent border-none outline-none text-sm text-white placeholder:text-white/50" autocomplete="off" />
+          <input id="mnu-search-input" type="search" placeholder="Search the site…" data-i18n-placeholder="nav.search.placeholder_mobile" class="flex-1 bg-transparent border-none outline-hidden text-sm text-white placeholder:text-white/50" autocomplete="off" />
         </div>
         <ul id="mnu-search-results" class="mt-2 max-h-[40vh] overflow-y-auto m-0 list-none"></ul>
       </div>
@@ -495,6 +481,6 @@ tailwind.config = {
 
     <script src="../assets/js/media-manifest.js?v=32" defer></script>
     <script src="../assets/js/search-index.js?v=32" defer></script>
-    <script src="../assets/js/i18n.js?v=33" defer></script>
-    <script src="../assets/js/site.js?v=33" defer></script>
+    <script src="../assets/js/i18n.js?v=34" defer></script>
+    <script src="../assets/js/site.js?v=34" defer></script>
     </body></html>

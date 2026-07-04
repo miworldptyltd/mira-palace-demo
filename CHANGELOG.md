@@ -1,3 +1,11 @@
+## [R020] - 2026-07-04
+
+R020 stack modernization — Tailwind v3 CDN to v4 compiled build, Tabler 2.47 to 3.44, flag-icons 7.2 to 7.5, Python 3.11 to 3.14, GitHub Actions checkout/setup-python to v6, upload-pages-artifact to v4
+
+## [R020] - 2026-07-04
+
+R020 stack modernization — Tailwind v3 CDN to v4 compiled build, Tabler 2.47 to 3.44, flag-icons 7.2 to 7.5, Python 3.11 to 3.14, GitHub Actions checkout/setup-python to v6, upload-pages-artifact to v4
+
 ## [R019] - 2026-07-04
 
 R019 dining rebuild — world-class 4-page structure, 3 venues, real bar photo, i18n keys tagged
@@ -157,6 +165,8 @@ First publishable build. Sent to the hotel for owner review.
 - LICENSE is all-rights-reserved proprietary.
 
 [0.1.0]: https://github.com/-/-/releases/tag/v0.1.0
+
+
 
 
 

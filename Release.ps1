@@ -93,7 +93,7 @@ foreach ($p in $retiredPages) {
 }
 
 # ---------------------------------------------------------------------------
-Step "[1/6]  Photo import"
+Step "[1/7]  Photo import"
 
 # Sentinel file we check for to decide whether photos have already been imported.
 $sentinel = "site\assets\img\king\king-01.jpg"
@@ -116,7 +116,28 @@ if ($ForcePhotos -or -not (Test-Path $sentinel)) {
 }
 
 # ---------------------------------------------------------------------------
-Step "[2/6]  Rebuild every HTML page"
+Step "[2/7]  Compile Tailwind CSS  (R020 — was v3 Play CDN, now proper build)"
+
+$twBin = Join-Path $root "tools\tailwindcss.exe"
+if (-not (Test-Path $twBin)) {
+  Info "Tailwind CLI not found — running Bootstrap-Tailwind.ps1 first ..."
+  $bootstrap = Join-Path $root "Bootstrap-Tailwind.ps1"
+  if (-not (Test-Path $bootstrap)) { Fail "Bootstrap-Tailwind.ps1 missing"; exit 1 }
+  & $bootstrap
+  if ($LASTEXITCODE -ne 0) { Fail "Tailwind bootstrap failed"; exit 1 }
+}
+
+$twIn  = Join-Path $root "scripts\tailwind\input.css"
+$twOut = Join-Path $root "site\assets\css\site.css"
+Info "Compiling $twIn -> site.css (minified)"
+& $twBin -i $twIn -o $twOut --minify
+if ($LASTEXITCODE -ne 0) { Fail "Tailwind CSS compile failed"; exit 1 }
+
+$outSize = (Get-Item $twOut).Length
+Pass ("site.css produced — {0:N0} bytes minified" -f $outSize)
+
+# ---------------------------------------------------------------------------
+Step "[3/7]  Rebuild every HTML page"
 
 $python = (Get-Command python -ErrorAction SilentlyContinue).Source
 if (-not $python) { $python = (Get-Command python3 -ErrorAction SilentlyContinue).Source }
@@ -127,7 +148,7 @@ if ($LASTEXITCODE -ne 0) { Fail "Build failed"; exit 1 }
 Pass "All HTML pages generated"
 
 # ---------------------------------------------------------------------------
-Step "[3/6]  Generate next release tag (Rxxx)"
+Step "[4/7]  Generate next release tag (Rxxx)"
 
 # Sanity: must be inside a git repo
 if (-not (Test-Path ".git")) { Fail "no .git folder — run Init-Repo.ps1 first"; exit 1 }
@@ -154,7 +175,7 @@ $release = "R{0:000}" -f $nextNum
 Pass "Next release: $release"
 
 # ---------------------------------------------------------------------------
-Step "[4/6]  Update VERSION and CHANGELOG.md"
+Step "[5/7]  Update VERSION and CHANGELOG.md"
 
 $today = Get-Date -Format "yyyy-MM-dd"
 
@@ -188,7 +209,7 @@ if (Test-Path $changelogPath) {
 }
 
 # ---------------------------------------------------------------------------
-Step "[5/6]  Commit and tag"
+Step "[6/7]  Commit and tag"
 
 git add -A | Out-Null
 $staged = git diff --cached --stat | Select-Object -Last 1
@@ -212,7 +233,7 @@ git tag -a $release -m "$release - $Message" 2>$null | Out-Null
 Pass "Tag:     $release"
 
 # ---------------------------------------------------------------------------
-Step "[6/6]  Push to GitHub"
+Step "[7/7]  Push to GitHub"
 
 git push origin main 2>&1 | Out-Null
 if ($LASTEXITCODE -ne 0) { Fail "git push origin main failed"; exit 1 }

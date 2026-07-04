@@ -38,3 +38,20 @@ Planning/backup/**
 
 # Generated runtime manifest — written fresh on every build
 site/assets/js/media-manifest.js
+
+# R020: Tailwind standalone CLI binaries — downloaded on demand by
+# Bootstrap-Tailwind.ps1 (Windows) or the deploy workflow (Linux).
+# Never committed — each dev / CI grabs the right platform binary.
+tools/tailwindcss.exe
+tools/tailwindcss-linux-x64
+tools/tailwindcss-macos-*
+
+# R020: site/assets/css/site.css is produced by the Tailwind CLI on every
+# build from scripts/tailwind/input.css (which imports custom.css).
+# We KEEP it tracked in git for two reasons:
+#   1. The first user (or CI) to clone the repo can serve the site without
+#      needing to run Tailwind locally — the last-shipped CSS is present.
+#   2. Diffs on this file give a fast sanity check that a stack bump
+#      didn't accidentally shrink the stylesheet to a broken shell.
+# The source of truth is still scripts/tailwind/custom.css — never edit
+# site/assets/css/site.css by hand; it will be overwritten on next build.

@@ -14,25 +14,57 @@ concurrency:
   group: pages
   cancel-in-progress: true
 
+# R020: pin the Tailwind CLI version in ONE place so it can't drift out of
+# sync with Bootstrap-Tailwind.ps1. Bump here + in Bootstrap-Tailwind.ps1
+# whenever you want to move to a newer Tailwind release.
+env:
+  TAILWIND_VERSION: "4.3.2"
+  PYTHON_VERSION:   "3.14"
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      # R020: bumped from v4 → v6 (Node 24 runtime; older majors sunset Sept 2026)
+      - uses: actions/checkout@v6
+
+      # R020: bumped from v5 → v6 + Python 3.11 → 3.14
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
-          python-version: '3.11'
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      # R020: replaces the old v3 Play CDN with a proper Tailwind build step.
+      # Uses the standalone binary — no Node.js, no npm — mirrors what
+      # Release.ps1 does on Windows for local dev/release.
+      - name: Install Tailwind CSS standalone CLI
+        run: |
+          mkdir -p tools
+          curl -sSL -o tools/tailwindcss \
+            "https://github.com/tailwindlabs/tailwindcss/releases/download/v${{ env.TAILWIND_VERSION }}/tailwindcss-linux-x64"
+          chmod +x tools/tailwindcss
+          ./tools/tailwindcss --help | head -1
+
+      - name: Compile Tailwind CSS
+        run: |
+          ./tools/tailwindcss \
+            -i scripts/tailwind/input.css \
+            -o site/assets/css/site.css \
+            --minify
+          ls -la site/assets/css/site.css
+
       - name: Generate site
         run: python3 scripts/build.py
-      - name: Add copyright-stamped X-Robots headers (noindex)
-        run: |
-          cat > site/.nojekyll <<EOF
-          EOF
+
+      - name: Add .nojekyll marker
+        run: touch site/.nojekyll
+
+      # R020: bumped from v3 → v4
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           path: site
+
   deploy:
     needs: build
     runs-on: ubuntu-latest
@@ -40,5 +72,6 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      # deploy-pages@v4 is still current in 2026
       - id: deployment
         uses: actions/deploy-pages@v4
