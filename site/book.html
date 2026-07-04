@@ -48,7 +48,7 @@
   // because GitHub Pages hosts at /mira-palace-demo/ rather than /.
   window.MIRA_ROOT = "";
 </script>
-<link rel="stylesheet" href="assets/css/site.css?v=30" />
+<link rel="stylesheet" href="assets/css/site.css?v=31" />
 <!-- R020: Tabler Icons bumped 2.47.0 → 3.44.0 (v3 kept the ti- prefix; classes we use — ti-chevron-down, ti-maximize — verified to still exist). -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.44.0/dist/tabler-icons.min.css" />
 <!-- R016: Cloudflare Turnstile (bot-check on forms). Test sitekey "always pass"
@@ -94,12 +94,17 @@
     },
     {
       "@type": "LocationFeatureSpecification",
-      "name": "Swimming pool",
+      "name": "Outdoor swimming pool",
       "value": true
     },
     {
       "@type": "LocationFeatureSpecification",
-      "name": "Private beach",
+      "name": "Indoor heated pool",
+      "value": true
+    },
+    {
+      "@type": "LocationFeatureSpecification",
+      "name": "Near beach (~700 m walk to Evrenseki public beach, Blue Flag)",
       "value": true
     },
     {
@@ -124,7 +129,7 @@
     },
     {
       "@type": "LocationFeatureSpecification",
-      "name": "Airport transfer",
+      "name": "Airport transfer (VIP minibus)",
       "value": true
     }
   ],
@@ -256,12 +261,12 @@
       <!-- Title bar -->
       <div class="bk-title">
         <h1>Send an enquiry</h1>
-        <p class="bk-title-note">No payment, no commitment · we confirm availability and a direct quote within the hour · prices on this page are indicative until we confirm</p>
+        <p class="bk-title-note">No payment, no commitment · rates shown are indicative — we confirm the final rate for your dates within the hour, usually faster</p>
       </div>
 
       <!-- Suite tabs (full width) -->
       <div class="bk-tabs" id="bk-tabs" role="tablist" aria-label="Suite type">
-        <button type="button" class="bk-tab" data-suite="standard">  <span class="bk-tab-nm">Standard</span>  <span class="bk-tab-pr" data-prices='{"try": 6300, "eur": 180, "usd": 195}'>Garden-facing comfort · from €180</span></button><button type="button" class="bk-tab" data-suite="deluxe">  <span class="bk-tab-nm">Deluxe</span>  <span class="bk-tab-pr" data-prices='{"try": 8400, "eur": 240, "usd": 260}'>Sea view · from €240</span></button><button type="button" class="bk-tab" data-suite="family">  <span class="bk-tab-nm">Family</span>  <span class="bk-tab-pr" data-prices='{"try": 10150, "eur": 290, "usd": 315}'>Connecting layout · from €290</span></button><button type="button" class="bk-tab" data-suite="king" data-sel="true">  <span class="bk-tab-nm">King</span>  <span class="bk-tab-pr" data-prices='{"try": 14700, "eur": 420, "usd": 455}'>Sea view · from €420</span></button>
+        <button type="button" class="bk-tab" data-suite="standard">  <span class="bk-tab-nm">Standard</span>  <span class="bk-tab-pr" data-prices='{"try": 8010, "eur": 180, "usd": 195}'>Garden-facing comfort · from €180</span></button><button type="button" class="bk-tab" data-suite="deluxe">  <span class="bk-tab-nm">Deluxe</span>  <span class="bk-tab-pr" data-prices='{"try": 10680, "eur": 240, "usd": 260}'>Sea view · from €240</span></button><button type="button" class="bk-tab" data-suite="family">  <span class="bk-tab-nm">Family</span>  <span class="bk-tab-pr" data-prices='{"try": 12905, "eur": 290, "usd": 314}'>Connecting layout · from €290</span></button><button type="button" class="bk-tab" data-suite="king" data-sel="true">  <span class="bk-tab-nm">King</span>  <span class="bk-tab-pr" data-prices='{"try": 18690, "eur": 420, "usd": 454}'>Sea view · from €420</span></button>
       </div>
 
       <!-- Two-column layout -->
@@ -277,9 +282,11 @@
               method="POST">
 
           <!-- R016: honeypot — hidden field bots fill in but humans don't.
-               Submit handler rejects the form silently if this is non-empty. -->
-          <div style="position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;overflow:hidden" aria-hidden="true">
-            <label>If you are human, leave this empty: <input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
+               R023: label text made blank so it never appears in a screen
+               scrape / SR read-out. Submit handler rejects the form silently
+               if this field is non-empty. -->
+          <div class="bk-honeypot" aria-hidden="true">
+            <label aria-hidden="true"><input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
           </div>
 
           <div class="bk-form-head">
@@ -288,7 +295,7 @@
               <div class="bk-form-sub" id="bk-form-sub">A6 · 1 of 1</div>
             </div>
             <div class="bk-form-pr">
-              <span id="bk-form-price" data-prices='{"try": 14700, "eur": 420, "usd": 455}'>€420</span>
+              <span id="bk-form-price" data-prices='{"try": 18690, "eur": 420, "usd": 454}'>€420</span>
               <small>/ night</small>
             </div>
           </div>
@@ -320,11 +327,37 @@
             </div>
           </div>
 
+          <div class="bk-grp">Your stay</div>
+          <div class="bk-rw2">
+            <div class="bk-fld">
+              <label for="bk-arrival-time">Estimated arrival</label>
+              <select id="bk-arrival-time" name="arrival_time">
+                <option value="">Not sure yet</option>
+                <option value="morning">Morning (before 12:00)</option>
+                <option value="afternoon">Afternoon (12:00–18:00)</option>
+                <option value="evening">Evening (18:00–22:00)</option>
+                <option value="late">Late (after 22:00)</option>
+              </select>
+            </div>
+            <div class="bk-fld">
+              <label for="bk-occasion">Occasion (optional)</label>
+              <select id="bk-occasion" name="occasion">
+                <option value="">Just a stay</option>
+                <option value="honeymoon">Honeymoon</option>
+                <option value="anniversary">Anniversary</option>
+                <option value="birthday">Birthday</option>
+                <option value="wellness">Wellness retreat</option>
+                <option value="family">Family holiday</option>
+                <option value="business">Business trip</option>
+              </select>
+            </div>
+          </div>
+
           <div class="bk-grp">Your details</div>
           <div class="bk-fld"><label for="bk-name">Full name</label><input type="text" id="bk-name" name="name" placeholder="Jane Roberts" required /></div>
           <div class="bk-fld"><label for="bk-email">Email</label><input type="email" id="bk-email" name="email" placeholder="jane@example.com" required /></div>
           <div class="bk-fld"><label for="bk-phone">Phone</label><input type="tel" id="bk-phone" name="phone" placeholder="+44 7700 900 123" /></div>
-          <div class="bk-fld"><label for="bk-notes">Notes (optional)</label><input type="text" id="bk-notes" name="notes" placeholder="Anniversary, dietary, accessibility..." /></div>
+          <div class="bk-fld"><label for="bk-notes">Anything else? (optional)</label><input type="text" id="bk-notes" name="notes" placeholder="Dietary, accessibility, a specific request..." /></div>
 
           <div class="bk-grp">Add-ons</div>
           <div class="bk-xs" id="bk-xs">
@@ -436,10 +469,11 @@
 
         </form>
 
-        <!-- R016: email preview panel — shows on submit, displays the staff
-             email exactly as Resend will deliver it. Visible during stub phase
-             so user can verify format before real email wiring goes live. -->
-        <div id="bk-email-preview" class="bk-hidden bk-email-preview">
+        <!-- R016: email preview panel — shows the exact staff inbox format.
+             R023: now gated behind ?demo=1 query param via site.js, so the
+             DEMO PREVIEW banner never surfaces in front of a real guest at
+             production. Local previews still pop it up with ?demo=1. -->
+        <div id="bk-email-preview" class="bk-hidden bk-email-preview" data-demo-only="true">
           <div class="bk-email-preview-head">
             <span class="bk-email-preview-tag">DEMO PREVIEW</span>
             <h3>What the hotel staff inbox will receive</h3>
@@ -484,7 +518,7 @@
     </div>
 
     <!-- Data blob the front-end JS reads from. R010 swaps this for a fetch() call to the admin API. -->
-    <script type="application/json" id="bk-data">{"currency_symbols": {"try": "₺", "eur": "€", "usd": "$"}, "suites": {"standard": {"name": "Standard Suite", "rooms_label": "C1–C15 · 15 rooms", "sub": "Garden-facing comfort · sleeps 2", "prices": {"try": 6300, "eur": 180, "usd": 195}, "photos": [{"path": "assets/img/standard/standard-01.jpg", "label": "Bedroom"}, {"path": "assets/img/standard/standard-04.jpg", "label": "Bed detail"}, {"path": "assets/img/standard/standard-06.jpg", "label": "Bathroom"}, {"path": "assets/img/standard/standard-09.jpg", "label": "Wardrobe"}, {"path": "assets/img/standard/standard-12.jpg", "label": "Garden view"}, {"path": "assets/img/standard/standard-14.jpg", "label": "Entrance"}], "basics": [["Rooms", "C1–C15"], ["Type", "Standard"], ["Size", "22 m²"], ["Floor", "Ground"], ["View", "Garden"], ["Available", "15 of 15"]], "capacity": [["Adults", "Up to 2"], ["Children", "Up to 1"], ["Queen bed", "1"], ["Sofa bed", "0"], ["Cot", "On request"], ["Smoking", "Non-smoking"]], "amenities": [["wifi", "Wi-Fi"], ["snowflake", "Air-con"], ["bath", "Marble bath"], ["flower", "Garden"], ["coffee", "Kettle"], ["device-tv", "Smart TV"], ["lock", "Safe"], ["glass", "Minibar"], ["hanger", "Wardrobe"], ["wind", "Hair dryer"]]}, "deluxe": {"name": "Deluxe Suite", "rooms_label": "A1, A7 + A2, A3, B1, B2, B3, B6, B7, B10 · 10 rooms", "sub": "Sea view · kitchenette in most · sleeps 2", "prices": {"try": 8400, "eur": 240, "usd": 260}, "photos": [{"path": "assets/img/deluxe/deluxe-01.jpg", "label": "Bedroom"}, {"path": "assets/img/deluxe/deluxe-04.jpg", "label": "Sitting area"}, {"path": "assets/img/deluxe/deluxe-08.jpg", "label": "Marble bath"}, {"path": "assets/img/deluxe/deluxe-10.jpg", "label": "Sea view"}, {"path": "assets/img/deluxe/deluxe-16.jpg", "label": "Kitchenette"}, {"path": "assets/img/deluxe/deluxe-22.jpg", "label": "Balcony"}], "basics": [["Rooms", "A1, A2, A3, A7, B1–B10"], ["Type", "Deluxe"], ["Size", "28 m²"], ["Floor", "1st–2nd"], ["View", "Sea"], ["Available", "10 of 10"]], "capacity": [["Adults", "Up to 2"], ["Children", "Up to 1"], ["King bed", "1"], ["Sofa bed", "0"], ["Kitchen", "8 of 10 rooms"], ["Cot", "On request"]], "amenities": [["wifi", "Wi-Fi"], ["snowflake", "Air-con"], ["bath", "Marble bath"], ["eye", "Sea view"], ["flower", "Balcony"], ["coffee", "Nespresso"], ["device-tv", "Smart TV"], ["lock", "Safe"], ["glass", "Minibar"], ["tools-kitchen-2", "Kitchenette"], ["hanger", "Wardrobe"], ["wind", "Hair dryer"]]}, "family": {"name": "Family Suite", "rooms_label": "A8, A9, B8, B9 · 4 rooms", "sub": "Connecting layout · sleeps 4", "prices": {"try": 10150, "eur": 290, "usd": 315}, "photos": [{"path": "assets/img/family/family-01.jpg", "label": "Family bedroom"}, {"path": "assets/img/standard/standard-06.jpg", "label": "Marble bath"}, {"path": "assets/img/standard/standard-09.jpg", "label": "Connecting room"}, {"path": "assets/img/standard/standard-12.jpg", "label": "Garden view"}, {"path": "assets/img/garden/garden-03.jpg", "label": "Garden walk"}, {"path": "assets/img/standard/standard-14.jpg", "label": "Entrance"}], "basics": [["Rooms", "A8, A9, B8, B9"], ["Type", "Family"], ["Size", "34 m²"], ["Floor", "1st"], ["View", "Garden"], ["Available", "4 of 4"]], "capacity": [["Adults", "Up to 2"], ["Children", "Up to 2"], ["King bed", "1"], ["Single beds", "2"], ["Sofa bed", "0"], ["Cot", "Available"]], "amenities": [["wifi", "Wi-Fi"], ["snowflake", "Air-con"], ["bath", "Marble bath"], ["flower", "Garden"], ["coffee", "Nespresso"], ["device-tv", "Smart TV"], ["lock", "Safe"], ["glass", "Minibar"], ["baby-carriage", "Cot ready"], ["hanger", "Wardrobe"], ["wind", "Hair dryer"]]}, "king": {"name": "King Suite — A6", "rooms_label": "A6 · 1 of 1", "sub": "Sea view · the signature suite · sleeps 2", "prices": {"try": 14700, "eur": 420, "usd": 455}, "photos": [{"path": "assets/img/king/king-01.jpg", "label": "Bedroom"}, {"path": "assets/img/king/king-04.jpg", "label": "Marble bath"}, {"path": "assets/img/king/king-05.jpg", "label": "Sitting area"}, {"path": "assets/img/king/king-09.jpg", "label": "Terrace"}, {"path": "assets/img/king/king-11.jpg", "label": "Sea view"}, {"path": "assets/img/king/king-14.jpg", "label": "Entrance"}], "basics": [["Room", "A6"], ["Type", "King"], ["Size", "42 m²"], ["Floor", "2nd"], ["View", "Sea view"], ["Available", "1 of 1"]], "capacity": [["Adults", "Up to 2"], ["Children", "Up to 1"], ["King bed", "1"], ["Sofa bed", "0"], ["Cot", "On request"], ["Extra bed", "On request"]], "amenities": [["wifi", "Wi-Fi"], ["snowflake", "Air-con"], ["bath", "Marble bath"], ["eye", "Sea view"], ["flower", "Terrace"], ["coffee", "Nespresso"], ["device-tv", "Smart TV"], ["lock", "Safe"], ["glass", "Minibar"], ["hanger", "Wardrobe"], ["wind", "Hair dryer"], ["iron", "Iron"]]}}, "airports": [{"key": "ayt", "label": "Antalya (AYT)", "prices": {"try": 2800, "eur": 80, "usd": 87}}, {"key": "gzp", "label": "Gazipaşa (GZP)", "prices": {"try": 4200, "eur": 120, "usd": 130}}], "otogars": [{"key": "antalya", "label": "Antalya Otogar", "prices": {"try": 1800, "eur": 52, "usd": 56}}, {"key": "manavgat", "label": "Manavgat Otogar", "prices": {"try": 800, "eur": 23, "usd": 25}}, {"key": "alanya", "label": "Alanya Otogar", "prices": {"try": 1500, "eur": 43, "usd": 47}}], "spa_packages": [{"key": "classic", "name": "Classic Package", "prices": {"try": 1120, "eur": 32, "usd": 35}, "bullets": ["20 min Turkish scrub & foam", "40 min classic massage", "Sauna and steam room access", "Face mask after each massage", "Herbal tea or coffee service", "Free shuttle service — round trip"]}, {"key": "relax", "name": "Relax Package", "prices": {"try": 1505, "eur": 43, "usd": 47}, "bullets": ["20 min Turkish scrub & foam", "60 min mix therapy", "Sauna and steam room access", "Face mask after each massage", "Herbal tea or coffee service", "Free shuttle service — round trip"]}, {"key": "aroma", "name": "Aromatherapy Package", "prices": {"try": 2065, "eur": 59, "usd": 64}, "bullets": ["20 min Turkish scrub & foam", "90 min aromatherapy", "Sauna and steam room access", "Face mask after each massage", "Freshly squeezed orange juice", "Free shuttle service — round trip"]}], "wine": {"prices": {"try": 1575, "eur": 45, "usd": 49}}, "late_checkout": {"prices": {"try": 1000, "eur": 28, "usd": 30}, "available_blurb": "Fixed late-checkout fee up to 17:00. Anything beyond 17:00, a full additional night is charged.", "unavailable_blurb": "Unfortunately late checkout is unavailable — the suite is reserved for arrival in the early afternoon. Luggage storage at reception is available.", "slots": ["13:00", "14:00", "15:00", "16:00", "17:00"], "checkout_default": "12:00", "checkin_default": "14:00"}, "airline_lookup": {"TK": "Turkish Airlines", "TC": "Turkish Airlines", "PC": "Pegasus Airlines", "XQ": "SunExpress", "XG": "SunExpress", "EW": "Eurowings", "EWG": "Eurowings", "LH": "Lufthansa", "DLH": "Lufthansa", "BA": "British Airways", "BAW": "British Airways", "KL": "KLM", "KLM": "KLM", "AF": "Air France", "AFR": "Air France", "LX": "Swiss", "SWR": "Swiss", "OS": "Austrian Airlines", "AY": "Finnair", "SK": "SAS", "LO": "LOT Polish Airlines", "AZ": "ITA Airways", "AA": "American Airlines", "DL": "Delta Air Lines", "W6": "Wizz Air", "FR": "Ryanair", "U2": "easyJet", "DY": "Norwegian", "IB": "Iberia", "SU": "Aeroflot", "S7": "S7 Airlines", "FZ": "flydubai", "EK": "Emirates", "QR": "Qatar Airways", "ET": "Ethiopian", "MS": "EgyptAir", "SV": "Saudia", "EY": "Etihad"}}</script>
+    <script type="application/json" id="bk-data">{"currency_symbols": {"try": "₺", "eur": "€", "usd": "$"}, "suites": {"standard": {"name": "Standard Suite", "rooms_label": "A4, A5, B4, B5 + C1–C15 · 19 rooms", "sub": "Garden-facing comfort · sleeps 2", "prices": {"try": 8010, "eur": 180, "usd": 195}, "photos": [{"path": "assets/img/standard/standard-01.jpg", "label": "Bedroom"}, {"path": "assets/img/standard/standard-04.jpg", "label": "Bed detail"}, {"path": "assets/img/standard/standard-06.jpg", "label": "Bathroom"}, {"path": "assets/img/standard/standard-09.jpg", "label": "Wardrobe"}, {"path": "assets/img/standard/standard-12.jpg", "label": "Garden view"}, {"path": "assets/img/standard/standard-14.jpg", "label": "Entrance"}], "basics": [["Rooms", "A4, A5, B4, B5, C1–C15"], ["Type", "Standard"], ["Size", "22 m²"], ["Floor", "Ground / 1st"], ["View", "Garden"], ["Available", "19 of 19"]], "capacity": [["Adults", "Up to 2"], ["Children", "Up to 1"], ["Queen bed", "1"], ["Sofa bed", "0"], ["Cot", "On request"], ["Smoking", "Non-smoking"]], "amenities": [["wifi", "Wi-Fi"], ["snowflake", "Air-con"], ["bath", "Marble bath"], ["flower", "Garden"], ["coffee", "Kettle"], ["device-tv", "Smart TV"], ["lock", "Safe"], ["glass", "Minibar"], ["hanger", "Wardrobe"], ["wind", "Hair dryer"]]}, "deluxe": {"name": "Deluxe Suite", "rooms_label": "A1, A2, A3, A7 + B1, B2, B3, B6, B7, B10 · 10 rooms", "sub": "Sea view · kitchenette in most · sleeps 2", "prices": {"try": 10680, "eur": 240, "usd": 260}, "photos": [{"path": "assets/img/deluxe/deluxe-01.jpg", "label": "Bedroom"}, {"path": "assets/img/deluxe/deluxe-04.jpg", "label": "Sitting area"}, {"path": "assets/img/deluxe/deluxe-08.jpg", "label": "Marble bath"}, {"path": "assets/img/deluxe/deluxe-10.jpg", "label": "Sea view"}, {"path": "assets/img/deluxe/deluxe-16.jpg", "label": "Kitchenette"}, {"path": "assets/img/deluxe/deluxe-22.jpg", "label": "Balcony"}], "basics": [["Rooms", "A1, A2, A3, A7, B1–B10"], ["Type", "Deluxe"], ["Size", "28 m²"], ["Floor", "1st–2nd"], ["View", "Sea"], ["Available", "10 of 10"]], "capacity": [["Adults", "Up to 2"], ["Children", "Up to 1"], ["King bed", "1"], ["Sofa bed", "0"], ["Kitchen", "8 of 10 rooms"], ["Cot", "On request"]], "amenities": [["wifi", "Wi-Fi"], ["snowflake", "Air-con"], ["bath", "Marble bath"], ["eye", "Sea view"], ["flower", "Balcony"], ["coffee", "Nespresso"], ["device-tv", "Smart TV"], ["lock", "Safe"], ["glass", "Minibar"], ["tools-kitchen-2", "Kitchenette"], ["hanger", "Wardrobe"], ["wind", "Hair dryer"]]}, "family": {"name": "Family Suite", "rooms_label": "A8, A9, B8, B9 · 4 rooms", "sub": "Connecting layout · sleeps 4", "prices": {"try": 12905, "eur": 290, "usd": 314}, "photos": [{"path": "assets/img/family/family-01.jpg", "label": "Family bedroom"}, {"path": "assets/img/standard/standard-06.jpg", "label": "Marble bath"}, {"path": "assets/img/standard/standard-09.jpg", "label": "Connecting room"}, {"path": "assets/img/standard/standard-12.jpg", "label": "Garden view"}, {"path": "assets/img/garden/garden-03.jpg", "label": "Garden walk"}, {"path": "assets/img/standard/standard-14.jpg", "label": "Entrance"}], "basics": [["Rooms", "A8, A9, B8, B9"], ["Type", "Family"], ["Size", "34 m²"], ["Floor", "1st"], ["View", "Garden"], ["Available", "4 of 4"]], "capacity": [["Adults", "Up to 2"], ["Children", "Up to 2"], ["King bed", "1"], ["Single beds", "2"], ["Sofa bed", "0"], ["Cot", "Available"]], "amenities": [["wifi", "Wi-Fi"], ["snowflake", "Air-con"], ["bath", "Marble bath"], ["flower", "Garden"], ["coffee", "Nespresso"], ["device-tv", "Smart TV"], ["lock", "Safe"], ["glass", "Minibar"], ["baby-carriage", "Cot ready"], ["hanger", "Wardrobe"], ["wind", "Hair dryer"]]}, "king": {"name": "King Suite — A6", "rooms_label": "A6 · 1 of 1", "sub": "Sea view · the signature suite · sleeps 2", "prices": {"try": 18690, "eur": 420, "usd": 454}, "photos": [{"path": "assets/img/king/king-01.jpg", "label": "Bedroom"}, {"path": "assets/img/king/king-04.jpg", "label": "Marble bath"}, {"path": "assets/img/king/king-05.jpg", "label": "Sitting area"}, {"path": "assets/img/king/king-09.jpg", "label": "Terrace"}, {"path": "assets/img/king/king-11.jpg", "label": "Sea view"}, {"path": "assets/img/king/king-14.jpg", "label": "Entrance"}], "basics": [["Room", "A6"], ["Type", "King"], ["Size", "42 m²"], ["Floor", "2nd"], ["View", "Sea view"], ["Available", "1 of 1"]], "capacity": [["Adults", "Up to 2"], ["Children", "Up to 1"], ["King bed", "1"], ["Sofa bed", "0"], ["Cot", "On request"], ["Extra bed", "On request"]], "amenities": [["wifi", "Wi-Fi"], ["snowflake", "Air-con"], ["bath", "Marble bath"], ["eye", "Sea view"], ["flower", "Terrace"], ["coffee", "Nespresso"], ["device-tv", "Smart TV"], ["lock", "Safe"], ["glass", "Minibar"], ["hanger", "Wardrobe"], ["wind", "Hair dryer"], ["iron", "Iron"]]}}, "airports": [{"key": "ayt", "label": "Antalya (AYT)", "prices": {"try": 2800, "eur": 80, "usd": 87}}, {"key": "gzp", "label": "Gazipaşa (GZP)", "prices": {"try": 4200, "eur": 120, "usd": 130}}], "otogars": [{"key": "antalya", "label": "Antalya Otogar", "prices": {"try": 1800, "eur": 52, "usd": 56}}, {"key": "manavgat", "label": "Manavgat Otogar", "prices": {"try": 800, "eur": 23, "usd": 25}}, {"key": "alanya", "label": "Alanya Otogar", "prices": {"try": 1500, "eur": 43, "usd": 47}}], "spa_packages": [{"key": "classic", "name": "Classic Package", "prices": {"try": 1120, "eur": 32, "usd": 35}, "bullets": ["20 min Turkish scrub & foam", "40 min classic massage", "Sauna and steam room access", "Face mask after each massage", "Herbal tea or coffee service", "Free shuttle service — round trip"]}, {"key": "relax", "name": "Relax Package", "prices": {"try": 1505, "eur": 43, "usd": 47}, "bullets": ["20 min Turkish scrub & foam", "60 min mix therapy", "Sauna and steam room access", "Face mask after each massage", "Herbal tea or coffee service", "Free shuttle service — round trip"]}, {"key": "aroma", "name": "Aromatherapy Package", "prices": {"try": 2065, "eur": 59, "usd": 64}, "bullets": ["20 min Turkish scrub & foam", "90 min aromatherapy", "Sauna and steam room access", "Face mask after each massage", "Freshly squeezed orange juice", "Free shuttle service — round trip"]}], "wine": {"prices": {"try": 1575, "eur": 45, "usd": 49}}, "late_checkout": {"prices": {"try": 1000, "eur": 28, "usd": 30}, "available_blurb": "Fixed late-checkout fee up to 17:00. Anything beyond 17:00, a full additional night is charged.", "unavailable_blurb": "Unfortunately late checkout is unavailable — the suite is reserved for arrival in the early afternoon. Luggage storage at reception is available.", "slots": ["13:00", "14:00", "15:00", "16:00", "17:00"], "checkout_default": "12:00", "checkin_default": "14:00"}, "airline_lookup": {"TK": "Turkish Airlines", "TC": "Turkish Airlines", "PC": "Pegasus Airlines", "XQ": "SunExpress", "XG": "SunExpress", "EW": "Eurowings", "EWG": "Eurowings", "LH": "Lufthansa", "DLH": "Lufthansa", "BA": "British Airways", "BAW": "British Airways", "KL": "KLM", "KLM": "KLM", "AF": "Air France", "AFR": "Air France", "LX": "Swiss", "SWR": "Swiss", "OS": "Austrian Airlines", "AY": "Finnair", "SK": "SAS", "LO": "LOT Polish Airlines", "AZ": "ITA Airways", "AA": "American Airlines", "DL": "Delta Air Lines", "W6": "Wizz Air", "FR": "Ryanair", "U2": "easyJet", "DY": "Norwegian", "IB": "Iberia", "SU": "Aeroflot", "S7": "S7 Airlines", "FZ": "flydubai", "EK": "Emirates", "QR": "Qatar Airways", "ET": "Ethiopian", "MS": "EgyptAir", "SV": "Saudia", "EY": "Etihad"}}</script>
     </main>
     <footer class="bg-mira-900 text-white/80 mt-24">
       <div class="max-w-7xl mx-auto px-5 lg:px-8 py-14 grid grid-cols-1 md:grid-cols-4 gap-10">
@@ -675,6 +709,6 @@
 
     <script src="assets/js/media-manifest.js?v=32" defer></script>
     <script src="assets/js/search-index.js?v=32" defer></script>
-    <script src="assets/js/i18n.js?v=34" defer></script>
-    <script src="assets/js/site.js?v=34" defer></script>
+    <script src="assets/js/i18n.js?v=35" defer></script>
+    <script src="assets/js/site.js?v=35" defer></script>
     </body></html>

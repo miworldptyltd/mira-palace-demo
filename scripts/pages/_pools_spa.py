@@ -20,17 +20,19 @@ IMG_SPA_12 = "assets/img/spa/spa-12.jpg"   # spa detail
 
 
 def pools(root: str) -> str:
-    # 4-slide hero from the garden folder
+    # R023: was four pools with fabricated dimensions + "private beach club".
+    # Reality: TWO pools (outdoor + heated indoor), and the nearest beach is
+    # Evrenseki Halk Plajı — a Blue-Flag public beach ~700 m down the lane.
     hero_urls = [f"{root}{u}" for u in (IMG_GARDEN_1, IMG_GARDEN_2, IMG_GARDEN_3, IMG_GARDEN_4)]
     h = hero_slideshow(hero_urls, "Pools & Beach",
-             "Four pools. One sea.<br/>Your choice of shade.",
-             "A main pool for families, an adults-only infinity pool, a heated indoor pool for mornings and winter, and a children's pool with its own small slide. Plus 600 m of shoreline we've made easy to reach.",
+             "Two pools. One sea.<br/>Your choice of shade.",
+             "A generous outdoor pool through the season, a heated indoor pool for the winter months and cold mornings, and the Blue-Flag public beach at Evrenseki a seven-minute walk down the cypress lane.",
              height="72vh")
     pools_data = [
-        ("Main pool", "25 × 12 m, 1.3–1.6 m deep. Open 08:00–19:00. Sun loungers on three sides, shaded pergola at the west end. Towel service at the pool bar."),
-        ("Infinity pool (adults only)", "A quieter 18 × 8 m pool raised above the orchard, with sun loungers and private cabanas on request. Open 09:00–19:00. Minimum age 16."),
-        ("Indoor pool", "14 × 7 m, heated year-round. Open 07:00–22:00 — ideal for morning swims before breakfast and for winter guests. Adjacent to the spa."),
-        ("Children's pool", "0.4 m deep with a gentle slide. A team member is at the pool 10:00–17:00. Parents welcome; shallow enough to sit in."),
+        ("Outdoor pool",
+         "Open through the season, sun loungers on three sides and shaded pergolas around the terrace. Towel service at the pool bar. Kids welcome — the shallow end is gentle."),
+        ("Indoor pool",
+         "Heated year-round for winter guests and early risers who want a lap before breakfast. Adjacent to the spa, so a swim naturally leads to the hammam."),
     ]
     pool_cards = "".join(
         f'<div class="p-7 bg-white rounded-lg shadow-lux"><h3 class="font-display text-2xl text-mira-900">{t}</h3><p class="mt-3 text-mira-700 text-sm leading-relaxed">{d}</p></div>'
@@ -38,20 +40,20 @@ def pools(root: str) -> str:
     )
     a = section(f"""
       {eyebrow('Our pools')}
-      {heading('Four to choose from.')}
+      {heading('One for summer. One for the rest of the year.')}
       <div class="grid md:grid-cols-2 gap-7 mt-10">{pool_cards}</div>
     """, bg="bg-sand-50")
     b = section(f"""
       <div class="grid lg:grid-cols-2 gap-12 items-center">
         <div>{eyebrow('The beach')}
-          {heading('600 metres from your room.')}
-          <p class="mt-5 text-mira-700 leading-relaxed">Our private beach club sits at the end of a cypress-lined lane, ten minutes on foot from the hotel or three minutes on the shuttle buggy that runs every thirty minutes. Sun loungers and parasols are reserved for Mira Palace guests; fresh towels are at the cabana.</p>
+          {heading('Evrenseki Halk Plajı, seven minutes on foot.')}
+          <p class="mt-5 text-mira-700 leading-relaxed"><strong>Evrenseki Halk Plajı</strong> is the Blue-Flag public beach at the end of the lane — the same soft sandy strip that runs the length of Evrenseki. Turn left out of reception, walk down the cypress-lined path, and you're on the sand in about seven minutes. Sunbeds, umbrellas and a beach kiosk on the front.</p>
           <ul class="mt-6 space-y-3 text-sm text-mira-700">
-            <li class="flex gap-3"><span class="text-sand-500">✓</span>Lifeguards on duty 10:00–18:00 in season</li>
-            <li class="flex gap-3"><span class="text-sand-500">✓</span>Showers, changing rooms, toilets, small bar</li>
-            <li class="flex gap-3"><span class="text-sand-500">✓</span>Light lunch served 12:30–15:00 (club sandwich, grilled fish, salads)</li>
-            <li class="flex gap-3"><span class="text-sand-500">✓</span>SUPs, paddles, kayaks, snorkel gear — free to use</li>
-            <li class="flex gap-3"><span class="text-sand-500">✓</span>Watersports (jet-ski, banana boat) operated by third-party at surcharge</li>
+            <li class="flex gap-3"><span class="text-sand-500">✓</span>Blue Flag since 2010 — soft, family-friendly sand</li>
+            <li class="flex gap-3"><span class="text-sand-500">✓</span>Sunbeds, parasols, showers and changing rooms on the beach (public)</li>
+            <li class="flex gap-3"><span class="text-sand-500">✓</span>Gentle shallow entry — good for young children</li>
+            <li class="flex gap-3"><span class="text-sand-500">✓</span>Kiosks and cafés along the promenade for drinks and light bites</li>
+            <li class="flex gap-3"><span class="text-sand-500">✓</span>Ask reception for a fresh towel to take with you</li>
           </ul>
         </div>
         <div class="aspect-[4/5] bg-cover bg-center rounded-lg shadow-lux" style="background-image:url('{root}{IMG_GARDEN_2}')"></div>

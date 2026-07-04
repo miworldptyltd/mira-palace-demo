@@ -16,18 +16,25 @@ via inline <script> so the front-end can swap currencies without a rebuild.
 """
 from __future__ import annotations
 import json
-from common import SITE_META
+from common import SITE_META, PRICES, FX_RATES, price as _p
 
 # --- Suite data ------------------------------------------------------------
-# Each suite has: name, room label, sub, prices in TRY/EUR/USD, six photos
-# with descriptive labels, and three info cards (basics, capacity, amenities).
+# Each suite pulls its rate from the central PRICES dict in common.py.
+# (R023: was 4 sets of hardcoded TRY/EUR/USD numbers scattered here — now
+# every published price is defined in one place and converted on the fly.)
+
+def _prices(key: str) -> dict:
+    """Build the {try, eur, usd} triple from the EUR base in PRICES."""
+    return {"try": _p(key, "try"), "eur": PRICES[key], "usd": _p(key, "usd")}
+
 
 SUITES = {
     "standard": {
         "name": "Standard Suite",
-        "rooms_label": "C1–C15 · 15 rooms",
+        # R023: added A4/A5/B4/B5 (previously unaccounted) — total 19 rooms.
+        "rooms_label": "A4, A5, B4, B5 + C1–C15 · 19 rooms",
         "sub": "Garden-facing comfort · sleeps 2",
-        "prices": {"try": 6300, "eur": 180, "usd": 195},
+        "prices": _prices("room_standard"),
         "photos": [
             ("assets/img/standard/standard-01.jpg", "Bedroom"),
             ("assets/img/standard/standard-04.jpg", "Bed detail"),
@@ -37,12 +44,12 @@ SUITES = {
             ("assets/img/standard/standard-14.jpg", "Entrance"),
         ],
         "basics": [
-            ("Rooms", "C1–C15"),
+            ("Rooms", "A4, A5, B4, B5, C1–C15"),
             ("Type", "Standard"),
             ("Size", "22 m²"),
-            ("Floor", "Ground"),
+            ("Floor", "Ground / 1st"),
             ("View", "Garden"),
-            ("Available", "15 of 15"),
+            ("Available", "19 of 19"),
         ],
         "capacity": [
             ("Adults", "Up to 2"),
@@ -61,9 +68,9 @@ SUITES = {
     },
     "deluxe": {
         "name": "Deluxe Suite",
-        "rooms_label": "A1, A7 + A2, A3, B1, B2, B3, B6, B7, B10 · 10 rooms",
+        "rooms_label": "A1, A2, A3, A7 + B1, B2, B3, B6, B7, B10 · 10 rooms",
         "sub": "Sea view · kitchenette in most · sleeps 2",
-        "prices": {"try": 8400, "eur": 240, "usd": 260},
+        "prices": _prices("room_deluxe"),
         "photos": [
             ("assets/img/deluxe/deluxe-01.jpg", "Bedroom"),
             ("assets/img/deluxe/deluxe-04.jpg", "Sitting area"),
@@ -100,7 +107,7 @@ SUITES = {
         "name": "Family Suite",
         "rooms_label": "A8, A9, B8, B9 · 4 rooms",
         "sub": "Connecting layout · sleeps 4",
-        "prices": {"try": 10150, "eur": 290, "usd": 315},
+        "prices": _prices("room_family"),
         "photos": [
             ("assets/img/family/family-01.jpg", "Family bedroom"),
             ("assets/img/standard/standard-06.jpg", "Marble bath"),
@@ -136,7 +143,7 @@ SUITES = {
         "name": "King Suite — A6",
         "rooms_label": "A6 · 1 of 1",
         "sub": "Sea view · the signature suite · sleeps 2",
-        "prices": {"try": 14700, "eur": 420, "usd": 455},
+        "prices": _prices("room_king"),
         "photos": [
             ("assets/img/king/king-01.jpg", "Bedroom"),
             ("assets/img/king/king-04.jpg", "Marble bath"),
@@ -545,7 +552,7 @@ def book(root: str) -> str:
       <!-- Title bar -->
       <div class="bk-title">
         <h1>Send an enquiry</h1>
-        <p class="bk-title-note">No payment, no commitment · we confirm availability and a direct quote within the hour · prices on this page are indicative until we confirm</p>
+        <p class="bk-title-note">No payment, no commitment · rates shown are indicative — we confirm the final rate for your dates within the hour, usually faster</p>
       </div>
 
       <!-- Suite tabs (full width) -->
@@ -566,9 +573,11 @@ def book(root: str) -> str:
               method="POST">
 
           <!-- R016: honeypot — hidden field bots fill in but humans don't.
-               Submit handler rejects the form silently if this is non-empty. -->
-          <div style="position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;overflow:hidden" aria-hidden="true">
-            <label>If you are human, leave this empty: <input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
+               R023: label text made blank so it never appears in a screen
+               scrape / SR read-out. Submit handler rejects the form silently
+               if this field is non-empty. -->
+          <div class="bk-honeypot" aria-hidden="true">
+            <label aria-hidden="true"><input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
           </div>
 
           <div class="bk-form-head">
@@ -609,11 +618,37 @@ def book(root: str) -> str:
             </div>
           </div>
 
+          <div class="bk-grp">Your stay</div>
+          <div class="bk-rw2">
+            <div class="bk-fld">
+              <label for="bk-arrival-time">Estimated arrival</label>
+              <select id="bk-arrival-time" name="arrival_time">
+                <option value="">Not sure yet</option>
+                <option value="morning">Morning (before 12:00)</option>
+                <option value="afternoon">Afternoon (12:00–18:00)</option>
+                <option value="evening">Evening (18:00–22:00)</option>
+                <option value="late">Late (after 22:00)</option>
+              </select>
+            </div>
+            <div class="bk-fld">
+              <label for="bk-occasion">Occasion (optional)</label>
+              <select id="bk-occasion" name="occasion">
+                <option value="">Just a stay</option>
+                <option value="honeymoon">Honeymoon</option>
+                <option value="anniversary">Anniversary</option>
+                <option value="birthday">Birthday</option>
+                <option value="wellness">Wellness retreat</option>
+                <option value="family">Family holiday</option>
+                <option value="business">Business trip</option>
+              </select>
+            </div>
+          </div>
+
           <div class="bk-grp">Your details</div>
           <div class="bk-fld"><label for="bk-name">Full name</label><input type="text" id="bk-name" name="name" placeholder="Jane Roberts" required /></div>
           <div class="bk-fld"><label for="bk-email">Email</label><input type="email" id="bk-email" name="email" placeholder="jane@example.com" required /></div>
           <div class="bk-fld"><label for="bk-phone">Phone</label><input type="tel" id="bk-phone" name="phone" placeholder="+44 7700 900 123" /></div>
-          <div class="bk-fld"><label for="bk-notes">Notes (optional)</label><input type="text" id="bk-notes" name="notes" placeholder="Anniversary, dietary, accessibility..." /></div>
+          <div class="bk-fld"><label for="bk-notes">Anything else? (optional)</label><input type="text" id="bk-notes" name="notes" placeholder="Dietary, accessibility, a specific request..." /></div>
 
           <div class="bk-grp">Add-ons</div>
           <div class="bk-xs" id="bk-xs">
@@ -632,10 +667,11 @@ def book(root: str) -> str:
 
         </form>
 
-        <!-- R016: email preview panel — shows on submit, displays the staff
-             email exactly as Resend will deliver it. Visible during stub phase
-             so user can verify format before real email wiring goes live. -->
-        <div id="bk-email-preview" class="bk-hidden bk-email-preview">
+        <!-- R016: email preview panel — shows the exact staff inbox format.
+             R023: now gated behind ?demo=1 query param via site.js, so the
+             DEMO PREVIEW banner never surfaces in front of a real guest at
+             production. Local previews still pop it up with ?demo=1. -->
+        <div id="bk-email-preview" class="bk-hidden bk-email-preview" data-demo-only="true">
           <div class="bk-email-preview-head">
             <span class="bk-email-preview-tag">DEMO PREVIEW</span>
             <h3>What the hotel staff inbox will receive</h3>

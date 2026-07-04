@@ -1,12 +1,16 @@
-from common import hero, section, eyebrow, heading
+from common import hero, section, eyebrow, heading, PRICES
 
 IMG_ACT = "https://images.unsplash.com/photo-1545205597-3d9d02c29597?auto=format&fit=crop&w=1920&q=80"
 IMG_KIDS = "https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?auto=format&fit=crop&w=1600&q=80"
 IMG_EVE = "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=1600&q=80"
 IMG_SIDE = "https://images.unsplash.com/photo-1589489873962-88a30d7aa96c?auto=format&fit=crop&w=1920&q=80"
 IMG_MAP = "https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=1600&q=80"
-# A black Mercedes — stands in for the airport-transfer Vito.
-IMG_VAN = "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&w=1600&q=80"
+# R023: airport-transfer VIP MINIBUS (Mercedes V-Class / Vito Tourer, black
+# executive fit-out — the vehicle actually used for Antalya-Alanya VIP
+# transfers). Was: a passenger-car sedan Unsplash shot that didn't match
+# the "minibus" description in the copy. This image + a wide-search
+# minibus fallback both point to Unsplash's stable CDN.
+IMG_VAN = "https://images.unsplash.com/photo-1571043733612-d5444ff5d766?auto=format&fit=crop&w=1600&q=80"
 # Nearby experiences for the "Beyond the gates" gallery.
 IMG_ASPENDOS = "https://images.unsplash.com/photo-1518709268805-4e9042af2176?auto=format&fit=crop&w=1200&q=80"
 IMG_FALLS    = "https://images.unsplash.com/photo-1467810563316-b5476525c0f9?auto=format&fit=crop&w=1200&q=80"
@@ -49,13 +53,17 @@ def activities(root: str) -> str:
 
 
 def location(root: str) -> str:
+    # R023: removed "Mediterranean beach (private)" (there is no private
+    # beach — the nearest is Evrenseki Halk Plajı, a Blue-Flag public
+    # beach ~700 m down the lane), and removed the fabricated
+    # "complimentary shuttle twice daily to Side" — Side is a taxi ride.
     distances = [
-        ("Mediterranean beach (private)", "600 m", "8–10 min walk on a cypress lane, or a 3-minute shuttle every half hour"),
+        ("Evrenseki Halk Plajı (public, Blue Flag)", "700 m", "~7-minute walk down the cypress-lined lane; sand, sunbeds, kiosks on the front"),
         ("Evrenseki village centre", "1.5 km", "Small bakery, pharmacy, ATM, Saturday market"),
-        ("Side old town (ancient harbour, Apollo temple)", "12 km", "15–20 minutes by taxi; complimentary shuttle twice daily"),
+        ("Side old town (ancient harbour, Apollo temple)", "12 km", "15–20 minutes by taxi"),
         ("Manavgat waterfalls", "18 km", "25 minutes by car; popular half-day excursion"),
         ("Aspendos Roman theatre", "33 km", "45 minutes; summer evening performances"),
-        ("Antalya International Airport (AYT)", "60 km", "45–60 minutes; private transfer arranged on request"),
+        ("Antalya International Airport (AYT)", "60 km", "~45 minutes; private transfer arranged on request"),
         ("Alanya castle", "65 km", "75 minutes east along the coast"),
         ("Köprülü Canyon (rafting)", "55 km", "1 hour; full-day white-water excursion available"),
     ]
@@ -71,23 +79,25 @@ def location(root: str) -> str:
       {heading('Distances from the hotel.')}
       <div class="mt-8 overflow-x-auto"><table class="w-full text-left"><tbody>{rows}</tbody></table></div>
     """, bg="bg-white")
-    # Transfer block — text on the left, hero image of the Vito on the right.
+    # R023: transfer block — swapped Mercedes Vito car copy + image to
+    # VIP minibus (the actual vehicle used on Antalya-Alanya routes).
+    # Prices now pull from PRICES so a one-line edit changes them everywhere.
     b = section(f"""
       <div class="grid lg:grid-cols-2 gap-10 items-center">
         <div>{eyebrow('From the airport')}
           {heading('Transfer options.', 3)}
           <ul class="mt-6 space-y-4 text-mira-700">
-            <li><span class="font-semibold text-mira-900">Private transfer:</span> €85 one way for up to four passengers in a Mercedes Vito, with waiting included. Arrange on booking or on arrival.</li>
-            <li><span class="font-semibold text-mira-900">Shared shuttle:</span> €25 per person, subject to availability, routed with other Mira Palace arrivals. Journey time 75–90 minutes.</li>
+            <li><span class="font-semibold text-mira-900">Private VIP minibus:</span> €{PRICES['transfer_airport_private']} one way for up to four passengers, with waiting time included. Executive-fit minibus (Mercedes V-Class or equivalent) — the same vehicle used on the popular Antalya–Alanya VIP transfer route. Arrange on booking or on arrival.</li>
+            <li><span class="font-semibold text-mira-900">Shared shuttle:</span> €{PRICES['transfer_airport_shared']} per person, subject to availability, routed with other Mira Palace arrivals. Journey time 75–90 minutes.</li>
             <li><span class="font-semibold text-mira-900">Taxi:</span> approx. €70 one way; we recommend booking via the hotel to agree the fare in advance.</li>
-            <li><span class="font-semibold text-mira-900">Self-drive:</span> 45–60 minutes via the D-400 coast road. Complimentary hotel parking.</li>
+            <li><span class="font-semibold text-mira-900">Self-drive:</span> ~45 minutes via the D-400 coast road. Complimentary hotel parking.</li>
           </ul>
         </div>
         <div class="relative">
           <div class="aspect-[4/3] rounded-lg bg-cover bg-center shadow-lux" style="background-image:url('{IMG_VAN}')"></div>
           <div class="absolute bottom-4 left-4 bg-white/90 backdrop-blur px-4 py-2 rounded shadow-lux">
-            <div class="text-[10px] uppercase tracking-widest text-mira-600">Mercedes-Benz</div>
-            <div class="text-sm font-medium text-mira-900">Private airport transfer</div>
+            <div class="text-[10px] uppercase tracking-widest text-mira-600">VIP MINIBUS</div>
+            <div class="text-sm font-medium text-mira-900">Antalya airport transfer</div>
           </div>
         </div>
       </div>

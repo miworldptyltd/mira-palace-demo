@@ -48,7 +48,7 @@
   // because GitHub Pages hosts at /mira-palace-demo/ rather than /.
   window.MIRA_ROOT = "";
 </script>
-<link rel="stylesheet" href="assets/css/site.css?v=30" />
+<link rel="stylesheet" href="assets/css/site.css?v=31" />
 <!-- R020: Tabler Icons bumped 2.47.0 → 3.44.0 (v3 kept the ti- prefix; classes we use — ti-chevron-down, ti-maximize — verified to still exist). -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.44.0/dist/tabler-icons.min.css" />
 <!-- R016: Cloudflare Turnstile (bot-check on forms). Test sitekey "always pass"
@@ -94,12 +94,17 @@
     },
     {
       "@type": "LocationFeatureSpecification",
-      "name": "Swimming pool",
+      "name": "Outdoor swimming pool",
       "value": true
     },
     {
       "@type": "LocationFeatureSpecification",
-      "name": "Private beach",
+      "name": "Indoor heated pool",
+      "value": true
+    },
+    {
+      "@type": "LocationFeatureSpecification",
+      "name": "Near beach (~700 m walk to Evrenseki public beach, Blue Flag)",
       "value": true
     },
     {
@@ -124,7 +129,7 @@
     },
     {
       "@type": "LocationFeatureSpecification",
-      "name": "Airport transfer",
+      "name": "Airport transfer (VIP minibus)",
       "value": true
     }
   ],
@@ -270,9 +275,9 @@
               action="https://mira-palace-enquiry.apps-224.workers.dev"
               method="POST">
 
-          <!-- R016: honeypot -->
-          <div style="position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;overflow:hidden" aria-hidden="true">
-            <label>If you are human, leave this empty: <input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
+          <!-- R016 honeypot (R023 clean-up — visually + a11y hidden, no leaking label) -->
+          <div class="bk-honeypot" aria-hidden="true">
+            <label aria-hidden="true"><input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
           </div>
 
           <div class="bk-form-head">
@@ -328,7 +333,7 @@
         </form>
 
         <!-- R016: email preview panel -->
-        <div id="sp-email-preview" class="bk-hidden bk-email-preview">
+        <div id="sp-email-preview" class="bk-hidden bk-email-preview" data-demo-only="true">
           <div class="bk-email-preview-head">
             <span class="bk-email-preview-tag">DEMO PREVIEW</span>
             <h3>What the spa staff inbox will receive</h3>
@@ -561,6 +566,6 @@
 
     <script src="assets/js/media-manifest.js?v=32" defer></script>
     <script src="assets/js/search-index.js?v=32" defer></script>
-    <script src="assets/js/i18n.js?v=34" defer></script>
-    <script src="assets/js/site.js?v=34" defer></script>
+    <script src="assets/js/i18n.js?v=35" defer></script>
+    <script src="assets/js/site.js?v=35" defer></script>
     </body></html>

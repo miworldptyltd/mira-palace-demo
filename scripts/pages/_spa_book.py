@@ -232,9 +232,9 @@ def spa_book(root: str) -> str:
               action="https://mira-palace-enquiry.apps-224.workers.dev"
               method="POST">
 
-          <!-- R016: honeypot -->
-          <div style="position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;overflow:hidden" aria-hidden="true">
-            <label>If you are human, leave this empty: <input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
+          <!-- R016 honeypot (R023 clean-up — visually + a11y hidden, no leaking label) -->
+          <div class="bk-honeypot" aria-hidden="true">
+            <label aria-hidden="true"><input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
           </div>
 
           <div class="bk-form-head">
@@ -290,7 +290,7 @@ def spa_book(root: str) -> str:
         </form>
 
         <!-- R016: email preview panel -->
-        <div id="sp-email-preview" class="bk-hidden bk-email-preview">
+        <div id="sp-email-preview" class="bk-hidden bk-email-preview" data-demo-only="true">
           <div class="bk-email-preview-head">
             <span class="bk-email-preview-tag">DEMO PREVIEW</span>
             <h3>What the spa staff inbox will receive</h3>

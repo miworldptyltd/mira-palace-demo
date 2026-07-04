@@ -1,4 +1,4 @@
-from common import hero, section, eyebrow, heading, lead, cta_band
+from common import hero, section, eyebrow, heading, lead, cta_band, PRICES
 
 IMG_HERO = "https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?auto=format&fit=crop&w=1920&q=80"
 IMG_BREAK = "https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?auto=format&fit=crop&w=1200&q=80"
@@ -8,7 +8,7 @@ def concept(root: str) -> str:
     included = [
         ("Dining", "Breakfast, lunch and dinner at the main restaurant. Light lunch at the pool restaurant. 24-hour in-room dining. One weekly à-la-carte dinner per stay (reservation required). Turkish afternoon tea with pastry. Late-night snack bar, 23:00–01:00."),
         ("Drinks", "Unlimited domestic and imported spirits, beers, wines, soft drinks, fresh juices, coffees, teas, and mineral water — all bars, all hours. House cocktail of the day. Fresh watermelon at the pool bar."),
-        ("Pools & beach", "All four pools (main, infinity, children's, indoor). Sun loungers, mattresses, parasols, towels. Beach-club access with shuttle service 600 m to the private beach area."),
+        ("Pools & beach", "Both pools (outdoor and heated indoor). Sun loungers, mattresses, parasols, towels. Evrenseki Halk Plajı — the Blue-Flag public beach — is a seven-minute walk from reception."),
         ("Spa facilities", "Full use of the hammam complex: Turkish bath chamber, sauna, steam room, cold plunge, relaxation room. Two fitness classes per day (yoga, aqua-fit, stretch). Gym access, 06:00–22:00."),
         ("Entertainment", "Evening programme: live music twice a week, folk night, pianist in the lobby every evening. Adult animation team with a deliberately soft touch — no microphones at the pool."),
         ("Kids & families", "Kids' club (4–12 years), 10:00–17:00 with a break for lunch. In-room cot, high-chair at the restaurant, child menu. Teen lounge with console games, 14:00–22:00."),
@@ -18,7 +18,7 @@ def concept(root: str) -> str:
         ("À la carte", "One included per stay. Additional evenings are €35 per person."),
         ("Spa treatments", "Massages, rituals, facials and scrubs priced à la carte. Hammam and facilities included."),
         ("Laundry", "Per-item laundry and dry-cleaning, returned same day if before 10:00."),
-        ("Airport transfer", "Private from Antalya (60 km): €85 one way for up to four passengers. Shared shuttles on request."),
+        ("Airport transfer", f"Private VIP minibus from Antalya (60 km, ~45 minutes): €{PRICES['transfer_airport_private']} one way for up to four passengers. Shared shuttles from €{PRICES['transfer_airport_shared']}/person on request."),
         ("Excursions", "Concierge-arranged: Aspendos theatre, Manavgat waterfalls, boat to Alanya, Taurus mountain jeep safari."),
     ]
     schedule = [

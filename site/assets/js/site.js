@@ -767,15 +767,17 @@
 
   const CUR_SYMBOLS = { try: '₺', eur: '€', usd: '$' };
   function detectCurrency() {
+    // R023: default is EUR for everyone. A Turkish Riviera hotel targeting
+    // European guests should not default to USD (the SME booking-form review
+    // called this out as the biggest first-impression miss). Turkish visitors
+    // still get TRY; everyone else — including US — gets EUR. Users can
+    // switch, and their choice persists in localStorage.
     var saved = null;
     try { saved = localStorage.getItem('mp-currency'); } catch (e) {}
     if (saved && CUR_SYMBOLS[saved]) return saved;
-    // Auto-detect from browser locale
     var locale = (navigator.language || 'en-US').toLowerCase();
     if (locale.indexOf('tr') === 0) return 'try';
-    if (locale.indexOf('en-us') === 0 || locale.indexOf('en-ca') === 0 ||
-        locale.indexOf('en-au') === 0 || locale === 'en') return 'usd';
-    return 'eur';  // safe default for European + everyone else
+    return 'eur';  // world-default for the Turkish Riviera boutique market
   }
   function applyCurrencyPills(cur) {
     document.querySelectorAll('.nav-cur').forEach(function (b) {
@@ -1384,7 +1386,11 @@
         'Subject: ' + email.subject + '\n' +
         '\n' + email.body;
     }
-    if (previewPanel) previewPanel.classList.remove('bk-hidden');
+    // R023: only reveal the DEMO PREVIEW panel when ?demo=1 is in the URL.
+    // At production the panel stays hidden — a real guest sees only the
+    // thank-you confirmation.
+    var demoOn = /(^|[?&])demo=1(?:&|$)/.test(window.location.search);
+    if (previewPanel && demoOn) previewPanel.classList.remove('bk-hidden');
     if (thanksPanel) thanksPanel.classList.remove('bk-hidden');
     form.style.display = 'none';
 

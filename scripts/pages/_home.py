@@ -29,7 +29,7 @@ def home(root: str) -> str:
         f"{root}{HERO_POSTER}",
         '<span data-i18n="home.hero.kicker">Side • Antalya • Türkiye</span>',
         '<span data-i18n="home.hero.h1">The Turkish Riviera, reimagined in quiet luxury.</span>',
-        '<span data-i18n="home.hero.sub">Thirty-four suites, four pools, and a Mediterranean shoreline 600 metres from your door. Mira Palace is a small, boutique all-inclusive where the entire team knows your name by the second morning.</span>',
+        '<span data-i18n="home.hero.sub">Thirty-four suites, two pools (one outdoor, one indoor) and Evrenseki\'s Blue-Flag public beach a seven-minute walk down a cypress lane. A small, boutique all-inclusive where the entire team knows your name by the second morning.</span>',
         primary_href=f"{root}rooms/",
         primary_label='<span data-i18n="home.hero.cta_suites">Explore our suites</span>',
         height="88vh",
@@ -43,16 +43,16 @@ def home(root: str) -> str:
         </div>
         <div class="lg:col-span-7 text-mira-700 leading-relaxed text-lg space-y-4">
           <p>Open since May 2022, Mira Palace was designed for travellers who want the convenience of an all-inclusive resort — unlimited dining, a full spa, pools for every mood — but in a setting small enough that the staff learn your favourite drink by the second evening.</p>
-          <p>Thirty-four suites, individually styled. Four pools, including an adults-only infinity pool overlooking the orchard. A beach club 600 metres from reception. And a kitchen that refuses to serve the same buffet twice in a week.</p>
+          <p>Thirty-four suites, individually styled. Two pools — a generous outdoor pool for the season, and a heated indoor pool for winter mornings. Evrenseki\'s Blue-Flag public beach seven minutes down the lane. And a kitchen that refuses to serve the same buffet twice in a week.</p>
         </div>
       </div>
-      <div class="mt-14">{feature_strip([('Suites','34'),('Pools','4'),('To the beach','600 m'),('To Side old town','12 km'),('Antalya airport','60 km'),('Operates year-round','12/12')])}</div>
+      <div class="mt-14">{feature_strip([('Suites','34'),('Pools','2'),('To Evrenseki beach','700 m'),('To Side old town','12 km'),('Antalya airport','60 km'),('Operates year-round','12/12')])}</div>
     """)
     three = section(f"""
       {eyebrow('Three ways to spend a day')}
       {heading('Stay. Eat. Unwind.')}
       <div class="grid md:grid-cols-3 gap-7 mt-12">
-        {card(f"{root}{IMG_ROOM}", "Suites", "Four suite types from 22 to 42 m² — Standard, Deluxe, Family and the King Suite. Garden courtyard or sea-view balcony, all with full en-suite.", f"{root}rooms/", "See our suites")}
+        {card(f"{root}{IMG_ROOM}", "Suites", "Four suite types from 22 to 42 m² — Standard, Deluxe, Family and the King Suite. Garden view or sea view, all with full en-suite.", f"{root}rooms/", "See our suites")}
         {card(IMG_DINING, "Dining", "Four outlets under one roof — from the open buffet kitchen to à-la-carte evenings by the pool and a lobby bar that stays open late.", f"{root}dining/", "Discover dining")}
         {card(f"{root}{IMG_SPA}", "Spa & wellness", "A full Turkish hammam, two saunas, a steam room, cold plunge, and a treatment menu from a 40-minute back massage to a three-hour hammam ritual.", f"{root}spa.html", "Enter the spa")}
       </div>
@@ -64,10 +64,57 @@ def home(root: str) -> str:
         "See the All-Inclusive concept",
         f"{root}{IMG_LOBBY}",
     )
-    testimonial = section(quote_block(
-        "Bu küçük otel, büyük zincirlerin üç katı özenle işliyor. Akşam yemeğinde şefi selamlıyorsun, sabah kapıcıyı, öğleden sonra spa menajerini. 34 oda için tam ihtiyacı olan enerji.",
-        "Demo review", "Sample Google review (translation placeholder — swap for real)"
-    ), bg="bg-mira-50")
+    # R023: real guest reviews sourced from TripAdvisor (verified). Google
+    # Business Profile scraping is bot-blocked — owner to paste in any
+    # extras when available. The 3-column grid stays as a design; add or
+    # rotate quotes here without touching layout code.
+    reviews = [
+        {
+            "quote": "A fantastic hotel in a relaxing location. As soon as I enter my room, I feel like I have been transported to another world.",
+            "name": "Bünyamin T.",
+            "meta": "Germany · TripAdvisor · April 2024",
+            "stars": 5,
+        },
+        {
+            "quote": "A family-run reliable boutique hotel — very attentive. The rooms are spacious, comfortable, most importantly immaculate.",
+            "name": "Dilek I.",
+            "meta": "Türkiye · TripAdvisor · September 2024",
+            "stars": 5,
+        },
+        {
+            "quote": "I was exceedingly pleased with the lovely spa area. Both of these massages were some of the best. I'm already planning my return.",
+            "name": "Nancy D.",
+            "meta": "Denver, USA · TripAdvisor · February 2025",
+            "stars": 4,
+        },
+    ]
+    def _stars(n):
+        return "★" * n + "☆" * (5 - n)
+    review_cards = "".join(
+        f"""
+        <article class="p-8 bg-white rounded-2xl shadow-lux flex flex-col h-full">
+          <div class="text-sand-500 tracking-widest text-sm mb-4">{_stars(r['stars'])}</div>
+          <blockquote class="font-display text-xl text-mira-900 leading-snug flex-1">&ldquo;{r['quote']}&rdquo;</blockquote>
+          <div class="mt-6 pt-5 border-t border-mira-100">
+            <div class="font-medium text-mira-900">{r['name']}</div>
+            <div class="text-xs text-mira-600 mt-0.5">{r['meta']}</div>
+          </div>
+        </article>
+        """
+        for r in reviews
+    )
+    testimonial = section(f"""
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <p class="uppercase tracking-[0.22em] text-sand-600 text-xs font-semibold" data-i18n="home.reviews.eyebrow">In our guests' words</p>
+        <h2 class="font-display text-3xl sm:text-4xl md:text-5xl text-mira-900 leading-tight mt-3" data-i18n="home.reviews.h2">Read by the people who stayed.</h2>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6">
+        {review_cards}
+      </div>
+      <p class="mt-10 text-center text-sm text-mira-600">
+        <a class="underline decoration-sand-400 underline-offset-4 hover:text-sand-600" href="https://www.tripadvisor.com/Hotel_Review-g12606409-d25909071-Reviews-Side_Mira_Palace-Ilica_Manavgat_Turkish_Mediterranean_Coast.html" target="_blank" rel="noopener" data-i18n="home.reviews.see_all">Read all Mira Palace reviews on TripAdvisor →</a>
+      </p>
+    """, bg="bg-mira-50")
     gallery_teaser = section(f"""
       <div class="flex flex-wrap items-end justify-between gap-6 mb-8">
         <div>{eyebrow('Moments at Mira Palace')}
@@ -90,9 +137,9 @@ def home(root: str) -> str:
       <div class="grid lg:grid-cols-2 gap-10 items-center">
         <div>{eyebrow('Where you are')}
           {heading('Evrenseki, between Side and the Taurus Mountains.')}
-          <p class="mt-5 text-mira-700 leading-relaxed">Fifteen minutes east of Side's ancient harbour, forty-five minutes from Antalya International Airport, and a short walk along a cypress-lined lane from our private stretch of Mediterranean beach. Pool weather from April to November, spa weather all year.</p>
+          <p class="mt-5 text-mira-700 leading-relaxed">Fifteen minutes east of Side's ancient harbour, forty-five minutes from Antalya International Airport, and a seven-minute walk down a cypress-lined lane to <strong>Evrenseki Halk Plajı</strong> — the Blue-Flag public beach on our doorstep. Pool weather from April to November, spa weather all year.</p>
           <div class="mt-6 grid grid-cols-3 gap-4 text-sm">
-            <div><div class="font-display text-2xl text-mira-800">600 m</div><div class="text-mira-600">To the beach</div></div>
+            <div><div class="font-display text-2xl text-mira-800">700 m</div><div class="text-mira-600">To Evrenseki beach</div></div>
             <div><div class="font-display text-2xl text-mira-800">12 km</div><div class="text-mira-600">To Side old town</div></div>
             <div><div class="font-display text-2xl text-mira-800">60 km</div><div class="text-mira-600">To Antalya airport</div></div>
           </div>
@@ -101,7 +148,48 @@ def home(root: str) -> str:
         <div class="aspect-[4/3] rounded-lg bg-cover bg-center shadow-lux" style="background-image:url('{root}{IMG_BEACH}')"></div>
       </div>
     """, bg="bg-sand-50")
-    return h + intro + three + concept_band + testimonial + gallery_teaser + location_teaser
+    # R023: Instagram tile grid — the world-class approach used by Aman,
+    # Rosewood, Six Senses etc. (all researched — none embed a live feed).
+    # Six hand-picked tiles, each linked to the @sidemirapalace profile.
+    # TODO(owner): replace each `href` below with the specific Instagram
+    # post URL (e.g. https://www.instagram.com/p/XXXX/) when you're ready.
+    # For now every tile links to the profile as a whole so the CTA works.
+    ig_url = "https://www.instagram.com/sidemirapalace/"
+    ig_tiles = [
+        ("assets/img/king/king-11.jpg",       "King Suite sea-view terrace"),
+        ("assets/img/spa/spa-01.jpg",         "Turkish hammam · marble göbek taşı"),
+        ("assets/img/garden/garden-04.jpg",   "Garden loungers at golden hour"),
+        ("assets/img/deluxe/deluxe-10.jpg",   "Deluxe Suite sea view"),
+        ("assets/img/spa/spa-08.jpg",         "Relaxation lounge"),
+        ("assets/img/family/family-01.jpg",   "Family Suite — connecting layout"),
+    ]
+    ig_grid = "".join(
+        f'<a href="{ig_url}" target="_blank" rel="noopener" '
+        f'class="group relative aspect-square block bg-cover bg-center overflow-hidden rounded" '
+        f'style="background-image:url(\'{root}{src}\')" aria-label="{alt} — @sidemirapalace on Instagram">'
+        f'<div class="absolute inset-0 bg-mira-900/0 group-hover:bg-mira-900/40 transition flex items-center justify-center">'
+        f'<span class="opacity-0 group-hover:opacity-100 text-white text-xs tracking-widest uppercase transition">View on Instagram</span>'
+        f'</div></a>'
+        for src, alt in ig_tiles
+    )
+    instagram = section(f"""
+      <div class="flex flex-wrap items-end justify-between gap-6 mb-8">
+        <div>
+          <p class="uppercase tracking-[0.22em] text-sand-600 text-xs font-semibold" data-i18n="home.instagram.eyebrow">Follow us</p>
+          <h2 class="mt-2 font-display text-3xl sm:text-4xl text-mira-900 leading-tight">
+            <a href="{ig_url}" target="_blank" rel="noopener" class="hover:text-sand-600 transition">@sidemirapalace</a>
+          </h2>
+        </div>
+        <a href="{ig_url}" target="_blank" rel="noopener" class="text-sm font-medium text-mira-700 hover:text-sand-500 inline-flex items-center gap-2">
+          <span data-i18n="home.instagram.follow">Follow on Instagram</span> <span>→</span>
+        </a>
+      </div>
+      <div class="grid grid-cols-3 md:grid-cols-6 gap-1.5">
+        {ig_grid}
+      </div>
+    """, bg="bg-white")
+
+    return h + intro + three + concept_band + testimonial + gallery_teaser + instagram + location_teaser
 
 
 def about(root: str) -> str:

@@ -52,7 +52,71 @@ SITE_META = {
     "permissions_label_en": "Permissions & queries",
     "permissions_label_tr": "İzin ve sorular",
     "og_image": "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1600&q=80",
+    # R023: hotel Instagram handle (main brand — separate from the spa handle above).
+    "instagram_handle": "sidemirapalace",
+    "instagram_url": "https://www.instagram.com/sidemirapalace/",
 }
+
+
+# =========================================================================
+# R023 — Central price registry.
+#
+# Every published price on the site is defined here, in EUR (base currency).
+# The Python page modules import PRICES and reference by key. The client-side
+# currency selector in site.js converts to TRY / USD using the FX_RATES below,
+# so the owner only has to edit ONE place to change any published price.
+#
+# Rates should be refreshed every quarter (or when FX drifts more than ~5%).
+# When a real backend arrives, this dict becomes the DB seed.
+#
+# HOW TO EDIT:
+#   - Change any number here → rebuild → new price shows across the site.
+#   - Add a new priceable item: add a key here, then reference PRICES["your_key"]
+#     from wherever you display it. Site.js picks up the EUR value from a
+#     data-eur-price attribute on any element and formats live in the selected
+#     currency.
+# =========================================================================
+
+PRICES = {
+    # ----- Room rates (per night, EUR base) -----
+    # Placeholders until the owner supplies real published rates.
+    "room_standard":            180,
+    "room_deluxe":              240,
+    "room_family":              290,
+    "room_king":                420,
+
+    # ----- Spa packages (per person, EUR base) -----
+    # Sourced from the printed Mira Palace spa menu PDF (R017).
+    "spa_classic":               32,
+    "spa_relax":                 43,
+    "spa_aromatherapy":          59,
+
+    # ----- Airport transfers (VIP minibus, EUR base) -----
+    # Antalya Airport (AYT) → hotel, ~60 km / ~45 minutes.
+    "transfer_airport_private":  85,   # up to 4 pax, one way
+    "transfer_airport_shared":   25,   # per person, subject to availability
+
+    # ----- Bus station transfer -----
+    "transfer_otogar":           15,   # Manavgat otogar → hotel
+}
+
+# FX rates as of July 2026. Base = 1 EUR.
+# R023 shipped with hardcoded rates + a hook for a live FX API in a future
+# release (see site.js currency logic). Refresh manually if the market moves
+# more than ~5% between releases.
+FX_RATES = {
+    "eur": 1.00,      # base
+    "try": 44.50,     # 1 EUR ≈ 44.50 TRY (July 2026)
+    "usd": 1.08,      # 1 EUR ≈ 1.08 USD (July 2026)
+}
+
+
+def price(key: str, currency: str = "eur") -> int:
+    """Return PRICES[key] converted to `currency` and rounded UP to the
+    nearest whole unit — hotels always round up, never down."""
+    import math
+    base = PRICES[key]
+    return math.ceil(base * FX_RATES[currency])
 
 # ---- Shared fragments ---------------------------------------------------
 
@@ -106,7 +170,7 @@ HEAD = """<!doctype html>
   // because GitHub Pages hosts at /mira-palace-demo/ rather than /.
   window.MIRA_ROOT = "{root}";
 </script>
-<link rel="stylesheet" href="{root}assets/css/site.css?v=30" />
+<link rel="stylesheet" href="{root}assets/css/site.css?v=31" />
 <!-- R020: Tabler Icons bumped 2.47.0 → 3.44.0 (v3 kept the ti- prefix; classes we use — ti-chevron-down, ti-maximize — verified to still exist). -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.44.0/dist/tabler-icons.min.css" />
 <!-- R016: Cloudflare Turnstile (bot-check on forms). Test sitekey "always pass"
@@ -435,8 +499,8 @@ def footer(root: str) -> str:
     {customiser_panel(root)}
     <script src="{root}assets/js/media-manifest.js?v=32" defer></script>
     <script src="{root}assets/js/search-index.js?v=32" defer></script>
-    <script src="{root}assets/js/i18n.js?v=34" defer></script>
-    <script src="{root}assets/js/site.js?v=34" defer></script>
+    <script src="{root}assets/js/i18n.js?v=35" defer></script>
+    <script src="{root}assets/js/site.js?v=35" defer></script>
     </body></html>
     """)
 
@@ -873,13 +937,14 @@ def _hotel_jsonld(page_url: str) -> str:
         "smokingAllowed": False,
         "amenityFeature": [
             {"@type": "LocationFeatureSpecification", "name": "Free Wi-Fi", "value": True},
-            {"@type": "LocationFeatureSpecification", "name": "Swimming pool", "value": True},
-            {"@type": "LocationFeatureSpecification", "name": "Private beach", "value": True},
+            {"@type": "LocationFeatureSpecification", "name": "Outdoor swimming pool", "value": True},
+            {"@type": "LocationFeatureSpecification", "name": "Indoor heated pool", "value": True},
+            {"@type": "LocationFeatureSpecification", "name": "Near beach (~700 m walk to Evrenseki public beach, Blue Flag)", "value": True},
             {"@type": "LocationFeatureSpecification", "name": "Spa", "value": True},
             {"@type": "LocationFeatureSpecification", "name": "Turkish hammam", "value": True},
             {"@type": "LocationFeatureSpecification", "name": "All-inclusive", "value": True},
             {"@type": "LocationFeatureSpecification", "name": "Free parking", "value": True},
-            {"@type": "LocationFeatureSpecification", "name": "Airport transfer", "value": True},
+            {"@type": "LocationFeatureSpecification", "name": "Airport transfer (VIP minibus)", "value": True},
         ],
         "checkinTime": "14:00",
         "checkoutTime": "12:00",

@@ -48,7 +48,7 @@
   // because GitHub Pages hosts at /mira-palace-demo/ rather than /.
   window.MIRA_ROOT = "";
 </script>
-<link rel="stylesheet" href="assets/css/site.css?v=30" />
+<link rel="stylesheet" href="assets/css/site.css?v=31" />
 <!-- R020: Tabler Icons bumped 2.47.0 → 3.44.0 (v3 kept the ti- prefix; classes we use — ti-chevron-down, ti-maximize — verified to still exist). -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.44.0/dist/tabler-icons.min.css" />
 <!-- R016: Cloudflare Turnstile (bot-check on forms). Test sitekey "always pass"
@@ -94,12 +94,17 @@
     },
     {
       "@type": "LocationFeatureSpecification",
-      "name": "Swimming pool",
+      "name": "Outdoor swimming pool",
       "value": true
     },
     {
       "@type": "LocationFeatureSpecification",
-      "name": "Private beach",
+      "name": "Indoor heated pool",
+      "value": true
+    },
+    {
+      "@type": "LocationFeatureSpecification",
+      "name": "Near beach (~700 m walk to Evrenseki public beach, Blue Flag)",
       "value": true
     },
     {
@@ -124,7 +129,7 @@
     },
     {
       "@type": "LocationFeatureSpecification",
-      "name": "Airport transfer",
+      "name": "Airport transfer (VIP minibus)",
       "value": true
     }
   ],
@@ -265,23 +270,23 @@
 <section class="bg-white py-20 lg:py-28 scroll-mt-24"><div class="max-w-7xl mx-auto px-5 lg:px-8">
       <p class="uppercase tracking-[0.22em] text-mira-600 text-xs font-semibold">Getting around</p>
       <h2 class="font-display text-3xl sm:text-4xl md:text-5xl text-mira-900 leading-tight ">Distances from the hotel.</h2>
-      <div class="mt-8 overflow-x-auto"><table class="w-full text-left"><tbody><tr class="border-t border-mira-200"><td class="py-4 pr-6 font-medium text-mira-900">Mediterranean beach (private)</td><td class="py-4 pr-6 text-mira-800 whitespace-nowrap">600 m</td><td class="py-4 text-mira-600 text-sm">8–10 min walk on a cypress lane, or a 3-minute shuttle every half hour</td></tr><tr class="border-t border-mira-200"><td class="py-4 pr-6 font-medium text-mira-900">Evrenseki village centre</td><td class="py-4 pr-6 text-mira-800 whitespace-nowrap">1.5 km</td><td class="py-4 text-mira-600 text-sm">Small bakery, pharmacy, ATM, Saturday market</td></tr><tr class="border-t border-mira-200"><td class="py-4 pr-6 font-medium text-mira-900">Side old town (ancient harbour, Apollo temple)</td><td class="py-4 pr-6 text-mira-800 whitespace-nowrap">12 km</td><td class="py-4 text-mira-600 text-sm">15–20 minutes by taxi; complimentary shuttle twice daily</td></tr><tr class="border-t border-mira-200"><td class="py-4 pr-6 font-medium text-mira-900">Manavgat waterfalls</td><td class="py-4 pr-6 text-mira-800 whitespace-nowrap">18 km</td><td class="py-4 text-mira-600 text-sm">25 minutes by car; popular half-day excursion</td></tr><tr class="border-t border-mira-200"><td class="py-4 pr-6 font-medium text-mira-900">Aspendos Roman theatre</td><td class="py-4 pr-6 text-mira-800 whitespace-nowrap">33 km</td><td class="py-4 text-mira-600 text-sm">45 minutes; summer evening performances</td></tr><tr class="border-t border-mira-200"><td class="py-4 pr-6 font-medium text-mira-900">Antalya International Airport (AYT)</td><td class="py-4 pr-6 text-mira-800 whitespace-nowrap">60 km</td><td class="py-4 text-mira-600 text-sm">45–60 minutes; private transfer arranged on request</td></tr><tr class="border-t border-mira-200"><td class="py-4 pr-6 font-medium text-mira-900">Alanya castle</td><td class="py-4 pr-6 text-mira-800 whitespace-nowrap">65 km</td><td class="py-4 text-mira-600 text-sm">75 minutes east along the coast</td></tr><tr class="border-t border-mira-200"><td class="py-4 pr-6 font-medium text-mira-900">Köprülü Canyon (rafting)</td><td class="py-4 pr-6 text-mira-800 whitespace-nowrap">55 km</td><td class="py-4 text-mira-600 text-sm">1 hour; full-day white-water excursion available</td></tr></tbody></table></div>
+      <div class="mt-8 overflow-x-auto"><table class="w-full text-left"><tbody><tr class="border-t border-mira-200"><td class="py-4 pr-6 font-medium text-mira-900">Evrenseki Halk Plajı (public, Blue Flag)</td><td class="py-4 pr-6 text-mira-800 whitespace-nowrap">700 m</td><td class="py-4 text-mira-600 text-sm">~7-minute walk down the cypress-lined lane; sand, sunbeds, kiosks on the front</td></tr><tr class="border-t border-mira-200"><td class="py-4 pr-6 font-medium text-mira-900">Evrenseki village centre</td><td class="py-4 pr-6 text-mira-800 whitespace-nowrap">1.5 km</td><td class="py-4 text-mira-600 text-sm">Small bakery, pharmacy, ATM, Saturday market</td></tr><tr class="border-t border-mira-200"><td class="py-4 pr-6 font-medium text-mira-900">Side old town (ancient harbour, Apollo temple)</td><td class="py-4 pr-6 text-mira-800 whitespace-nowrap">12 km</td><td class="py-4 text-mira-600 text-sm">15–20 minutes by taxi</td></tr><tr class="border-t border-mira-200"><td class="py-4 pr-6 font-medium text-mira-900">Manavgat waterfalls</td><td class="py-4 pr-6 text-mira-800 whitespace-nowrap">18 km</td><td class="py-4 text-mira-600 text-sm">25 minutes by car; popular half-day excursion</td></tr><tr class="border-t border-mira-200"><td class="py-4 pr-6 font-medium text-mira-900">Aspendos Roman theatre</td><td class="py-4 pr-6 text-mira-800 whitespace-nowrap">33 km</td><td class="py-4 text-mira-600 text-sm">45 minutes; summer evening performances</td></tr><tr class="border-t border-mira-200"><td class="py-4 pr-6 font-medium text-mira-900">Antalya International Airport (AYT)</td><td class="py-4 pr-6 text-mira-800 whitespace-nowrap">60 km</td><td class="py-4 text-mira-600 text-sm">~45 minutes; private transfer arranged on request</td></tr><tr class="border-t border-mira-200"><td class="py-4 pr-6 font-medium text-mira-900">Alanya castle</td><td class="py-4 pr-6 text-mira-800 whitespace-nowrap">65 km</td><td class="py-4 text-mira-600 text-sm">75 minutes east along the coast</td></tr><tr class="border-t border-mira-200"><td class="py-4 pr-6 font-medium text-mira-900">Köprülü Canyon (rafting)</td><td class="py-4 pr-6 text-mira-800 whitespace-nowrap">55 km</td><td class="py-4 text-mira-600 text-sm">1 hour; full-day white-water excursion available</td></tr></tbody></table></div>
     </div></section><section class="bg-sand-50 py-20 lg:py-28 scroll-mt-24"><div class="max-w-7xl mx-auto px-5 lg:px-8">
       <div class="grid lg:grid-cols-2 gap-10 items-center">
         <div><p class="uppercase tracking-[0.22em] text-mira-600 text-xs font-semibold">From the airport</p>
           <h3 class="font-display text-2xl sm:text-3xl text-mira-900 leading-tight ">Transfer options.</h3>
           <ul class="mt-6 space-y-4 text-mira-700">
-            <li><span class="font-semibold text-mira-900">Private transfer:</span> €85 one way for up to four passengers in a Mercedes Vito, with waiting included. Arrange on booking or on arrival.</li>
+            <li><span class="font-semibold text-mira-900">Private VIP minibus:</span> €85 one way for up to four passengers, with waiting time included. Executive-fit minibus (Mercedes V-Class or equivalent) — the same vehicle used on the popular Antalya–Alanya VIP transfer route. Arrange on booking or on arrival.</li>
             <li><span class="font-semibold text-mira-900">Shared shuttle:</span> €25 per person, subject to availability, routed with other Mira Palace arrivals. Journey time 75–90 minutes.</li>
             <li><span class="font-semibold text-mira-900">Taxi:</span> approx. €70 one way; we recommend booking via the hotel to agree the fare in advance.</li>
-            <li><span class="font-semibold text-mira-900">Self-drive:</span> 45–60 minutes via the D-400 coast road. Complimentary hotel parking.</li>
+            <li><span class="font-semibold text-mira-900">Self-drive:</span> ~45 minutes via the D-400 coast road. Complimentary hotel parking.</li>
           </ul>
         </div>
         <div class="relative">
-          <div class="aspect-[4/3] rounded-lg bg-cover bg-center shadow-lux" style="background-image:url('https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&w=1600&q=80')"></div>
+          <div class="aspect-[4/3] rounded-lg bg-cover bg-center shadow-lux" style="background-image:url('https://images.unsplash.com/photo-1571043733612-d5444ff5d766?auto=format&fit=crop&w=1600&q=80')"></div>
           <div class="absolute bottom-4 left-4 bg-white/90 backdrop-blur px-4 py-2 rounded shadow-lux">
-            <div class="text-[10px] uppercase tracking-widest text-mira-600">Mercedes-Benz</div>
-            <div class="text-sm font-medium text-mira-900">Private airport transfer</div>
+            <div class="text-[10px] uppercase tracking-widest text-mira-600">VIP MINIBUS</div>
+            <div class="text-sm font-medium text-mira-900">Antalya airport transfer</div>
           </div>
         </div>
       </div>
@@ -495,6 +500,6 @@
 
     <script src="assets/js/media-manifest.js?v=32" defer></script>
     <script src="assets/js/search-index.js?v=32" defer></script>
-    <script src="assets/js/i18n.js?v=34" defer></script>
-    <script src="assets/js/site.js?v=34" defer></script>
+    <script src="assets/js/i18n.js?v=35" defer></script>
+    <script src="assets/js/site.js?v=35" defer></script>
     </body></html>

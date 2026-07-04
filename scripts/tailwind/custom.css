@@ -818,6 +818,23 @@ details > summary::-webkit-details-marker { display: none; }
   .bk-tiles { grid-template-columns: 1fr; }
 }
 
+/* R023: honeypot — visually hidden AND removed from the accessibility tree.
+   Was: an inline style="position:absolute;left:-9999px..." block that
+   still leaked its "If you are human, leave this empty" label into
+   page-text scrapes (SME review flagged this as amateur). Now:
+   properly hidden, no visible label. */
+.bk-honeypot {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
 /* R016: Turnstile widget container + email preview panel */
 .bk-turnstile-wrap {
   margin: 12px 0 8px;
