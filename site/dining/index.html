@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Dining · Mira Palace</title>
-<meta name="description" content="Four dining outlets at Mira Palace — main restaurant, pool restaurant, lobby bar, orchard bar." />
+<title>Dining & Bars · Mira Palace</title>
+<meta name="description" content="Three settings, one Mediterranean philosophy — Mira Restaurant, the Pool Bar and the Lobby Bar. Turkish-Mediterranean plating, wood-fired pide, and cocktails until 01:00 at Mira Palace, Side." />
 <meta name="robots" content="noindex,nofollow" />
 <link rel="canonical" href="https://miworldptyltd.github.io/mira-palace-demo/dining/index.html" />
 <!-- R015: layered security via meta tags (HSTS / X-Frame-Options need HTTP headers, set at Cloudflare proxy in R021) -->
@@ -14,8 +14,8 @@
 <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=(), payment=()" />
 <!-- R015: rich Open Graph + Twitter Card for proper link previews on shares -->
 <meta property="og:site_name" content="Mira Palace" />
-<meta property="og:title" content="Dining · Mira Palace" />
-<meta property="og:description" content="Four dining outlets at Mira Palace — main restaurant, pool restaurant, lobby bar, orchard bar." />
+<meta property="og:title" content="Dining & Bars · Mira Palace" />
+<meta property="og:description" content="Three settings, one Mediterranean philosophy — Mira Restaurant, the Pool Bar and the Lobby Bar. Turkish-Mediterranean plating, wood-fired pide, and cocktails until 01:00 at Mira Palace, Side." />
 <meta property="og:type" content="website" />
 <meta property="og:image" content="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1600&q=80" />
 <meta property="og:image:width" content="1600" />
@@ -27,8 +27,8 @@
 <meta property="og:locale:alternate" content="de_DE" />
 <meta property="og:locale:alternate" content="ru_RU" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Dining · Mira Palace" />
-<meta name="twitter:description" content="Four dining outlets at Mira Palace — main restaurant, pool restaurant, lobby bar, orchard bar." />
+<meta name="twitter:title" content="Dining & Bars · Mira Palace" />
+<meta name="twitter:description" content="Three settings, one Mediterranean philosophy — Mira Restaurant, the Pool Bar and the Lobby Bar. Turkish-Mediterranean plating, wood-fired pide, and cocktails until 01:00 at Mira Palace, Side." />
 <meta name="twitter:image" content="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1600&q=80" />
 <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -63,7 +63,7 @@ tailwind.config = {
   // because GitHub Pages hosts at /mira-palace-demo/ rather than /.
   window.MIRA_ROOT = "../";
 </script>
-<link rel="stylesheet" href="../assets/css/site.css?v=27" />
+<link rel="stylesheet" href="../assets/css/site.css?v=28" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/tabler-icons.min.css" />
 <!-- R016: Cloudflare Turnstile (bot-check on forms). Test sitekey "always pass"
      during the stub phase; real sitekey swaps in once user creates the widget. -->
@@ -265,83 +265,226 @@ tailwind.config = {
   </div>
 </header>
 <main id="main" class="pt-16 md:pt-[104px]"><div id="mp-i18n-notice" class="hidden bg-sand-100 border-b border-sand-300/40 px-5 py-2 text-center text-xs text-mira-800"><span data-i18n="i18n.in_progress">Page content translation in progress — English shown.</span></div>
-<section class="relative hero-section" style="min-height:70vh;">
-  <div class="absolute inset-0 hero-overlay" style="background-image:url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1600&q=80'); background-size:cover; background-position:center;"></div>
-  <div class="relative max-w-7xl mx-auto px-5 lg:px-8 pt-10 pb-16 text-white flex flex-col justify-start min-h-[inherit]" style="min-height:70vh;">
+<section class="relative hero-section" style="min-height:76vh;">
+  <div class="hero-slideshow" data-slideshow data-interval="7000">
+    <div class="slide active" style="background-image:url('https://sidemirapalace.com/img/restaurant/20240713110135_88159.png')"></div><div class="slide" style="background-image:url('https://sidemirapalace.com/img/imkanlar/20240713112112_56335.png')"></div><div class="slide" style="background-image:url('https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=1600&q=80')"></div><div class="slide" style="background-image:url('https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?auto=format&fit=crop&w=1600&q=80')"></div><div class="slide" style="background-image:url('https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=1600&q=80')"></div>
+  </div>
+  <div class="absolute inset-0 hero-overlay pointer-events-none"></div>
+  <div class="relative max-w-7xl mx-auto px-5 lg:px-8 pt-10 pb-16 text-white flex flex-col justify-start min-h-[inherit]" style="min-height:76vh;">
     <div class="max-w-3xl">
-      <p class="uppercase tracking-[0.22em] text-sand-300 text-xs sm:text-sm font-semibold mb-4">Dining</p>
-      <h1 class="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.05]">Four outlets. One kitchen.<br/>Thirty-four guests watching.</h1>
-      <p class="mt-5 max-w-2xl text-base sm:text-lg text-white/90 leading-relaxed">A restaurant small enough that the chef plates every pass, a pool grill that does nothing except pide and wood-fired pizza extraordinarily well, and two bars with long wine lists.</p>
-      <div class="mt-8 flex flex-wrap gap-3"></div>
+      <p class="uppercase tracking-[0.22em] text-sand-300 text-xs sm:text-sm font-semibold mb-4"><span data-i18n="din.hero.kicker">Dining &amp; Bars</span></p>
+      <h1 class="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.05]"><span data-i18n="din.hero.h1">Antalya on the plate. Türkiye in the glass.</span></h1>
+      <p class="mt-5 max-w-2xl text-base sm:text-lg text-white/90 leading-relaxed"><span data-i18n="din.hero.sub">Three settings, one Mediterranean philosophy — a chef-led main restaurant, a pool bar for long lunches, and a lobby bar that stays open late. Every ingredient sourced within a hundred kilometres wherever the season allows.</span></p>
+      <div class="mt-8 flex flex-wrap gap-3"><a href="../book.html" class="inline-flex items-center justify-center px-7 py-3 bg-sand-300 text-mira-900 rounded-full font-medium tracking-wide hover:bg-sand-200 shadow-lux transition"><span data-i18n="din.hero.cta">Reserve a table</span></a></div>
     </div>
   </div>
 </section>
-<section id="dining-rooms" class="bg-sand-50 py-20 lg:py-28 scroll-mt-24"><div class="max-w-7xl mx-auto px-5 lg:px-8">
-      <p class="uppercase tracking-[0.22em] text-mira-600 text-xs font-semibold">Where to eat and drink</p>
-      <h2 class="font-display text-3xl sm:text-4xl md:text-5xl text-mira-900 leading-tight ">Our dining rooms.</h2>
-      <div class="grid md:grid-cols-2 gap-7 mt-12">
+<section class="bg-white py-20 lg:py-28 scroll-mt-24"><div class="max-w-7xl mx-auto px-5 lg:px-8">
+      <div class="grid lg:grid-cols-12 gap-12 items-start">
+        <div class="lg:col-span-4">
+          <p class="uppercase tracking-[0.22em] text-mira-600 text-xs font-semibold" data-i18n="din.intro.eyebrow">Our kitchen</p>
+          <h2 class="font-display text-3xl sm:text-4xl md:text-5xl text-mira-900 leading-tight" data-i18n="din.intro.h2">Cooked short. Served slowly.</h2>
+        </div>
+        <div class="lg:col-span-8 text-mira-700 leading-relaxed space-y-4 text-lg">
+          <p data-i18n="din.intro.p1">Our menu is short because the pantry is short. Fish from the Manavgat morning market, lamb from the Toros foothills, vegetables from three farms we buy from directly, citrus from the grove ten minutes down the coast road. If it can't be brought in fresh that morning, we don't put it on the pass.</p>
+          <p data-i18n="din.intro.p2">Everything we serve leans Turkish-Mediterranean, but the pace is our own: unhurried, warm, precise on the plate and generous at the table. Thirty-four suites means every dinner service fits in one seating — the chef comes out, the sommelier remembers your wine, no one is rushed for the next cover.</p>
+        </div>
+      </div>
+    </div></section><section class="bg-sand-50 py-20 lg:py-28 scroll-mt-24"><div class="max-w-7xl mx-auto px-5 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto">
+        <p class="uppercase tracking-[0.22em] text-sand-600 text-xs font-semibold" data-i18n="din.venues.eyebrow">Three settings</p>
+        <h2 class="font-display text-3xl sm:text-4xl md:text-5xl text-mira-900 leading-tight" data-i18n="din.venues.h2">Where to eat and drink.</h2>
+        <p class="mt-5 text-mira-700 leading-relaxed" data-i18n="din.venues.lead">
+          One kitchen. Three different moods. Move between them however the day wants to unfold — swimsuit at lunch, something linen at dinner, a nightcap on the way to bed.
+        </p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-7 mt-14">
+        <article class="relative bg-white rounded-2xl overflow-hidden ring-2 ring-sand-300 shadow-2xl flex flex-col">
+          <span class="absolute top-4 right-4 bg-sand-300 text-mira-900 text-[10px] font-semibold tracking-widest uppercase px-3 py-1 rounded-full" data-i18n="din.venues.most_loved">Most loved</span>
+          <div class="aspect-[16/10] bg-cover bg-center" style="background-image:url('https://sidemirapalace.com/img/imkanlar/20240713112112_56335.png')"></div>
+          <div class="p-8 flex-1 flex flex-col">
+            <p class="text-[10px] uppercase tracking-widest text-sand-600 font-semibold" data-i18n="din.v.main.tag">Signature dining</p>
+            <h3 class="mt-2 font-display text-3xl text-mira-900 leading-none" data-i18n="din.v.main.name">Mira Restaurant</h3>
+            <p class="mt-3 text-sm italic text-sand-600" data-i18n="din.v.main.tagline">Turkish-Mediterranean plating in the main dining room — the heart of the hotel.</p>
+            <div class="mt-6 pt-6 border-t border-mira-100">
+              <div class="text-[10px] uppercase tracking-widest text-mira-500 font-semibold mb-3" data-i18n="din.venues.on_the_menu">On the menu</div>
+              <ul class="space-y-2"><li class="flex gap-3 text-sm text-mira-700 leading-relaxed"><span class="text-sand-500 shrink-0 mt-0.5">✓</span><span data-i18n="din.v.b.chef">Chef-led plated dinner service</span></li><li class="flex gap-3 text-sm text-mira-700 leading-relaxed"><span class="text-sand-500 shrink-0 mt-0.5">✓</span><span data-i18n="din.v.b.buffet">Open-kitchen breakfast &amp; lunch buffets</span></li><li class="flex gap-3 text-sm text-mira-700 leading-relaxed"><span class="text-sand-500 shrink-0 mt-0.5">✓</span><span data-i18n="din.v.b.rotating">Rotating regional theme every evening</span></li><li class="flex gap-3 text-sm text-mira-700 leading-relaxed"><span class="text-sand-500 shrink-0 mt-0.5">✓</span><span data-i18n="din.v.b.wine">Turkish and Old-World wine pairings</span></li><li class="flex gap-3 text-sm text-mira-700 leading-relaxed"><span class="text-sand-500 shrink-0 mt-0.5">✓</span><span data-i18n="din.v.b.window">Open kitchen, window onto the garden</span></li></ul>
+            </div>
+            <div class="mt-6 pt-4 border-t border-mira-100 text-xs">
+              <div class="text-[10px] uppercase tracking-widest text-mira-500 font-semibold" data-i18n="din.venues.hours">Hours</div>
+              <div class="mt-1 text-mira-700" data-i18n="din.v.main.hours">07:00 – 10:30 · 12:30 – 14:30 · 19:00 – 22:00</div>
+            </div>
+            <a href="../dining/main-restaurant.html"
+               class="mt-8 w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-mira-800 text-white rounded-full font-medium text-sm hover:bg-mira-900 transition">
+              <span data-i18n="din.venues.explore">Explore</span> <span data-i18n="din.v.main.name">Mira Restaurant</span> <span>→</span>
+            </a>
+          </div>
+        </article>
         
-<a href="../dining/main-restaurant.html" class="group block bg-white rounded-lg overflow-hidden shadow-lux hover:-translate-y-1 transition will-change-transform">
-  <div class="aspect-[4/3] bg-cover bg-center transition group-hover:scale-[1.04]" style="background-image:url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1600&q=80')"></div>
-  <div class="p-7">
-    <h3 class="font-display text-2xl text-mira-900">Mira — main restaurant</h3>
-    <p class="mt-3 text-sm text-mira-700 leading-relaxed">The indoor dining room. Open buffet for breakfast and lunch; plated à-la-carte-style dinner with a rotating themed menu each evening.</p>
-    <span class="mt-5 inline-flex items-center gap-2 text-sm font-medium text-mira-700 group-hover:text-sand-500">
-      View the restaurant <span class="transition group-hover:translate-x-1">→</span>
-    </span>
-  </div>
-</a>
-
+        <article class="relative bg-white rounded-2xl overflow-hidden shadow-lux flex flex-col">
+          
+          <div class="aspect-[16/10] bg-cover bg-center" style="background-image:url('https://images.unsplash.com/photo-1470337458703-46ad1756a187?auto=format&fit=crop&w=1600&q=80')"></div>
+          <div class="p-8 flex-1 flex flex-col">
+            <p class="text-[10px] uppercase tracking-widest text-sand-600 font-semibold" data-i18n="din.v.pool.tag">All-day poolside</p>
+            <h3 class="mt-2 font-display text-3xl text-mira-900 leading-none" data-i18n="din.v.pool.name">Pool Bar</h3>
+            <p class="mt-3 text-sm italic text-sand-600" data-i18n="din.v.pool.tagline">Mezze, wood-fired pide and long lunches under the pergola — swimsuits welcome.</p>
+            <div class="mt-6 pt-6 border-t border-mira-100">
+              <div class="text-[10px] uppercase tracking-widest text-mira-500 font-semibold mb-3" data-i18n="din.venues.on_the_menu">On the menu</div>
+              <ul class="space-y-2"><li class="flex gap-3 text-sm text-mira-700 leading-relaxed"><span class="text-sand-500 shrink-0 mt-0.5">✓</span><span data-i18n="din.v.b.mezze">Twenty small mezze plates, changing daily</span></li><li class="flex gap-3 text-sm text-mira-700 leading-relaxed"><span class="text-sand-500 shrink-0 mt-0.5">✓</span><span data-i18n="din.v.b.pide">Wood-fired pide &amp; pizza to order</span></li><li class="flex gap-3 text-sm text-mira-700 leading-relaxed"><span class="text-sand-500 shrink-0 mt-0.5">✓</span><span data-i18n="din.v.b.grill">Grilled fish of the morning market</span></li><li class="flex gap-3 text-sm text-mira-700 leading-relaxed"><span class="text-sand-500 shrink-0 mt-0.5">✓</span><span data-i18n="din.v.b.icecream">Afternoon ice-cream cart for the children</span></li><li class="flex gap-3 text-sm text-mira-700 leading-relaxed"><span class="text-sand-500 shrink-0 mt-0.5">✓</span><span data-i18n="din.v.b.jasmine">Pergola shade heavy with jasmine in July</span></li></ul>
+            </div>
+            <div class="mt-6 pt-4 border-t border-mira-100 text-xs">
+              <div class="text-[10px] uppercase tracking-widest text-mira-500 font-semibold" data-i18n="din.venues.hours">Hours</div>
+              <div class="mt-1 text-mira-700" data-i18n="din.v.pool.hours">10:00 – 19:00 · Ice-cream cart 15:00 – 17:00</div>
+            </div>
+            <a href="../dining/pool-bar.html"
+               class="mt-8 w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-mira-800 text-white rounded-full font-medium text-sm hover:bg-mira-900 transition">
+              <span data-i18n="din.venues.explore">Explore</span> <span data-i18n="din.v.pool.name">Pool Bar</span> <span>→</span>
+            </a>
+          </div>
+        </article>
         
-<a href="../dining/pool-bar.html" class="group block bg-white rounded-lg overflow-hidden shadow-lux hover:-translate-y-1 transition will-change-transform">
-  <div class="aspect-[4/3] bg-cover bg-center transition group-hover:scale-[1.04]" style="background-image:url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1600&q=80')"></div>
-  <div class="p-7">
-    <h3 class="font-display text-2xl text-mira-900">Deniz — pool restaurant</h3>
-    <p class="mt-3 text-sm text-mira-700 leading-relaxed">Casual lunch by the pool. Wood-fired pide and pizza, a mezze bar, salads, grilled fish of the day, and ice-cream cart in the afternoon.</p>
-    <span class="mt-5 inline-flex items-center gap-2 text-sm font-medium text-mira-700 group-hover:text-sand-500">
-      View the pool restaurant <span class="transition group-hover:translate-x-1">→</span>
-    </span>
-  </div>
-</a>
-
-        
-<a href="../dining/lobby-bar.html" class="group block bg-white rounded-lg overflow-hidden shadow-lux hover:-translate-y-1 transition will-change-transform">
-  <div class="aspect-[4/3] bg-cover bg-center transition group-hover:scale-[1.04]" style="background-image:url('https://images.unsplash.com/photo-1470337458703-46ad1756a187?auto=format&fit=crop&w=1600&q=80')"></div>
-  <div class="p-7">
-    <h3 class="font-display text-2xl text-mira-900">Lobby bar</h3>
-    <p class="mt-3 text-sm text-mira-700 leading-relaxed">All-day and late-night. Coffee and pastries in the morning, cocktails and piano after dark. Open 10:00–01:00.</p>
-    <span class="mt-5 inline-flex items-center gap-2 text-sm font-medium text-mira-700 group-hover:text-sand-500">
-      View the lobby bar <span class="transition group-hover:translate-x-1">→</span>
-    </span>
-  </div>
-</a>
-
-        
-<a href="../dining/lobby-bar.html" class="group block bg-white rounded-lg overflow-hidden shadow-lux hover:-translate-y-1 transition will-change-transform">
-  <div class="aspect-[4/3] bg-cover bg-center transition group-hover:scale-[1.04]" style="background-image:url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=1200&q=80')"></div>
-  <div class="p-7">
-    <h3 class="font-display text-2xl text-mira-900">Orchard bar</h3>
-    <p class="mt-3 text-sm text-mira-700 leading-relaxed">Our pool bar — fresh juices and smoothies in the day, classic cocktails in the late afternoon, and the hotel’s best sundowner spot. Open 10:00–00:00.</p>
-    <span class="mt-5 inline-flex items-center gap-2 text-sm font-medium text-mira-700 group-hover:text-sand-500">
-      At the pool <span class="transition group-hover:translate-x-1">→</span>
-    </span>
-  </div>
-</a>
-
+        <article class="relative bg-white rounded-2xl overflow-hidden shadow-lux flex flex-col">
+          
+          <div class="aspect-[16/10] bg-cover bg-center" style="background-image:url('https://sidemirapalace.com/img/restaurant/20240713110135_88159.png')"></div>
+          <div class="p-8 flex-1 flex flex-col">
+            <p class="text-[10px] uppercase tracking-widest text-sand-600 font-semibold" data-i18n="din.v.lobby.tag">Nightcaps &amp; espresso</p>
+            <h3 class="mt-2 font-display text-3xl text-mira-900 leading-none" data-i18n="din.v.lobby.name">Lobby Bar</h3>
+            <p class="mt-3 text-sm italic text-sand-600" data-i18n="din.v.lobby.tagline">Morning espresso to midnight cocktails — the polished-wood counter that anchors the ground floor.</p>
+            <div class="mt-6 pt-6 border-t border-mira-100">
+              <div class="text-[10px] uppercase tracking-widest text-mira-500 font-semibold mb-3" data-i18n="din.venues.on_the_menu">On the menu</div>
+              <ul class="space-y-2"><li class="flex gap-3 text-sm text-mira-700 leading-relaxed"><span class="text-sand-500 shrink-0 mt-0.5">✓</span><span data-i18n="din.v.b.house">House cocktails built around rakı &amp; pomegranate</span></li><li class="flex gap-3 text-sm text-mira-700 leading-relaxed"><span class="text-sand-500 shrink-0 mt-0.5">✓</span><span data-i18n="din.v.b.reserve">Reserve list — small-batch Turkish &amp; Old-World spirits</span></li><li class="flex gap-3 text-sm text-mira-700 leading-relaxed"><span class="text-sand-500 shrink-0 mt-0.5">✓</span><span data-i18n="din.v.b.piano">Live piano four evenings a week</span></li><li class="flex gap-3 text-sm text-mira-700 leading-relaxed"><span class="text-sand-500 shrink-0 mt-0.5">✓</span><span data-i18n="din.v.b.coffee">Fresh-roasted Turkish coffee, served properly</span></li><li class="flex gap-3 text-sm text-mira-700 leading-relaxed"><span class="text-sand-500 shrink-0 mt-0.5">✓</span><span data-i18n="din.v.b.late">Last call at 00:45 — no one is rushed out</span></li></ul>
+            </div>
+            <div class="mt-6 pt-4 border-t border-mira-100 text-xs">
+              <div class="text-[10px] uppercase tracking-widest text-mira-500 font-semibold" data-i18n="din.venues.hours">Hours</div>
+              <div class="mt-1 text-mira-700" data-i18n="din.v.lobby.hours">10:00 – 01:00 · Piano 20:00 – 23:00</div>
+            </div>
+            <a href="../dining/lobby-bar.html"
+               class="mt-8 w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-mira-800 text-white rounded-full font-medium text-sm hover:bg-mira-900 transition">
+              <span data-i18n="din.venues.explore">Explore</span> <span data-i18n="din.v.lobby.name">Lobby Bar</span> <span>→</span>
+            </a>
+          </div>
+        </article>
+        </div>
+      <p class="mt-8 text-center text-xs text-mira-500 italic">
+        <span data-i18n="din.venues.foot">Table reservations recommended for dinner. Reserve online, or call reception directly —</span>
+        <a class="underline hover:text-sand-500" href="tel:+905348988405">+90 534 898 84 05</a>.
+      </p>
+    </div></section><section class="bg-white py-20 lg:py-28 scroll-mt-24"><div class="max-w-7xl mx-auto px-5 lg:px-8">
+      <div class="max-w-5xl mx-auto text-center">
+        <p class="uppercase tracking-[0.22em] text-mira-600 text-xs font-semibold" data-i18n="din.every.eyebrow">In every meal</p>
+        <h2 class="font-display text-3xl sm:text-4xl md:text-5xl text-mira-900 leading-tight" data-i18n="din.every.h2">What is always there.</h2>
+        <p class="mt-5 text-mira-700 leading-relaxed" data-i18n="din.every.lead">
+          Regardless of which room you're eating in — these are the constants.
+        </p>
+        <div class="mt-12 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+          <div class="text-center">
+            <div class="text-4xl">🍞</div>
+            <div class="mt-2 font-display text-lg text-mira-900" data-i18n="din.every.bread.t">Warm bread</div>
+            <div class="text-xs text-mira-600 mt-1" data-i18n="din.every.bread.s">Baked in-house every morning</div>
+          </div>
+          <div class="text-center">
+            <div class="text-4xl">🫒</div>
+            <div class="mt-2 font-display text-lg text-mira-900" data-i18n="din.every.oil.t">Aegean olive oil</div>
+            <div class="text-xs text-mira-600 mt-1" data-i18n="din.every.oil.s">Cold-pressed, single estate</div>
+          </div>
+          <div class="text-center">
+            <div class="text-4xl">☕</div>
+            <div class="mt-2 font-display text-lg text-mira-900" data-i18n="din.every.coffee.t">Turkish coffee</div>
+            <div class="text-xs text-mira-600 mt-1" data-i18n="din.every.coffee.s">Copper cezve, the old way</div>
+          </div>
+          <div class="text-center">
+            <div class="text-4xl">👶</div>
+            <div class="mt-2 font-display text-lg text-mira-900" data-i18n="din.every.kids.t">Kids' menu</div>
+            <div class="text-xs text-mira-600 mt-1" data-i18n="din.every.kids.s">Small plates, gentle spice</div>
+          </div>
+          <div class="text-center">
+            <div class="text-4xl">🌱</div>
+            <div class="mt-2 font-display text-lg text-mira-900" data-i18n="din.every.dietary.t">Dietary swaps</div>
+            <div class="text-xs text-mira-600 mt-1" data-i18n="din.every.dietary.s">Vegan, gluten-free, allergy</div>
+          </div>
+          <div class="text-center">
+            <div class="text-4xl">🍇</div>
+            <div class="mt-2 font-display text-lg text-mira-900" data-i18n="din.every.wine.t">Turkish wine</div>
+            <div class="text-xs text-mira-600 mt-1" data-i18n="din.every.wine.s">By the glass, the bottle, the story</div>
+          </div>
+        </div>
+      </div>
+    </div></section><section class="bg-sand-50 py-20 lg:py-28 scroll-mt-24"><div class="max-w-7xl mx-auto px-5 lg:px-8">
+      <p class="uppercase tracking-[0.22em] text-mira-600 text-xs font-semibold" data-i18n="din.pantry.eyebrow">The pantry</p>
+      <h2 class="font-display text-3xl sm:text-4xl md:text-5xl text-mira-900 leading-tight" data-i18n="din.pantry.h2">Six things the kitchen is built on.</h2>
+      <p class="mt-5 max-w-2xl text-mira-700 leading-relaxed" data-i18n="din.pantry.lead">
+        We buy short and we buy local, but we're strict about what we buy. These six pillars are the backbone of almost everything we serve — from breakfast to a late-night whisky.
+      </p>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-7 mt-10"><article class="bg-white rounded-lg overflow-hidden shadow-lux group">  <div class="aspect-[4/3] bg-cover bg-center transition duration-500 group-hover:scale-[1.03]" style="background-image:url('https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&w=1600&q=80')"></div>  <div class="p-6">    <h3 class="font-display text-xl text-mira-900" data-i18n="din.pantry.oil.t">Aegean olive oil</h3>    <p class="mt-2 text-sm text-mira-700 leading-relaxed" data-i18n="din.pantry.oil.d">Single-estate, cold-pressed, from an orchard forty kilometres west of the hotel. The house oil sits on every table. The finishing oil comes out for the plated dishes.</p>  </div></article><article class="bg-white rounded-lg overflow-hidden shadow-lux group">  <div class="aspect-[4/3] bg-cover bg-center transition duration-500 group-hover:scale-[1.03]" style="background-image:url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=1600&q=80')"></div>  <div class="p-6">    <h3 class="font-display text-xl text-mira-900" data-i18n="din.pantry.citrus.t">Antalya citrus</h3>    <p class="mt-2 text-sm text-mira-700 leading-relaxed" data-i18n="din.pantry.citrus.d">The valley behind us grows some of Türkiye's best oranges, lemons and pomegranates. What arrives in the kitchen at 6 a.m. is on the plate by lunch.</p>  </div></article><article class="bg-white rounded-lg overflow-hidden shadow-lux group">  <div class="aspect-[4/3] bg-cover bg-center transition duration-500 group-hover:scale-[1.03]" style="background-image:url('https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=1600&q=80')"></div>  <div class="p-6">    <h3 class="font-display text-xl text-mira-900" data-i18n="din.pantry.lamb.t">Toros lamb</h3>    <p class="mt-2 text-sm text-mira-700 leading-relaxed" data-i18n="din.pantry.lamb.d">Raised in the Toros foothills on wild herb pasture. Butchered by a partner in Manavgat we've worked with for five years. Slow-cooked, grilled over vine wood, or braised in pomegranate molasses.</p>  </div></article><article class="bg-white rounded-lg overflow-hidden shadow-lux group">  <div class="aspect-[4/3] bg-cover bg-center transition duration-500 group-hover:scale-[1.03]" style="background-image:url('https://images.unsplash.com/photo-1544378730-6d5c9bea174d?auto=format&fit=crop&w=1600&q=80')"></div>  <div class="p-6">    <h3 class="font-display text-xl text-mira-900" data-i18n="din.pantry.herbs.t">Wild herbs</h3>    <p class="mt-2 text-sm text-mira-700 leading-relaxed" data-i18n="din.pantry.herbs.d">Sage, thyme, oregano, mountain mint — foraged in season by the same family who supplies the local restaurants of Side. Dried herbs for winter, fresh cut every morning in season.</p>  </div></article><article class="bg-white rounded-lg overflow-hidden shadow-lux group">  <div class="aspect-[4/3] bg-cover bg-center transition duration-500 group-hover:scale-[1.03]" style="background-image:url('https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=1600&q=80')"></div>  <div class="p-6">    <h3 class="font-display text-xl text-mira-900" data-i18n="din.pantry.bread.t">Bread &amp; simit</h3>    <p class="mt-2 text-sm text-mira-700 leading-relaxed" data-i18n="din.pantry.bread.d">Every loaf, pide, simit and lavash is baked in the hotel bakery from the day's flour. Sourdough starter is the same one we brought over from the family bakery in Antalya, kept alive since 1998.</p>  </div></article><article class="bg-white rounded-lg overflow-hidden shadow-lux group">  <div class="aspect-[4/3] bg-cover bg-center transition duration-500 group-hover:scale-[1.03]" style="background-image:url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1600&q=80')"></div>  <div class="p-6">    <h3 class="font-display text-xl text-mira-900" data-i18n="din.pantry.coffee.t">Turkish coffee</h3>    <p class="mt-2 text-sm text-mira-700 leading-relaxed" data-i18n="din.pantry.coffee.d">Roasted in-house each week from a single-origin Kurukahveci Mehmet Efendi partnership blend. Ground fine, brewed in copper cezve, served with a glass of water and a piece of lokum.</p>  </div></article></div>
+    </div></section><section class="bg-white py-20 lg:py-28 scroll-mt-24"><div class="max-w-7xl mx-auto px-5 lg:px-8">
+      <div class="max-w-5xl mx-auto bg-mira-900 text-white rounded-2xl overflow-hidden shadow-lux">
+        <div class="grid lg:grid-cols-5 items-stretch">
+          <div class="aspect-[4/3] lg:aspect-auto lg:col-span-2 bg-cover bg-center" style="background-image:url('https://images.unsplash.com/photo-1607301405390-d831c242f59b?auto=format&fit=crop&w=1600&q=80')"></div>
+          <div class="lg:col-span-3 p-10 lg:p-14">
+            <p class="uppercase tracking-[0.22em] text-sand-300 text-xs font-semibold" data-i18n="din.chef.eyebrow">From the kitchen</p>
+            <blockquote class="mt-5 font-display text-2xl sm:text-3xl leading-snug" data-i18n="din.chef.quote">
+              &ldquo;Thirty-four suites means one seating. That's a rare thing, and it changes how you cook. Nothing sits under a heat lamp. Nothing is rushed to the pass. Every plate gets checked before it leaves the kitchen — and if the fish came in poor that morning, we tell you and change the menu.&rdquo;
+            </blockquote>
+            <div class="mt-6 flex items-center gap-4">
+              <div class="w-12 h-px bg-sand-300"></div>
+              <div>
+                <div class="font-display text-lg" data-i18n="din.chef.name">Chef Kaan Demir</div>
+                <div class="text-xs uppercase tracking-widest text-sand-300 mt-0.5" data-i18n="din.chef.role">Head Chef · Mira Palace</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div></section><section class="bg-sand-50 py-20 lg:py-28 scroll-mt-24"><div class="max-w-7xl mx-auto px-5 lg:px-8">
+      <div class="max-w-4xl mx-auto">
+        <p class="uppercase tracking-[0.22em] text-mira-600 text-xs font-semibold" data-i18n="din.etq.eyebrow">A few things to know</p>
+        <h3 class="font-display text-2xl sm:text-3xl text-mira-900 leading-tight" data-i18n="din.etq.h2">Small courtesies of the house.</h3>
+        <div class="mt-10 grid md:grid-cols-2 gap-x-12 gap-y-6 text-mira-700 text-sm leading-relaxed">
+          <div class="flex gap-3"><span class="text-sand-500 shrink-0">✓</span><div><span class="font-medium text-mira-900" data-i18n="din.etq.1.t">Dress code is easy.</span> <span data-i18n="din.etq.1.d">Swimwear at the pool bar; something linen or a shirt at dinner. No jacket required — this isn't that kind of hotel.</span></div></div>
+          <div class="flex gap-3"><span class="text-sand-500 shrink-0">✓</span><div><span class="font-medium text-mira-900" data-i18n="din.etq.2.t">Children are welcome everywhere.</span> <span data-i18n="din.etq.2.d">A dedicated small-plates menu, high chairs at every table, and the kitchen will happily plate any main in a smaller portion.</span></div></div>
+          <div class="flex gap-3"><span class="text-sand-500 shrink-0">✓</span><div><span class="font-medium text-mira-900" data-i18n="din.etq.3.t">Allergies &amp; dietary at booking.</span> <span data-i18n="din.etq.3.d">Tell us at reservation and again at the table. Vegan, vegetarian, gluten-free, nut-free — the chef adjusts every dish, not a separate menu.</span></div></div>
+          <div class="flex gap-3"><span class="text-sand-500 shrink-0">✓</span><div><span class="font-medium text-mira-900" data-i18n="din.etq.4.t">Private dining, chef's table.</span> <span data-i18n="din.etq.4.d">The small private room seats eight and is available for family celebrations, small tastings, or a birthday dinner. Twenty-four hours' notice.</span></div></div>
+          <div class="flex gap-3"><span class="text-sand-500 shrink-0">✓</span><div><span class="font-medium text-mira-900" data-i18n="din.etq.5.t">Corkage is fine.</span> <span data-i18n="din.etq.5.d">Bring a bottle if you've been travelling with something special — the sommelier will pour it for a modest corkage. Just ask at the maître d'.</span></div></div>
+          <div class="flex gap-3"><span class="text-sand-500 shrink-0">✓</span><div><span class="font-medium text-mira-900" data-i18n="din.etq.6.t">Cancellations 4 hours before.</span> <span data-i18n="din.etq.6.d">A courtesy for the kitchen and the sommelier who will have started prepping for your table. Same-day changes — text WhatsApp.</span></div></div>
+        </div>
       </div>
     </div></section><section class="bg-white py-20 lg:py-28 scroll-mt-24"><div class="max-w-7xl mx-auto px-5 lg:px-8">
-      <span id="sample-menu" class="block -mt-24 pt-24" aria-hidden="true"></span>
-      <p class="uppercase tracking-[0.22em] text-mira-600 text-xs font-semibold">Sample evening menu</p>
-      <h3 class="font-display text-2xl sm:text-3xl text-mira-900 leading-tight ">Tonight at Mira.</h3>
-      <div class="mt-10 max-w-3xl mx-auto">
-        <div class="menu-card rounded-md">
-          <h3>Mira Restaurant</h3>
-          <span class="menu-tag">A Monday in May · From the chef</span>
-          <section class="menu-section"><h4 class="menu-section-title">To start</h4><div class="menu-row"><div class="name">Grilled octopus</div><div class="desc">white-bean purée, pul biber oil</div></div><div class="menu-row"><div class="name">Chilled tomato &amp; pomegranate soup</div><div class="desc">basil granita, dill</div></div><div class="menu-row"><div class="name">Warm halloumi</div><div class="desc">walnut &amp; rocket salad, sumac vinaigrette</div></div><div class="menu-row"><div class="name">Smoked aubergine</div><div class="desc">yoghurt, walnuts, pomegranate seeds</div></div></section>
-          <section class="menu-section"><h4 class="menu-section-title">From the wood oven</h4><div class="menu-row"><div class="name">Whole sea bass</div><div class="desc">lemon, thyme, olive oil</div></div><div class="menu-row"><div class="name">Dorade in salt crust</div><div class="desc">for two — cracked at the table</div></div><div class="menu-row"><div class="name">Lamb shoulder</div><div class="desc">pomegranate molasses, bulgur, fennel</div></div><div class="menu-row"><div class="name">Wood-fired pide</div><div class="desc">minced lamb &amp; tomato, or four cheese</div></div></section>
-          <section class="menu-section"><h4 class="menu-section-title">Mains</h4><div class="menu-row"><div class="name">Chicken şiş</div><div class="desc">garlic yoghurt, pilav, chilli butter</div></div><div class="menu-row"><div class="name">Slow-braised beef cheek</div><div class="desc">mashed potato, roasted shallots, jus</div></div><div class="menu-row"><div class="name">Vegetable moussaka</div><div class="desc">pine nuts, feta, oregano</div></div><div class="menu-row"><div class="name">Saffron risotto</div><div class="desc">seafood of the day, lemon zest</div></div></section>
-          <section class="menu-section"><h4 class="menu-section-title">To finish</h4><div class="menu-row"><div class="name">Baklava</div><div class="desc">with kaymak and pistachio</div></div><div class="menu-row"><div class="name">Poached quince</div><div class="desc">clotted cream, walnut praline</div></div><div class="menu-row"><div class="name">Antalya cheese plate</div><div class="desc">fig jam, honeycomb, walnut bread</div></div><div class="menu-row"><div class="name">Turkish coffee &amp; lokum</div><div class="desc">the way it should be</div></div></section>
-          <p class="mt-10 text-center text-xs italic" style="color:var(--mira-700); font-family:Inter,sans-serif; letter-spacing:.05em;">Menu rotates weekly · vegan, gluten-free and allergy adjustments are made by the chef on the day · just say a word at the maître d'.</p>
+      <div class="max-w-5xl mx-auto bg-mira-900 text-white rounded-2xl overflow-hidden shadow-lux">
+        <div class="grid lg:grid-cols-2 items-stretch">
+          <div class="aspect-[4/3] lg:aspect-auto bg-cover bg-center" style="background-image:url('https://sidemirapalace.com/img/restaurant/20240713110135_88159.png')"></div>
+          <div class="p-10 lg:p-12">
+            <div class="text-[10px] uppercase tracking-widest text-sand-300 font-semibold" data-i18n="din.contact.eyebrow">Reserve a table</div>
+            <h3 class="font-display text-4xl mt-3" data-i18n="din.contact.h3">Reception takes reservations directly.</h3>
+            <p class="mt-5 text-white/80 leading-relaxed" data-i18n="din.contact.p">
+              Book online in ninety seconds, or call reception — evenings sell out on weekends, and we hold a handful of tables until the day of arrival.
+            </p>
+            <div class="mt-8 space-y-4">
+              <a href="tel:+905348988405" class="flex items-center gap-4 group">
+                <div class="w-12 h-12 rounded-full bg-white/10 grid place-items-center text-2xl">☎</div>
+                <div>
+                  <div class="text-xs uppercase tracking-widest text-sand-300" data-i18n="din.contact.reception">Hotel reception</div>
+                  <div class="font-display text-2xl group-hover:text-sand-200 transition">+90 534 898 84 05</div>
+                </div>
+              </a>
+              <a href="https://wa.me/905348988405" rel="noopener" class="flex items-center gap-4 group">
+                <div class="w-12 h-12 rounded-full bg-white/10 grid place-items-center text-2xl">💬</div>
+                <div>
+                  <div class="text-xs uppercase tracking-widest text-sand-300" data-i18n="din.contact.whatsapp_label">WhatsApp</div>
+                  <div class="font-display text-2xl group-hover:text-sand-200 transition" data-i18n="din.contact.whatsapp_v">Same number, faster</div>
+                </div>
+              </a>
+              <a href="tel:+902426420913" class="flex items-center gap-4 group">
+                <div class="w-12 h-12 rounded-full bg-white/10 grid place-items-center text-2xl">📞</div>
+                <div>
+                  <div class="text-xs uppercase tracking-widest text-sand-300" data-i18n="din.contact.landline">Landline</div>
+                  <div class="font-display text-2xl group-hover:text-sand-200 transition">+90 242 642 09 13</div>
+                </div>
+              </a>
+            </div>
+            <a href="../book.html" class="mt-10 inline-flex items-center gap-3 px-8 py-4 bg-sand-300 text-mira-900 rounded-full font-semibold hover:bg-sand-200 transition">
+              <span data-i18n="din.contact.cta">Reserve online</span> <span>→</span>
+            </a>
+          </div>
         </div>
       </div>
     </div></section></main>
@@ -534,6 +677,6 @@ tailwind.config = {
 
     <script src="../assets/js/media-manifest.js?v=32" defer></script>
     <script src="../assets/js/search-index.js?v=32" defer></script>
-    <script src="../assets/js/i18n.js?v=32" defer></script>
-    <script src="../assets/js/site.js?v=32" defer></script>
+    <script src="../assets/js/i18n.js?v=33" defer></script>
+    <script src="../assets/js/site.js?v=33" defer></script>
     </body></html>

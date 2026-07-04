@@ -56,47 +56,47 @@ window.MIRA_SEARCH_INDEX = [
   },
   {
     "path": "dining/",
-    "title": "Dining · Mira Palace",
-    "description": "Four dining outlets at Mira Palace — main restaurant, pool restaurant, lobby bar, orchard bar.",
+    "title": "Dining & Bars · Mira Palace",
+    "description": "Three settings, one Mediterranean philosophy — Mira Restaurant, the Pool Bar and the Lobby Bar. Turkish-Mediterranean plating, wood-fired pide, and cocktails until 01:00 at Mira Palace, Side.",
     "headings": [
-      "Four outlets. One kitchen.Thirty-four guests watching.",
-      "Our dining rooms.",
-      "Mira — main restaurant",
-      "Deniz — pool restaurant",
-      "Lobby bar",
-      "Orchard bar",
-      "Tonight at Mira.",
-      "Mira Restaurant"
+      "Antalya on the plate. Türkiye in the glass.",
+      "Cooked short. Served slowly.",
+      "Where to eat and drink.",
+      "Mira Restaurant",
+      "Pool Bar",
+      "Lobby Bar",
+      "What is always there.",
+      "Six things the kitchen is built on."
     ]
   },
   {
     "path": "dining/main-restaurant.html",
-    "title": "Mira main restaurant · Mira Palace",
-    "description": "The main restaurant at Mira Palace — breakfast and lunch open buffet, evening menu-led dinner with weekly themes.",
+    "title": "Mira Restaurant · Mira Palace",
+    "description": "The main dining room at Mira Palace — chef-led plated dinner with a rotating regional theme every evening, breakfast and lunch buffets, open kitchen onto the garden.",
     "headings": [
-      "Mira restaurant.",
-      "Service times"
+      "The main dining room.",
+      "Hours house rules",
+      "Tonight at Mira."
     ]
   },
   {
     "path": "dining/pool-bar.html",
-    "title": "Pool restaurant (Deniz) · Mira Palace",
-    "description": "Casual poolside lunch with wood-fired pide and pizza, mezze bar, grilled fish.",
+    "title": "Pool Bar · Mira Palace",
+    "description": "Mediterranean poolside lunch at Mira Palace — mezze, wood-fired pide, grilled fish of the morning market, served under a pergola three metres from the water.",
     "headings": [
-      "Deniz — by the pool.",
-      "At a glance"
+      "Long lunches by the pool.",
+      "Hours house rules",
+      "At the pool today."
     ]
   },
   {
     "path": "dining/lobby-bar.html",
-    "title": "Lobby & Orchard bars · Mira Palace",
-    "description": "All-day and late-night bars at Mira Palace — coffee, cocktails, wine list, reserve spirits.",
+    "title": "Lobby Bar · Mira Palace",
+    "description": "The lobby bar at Mira Palace — espresso in the morning, cocktails and live piano at night. Open every day 10:00 to 01:00.",
     "headings": [
-      "Two bars, one late night.",
-      "A short list of what we make well.",
-      "House cocktails",
-      "Wine list (All-Inclusive)",
-      "Reserve list (extra charge)"
+      "Espresso in the morning. Nightcaps at midnight.",
+      "Hours house rules",
+      "From the bar tonight."
     ]
   },
   {

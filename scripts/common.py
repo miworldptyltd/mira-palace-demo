@@ -121,7 +121,7 @@ tailwind.config = {{
   // because GitHub Pages hosts at /mira-palace-demo/ rather than /.
   window.MIRA_ROOT = "{root}";
 </script>
-<link rel="stylesheet" href="{root}assets/css/site.css?v=27" />
+<link rel="stylesheet" href="{root}assets/css/site.css?v=28" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/tabler-icons.min.css" />
 <!-- R016: Cloudflare Turnstile (bot-check on forms). Test sitekey "always pass"
      during the stub phase; real sitekey swaps in once user creates the widget. -->
@@ -449,8 +449,8 @@ def footer(root: str) -> str:
     {customiser_panel(root)}
     <script src="{root}assets/js/media-manifest.js?v=32" defer></script>
     <script src="{root}assets/js/search-index.js?v=32" defer></script>
-    <script src="{root}assets/js/i18n.js?v=32" defer></script>
-    <script src="{root}assets/js/site.js?v=32" defer></script>
+    <script src="{root}assets/js/i18n.js?v=33" defer></script>
+    <script src="{root}assets/js/site.js?v=33" defer></script>
     </body></html>
     """)
 

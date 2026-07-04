@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Mira main restaurant · Mira Palace</title>
-<meta name="description" content="The main restaurant at Mira Palace — breakfast and lunch open buffet, evening menu-led dinner with weekly themes." />
+<title>Mira Restaurant · Mira Palace</title>
+<meta name="description" content="The main dining room at Mira Palace — chef-led plated dinner with a rotating regional theme every evening, breakfast and lunch buffets, open kitchen onto the garden." />
 <meta name="robots" content="noindex,nofollow" />
 <link rel="canonical" href="https://miworldptyltd.github.io/mira-palace-demo/dining/main-restaurant.html" />
 <!-- R015: layered security via meta tags (HSTS / X-Frame-Options need HTTP headers, set at Cloudflare proxy in R021) -->
@@ -14,8 +14,8 @@
 <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=(), payment=()" />
 <!-- R015: rich Open Graph + Twitter Card for proper link previews on shares -->
 <meta property="og:site_name" content="Mira Palace" />
-<meta property="og:title" content="Mira main restaurant · Mira Palace" />
-<meta property="og:description" content="The main restaurant at Mira Palace — breakfast and lunch open buffet, evening menu-led dinner with weekly themes." />
+<meta property="og:title" content="Mira Restaurant · Mira Palace" />
+<meta property="og:description" content="The main dining room at Mira Palace — chef-led plated dinner with a rotating regional theme every evening, breakfast and lunch buffets, open kitchen onto the garden." />
 <meta property="og:type" content="website" />
 <meta property="og:image" content="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1600&q=80" />
 <meta property="og:image:width" content="1600" />
@@ -27,8 +27,8 @@
 <meta property="og:locale:alternate" content="de_DE" />
 <meta property="og:locale:alternate" content="ru_RU" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Mira main restaurant · Mira Palace" />
-<meta name="twitter:description" content="The main restaurant at Mira Palace — breakfast and lunch open buffet, evening menu-led dinner with weekly themes." />
+<meta name="twitter:title" content="Mira Restaurant · Mira Palace" />
+<meta name="twitter:description" content="The main dining room at Mira Palace — chef-led plated dinner with a rotating regional theme every evening, breakfast and lunch buffets, open kitchen onto the garden." />
 <meta name="twitter:image" content="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1600&q=80" />
 <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -63,7 +63,7 @@ tailwind.config = {
   // because GitHub Pages hosts at /mira-palace-demo/ rather than /.
   window.MIRA_ROOT = "../";
 </script>
-<link rel="stylesheet" href="../assets/css/site.css?v=27" />
+<link rel="stylesheet" href="../assets/css/site.css?v=28" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/tabler-icons.min.css" />
 <!-- R016: Cloudflare Turnstile (bot-check on forms). Test sitekey "always pass"
      during the stub phase; real sitekey swaps in once user creates the widget. -->
@@ -266,44 +266,61 @@ tailwind.config = {
 </header>
 <main id="main" class="pt-16 md:pt-[104px]"><div id="mp-i18n-notice" class="hidden bg-sand-100 border-b border-sand-300/40 px-5 py-2 text-center text-xs text-mira-800"><span data-i18n="i18n.in_progress">Page content translation in progress — English shown.</span></div>
 <section class="relative hero-section" style="min-height:68vh;">
-  <div class="absolute inset-0 hero-overlay" style="background-image:url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1600&q=80'); background-size:cover; background-position:center;"></div>
+  <div class="hero-slideshow" >
+    <div class="slide active" style="background-image:url('https://sidemirapalace.com/img/imkanlar/20240713112112_56335.png')"></div>
+  </div>
+  <div class="absolute inset-0 hero-overlay pointer-events-none"></div>
   <div class="relative max-w-7xl mx-auto px-5 lg:px-8 pt-10 pb-16 text-white flex flex-col justify-start min-h-[inherit]" style="min-height:68vh;">
     <div class="max-w-3xl">
-      <p class="uppercase tracking-[0.22em] text-sand-300 text-xs sm:text-sm font-semibold mb-4">Mira — main restaurant</p>
-      <h1 class="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.05]">Mira restaurant.</h1>
-      <p class="mt-5 max-w-2xl text-base sm:text-lg text-white/90 leading-relaxed">The indoor dining room. Open buffet for breakfast and lunch, and a plated, menu-led dinner with a rotating theme every evening.</p>
-      <div class="mt-8 flex flex-wrap gap-3"></div>
+      <p class="uppercase tracking-[0.22em] text-sand-300 text-xs sm:text-sm font-semibold mb-4"><span data-i18n="din.main.hero.kicker">Mira Restaurant</span></p>
+      <h1 class="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.05]"><span data-i18n="din.main.hero.h1">The main dining room.</span></h1>
+      <p class="mt-5 max-w-2xl text-base sm:text-lg text-white/90 leading-relaxed"><span data-i18n="din.main.hero.sub">Turkish-Mediterranean plating in the heart of the ground floor — thirty-four suites means one seating, and one seating means the chef checks every plate before it leaves the pass.</span></p>
+      <div class="mt-8 flex flex-wrap gap-3"><a href="../book.html" class="inline-flex items-center justify-center px-7 py-3 bg-sand-300 text-mira-900 rounded-full font-medium tracking-wide hover:bg-sand-200 shadow-lux transition"><span data-i18n="din.main.hero.cta">Reserve a table</span></a></div>
     </div>
   </div>
 </section>
 <section class="bg-white py-20 lg:py-28 scroll-mt-24"><div class="max-w-7xl mx-auto px-5 lg:px-8">
       <div class="grid lg:grid-cols-12 gap-12">
         <div class="lg:col-span-7 text-mira-700 leading-relaxed text-lg space-y-5">
-          <p>The main restaurant seats sixty at full capacity, which means even a full house fits in one service. Breakfast is a proper open-kitchen buffet: an egg station, a fresh-juice bar, a hot corner with simit, menemen and sucuklu yumurta, a bread station, and an espresso machine we take seriously.</p>
-          <p>Lunch is similar, lighter, with the soup and grilled station leading. Dinner is the evening’s theme — a different country or region of Türkiye each night — plated and served with a wine pairing if you want it.</p>
-          <p>We don’t fuss over dress code. Flip-flops are fine at breakfast; at dinner, most guests change into something light. Nothing that requires a jacket.</p>
+          <p data-i18n="din.main.p1">Sixty covers at capacity — enough that a full house is a proper room, small enough that the maître d' knows every table. Breakfast and lunch are open-kitchen buffets, always with a hot corner, an egg station, a fresh-juice bar and an espresso machine we take seriously.</p><p data-i18n="din.main.p2">Dinner is a plated, menu-led evening service with a rotating regional theme — a different corner of Türkiye each night, from Aegean fish to Southeastern kebab, with a small à-la-carte column running underneath for the classics. Wine pairings suggested by the sommelier if you want them.</p><p data-i18n="din.main.p3">The room opens onto the garden through floor-to-ceiling glass; in season, the doors fold back and half the tables spill onto the terrace. In winter, the fireplace at the north end draws the room together.</p>
         </div>
         <aside class="lg:col-span-5">
           <div class="bg-white rounded-lg shadow-lux p-7">
-            <h3 class="font-display text-2xl text-mira-900">Service times</h3>
-            <dl class="mt-5 grid grid-cols-2 gap-y-3 text-sm">
-              <dt class="text-mira-600">Breakfast</dt><dd class="text-right font-medium">07:00 – 10:30</dd>
-              <dt class="text-mira-600">Late breakfast</dt><dd class="text-right font-medium">10:30 – 12:00 (lobby)</dd>
-              <dt class="text-mira-600">Lunch</dt><dd class="text-right font-medium">12:30 – 14:30</dd>
-              <dt class="text-mira-600">Dinner</dt><dd class="text-right font-medium">19:00 – 22:00</dd>
-              <dt class="text-mira-600">À la carte night</dt><dd class="text-right font-medium">Fri &amp; Sat · booking</dd>
-              <dt class="text-mira-600">Dress</dt><dd class="text-right font-medium">Smart casual at dinner</dd>
-            </dl>
-            <a href="../concept.html" class="mt-5 inline-flex items-center gap-2 text-sm font-medium text-mira-700 hover:text-sand-600">What’s included →</a>
+            <h3 class="font-display text-2xl text-mira-900" data-i18n="din.main.hours.h3">Hours &amp; house rules</h3>
+            <dl class="mt-5 grid grid-cols-2 gap-y-3 text-sm"><dt class="text-mira-600" data-i18n="din.main.hours.0.k">Breakfast</dt><dd class="text-right font-medium" data-i18n="din.main.hours.0.v">07:00 – 10:30</dd><dt class="text-mira-600" data-i18n="din.main.hours.1.k">Lunch</dt><dd class="text-right font-medium" data-i18n="din.main.hours.1.v">12:30 – 14:30</dd><dt class="text-mira-600" data-i18n="din.main.hours.2.k">Dinner</dt><dd class="text-right font-medium" data-i18n="din.main.hours.2.v">19:00 – 22:00</dd><dt class="text-mira-600" data-i18n="din.main.hours.3.k">Dress</dt><dd class="text-right font-medium" data-i18n="din.main.hours.3.v">Smart casual</dd><dt class="text-mira-600" data-i18n="din.main.hours.4.k">Children</dt><dd class="text-right font-medium" data-i18n="din.main.hours.4.v">Welcome, kids' menu</dd><dt class="text-mira-600" data-i18n="din.main.hours.5.k">Private room</dt><dd class="text-right font-medium" data-i18n="din.main.hours.5.v">Seats 8, on request</dd></dl>
+            <a href="../book.html" class="mt-6 inline-flex items-center gap-2 text-sm font-medium text-mira-800 hover:text-sand-600">
+              <span data-i18n="din.main.hours.cta">Reserve a table</span> →
+            </a>
           </div>
         </aside>
       </div>
     </div></section><section class="bg-sand-50 py-20 lg:py-28 scroll-mt-24"><div class="max-w-7xl mx-auto px-5 lg:px-8">
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-        <div class="aspect-[4/5] bg-cover bg-center rounded" style="background-image:url('https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?auto=format&fit=crop&w=1200&q=80')"></div>
-        <div class="aspect-[4/5] bg-cover bg-center rounded" style="background-image:url('https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=1200&q=80')"></div>
-        <div class="aspect-[4/5] bg-cover bg-center rounded" style="background-image:url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1600&q=80')"></div>
-        <div class="aspect-[4/5] bg-cover bg-center rounded" style="background-image:url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1600&q=80')"></div>
+      <span id="menu" class="block -mt-24 pt-24" aria-hidden="true"></span>
+      <div class="text-center max-w-2xl mx-auto">
+        <p class="uppercase tracking-[0.22em] text-sand-600 text-xs font-semibold" data-i18n="din.main.hl.eyebrow">Signature moments</p>
+        <h2 class="font-display text-3xl sm:text-4xl md:text-5xl text-mira-900 leading-tight" data-i18n="din.main.hl.h2">Tonight at Mira.</h2>
+      </div>
+      <div class="mt-10 max-w-3xl mx-auto">
+        <div class="menu-card rounded-md">
+          <div class="menu-row"><div class="name" data-i18n="din.main.hl.0.n">Grilled octopus</div><div class="desc" data-i18n="din.main.hl.0.d">white-bean purée, pul biber oil, lemon</div></div><div class="menu-row"><div class="name" data-i18n="din.main.hl.1.n">Chilled tomato soup</div><div class="desc" data-i18n="din.main.hl.1.d">basil granita, dill, olive oil</div></div><div class="menu-row"><div class="name" data-i18n="din.main.hl.2.n">Whole sea bass, wood-fired</div><div class="desc" data-i18n="din.main.hl.2.d">lemon, thyme, salt-baked potato</div></div><div class="menu-row"><div class="name" data-i18n="din.main.hl.3.n">Slow-braised beef cheek</div><div class="desc" data-i18n="din.main.hl.3.d">smoked aubergine, pomegranate molasses, jus</div></div><div class="menu-row"><div class="name" data-i18n="din.main.hl.4.n">Vegetable moussaka</div><div class="desc" data-i18n="din.main.hl.4.d">pine nuts, feta, oregano, tahini yoghurt</div></div><div class="menu-row"><div class="name" data-i18n="din.main.hl.5.n">Baklava with kaymak</div><div class="desc" data-i18n="din.main.hl.5.d">walnut &amp; pistachio, warm from the oven</div></div><div class="menu-row"><div class="name" data-i18n="din.main.hl.6.n">Antalya cheese board</div><div class="desc" data-i18n="din.main.hl.6.d">fig jam, honeycomb, walnut bread</div></div><div class="menu-row"><div class="name" data-i18n="din.main.hl.7.n">Turkish coffee &amp; lokum</div><div class="desc" data-i18n="din.main.hl.7.d">the way it should be — with a glass of water</div></div>
+        </div>
+        <p class="mt-8 text-center text-xs italic" style="color:var(--mira-700); font-family:Inter,sans-serif; letter-spacing:.05em;" data-i18n="din.main.hl.foot">Menu rotates with the season &middot; vegan, gluten-free &amp; allergy adjustments made at the table.</p>
+      </div>
+    </div></section><section class="bg-white py-20 lg:py-28 scroll-mt-24"><div class="max-w-7xl mx-auto px-5 lg:px-8">
+      <div class="max-w-4xl mx-auto bg-mira-900 text-white rounded-2xl overflow-hidden shadow-lux">
+        <div class="grid md:grid-cols-5 items-stretch">
+          <div class="aspect-[4/3] md:aspect-auto md:col-span-2 bg-cover bg-center" style="background-image:url('https://images.unsplash.com/photo-1607301405390-d831c242f59b?auto=format&fit=crop&w=1600&q=80')"></div>
+          <div class="md:col-span-3 p-8 md:p-10">
+            <p class="uppercase tracking-[0.22em] text-sand-300 text-xs font-semibold" data-i18n="din.main.voice.eyebrow">In their words</p>
+            <blockquote class="mt-4 font-display text-xl sm:text-2xl leading-snug" data-i18n="din.main.voice.quote">
+              &ldquo;One seating is a discipline. We cook for the room we can see, and we finish when the last table wants to. If a guest asks for something off-menu, we look at what came in that morning and do our best — that answer is almost always yes.&rdquo;
+            </blockquote>
+            <div class="mt-6">
+              <div class="font-display text-lg" data-i18n="din.main.voice.name">Chef Kaan Demir</div>
+              <div class="text-xs uppercase tracking-widest text-sand-300 mt-0.5" data-i18n="din.main.voice.role">Head Chef · Mira Restaurant</div>
+            </div>
+          </div>
+        </div>
       </div>
     </div></section></main>
     <footer class="bg-mira-900 text-white/80 mt-24">
@@ -495,6 +512,6 @@ tailwind.config = {
 
     <script src="../assets/js/media-manifest.js?v=32" defer></script>
     <script src="../assets/js/search-index.js?v=32" defer></script>
-    <script src="../assets/js/i18n.js?v=32" defer></script>
-    <script src="../assets/js/site.js?v=32" defer></script>
+    <script src="../assets/js/i18n.js?v=33" defer></script>
+    <script src="../assets/js/site.js?v=33" defer></script>
     </body></html>

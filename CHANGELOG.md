@@ -1,3 +1,7 @@
+## [R019] - 2026-07-04
+
+R019 dining rebuild — world-class 4-page structure, 3 venues, real bar photo, i18n keys tagged
+
 ## [R018] - 2026-07-03
 
 R018 feat: spa and wellness page fully translated EN TR DE RU contextually - hero philosophy 3 packages every visit strip 6 facilities 5 stage ritual etiquette contact block - approx 65 new keys per language - translation-in-progress notice now hides on spa page too
@@ -153,6 +157,7 @@ First publishable build. Sent to the hotel for owner review.
 - LICENSE is all-rights-reserved proprietary.
 
 [0.1.0]: https://github.com/-/-/releases/tag/v0.1.0
+
 
 
 

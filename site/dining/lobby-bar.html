@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Lobby & Orchard bars · Mira Palace</title>
-<meta name="description" content="All-day and late-night bars at Mira Palace — coffee, cocktails, wine list, reserve spirits." />
+<title>Lobby Bar · Mira Palace</title>
+<meta name="description" content="The lobby bar at Mira Palace — espresso in the morning, cocktails and live piano at night. Open every day 10:00 to 01:00." />
 <meta name="robots" content="noindex,nofollow" />
 <link rel="canonical" href="https://miworldptyltd.github.io/mira-palace-demo/dining/lobby-bar.html" />
 <!-- R015: layered security via meta tags (HSTS / X-Frame-Options need HTTP headers, set at Cloudflare proxy in R021) -->
@@ -14,8 +14,8 @@
 <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=(), payment=()" />
 <!-- R015: rich Open Graph + Twitter Card for proper link previews on shares -->
 <meta property="og:site_name" content="Mira Palace" />
-<meta property="og:title" content="Lobby & Orchard bars · Mira Palace" />
-<meta property="og:description" content="All-day and late-night bars at Mira Palace — coffee, cocktails, wine list, reserve spirits." />
+<meta property="og:title" content="Lobby Bar · Mira Palace" />
+<meta property="og:description" content="The lobby bar at Mira Palace — espresso in the morning, cocktails and live piano at night. Open every day 10:00 to 01:00." />
 <meta property="og:type" content="website" />
 <meta property="og:image" content="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1600&q=80" />
 <meta property="og:image:width" content="1600" />
@@ -27,8 +27,8 @@
 <meta property="og:locale:alternate" content="de_DE" />
 <meta property="og:locale:alternate" content="ru_RU" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Lobby & Orchard bars · Mira Palace" />
-<meta name="twitter:description" content="All-day and late-night bars at Mira Palace — coffee, cocktails, wine list, reserve spirits." />
+<meta name="twitter:title" content="Lobby Bar · Mira Palace" />
+<meta name="twitter:description" content="The lobby bar at Mira Palace — espresso in the morning, cocktails and live piano at night. Open every day 10:00 to 01:00." />
 <meta name="twitter:image" content="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1600&q=80" />
 <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -63,7 +63,7 @@ tailwind.config = {
   // because GitHub Pages hosts at /mira-palace-demo/ rather than /.
   window.MIRA_ROOT = "../";
 </script>
-<link rel="stylesheet" href="../assets/css/site.css?v=27" />
+<link rel="stylesheet" href="../assets/css/site.css?v=28" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/tabler-icons.min.css" />
 <!-- R016: Cloudflare Turnstile (bot-check on forms). Test sitekey "always pass"
      during the stub phase; real sitekey swaps in once user creates the widget. -->
@@ -265,22 +265,63 @@ tailwind.config = {
   </div>
 </header>
 <main id="main" class="pt-16 md:pt-[104px]"><div id="mp-i18n-notice" class="hidden bg-sand-100 border-b border-sand-300/40 px-5 py-2 text-center text-xs text-mira-800"><span data-i18n="i18n.in_progress">Page content translation in progress — English shown.</span></div>
-<section class="relative hero-section" style="min-height:66vh;">
-  <div class="absolute inset-0 hero-overlay" style="background-image:url('https://images.unsplash.com/photo-1470337458703-46ad1756a187?auto=format&fit=crop&w=1600&q=80'); background-size:cover; background-position:center;"></div>
-  <div class="relative max-w-7xl mx-auto px-5 lg:px-8 pt-10 pb-16 text-white flex flex-col justify-start min-h-[inherit]" style="min-height:66vh;">
+<section class="relative hero-section" style="min-height:68vh;">
+  <div class="hero-slideshow" >
+    <div class="slide active" style="background-image:url('https://sidemirapalace.com/img/restaurant/20240713110135_88159.png')"></div>
+  </div>
+  <div class="absolute inset-0 hero-overlay pointer-events-none"></div>
+  <div class="relative max-w-7xl mx-auto px-5 lg:px-8 pt-10 pb-16 text-white flex flex-col justify-start min-h-[inherit]" style="min-height:68vh;">
     <div class="max-w-3xl">
-      <p class="uppercase tracking-[0.22em] text-sand-300 text-xs sm:text-sm font-semibold mb-4">Lobby &amp; Orchard bars</p>
-      <h1 class="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.05]">Two bars, one late night.</h1>
-      <p class="mt-5 max-w-2xl text-base sm:text-lg text-white/90 leading-relaxed">The Lobby Bar opens for espresso at 10:00 and stays open until 01:00. The Orchard Bar, by the main pool, runs until midnight. Between them they cover the whole day.</p>
-      <div class="mt-8 flex flex-wrap gap-3"></div>
+      <p class="uppercase tracking-[0.22em] text-sand-300 text-xs sm:text-sm font-semibold mb-4"><span data-i18n="din.lobby.hero.kicker">Lobby Bar</span></p>
+      <h1 class="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.05]"><span data-i18n="din.lobby.hero.h1">Espresso in the morning. Nightcaps at midnight.</span></h1>
+      <p class="mt-5 max-w-2xl text-base sm:text-lg text-white/90 leading-relaxed"><span data-i18n="din.lobby.hero.sub">The polished-wood counter that anchors the ground floor — coffee and pastries at daybreak, cocktails and piano after dark. Open every day, 10:00 to 01:00.</span></p>
+      <div class="mt-8 flex flex-wrap gap-3"><a href="../book.html" class="inline-flex items-center justify-center px-7 py-3 bg-sand-300 text-mira-900 rounded-full font-medium tracking-wide hover:bg-sand-200 shadow-lux transition"><span data-i18n="din.lobby.hero.cta">Reserve at the bar</span></a></div>
     </div>
   </div>
 </section>
-<section class="bg-sand-50 py-20 lg:py-28 scroll-mt-24"><div class="max-w-7xl mx-auto px-5 lg:px-8">
-      <p class="uppercase tracking-[0.22em] text-mira-600 text-xs font-semibold">On the menu</p>
-      <h3 class="font-display text-2xl sm:text-3xl text-mira-900 leading-tight ">A short list of what we make well.</h3>
-      <div class="grid md:grid-cols-3 gap-7 mt-10"><div class="p-7 bg-white rounded-lg shadow-lux"><h3 class="font-display text-2xl text-mira-900">House cocktails</h3><ul class="mt-4 space-y-2 text-sm text-mira-700"><li>Rakı Sour — rakı, lemon, egg-white, cherry</li><li>Side Spritz — bitter orange, prosecco, thyme</li><li>Pomegranate Sour — pomegranate molasses, vodka, lime</li><li>Orchard Mojito — fresh mint, basil, white rum, lime</li></ul></div><div class="p-7 bg-white rounded-lg shadow-lux"><h3 class="font-display text-2xl text-mira-900">Wine list (All-Inclusive)</h3><ul class="mt-4 space-y-2 text-sm text-mira-700"><li>Doluca Kav — white, Emir grape, Cappadocia</li><li>Kavaklıdere Yakut — red blend, Anatolia</li><li>Sevilen Majestic — rosé, İzmir</li><li>Prosecco DOC — by the glass or bottle</li></ul></div><div class="p-7 bg-white rounded-lg shadow-lux"><h3 class="font-display text-2xl text-mira-900">Reserve list (extra charge)</h3><ul class="mt-4 space-y-2 text-sm text-mira-700"><li>Corvus Rüzgar — premium Turkish red</li><li>Billecart-Salmon Brut Reserve champagne</li><li>The Balvenie 14 DoubleWood</li><li>Rémy Martin VSOP</li></ul></div></div>
-      <p class="mt-8 text-xs text-mira-500 italic">Reserve list is charged per serve and billed on checkout. Everything else is included in your All-Inclusive stay.</p>
+<section class="bg-white py-20 lg:py-28 scroll-mt-24"><div class="max-w-7xl mx-auto px-5 lg:px-8">
+      <div class="grid lg:grid-cols-12 gap-12">
+        <div class="lg:col-span-7 text-mira-700 leading-relaxed text-lg space-y-5">
+          <p data-i18n="din.lobby.p1">The lobby bar is the beating heart of the ground floor. It opens for espresso and freshly-baked pastries at 10:00, keeps pouring through the afternoon for those who never quite left, and shifts into cocktails at 17:00 as the light drops. The piano starts at eight most evenings; last call is 00:45 and no one is rushed to the door.</p><p data-i18n="din.lobby.p2">The house cocktail list leans Turkish — rakı sours, pomegranate-molasses spritzes, orchard mojitos with mint from the garden — with a longer reserve list of small-batch Turkish spirits, Old-World whiskies, cognac and Champagne for the guests who want the good bottle from the top shelf.</p><p data-i18n="din.lobby.p3">The bar itself is polished dark wood with backlit yellow shelving behind — the room the architect got right first time. Sit at the counter, order the sommelier's evening pour, and watch the barman do the honest work.</p>
+        </div>
+        <aside class="lg:col-span-5">
+          <div class="bg-white rounded-lg shadow-lux p-7">
+            <h3 class="font-display text-2xl text-mira-900" data-i18n="din.lobby.hours.h3">Hours &amp; house rules</h3>
+            <dl class="mt-5 grid grid-cols-2 gap-y-3 text-sm"><dt class="text-mira-600" data-i18n="din.lobby.hours.0.k">Bar open</dt><dd class="text-right font-medium" data-i18n="din.lobby.hours.0.v">10:00 – 01:00</dd><dt class="text-mira-600" data-i18n="din.lobby.hours.1.k">Espresso</dt><dd class="text-right font-medium" data-i18n="din.lobby.hours.1.v">10:00 – 17:00</dd><dt class="text-mira-600" data-i18n="din.lobby.hours.2.k">Cocktails</dt><dd class="text-right font-medium" data-i18n="din.lobby.hours.2.v">17:00 – 00:45</dd><dt class="text-mira-600" data-i18n="din.lobby.hours.3.k">Piano</dt><dd class="text-right font-medium" data-i18n="din.lobby.hours.3.v">20:00 – 23:00, Wed–Sat</dd><dt class="text-mira-600" data-i18n="din.lobby.hours.4.k">Dress</dt><dd class="text-right font-medium" data-i18n="din.lobby.hours.4.v">Whatever you're in</dd><dt class="text-mira-600" data-i18n="din.lobby.hours.5.k">Last call</dt><dd class="text-right font-medium" data-i18n="din.lobby.hours.5.v">00:45</dd></dl>
+            <a href="../book.html" class="mt-6 inline-flex items-center gap-2 text-sm font-medium text-mira-800 hover:text-sand-600">
+              <span data-i18n="din.lobby.hours.cta">Reserve a table</span> →
+            </a>
+          </div>
+        </aside>
+      </div>
+    </div></section><section class="bg-sand-50 py-20 lg:py-28 scroll-mt-24"><div class="max-w-7xl mx-auto px-5 lg:px-8">
+      <span id="menu" class="block -mt-24 pt-24" aria-hidden="true"></span>
+      <div class="text-center max-w-2xl mx-auto">
+        <p class="uppercase tracking-[0.22em] text-sand-600 text-xs font-semibold" data-i18n="din.lobby.hl.eyebrow">Signature moments</p>
+        <h2 class="font-display text-3xl sm:text-4xl md:text-5xl text-mira-900 leading-tight" data-i18n="din.lobby.hl.h2">From the bar tonight.</h2>
+      </div>
+      <div class="mt-10 max-w-3xl mx-auto">
+        <div class="menu-card rounded-md">
+          <div class="menu-row"><div class="name" data-i18n="din.lobby.hl.0.n">Rakı sour</div><div class="desc" data-i18n="din.lobby.hl.0.d">rakı, lemon, egg-white, morello cherry</div></div><div class="menu-row"><div class="name" data-i18n="din.lobby.hl.1.n">Side spritz</div><div class="desc" data-i18n="din.lobby.hl.1.d">bitter orange, prosecco, thyme, ice</div></div><div class="menu-row"><div class="name" data-i18n="din.lobby.hl.2.n">Pomegranate martini</div><div class="desc" data-i18n="din.lobby.hl.2.d">pomegranate molasses, vodka, lime, sumac rim</div></div><div class="menu-row"><div class="name" data-i18n="din.lobby.hl.3.n">Orchard mojito</div><div class="desc" data-i18n="din.lobby.hl.3.d">garden mint, basil, white rum, lime</div></div><div class="menu-row"><div class="name" data-i18n="din.lobby.hl.4.n">Turkish coffee, the way it should be</div><div class="desc" data-i18n="din.lobby.hl.4.d">copper cezve, glass of water, lokum on the side</div></div><div class="menu-row"><div class="name" data-i18n="din.lobby.hl.5.n">Reserve pour</div><div class="desc" data-i18n="din.lobby.hl.5.d">Balvenie 14 · Balcones single malt · Corvus Rüzgar red</div></div><div class="menu-row"><div class="name" data-i18n="din.lobby.hl.6.n">Late-night mezze</div><div class="desc" data-i18n="din.lobby.hl.6.d">olives, cheese, warm bread, honeycomb</div></div><div class="menu-row"><div class="name" data-i18n="din.lobby.hl.7.n">Signature baklava</div><div class="desc" data-i18n="din.lobby.hl.7.d">with a glass of Turkish tea, at any hour</div></div>
+        </div>
+        <p class="mt-8 text-center text-xs italic" style="color:var(--mira-700); font-family:Inter,sans-serif; letter-spacing:.05em;" data-i18n="din.lobby.hl.foot">Menu rotates with the season &middot; vegan, gluten-free &amp; allergy adjustments made at the table.</p>
+      </div>
+    </div></section><section class="bg-white py-20 lg:py-28 scroll-mt-24"><div class="max-w-7xl mx-auto px-5 lg:px-8">
+      <div class="max-w-4xl mx-auto bg-mira-900 text-white rounded-2xl overflow-hidden shadow-lux">
+        <div class="grid md:grid-cols-5 items-stretch">
+          <div class="aspect-[4/3] md:aspect-auto md:col-span-2 bg-cover bg-center" style="background-image:url('https://images.unsplash.com/photo-1587223962930-cb7f31384c19?auto=format&fit=crop&w=1600&q=80')"></div>
+          <div class="md:col-span-3 p-8 md:p-10">
+            <p class="uppercase tracking-[0.22em] text-sand-300 text-xs font-semibold" data-i18n="din.lobby.voice.eyebrow">In their words</p>
+            <blockquote class="mt-4 font-display text-xl sm:text-2xl leading-snug" data-i18n="din.lobby.voice.quote">
+              &ldquo;A good hotel bar is a small living room that the whole hotel shares. You don't tell people how to sit or what to wear. You pour a proper drink, you remember what they had last night, and you never make anyone feel they're taking up space they haven't paid for.&rdquo;
+            </blockquote>
+            <div class="mt-6">
+              <div class="font-display text-lg" data-i18n="din.lobby.voice.name">Yaren Kaya</div>
+              <div class="text-xs uppercase tracking-widest text-sand-300 mt-0.5" data-i18n="din.lobby.voice.role">Head Bartender · Lobby Bar</div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div></section></main>
     <footer class="bg-mira-900 text-white/80 mt-24">
       <div class="max-w-7xl mx-auto px-5 lg:px-8 py-14 grid grid-cols-1 md:grid-cols-4 gap-10">
@@ -471,6 +512,6 @@ tailwind.config = {
 
     <script src="../assets/js/media-manifest.js?v=32" defer></script>
     <script src="../assets/js/search-index.js?v=32" defer></script>
-    <script src="../assets/js/i18n.js?v=32" defer></script>
-    <script src="../assets/js/site.js?v=32" defer></script>
+    <script src="../assets/js/i18n.js?v=33" defer></script>
+    <script src="../assets/js/site.js?v=33" defer></script>
     </body></html>
