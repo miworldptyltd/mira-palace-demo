@@ -106,7 +106,7 @@ HEAD = """<!doctype html>
   // because GitHub Pages hosts at /mira-palace-demo/ rather than /.
   window.MIRA_ROOT = "{root}";
 </script>
-<link rel="stylesheet" href="{root}assets/css/site.css?v=29" />
+<link rel="stylesheet" href="{root}assets/css/site.css?v=30" />
 <!-- R020: Tabler Icons bumped 2.47.0 → 3.44.0 (v3 kept the ti- prefix; classes we use — ti-chevron-down, ti-maximize — verified to still exist). -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.44.0/dist/tabler-icons.min.css" />
 <!-- R016: Cloudflare Turnstile (bot-check on forms). Test sitekey "always pass"

@@ -4,12 +4,19 @@ IMG_POOL = "assets/img/garden/garden-01.jpg"
 IMG_GARDEN_2 = "assets/img/garden/garden-02.jpg"
 IMG_GARDEN_3 = "assets/img/garden/garden-03.jpg"
 IMG_GARDEN_4 = "assets/img/garden/garden-04.jpg"
-IMG_ROOM = "assets/img/king/king-01.jpg"   # real King Suite signature shot
-IMG_DINING = "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80"
-IMG_SPA = "assets/img/spa/spa-01.jpg"      # real spa hero shot
-IMG_BEACH = "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=80"
-IMG_LOBBY = "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1920&q=80"
-IMG_BREAKFAST = "https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?auto=format&fit=crop&w=1200&q=80"
+IMG_ROOM = "assets/img/king/king-01.jpg"    # real King Suite signature shot
+IMG_SPA  = "assets/img/spa/spa-01.jpg"      # real spa hero
+
+# R021 image audit: the four constants below used to be generic Unsplash
+# shots that showed *specific* venues (a restaurant, a hotel lobby, a
+# breakfast spread, a tropical beach) — presenting them as Mira Palace
+# spaces when they weren't. Fixed: dining now uses the live sidemirapalace.com
+# bar photo (same as the dining hub hero); the other three swap to real
+# Mira Palace photography already on disk.
+IMG_DINING    = "https://sidemirapalace.com/img/restaurant/20240713110135_88159.png"  # real bar from live site
+IMG_LOBBY     = "assets/img/garden/garden-06.jpg"      # real garden (used on "everything included" band)
+IMG_BREAKFAST = "assets/img/standard/standard-01.jpg"  # real Standard Suite — rounds gallery out to all 4 room types
+IMG_BEACH     = "assets/img/garden/garden-07.jpg"      # real garden/exterior — TODO: swap for a real beach photo when the hotel supplies one
 
 # HERO_POSTER is the still image visible while the home-page hero video
 # is buffering. Real Mira Palace garden shot looks more inviting than a
@@ -55,7 +62,7 @@ def home(root: str) -> str:
         "Unlimited buffet breakfasts, lunches and dinners. All soft drinks, local beers, wines and spirits. Afternoon tea and late-night snacks. Pools, beach, hammam access, fitness classes, evening entertainment. See what's covered.",
         f"{root}concept.html",
         "See the All-Inclusive concept",
-        IMG_LOBBY,
+        f"{root}{IMG_LOBBY}",
     )
     testimonial = section(quote_block(
         "Bu küçük otel, büyük zincirlerin üç katı özenle işliyor. Akşam yemeğinde şefi selamlıyorsun, sabah kapıcıyı, öğleden sonra spa menajerini. 34 oda için tam ihtiyacı olan enerji.",
@@ -74,7 +81,7 @@ def home(root: str) -> str:
         <div class="aspect-[4/5] bg-cover bg-center rounded" style="background-image:url('{IMG_DINING}')"></div>
         <div class="aspect-[4/5] bg-cover bg-center rounded" style="background-image:url('{root}assets/img/spa/spa-02.jpg')"></div>
         <div class="aspect-[4/5] bg-cover bg-center rounded" style="background-image:url('{root}assets/img/garden/garden-05.jpg')"></div>
-        <div class="aspect-[4/5] bg-cover bg-center rounded" style="background-image:url('{IMG_BREAKFAST}')"></div>
+        <div class="aspect-[4/5] bg-cover bg-center rounded" style="background-image:url('{root}{IMG_BREAKFAST}')"></div>
         <div class="aspect-[4/5] bg-cover bg-center rounded" style="background-image:url('{root}assets/img/deluxe/deluxe-02.jpg')"></div>
         <div class="aspect-[4/5] bg-cover bg-center rounded bg-mira-700 grid place-items-center text-sand-200 font-display text-xl"><a href="{root}gallery.html">See all →</a></div>
       </div>
@@ -91,7 +98,7 @@ def home(root: str) -> str:
           </div>
           <a href="{root}location.html" class="mt-8 inline-flex items-center gap-2 text-mira-700 font-medium hover:text-sand-500">Directions &amp; transfers <span>→</span></a>
         </div>
-        <div class="aspect-[4/3] rounded-lg bg-cover bg-center shadow-lux" style="background-image:url('{IMG_BEACH}')"></div>
+        <div class="aspect-[4/3] rounded-lg bg-cover bg-center shadow-lux" style="background-image:url('{root}{IMG_BEACH}')"></div>
       </div>
     """, bg="bg-sand-50")
     return h + intro + three + concept_band + testimonial + gallery_teaser + location_teaser

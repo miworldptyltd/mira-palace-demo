@@ -1,3 +1,7 @@
+## [R021] - 2026-07-04
+
+R021 home page image audit — dining card + gallery tile + all-inclusive band + breakfast tile + beach teaser now use real Mira Palace photography (bar via live site, gardens 06/07, standard suite 01) instead of stock Unsplash that misrepresented spaces
+
 ## [R020] - 2026-07-04
 
 R020 stack modernization — Tailwind v3 CDN to v4 compiled build, Tabler 2.47 to 3.44, flag-icons 7.2 to 7.5, Python 3.11 to 3.14, GitHub Actions checkout/setup-python to v6, upload-pages-artifact to v4
@@ -165,6 +169,7 @@ First publishable build. Sent to the hotel for owner review.
 - LICENSE is all-rights-reserved proprietary.
 
 [0.1.0]: https://github.com/-/-/releases/tag/v0.1.0
+
 
 
 
