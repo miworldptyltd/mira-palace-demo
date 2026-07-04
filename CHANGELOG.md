@@ -1,3 +1,7 @@
+## [R023] - 2026-07-04
+
+R023 hotfix — i18n.js runtime was overwriting the R022 hero + footer copy with the old private-beach and four-pools fabrication in all four languages; corrected home.hero.sub and footer.tagline for EN/TR/DE/RU, bumped JS cache-buster v35 to v36
+
 ## [R022] - 2026-07-04
 
 R023 accuracy + trust + booking UX pass — centralized PRICES dict (all prices editable in one place, EUR base), currency default EUR, private beach fabrication removed everywhere (Evrenseki Halk Plajı Blue Flag public beach ~700m), 4 pools to 2 (outdoor + indoor), fabricated Side shuttle removed, Mercedes Vito to VIP minibus image and copy, standard suite room count 15 to 19 (A4 A5 B4 B5 added), booking form honeypot properly hidden, DEMO PREVIEW gated behind ?demo=1, arrival time and occasion select fields added, real TripAdvisor reviews block on home, Instagram 6-tile grid for @sidemirapalace
@@ -173,6 +177,7 @@ First publishable build. Sent to the hotel for owner review.
 - LICENSE is all-rights-reserved proprietary.
 
 [0.1.0]: https://github.com/-/-/releases/tag/v0.1.0
+
 
 
 

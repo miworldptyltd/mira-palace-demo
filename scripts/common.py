@@ -499,8 +499,8 @@ def footer(root: str) -> str:
     {customiser_panel(root)}
     <script src="{root}assets/js/media-manifest.js?v=32" defer></script>
     <script src="{root}assets/js/search-index.js?v=32" defer></script>
-    <script src="{root}assets/js/i18n.js?v=35" defer></script>
-    <script src="{root}assets/js/site.js?v=35" defer></script>
+    <script src="{root}assets/js/i18n.js?v=36" defer></script>
+    <script src="{root}assets/js/site.js?v=36" defer></script>
     </body></html>
     """)
 
