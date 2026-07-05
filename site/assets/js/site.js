@@ -1417,4 +1417,181 @@
   var spForm = document.getElementById('sp-form');
   if (spForm) spForm.addEventListener('submit', function (e) { e.preventDefault(); handleEnquirySubmit(spForm); });
 
+  // ===================================================================
+  // R025: Reviews carousel + modal (home page hero corner card)
+  //   - card: 1 review at a time, auto-rotates every 8s, pauses on hover
+  //   - dots + arrows for manual step; touch swipe on mobile
+  //   - tap card OR ENTER key opens modal with full review text
+  //   - modal: swipe/arrow/dot navigation, close on X / backdrop / ESC
+  //   - respects prefers-reduced-motion (no auto-rotate)
+  // ===================================================================
+  (function initReviewsCarousel() {
+    var card = document.getElementById('reviews-card');
+    if (!card) return;
+
+    var viewport = document.getElementById('mp-rev-viewport');
+    var slides = viewport ? Array.from(viewport.querySelectorAll('.mp-rev-slide')) : [];
+    if (slides.length === 0) return;
+    var dots = Array.from(card.querySelectorAll('.mp-rev-dot'));
+    var openBtn = document.getElementById('mp-rev-open');
+    var modal = document.getElementById('mp-rev-modal');
+    var modalBody = document.getElementById('mp-rev-modal-body');
+    var modalSlides = modalBody ? Array.from(modalBody.querySelectorAll('.mp-rev-modal-slide')) : [];
+    var modalDots = modal ? Array.from(modal.querySelectorAll('.mp-rev-modal-dot')) : [];
+    var reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    var idx = 0;
+    var timer = null;
+    var AUTO_MS = 8000;
+
+    function goTo(i) {
+      idx = ((i % slides.length) + slides.length) % slides.length;
+      slides.forEach(function (s, k) {
+        var on = k === idx;
+        s.setAttribute('data-active', on ? 'true' : 'false');
+        s.setAttribute('aria-hidden', on ? 'false' : 'true');
+      });
+      dots.forEach(function (d, k) { d.setAttribute('data-on', k === idx ? 'true' : 'false'); });
+    }
+    goTo(0);
+
+    function next() { goTo(idx + 1); }
+    function prev() { goTo(idx - 1); }
+    function startTimer() { if (reducedMotion) return; stopTimer(); timer = setInterval(next, AUTO_MS); }
+    function stopTimer() { if (timer) { clearInterval(timer); timer = null; } }
+
+    dots.forEach(function (d) {
+      d.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var to = parseInt(d.getAttribute('data-goto'), 10);
+        if (!isNaN(to)) { goTo(to); startTimer(); }
+      });
+    });
+
+    // Touch swipe on the corner card
+    var touchStartX = 0, touchStartY = 0, touchMoved = false;
+    viewport.addEventListener('touchstart', function (e) {
+      var t = e.touches[0];
+      touchStartX = t.clientX; touchStartY = t.clientY; touchMoved = false;
+      stopTimer();
+    }, { passive: true });
+    viewport.addEventListener('touchmove', function () { touchMoved = true; }, { passive: true });
+    viewport.addEventListener('touchend', function (e) {
+      var t = e.changedTouches[0];
+      var dx = t.clientX - touchStartX;
+      var dy = t.clientY - touchStartY;
+      if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
+        if (dx < 0) next(); else prev();
+      }
+      startTimer();
+    }, { passive: true });
+
+    // Hover / focus pauses auto-rotate
+    card.addEventListener('mouseenter', stopTimer);
+    card.addEventListener('mouseleave', startTimer);
+    card.addEventListener('focusin', stopTimer);
+    card.addEventListener('focusout', startTimer);
+
+    // Modal
+    function openModal() {
+      if (!modal) return;
+      modal.hidden = false;
+      document.body.classList.add('mp-rev-modal-open');
+      modalGoTo(idx);
+      var focusable = modal.querySelector('.mp-rev-modal-x');
+      if (focusable) setTimeout(function () { focusable.focus(); }, 30);
+    }
+    function closeModal() {
+      if (!modal) return;
+      modal.hidden = true;
+      document.body.classList.remove('mp-rev-modal-open');
+      if (openBtn) openBtn.focus();
+    }
+    function modalGoTo(i) {
+      var n = modalSlides.length;
+      if (n === 0) return;
+      var k = ((i % n) + n) % n;
+      idx = k;
+      modalSlides.forEach(function (s, j) { s.setAttribute('data-active', j === k ? 'true' : 'false'); });
+      modalDots.forEach(function (d, j) { d.setAttribute('data-on', j === k ? 'true' : 'false'); });
+      // Also keep the corner card in sync so when the modal closes the state matches
+      goTo(k);
+    }
+
+    if (openBtn) openBtn.addEventListener('click', openModal);
+    if (modal) {
+      modal.addEventListener('click', function (e) {
+        var el = e.target;
+        if (el && el.getAttribute && el.getAttribute('data-close') === '1') closeModal();
+      });
+      var prevBtn = modal.querySelector('.mp-rev-modal-prev');
+      var nextBtn = modal.querySelector('.mp-rev-modal-next');
+      if (prevBtn) prevBtn.addEventListener('click', function () { modalGoTo(idx - 1); });
+      if (nextBtn) nextBtn.addEventListener('click', function () { modalGoTo(idx + 1); });
+      modalDots.forEach(function (d, j) {
+        d.addEventListener('click', function () { modalGoTo(j); });
+      });
+      document.addEventListener('keydown', function (e) {
+        if (modal.hidden) return;
+        if (e.key === 'Escape') closeModal();
+        else if (e.key === 'ArrowRight') modalGoTo(idx + 1);
+        else if (e.key === 'ArrowLeft') modalGoTo(idx - 1);
+      });
+      // Swipe on modal body
+      var mx = 0, my = 0;
+      modalBody.addEventListener('touchstart', function (e) { var t = e.touches[0]; mx = t.clientX; my = t.clientY; }, { passive: true });
+      modalBody.addEventListener('touchend', function (e) {
+        var t = e.changedTouches[0];
+        var dx = t.clientX - mx, dy = t.clientY - my;
+        if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
+          if (dx < 0) modalGoTo(idx + 1); else modalGoTo(idx - 1);
+        }
+      }, { passive: true });
+    }
+
+    // Keyboard on the corner card
+    card.addEventListener('keydown', function (e) {
+      if (e.target !== openBtn) return;
+      if (e.key === 'ArrowRight') { next(); startTimer(); }
+      else if (e.key === 'ArrowLeft') { prev(); startTimer(); }
+    });
+
+    // Kick off
+    startTimer();
+  })();
+
+  // ===================================================================
+  // R025: Offers page hero — random-video-per-visit (no repeat within
+  // the same browser session, respects the same video pool as the
+  // Customise panel).
+  // ===================================================================
+  (function initOffersHeroVideoShuffle() {
+    var heroVideo = document.getElementById('offers-hero-video');
+    if (!heroVideo) return;
+    var pool = Array.isArray(window.MIRA_VIDEOS) ? window.MIRA_VIDEOS.slice() : [];
+    if (pool.length === 0) return;
+    var seenKey = 'mp-offers-hero-seen';
+    var seen = [];
+    try {
+      var raw = sessionStorage.getItem(seenKey);
+      if (raw) seen = JSON.parse(raw) || [];
+    } catch (e) { seen = []; }
+    var remaining = pool.filter(function (p) { return seen.indexOf(p.key) === -1; });
+    if (remaining.length === 0) {
+      seen = [];
+      remaining = pool.slice();
+    }
+    var pick = remaining[Math.floor(Math.random() * remaining.length)];
+    seen.push(pick.key);
+    try { sessionStorage.setItem(seenKey, JSON.stringify(seen)); } catch (e) {}
+    var src = heroVideo.querySelector('source');
+    if (src) {
+      var root = window.MIRA_ROOT || '';
+      src.src = root + pick.path;
+      heroVideo.load();
+      var playPromise = heroVideo.play();
+      if (playPromise && playPromise.catch) playPromise.catch(function () { /* muted autoplay policy handled by browser */ });
+    }
+  })();
+
 })();

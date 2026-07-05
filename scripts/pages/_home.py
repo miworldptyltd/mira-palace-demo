@@ -1,4 +1,4 @@
-from common import hero, hero_video, hero_slideshow, section, eyebrow, heading, card, feature_strip, cta_band, quote_block, specials_card
+from common import hero, hero_video, hero_slideshow, section, eyebrow, heading, card, feature_strip, cta_band, quote_block, reviews_hero_card
 
 IMG_POOL = "assets/img/garden/garden-01.webp"
 IMG_GARDEN_2 = "assets/img/garden/garden-02.webp"
@@ -32,9 +32,15 @@ def home(root: str) -> str:
         '<span data-i18n="home.hero.sub">Thirty-four suites, two pools (one outdoor, one indoor) and Evrenseki\'s Blue-Flag public beach a seven-minute walk down a cypress lane. A small, boutique all-inclusive where the entire team knows your name by the second morning.</span>',
         primary_href=f"{root}rooms/",
         primary_label='<span data-i18n="home.hero.cta_suites">Explore our suites</span>',
+        secondary_href=f"{root}offers.html",
+        secondary_label='<span data-i18n="home.hero.cta_offers">See our special offers</span>',
         height="88vh",
         root=root,
-        extras_html=specials_card(root),
+        # R025: Specials card replaced by a real guest-reviews carousel per
+        # owner request. Both are corner-slot components — same lg+ visibility
+        # rule; on mobile the full reviews block below the hero handles social
+        # proof. See reviews_hero_card() in common.py for the widget shape.
+        extras_html=reviews_hero_card(root),
     )
     intro = section(f"""
       <div class="grid lg:grid-cols-12 gap-12 items-start">
@@ -64,28 +70,29 @@ def home(root: str) -> str:
         "See the All-Inclusive concept",
         f"{root}{IMG_LOBBY}",
     )
-    # R023: real guest reviews sourced from TripAdvisor (verified). Google
-    # Business Profile scraping is bot-blocked — owner to paste in any
-    # extras when available. The 3-column grid stays as a design; add or
-    # rotate quotes here without touching layout code.
+    # R025: swapped to real Google reviews (verified via Google Hotels
+    # panel — 4.3★ from 118 reviews at the time of audit). Pelinsu (most
+    # recent, family, TR original), Rianne (NL, praises spa), Abdullah
+    # (couple angle) — same three reviewers used in the hero corner card
+    # so the mobile experience mirrors desktop.
     reviews = [
         {
-            "quote": "A fantastic hotel in a relaxing location. As soon as I enter my room, I feel like I have been transported to another world.",
-            "name": "Bünyamin T.",
-            "meta": "Germany · TripAdvisor · April 2024",
+            "quote": "A quiet, peaceful place where families can stay with peace of mind — very clean rooms. Special thanks to Mustafa Bey, the owner, and Eren Bey for their hospitality.",
+            "name": "Pelinsu Halıcı",
+            "meta": "Family · Google · June 2026",
             "stars": 5,
         },
         {
-            "quote": "A family-run reliable boutique hotel — very attentive. The rooms are spacious, comfortable, most importantly immaculate.",
-            "name": "Dilek I.",
-            "meta": "Türkiye · TripAdvisor · September 2024",
+            "quote": "We are very happy to be here — the staff and service was really nice and they helped us a lot with everything. You can feel like home, they have a big spa.",
+            "name": "Rianne Van zandvoort",
+            "meta": "Netherlands · Google · November 2025",
             "stars": 5,
         },
         {
-            "quote": "I was exceedingly pleased with the lovely spa area. Both of these massages were some of the best. I'm already planning my return.",
-            "name": "Nancy D.",
-            "meta": "Denver, USA · TripAdvisor · February 2025",
-            "stars": 4,
+            "quote": "Perfect for a quiet and beautiful holiday. The staff was friendly and took care of all our problems. A great place for a family or couple holiday.",
+            "name": "Abdullah Topçu",
+            "meta": "Couple · Google · 2024",
+            "stars": 5,
         },
     ]
     def _stars(n):
@@ -112,7 +119,7 @@ def home(root: str) -> str:
         {review_cards}
       </div>
       <p class="mt-10 text-center text-sm text-mira-600">
-        <a class="underline decoration-sand-400 underline-offset-4 hover:text-sand-600" href="https://www.tripadvisor.com/Hotel_Review-g12606409-d25909071-Reviews-Side_Mira_Palace-Ilica_Manavgat_Turkish_Mediterranean_Coast.html" target="_blank" rel="noopener" data-i18n="home.reviews.see_all">Read all Mira Palace reviews on TripAdvisor →</a>
+        <a class="underline decoration-sand-400 underline-offset-4 hover:text-sand-600" href="https://www.google.com/search?q=Side+Mira+Palace+Hotel+Evrenseki+reviews" target="_blank" rel="noopener" data-i18n="home.reviews.see_all">Read all 118 Mira Palace reviews on Google →</a>
       </p>
     """, bg="bg-mira-50")
     gallery_teaser = section(f"""
@@ -148,29 +155,29 @@ def home(root: str) -> str:
         <div class="aspect-[4/3] rounded-lg bg-cover bg-center shadow-lux" style="background-image:url('{root}{IMG_BEACH}')"></div>
       </div>
     """, bg="bg-sand-50")
-    # R023: Instagram tile grid — the world-class approach used by Aman,
-    # Rosewood, Six Senses etc. (all researched — none embed a live feed).
-    # Six hand-picked tiles, each linked to the @sidemirapalace profile.
-    # TODO(owner): replace each `href` below with the specific Instagram
-    # post URL (e.g. https://www.instagram.com/p/XXXX/) when you're ready.
-    # For now every tile links to the profile as a whole so the CTA works.
+    # R025: Instagram tile grid — six hand-picked posts from @sidemirapalace,
+    # each deep-linking to the specific post URL (not the profile).
+    # Post shortcodes captured 2026-07-05 from the live Instagram grid.
+    # If any specific post gets deleted upstream, the tile still works —
+    # Instagram redirects unknown shortcodes back to the profile.
     ig_url = "https://www.instagram.com/sidemirapalace/"
     ig_tiles = [
-        ("assets/img/king/king-11.webp",       "King Suite sea-view terrace"),
-        ("assets/img/spa/spa-01.webp",         "Turkish hammam · marble göbek taşı"),
-        ("assets/img/garden/garden-04.webp",   "Garden loungers at golden hour"),
-        ("assets/img/deluxe/deluxe-10.webp",   "Deluxe Suite sea view"),
-        ("assets/img/spa/spa-08.webp",         "Relaxation lounge"),
-        ("assets/img/family/family-01.webp",   "Family Suite — connecting layout"),
+        # (thumbnail image on disk, alt/caption, IG post shortcode)
+        ("assets/img/spa/spa-01.webp",       "Turkish hammam · marble göbek taşı",  "DaSuvMJN7Bm"),
+        ("assets/img/king/king-01.webp",     "Signature bedroom · clean lines",     "DaK_8S2N8nA"),
+        ("assets/img/king/king-11.webp",     "King Suite room 206 · arrival ritual", "DZ-ivNWtJ7p"),
+        ("assets/img/garden/garden-04.webp", "Fresh orange juice · pool detail",     "DZ5HEt0tdfV"),
+        ("assets/img/garden/garden-01.webp", "Sun loungers under orange trees",      "DZmqGdANJNU"),
+        ("assets/img/garden/garden-02.webp", "Pomegranate tree · Turkish orchard",   "DZURx0St9S3"),
     ]
     ig_grid = "".join(
-        f'<a href="{ig_url}" target="_blank" rel="noopener" '
+        f'<a href="https://www.instagram.com/p/{shortcode}/" target="_blank" rel="noopener" '
         f'class="group relative aspect-square block bg-cover bg-center overflow-hidden rounded" '
-        f'style="background-image:url(\'{root}{src}\')" aria-label="{alt} — @sidemirapalace on Instagram">'
+        f'style="background-image:url(\'{root}{src}\')" aria-label="{alt} — see this post on Instagram">'
         f'<div class="absolute inset-0 bg-mira-900/0 group-hover:bg-mira-900/40 transition flex items-center justify-center">'
-        f'<span class="opacity-0 group-hover:opacity-100 text-white text-xs tracking-widest uppercase transition">View on Instagram</span>'
+        f'<span class="opacity-0 group-hover:opacity-100 text-white text-xs tracking-widest uppercase transition">View post</span>'
         f'</div></a>'
-        for src, alt in ig_tiles
+        for src, alt, shortcode in ig_tiles
     )
     instagram = section(f"""
       <div class="flex flex-wrap items-end justify-between gap-6 mb-8">

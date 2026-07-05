@@ -146,10 +146,6 @@ window.MIRA_I18N = {
     "home.hero.cta_suites": "Explore our suites",
     "home.intro.kicker": "A quieter kind of resort",
     "home.intro.h2": "Big-hotel comfort, small-hotel soul.",
-    "home.specials.heading": "Our specials",
-    "home.specials.subtitle": "Direct only",
-    "home.specials.blurb": "Best rates are always direct. These are reserved for guests who book through us.",
-    "home.specials.see_all": "See all offers",
     // ---- TRANSLATION-IN-PROGRESS NOTICE ----
     "i18n.in_progress": "Page content translation in progress — English shown.",
 
@@ -536,10 +532,6 @@ window.MIRA_I18N = {
     "home.hero.cta_suites": "Süitleri inceleyin",
     "home.intro.kicker": "Daha sakin bir tatil köyü",
     "home.intro.h2": "Büyük otel konforu, küçük otel ruhuyla.",
-    "home.specials.heading": "Özel fırsatlarımız",
-    "home.specials.subtitle": "Sadece doğrudan",
-    "home.specials.blurb": "En iyi fiyat her zaman doğrudan bizden. Bu fırsatlar yalnızca bizim üzerimizden rezervasyon yapanlar içindir.",
-    "home.specials.see_all": "Tüm fırsatları görün",
     // Notice
     "i18n.in_progress": "Sayfa içeriği çevirisi sürüyor — şimdilik İngilizce gösteriliyor.",
 
@@ -908,10 +900,6 @@ window.MIRA_I18N = {
     "home.hero.cta_suites": "Unsere Suiten ansehen",
     "home.intro.kicker": "Ein ruhigerer Urlaub",
     "home.intro.h2": "Komfort eines großen Hauses, Seele eines kleinen.",
-    "home.specials.heading": "Unsere Angebote",
-    "home.specials.subtitle": "Nur direkt",
-    "home.specials.blurb": "Die besten Preise gibt es immer direkt. Diese Angebote sind unseren Direktbuchern vorbehalten.",
-    "home.specials.see_all": "Alle Angebote ansehen",
     "i18n.in_progress": "Übersetzung der Seiteninhalte in Arbeit — Englisch wird angezeigt.",
 
     // ---- ABOUT PAGE (R012) — formal "Sie" form throughout ----
@@ -1279,10 +1267,6 @@ window.MIRA_I18N = {
     "home.hero.cta_suites": "Посмотреть сьюты",
     "home.intro.kicker": "Курорт более тихого формата",
     "home.intro.h2": "Удобства большого отеля, душа маленького.",
-    "home.specials.heading": "Наши спецпредложения",
-    "home.specials.subtitle": "Только напрямую",
-    "home.specials.blurb": "Лучшие цены всегда при прямом бронировании. Эти предложения — для тех, кто бронирует через нас.",
-    "home.specials.see_all": "Все предложения",
     "i18n.in_progress": "Перевод содержимого страницы в работе — показан английский вариант.",
 
     // ---- ABOUT PAGE (R012) — formal "вы" throughout ----
@@ -1516,12 +1500,4 @@ window.MIRA_I18N = {
     "spa.etq.6.d": "Изменения в тот же день — не проблема; напишите в WhatsApp сбоку.",
     "spa.contact.eyebrow": "Забронировать сеанс",
     "spa.contact.h3": "Спа-ресепшен отвечает напрямую.",
-    "spa.contact.p": "Забронируйте онлайн за полторы минуты или позвоните прямо в спа — отдельный номер от главной ресепшен, чтобы не занимать основную линию.",
-    "spa.contact.reception": "Спа-ресепшен",
-    "spa.contact.whatsapp_label": "WhatsApp",
-    "spa.contact.whatsapp_v": "Тот же номер, быстрее",
-    "spa.contact.instagram": "Instagram",
-    "spa.contact.cta": "Забронировать онлайн"
-  }
-
-};
+    "spa.contact.p": "Забронируйте онлайн за полторы минуты или позвоните прямо в спа — отдельный номер 

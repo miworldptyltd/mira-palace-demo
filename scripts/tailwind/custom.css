@@ -1,6 +1,121 @@
 /* Mira Palace — custom stylesheet */
 
 /* -----------------------------------------------------------------------
+   R025: Hero reviews carousel + full-text modal.
+
+   Visible on lg+ only (mobile users get the full 3-card grid section
+   below the hero). Auto-rotate every 8s, pauses on hover/focus, honours
+   prefers-reduced-motion. Tap the corner card to open the modal.
+   ----------------------------------------------------------------------- */
+.mp-rev-card { }
+.mp-rev-viewport { position: relative; min-height: 148px; }
+.mp-rev-slide {
+  position: absolute; inset: 0; opacity: 0; transform: translateX(8px);
+  transition: opacity .35s ease, transform .35s ease;
+  pointer-events: none;
+}
+.mp-rev-slide[data-active="true"] {
+  position: relative; opacity: 1; transform: none; pointer-events: auto;
+}
+.mp-rev-dot {
+  width: 6px; height: 6px; border-radius: 999px;
+  background: rgba(255,255,255,.35);
+  border: 0; padding: 0; cursor: pointer;
+  transition: background .2s;
+}
+.mp-rev-dot[data-on="true"] { background: #D4B971; }
+.mp-rev-dot:hover, .mp-rev-dot:focus-visible { background: rgba(255,255,255,.85); outline: none; }
+
+/* Modal */
+.mp-rev-modal {
+  position: fixed; inset: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px;
+}
+.mp-rev-modal[hidden] { display: none; }
+.mp-rev-modal-backdrop {
+  position: absolute; inset: 0;
+  background: rgba(19, 38, 48, 0.72);
+  backdrop-filter: blur(6px);
+  cursor: pointer;
+}
+.mp-rev-modal-panel {
+  position: relative;
+  background: #FBF8F1;
+  max-width: 560px; width: 100%;
+  border-radius: 14px;
+  padding: 32px 28px 28px;
+  box-shadow: 0 30px 80px -20px rgba(19,38,48,.6);
+  max-height: calc(100dvh - 40px);
+  overflow-y: auto;
+}
+.mp-rev-modal-x {
+  background: transparent; border: 0;
+  color: #345661;
+  width: 44px; height: 44px; border-radius: 999px;
+  display: grid; place-items: center;
+  cursor: pointer;
+  transition: background .2s;
+}
+.mp-rev-modal-x:hover, .mp-rev-modal-x:focus-visible { background: #E8D4A0; outline: none; }
+.mp-rev-modal-body { position: relative; min-height: 220px; }
+.mp-rev-modal-slide {
+  position: absolute; inset: 0; opacity: 0;
+  transition: opacity .35s ease;
+  pointer-events: none;
+}
+.mp-rev-modal-slide[data-active="true"] {
+  position: relative; opacity: 1; pointer-events: auto;
+}
+.mp-rev-modal-nav {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px; margin-top: 24px;
+  padding-top: 20px; border-top: 1px solid #E0EBEE;
+}
+.mp-rev-modal-nav > button {
+  width: 44px; height: 44px; border-radius: 999px;
+  background: #132630; color: #fff;
+  border: 0; cursor: pointer; font-size: 20px;
+  transition: background .2s;
+}
+.mp-rev-modal-nav > button:hover { background: #274551; }
+.mp-rev-modal-nav > button:focus-visible { outline: 2px solid #D4B971; outline-offset: 2px; }
+.mp-rev-modal-dots { display: flex; gap: 8px; }
+.mp-rev-modal-dot {
+  width: 8px; height: 8px; border-radius: 999px;
+  background: #E0EBEE; border: 0; cursor: pointer;
+}
+.mp-rev-modal-dot[data-on="true"] { background: #B68F3F; }
+.mp-rev-modal-cta {
+  display: inline-flex; align-items: center; gap: 8px;
+  margin-top: 22px;
+  padding: 12px 20px;
+  background: #132630; color: #fff;
+  border-radius: 999px;
+  font-weight: 500; font-size: 14px;
+  text-decoration: none;
+  transition: background .2s;
+}
+.mp-rev-modal-cta:hover { background: #274551; }
+
+/* Body scroll lock while modal is open */
+body.mp-rev-modal-open { overflow: hidden; }
+
+/* Mobile: modal fills more of the screen; ensure text reads well */
+@media (max-width: 639px) {
+  .mp-rev-modal { padding: 12px; }
+  .mp-rev-modal-panel { padding: 24px 20px; border-radius: 12px; }
+  .mp-rev-modal-body blockquote { font-size: 20px !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mp-rev-slide, .mp-rev-modal-slide {
+    transition: none;
+  }
+}
+
+
+/* -----------------------------------------------------------------------
    R024 PERFORMANCE: content-visibility deferred rendering.
    The site's hotel photos are almost entirely CSS background-images —
    loading="lazy" doesn't apply to those, so we use content-visibility

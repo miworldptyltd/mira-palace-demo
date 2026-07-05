@@ -1,3 +1,7 @@
+## [R025] - 2026-07-05
+
+R025 home hero reviews carousel replaces specials card, secondary CTA See our special offers, real Google reviews (Pelinsu Rianne Abdullah), location Nearby treasures cards with Wikimedia Commons imagery (Side Apollo Aspendos Manavgat Kaleici), offers hero random-video-per-visit shuffler swapping the tropical fabrication, offers cards using real hotel photos, Instagram tiles deep-linked to specific posts, dead code removed (specials_card function and 16 home.specials i18n keys), RELEASE_NOTES.md ledger updated
+
 ## [R024] - 2026-07-05
 
 R024 perf pass — hero videos trimmed, JPG to WebP saving 39 percent (7.2 MB), content-visibility auto below fold, mobile floats collapsed to WhatsApp only under 640px, Tabler CSS async-loaded, Cormorant weights trimmed 4 to 2, HTML no-cache meta for instant release propagation, monogram width height fetchpriority
@@ -181,6 +185,7 @@ First publishable build. Sent to the hotel for owner review.
 - LICENSE is all-rights-reserved proprietary.
 
 [0.1.0]: https://github.com/-/-/releases/tag/v0.1.0
+
 
 
 

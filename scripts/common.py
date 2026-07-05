@@ -181,7 +181,7 @@ HEAD = """<!doctype html>
   // because GitHub Pages hosts at /mira-palace-demo/ rather than /.
   window.MIRA_ROOT = "{root}";
 </script>
-<link rel="stylesheet" href="{root}assets/css/site.css?v=32" />
+<link rel="stylesheet" href="{root}assets/css/site.css?v=33" />
 <!-- R020: Tabler Icons bumped 2.47.0 → 3.44.0.
      R024: async-loaded so the ~204 KB stylesheet does not block first paint.
      The media="print" trick makes the browser fetch it at low priority; the
@@ -516,8 +516,8 @@ def footer(root: str) -> str:
     {customiser_panel(root)}
     <script src="{root}assets/js/media-manifest.js?v=32" defer></script>
     <script src="{root}assets/js/search-index.js?v=32" defer></script>
-    <script src="{root}assets/js/i18n.js?v=37" defer></script>
-    <script src="{root}assets/js/site.js?v=37" defer></script>
+    <script src="{root}assets/js/i18n.js?v=38" defer></script>
+    <script src="{root}assets/js/site.js?v=38" defer></script>
     </body></html>
     """)
 
@@ -854,15 +854,22 @@ def write_media_manifest(out_path: pathlib.Path) -> None:
 
 def hero_video(poster_url: str, kicker: str, heading: str, sub: str,
                primary_href: str = "", primary_label: str = "", height: str = "88vh", root: str = "",
-               extras_html: str = "") -> str:
+               extras_html: str = "",
+               secondary_href: str = "", secondary_label: str = "") -> str:
     """Video-backed hero. Video autoplays muted (browser rule); music is opt-in via a toggle.
        Both video source and music source are swappable from the Customise panel — see site.js.
        Optional `extras_html` is injected inside the hero section (typically an
-       absolutely-positioned card overlay like the home page Specials card)."""
+       absolutely-positioned card overlay like the home page reviews card).
+       R025: added `secondary_href` + `secondary_label` for a ghost-style secondary
+       CTA that sits next to the primary (e.g. "See our special offers →").
+       On mobile the two CTAs stack full-width; on desktop they sit side by side."""
     cta = ""
     if primary_href:
-        cta = (f'<a href="{primary_href}" class="inline-flex items-center justify-center px-7 py-3 bg-sand-300 text-mira-900 '
-               f'rounded-full font-medium tracking-wide hover:bg-sand-200 shadow-lux transition">{primary_label}</a>')
+        cta += (f'<a href="{primary_href}" class="inline-flex items-center justify-center px-7 py-3 bg-sand-300 text-mira-900 '
+                f'rounded-full font-medium tracking-wide hover:bg-sand-200 shadow-lux transition">{primary_label}</a>')
+    if secondary_href:
+        cta += (f'<a href="{secondary_href}" class="inline-flex items-center justify-center px-7 py-3 bg-transparent border border-white/70 '
+                f'text-white rounded-full font-medium tracking-wide hover:bg-white/10 transition">{secondary_label} <span class="ml-2">→</span></a>')
     # Default video path (for the <source> tag). The JS swaps this on load
     # from the user's stored choice if any.
     default_video_rel = next((p for k, _, p in VIDEO_OPTIONS if k == DEFAULT_VIDEO_KEY), "")
@@ -887,35 +894,123 @@ def hero_video(poster_url: str, kicker: str, heading: str, sub: str,
     """)
 
 
-def specials_card(root: str, items=None) -> str:
-    """Transparent overlay card for the home hero. Backend can toggle its
-    visibility later by flipping the [data-show] attribute via the booking
-    admin. For now, items are hard-coded (illustrative) and the card shows
-    by default."""
-    if items is None:
-        items = [
-            ("Early bird", "Up to 25% off", "Book by 31 May 2026 for arrivals before 15 July."),
-            ("Stay 7, pay 6", "Late-summer escape", "Arrivals 1–30 September. Complimentary airport transfer."),
-            ("Honeymoon", "Included extras", "Sparkling wine on arrival, private hammam session for two."),
+def reviews_hero_card(root: str, reviews=None, aggregate=None) -> str:
+    """R025: swipeable review carousel that lives in the hero corner slot.
+    Replaces the specials_card on the home page — the owner wanted real
+    social proof visible above the fold instead of a promo card.
+
+    UX: shows one review at a time; ‹ › arrows step through; tap the card
+    opens a full-text modal (site.js handles the modal + swipe gestures).
+    Auto-rotates every 8s, pauses on hover/focus. Respects prefers-reduced-
+    motion (JS disables auto-rotate). Mobile: card hidden on <lg (mobile
+    users see the full 3-card grid further down the page). Keyboard: focus
+    the card + arrow keys to navigate; ESC closes the modal.
+    """
+    if reviews is None:
+        reviews = [
+            {
+                "quote": "A quiet, peaceful place where families can stay with peace of mind — very clean rooms. Special thanks to Mustafa Bey, the owner, and Eren Bey for their hospitality.",
+                "name": "Pelinsu Halıcı",
+                "meta": "Family · Google · 1 month ago",
+                "stars": 5,
+                "src": "google",
+            },
+            {
+                "quote": "We are very happy to be here — the staff and service was really nice and they helped us a lot with everything. You can feel like home, they have a big spa.",
+                "name": "Rianne Van zandvoort",
+                "meta": "Netherlands · Google · 8 months ago",
+                "stars": 5,
+                "src": "google",
+            },
+            {
+                "quote": "Perfect for a quiet and beautiful holiday. The staff was friendly and took care of all our problems. A great place for a family or couple holiday.",
+                "name": "Abdullah Topçu",
+                "meta": "Couple · Google · 1 year ago",
+                "stars": 5,
+                "src": "google",
+            },
         ]
-    rows = "".join(
-        f'<li class="border-t border-white/15 first:border-t-0 py-3">'
-        f'  <div class="text-[11px] uppercase tracking-[0.18em] text-sand-300 font-semibold">{tag}</div>'
-        f'  <div class="font-display text-lg text-white leading-tight mt-0.5">{title}</div>'
-        f'  <div class="text-xs text-white/80 mt-1 leading-relaxed">{desc}</div>'
-        f'</li>'
-        for tag, title, desc in items
+    if aggregate is None:
+        aggregate = {"rating": "4.3", "count": "118", "source": "Google"}
+
+    def _stars(n):
+        return "★" * n + "☆" * (5 - n)
+
+    slides = ""
+    for i, r in enumerate(reviews):
+        active = "true" if i == 0 else "false"
+        slides += (
+            f'<article class="mp-rev-slide" data-active="{active}" data-idx="{i}" role="tabpanel" aria-hidden="{"false" if i == 0 else "true"}">'
+            f'  <div class="text-[11px] uppercase tracking-[0.18em] text-sand-300 font-semibold">{r["meta"]}</div>'
+            f'  <div class="mt-1 text-sand-300 tracking-wider text-sm">{_stars(r["stars"])}</div>'
+            f'  <blockquote class="mt-2 font-display text-lg text-white leading-snug">&ldquo;{r["quote"][:140]}{"…" if len(r["quote"]) > 140 else ""}&rdquo;</blockquote>'
+            f'  <div class="mt-3 text-xs text-white/80 font-medium">{r["name"]}</div>'
+            f'</article>'
+        )
+
+    # Modal payload — same reviews, full text
+    modal_slides = ""
+    for i, r in enumerate(reviews):
+        modal_slides += (
+            f'<article class="mp-rev-modal-slide" data-idx="{i}">'
+            f'  <div class="text-xs uppercase tracking-widest text-sand-600 font-semibold">{r["meta"]}</div>'
+            f'  <div class="mt-1 text-sand-500 tracking-wider">{_stars(r["stars"])}</div>'
+            f'  <blockquote class="mt-4 font-display text-2xl text-mira-900 leading-snug">&ldquo;{r["quote"]}&rdquo;</blockquote>'
+            f'  <div class="mt-6 text-sm text-mira-700 font-medium">{r["name"]}</div>'
+            f'</article>'
+        )
+
+    dots = "".join(
+        f'<button type="button" class="mp-rev-dot" data-goto="{i}" aria-label="Show review {i + 1}"></button>'
+        for i in range(len(reviews))
     )
+
     return dedent(f"""
-    <aside id="specials-card" data-show="true" class="hidden lg:block absolute right-6 xl:right-12 top-1/2 -translate-y-1/2 w-[300px] xl:w-[340px] z-10 backdrop-blur-md bg-mira-900/40 border border-white/20 rounded-lg shadow-lux p-5 text-white">
-      <div class="flex items-baseline justify-between mb-3">
-        <h2 class="font-display text-2xl leading-none" data-i18n="home.specials.heading">Our specials</h2>
-        <span class="text-[10px] uppercase tracking-widest text-sand-300/90" data-i18n="home.specials.subtitle">Direct only</span>
-      </div>
-      <p class="text-xs text-white/75 leading-relaxed mb-2" data-i18n="home.specials.blurb">Best rates are always direct. These are reserved for guests who book through us.</p>
-      <ul class="m-0 p-0 list-none">{rows}</ul>
-      <a href="{root}offers.html" class="mt-4 inline-flex items-center justify-center w-full px-4 py-2.5 bg-sand-300 text-mira-900 rounded-full font-medium text-sm hover:bg-sand-200 transition"><span data-i18n="home.specials.see_all">See all offers</span> <span class="ml-2">→</span></a>
+    <aside id="reviews-card" class="hidden lg:block absolute right-6 xl:right-12 top-1/2 -translate-y-1/2 w-[320px] xl:w-[360px] z-10 mp-rev-card">
+      <button type="button" id="mp-rev-open" class="w-full text-left backdrop-blur-md bg-mira-900/45 border border-white/20 rounded-lg shadow-lux p-5 text-white transition hover:bg-mira-900/55 focus:outline-none focus:ring-2 focus:ring-sand-300"
+              aria-label="Read reviews in full">
+        <div class="flex items-baseline justify-between mb-3">
+          <h2 class="font-display text-2xl leading-none" data-i18n="home.reviews_card.heading">In their words</h2>
+          <div class="text-[11px] uppercase tracking-widest text-sand-300/90"><span class="font-semibold">{aggregate["rating"]}</span> ★ · {aggregate["count"]} <span data-i18n="home.reviews_card.on">on</span> {aggregate["source"]}</div>
+        </div>
+        <div class="mp-rev-viewport" id="mp-rev-viewport" role="tablist" aria-label="Guest reviews">
+          {slides}
+        </div>
+        <div class="flex items-center justify-between mt-4">
+          <div class="flex items-center gap-2 mp-rev-dots">{dots}</div>
+          <span class="text-xs text-white/85 underline underline-offset-4" data-i18n="home.reviews_card.tap_to_read">Tap to read full</span>
+        </div>
+      </button>
     </aside>
+
+    <!-- R025: expanded review modal — same three reviews, full text, plus
+         link to the full Google listing. Hidden by default; site.js
+         toggles .mp-rev-modal-open when the corner card is tapped. -->
+    <div id="mp-rev-modal" class="mp-rev-modal" role="dialog" aria-modal="true" aria-labelledby="mp-rev-modal-title" hidden>
+      <div class="mp-rev-modal-backdrop" data-close="1"></div>
+      <div class="mp-rev-modal-panel" role="document">
+        <div class="flex items-start justify-between gap-4 mb-1">
+          <div>
+            <p class="text-xs uppercase tracking-widest text-sand-600 font-semibold" data-i18n="home.reviews_modal.eyebrow">In our guests' words</p>
+            <h3 id="mp-rev-modal-title" class="font-display text-3xl text-mira-900 mt-1">{aggregate["rating"]} ★ · {aggregate["count"]} reviews on {aggregate["source"]}</h3>
+          </div>
+          <button type="button" class="mp-rev-modal-x" aria-label="Close" data-close="1">
+            <svg viewBox="0 0 20 20" class="w-5 h-5" fill="currentColor" aria-hidden="true"><path d="M6.293 6.293a1 1 0 011.414 0L10 8.586l2.293-2.293a1 1 0 111.414 1.414L11.414 10l2.293 2.293a1 1 0 01-1.414 1.414L10 11.414l-2.293 2.293a1 1 0 01-1.414-1.414L8.586 10 6.293 7.707a1 1 0 010-1.414z"/></svg>
+          </button>
+        </div>
+        <div class="mp-rev-modal-body" id="mp-rev-modal-body">
+          {modal_slides}
+        </div>
+        <div class="mp-rev-modal-nav">
+          <button type="button" class="mp-rev-modal-prev" aria-label="Previous review">‹</button>
+          <div class="flex items-center gap-2 mp-rev-modal-dots">{dots.replace("mp-rev-dot", "mp-rev-modal-dot")}</div>
+          <button type="button" class="mp-rev-modal-next" aria-label="Next review">›</button>
+        </div>
+        <a href="https://www.google.com/search?q=Side+Mira+Palace+Hotel+Evrenseki+reviews" target="_blank" rel="noopener" class="mp-rev-modal-cta">
+          <span data-i18n="home.reviews_modal.cta">Read all reviews on Google</span> <span>→</span>
+        </a>
+      </div>
+    </div>
     """)
 
 

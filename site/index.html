@@ -59,7 +59,7 @@
   // because GitHub Pages hosts at /mira-palace-demo/ rather than /.
   window.MIRA_ROOT = "";
 </script>
-<link rel="stylesheet" href="assets/css/site.css?v=32" />
+<link rel="stylesheet" href="assets/css/site.css?v=33" />
 <!-- R020: Tabler Icons bumped 2.47.0 → 3.44.0.
      R024: async-loaded so the ~204 KB stylesheet does not block first paint.
      The media="print" trick makes the browser fetch it at low priority; the
@@ -284,19 +284,55 @@
           <p class="uppercase tracking-[0.22em] text-sand-300 text-xs sm:text-sm font-semibold mb-4"><span data-i18n="home.hero.kicker">Side • Antalya • Türkiye</span></p>
           <h1 class="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.05]"><span data-i18n="home.hero.h1">The Turkish Riviera, reimagined in quiet luxury.</span></h1>
           <p class="mt-5 max-w-2xl text-base sm:text-lg text-white/90 leading-relaxed"><span data-i18n="home.hero.sub">Thirty-four suites, two pools (one outdoor, one indoor) and Evrenseki's Blue-Flag public beach a seven-minute walk down a cypress lane. A small, boutique all-inclusive where the entire team knows your name by the second morning.</span></p>
-          <div class="mt-8 flex flex-wrap gap-3"><a href="rooms/" class="inline-flex items-center justify-center px-7 py-3 bg-sand-300 text-mira-900 rounded-full font-medium tracking-wide hover:bg-sand-200 shadow-lux transition"><span data-i18n="home.hero.cta_suites">Explore our suites</span></a></div>
+          <div class="mt-8 flex flex-wrap gap-3"><a href="rooms/" class="inline-flex items-center justify-center px-7 py-3 bg-sand-300 text-mira-900 rounded-full font-medium tracking-wide hover:bg-sand-200 shadow-lux transition"><span data-i18n="home.hero.cta_suites">Explore our suites</span></a><a href="offers.html" class="inline-flex items-center justify-center px-7 py-3 bg-transparent border border-white/70 text-white rounded-full font-medium tracking-wide hover:bg-white/10 transition"><span data-i18n="home.hero.cta_offers">See our special offers</span> <span class="ml-2">→</span></a></div>
         </div>
       </div>
 
-<aside id="specials-card" data-show="true" class="hidden lg:block absolute right-6 xl:right-12 top-1/2 -translate-y-1/2 w-[300px] xl:w-[340px] z-10 backdrop-blur-md bg-mira-900/40 border border-white/20 rounded-lg shadow-lux p-5 text-white">
-  <div class="flex items-baseline justify-between mb-3">
-    <h2 class="font-display text-2xl leading-none" data-i18n="home.specials.heading">Our specials</h2>
-    <span class="text-[10px] uppercase tracking-widest text-sand-300/90" data-i18n="home.specials.subtitle">Direct only</span>
-  </div>
-  <p class="text-xs text-white/75 leading-relaxed mb-2" data-i18n="home.specials.blurb">Best rates are always direct. These are reserved for guests who book through us.</p>
-  <ul class="m-0 p-0 list-none"><li class="border-t border-white/15 first:border-t-0 py-3">  <div class="text-[11px] uppercase tracking-[0.18em] text-sand-300 font-semibold">Early bird</div>  <div class="font-display text-lg text-white leading-tight mt-0.5">Up to 25% off</div>  <div class="text-xs text-white/80 mt-1 leading-relaxed">Book by 31 May 2026 for arrivals before 15 July.</div></li><li class="border-t border-white/15 first:border-t-0 py-3">  <div class="text-[11px] uppercase tracking-[0.18em] text-sand-300 font-semibold">Stay 7, pay 6</div>  <div class="font-display text-lg text-white leading-tight mt-0.5">Late-summer escape</div>  <div class="text-xs text-white/80 mt-1 leading-relaxed">Arrivals 1–30 September. Complimentary airport transfer.</div></li><li class="border-t border-white/15 first:border-t-0 py-3">  <div class="text-[11px] uppercase tracking-[0.18em] text-sand-300 font-semibold">Honeymoon</div>  <div class="font-display text-lg text-white leading-tight mt-0.5">Included extras</div>  <div class="text-xs text-white/80 mt-1 leading-relaxed">Sparkling wine on arrival, private hammam session for two.</div></li></ul>
-  <a href="offers.html" class="mt-4 inline-flex items-center justify-center w-full px-4 py-2.5 bg-sand-300 text-mira-900 rounded-full font-medium text-sm hover:bg-sand-200 transition"><span data-i18n="home.specials.see_all">See all offers</span> <span class="ml-2">→</span></a>
+<aside id="reviews-card" class="hidden lg:block absolute right-6 xl:right-12 top-1/2 -translate-y-1/2 w-[320px] xl:w-[360px] z-10 mp-rev-card">
+  <button type="button" id="mp-rev-open" class="w-full text-left backdrop-blur-md bg-mira-900/45 border border-white/20 rounded-lg shadow-lux p-5 text-white transition hover:bg-mira-900/55 focus:outline-none focus:ring-2 focus:ring-sand-300"
+          aria-label="Read reviews in full">
+    <div class="flex items-baseline justify-between mb-3">
+      <h2 class="font-display text-2xl leading-none" data-i18n="home.reviews_card.heading">In their words</h2>
+      <div class="text-[11px] uppercase tracking-widest text-sand-300/90"><span class="font-semibold">4.3</span> ★ · 118 <span data-i18n="home.reviews_card.on">on</span> Google</div>
+    </div>
+    <div class="mp-rev-viewport" id="mp-rev-viewport" role="tablist" aria-label="Guest reviews">
+      <article class="mp-rev-slide" data-active="true" data-idx="0" role="tabpanel" aria-hidden="false">  <div class="text-[11px] uppercase tracking-[0.18em] text-sand-300 font-semibold">Family · Google · 1 month ago</div>  <div class="mt-1 text-sand-300 tracking-wider text-sm">★★★★★</div>  <blockquote class="mt-2 font-display text-lg text-white leading-snug">&ldquo;A quiet, peaceful place where families can stay with peace of mind — very clean rooms. Special thanks to Mustafa Bey, the owner, and Eren Be…&rdquo;</blockquote>  <div class="mt-3 text-xs text-white/80 font-medium">Pelinsu Halıcı</div></article><article class="mp-rev-slide" data-active="false" data-idx="1" role="tabpanel" aria-hidden="true">  <div class="text-[11px] uppercase tracking-[0.18em] text-sand-300 font-semibold">Netherlands · Google · 8 months ago</div>  <div class="mt-1 text-sand-300 tracking-wider text-sm">★★★★★</div>  <blockquote class="mt-2 font-display text-lg text-white leading-snug">&ldquo;We are very happy to be here — the staff and service was really nice and they helped us a lot with everything. You can feel like home, they …&rdquo;</blockquote>  <div class="mt-3 text-xs text-white/80 font-medium">Rianne Van zandvoort</div></article><article class="mp-rev-slide" data-active="false" data-idx="2" role="tabpanel" aria-hidden="true">  <div class="text-[11px] uppercase tracking-[0.18em] text-sand-300 font-semibold">Couple · Google · 1 year ago</div>  <div class="mt-1 text-sand-300 tracking-wider text-sm">★★★★★</div>  <blockquote class="mt-2 font-display text-lg text-white leading-snug">&ldquo;Perfect for a quiet and beautiful holiday. The staff was friendly and took care of all our problems. A great place for a family or couple ho…&rdquo;</blockquote>  <div class="mt-3 text-xs text-white/80 font-medium">Abdullah Topçu</div></article>
+    </div>
+    <div class="flex items-center justify-between mt-4">
+      <div class="flex items-center gap-2 mp-rev-dots"><button type="button" class="mp-rev-dot" data-goto="0" aria-label="Show review 1"></button><button type="button" class="mp-rev-dot" data-goto="1" aria-label="Show review 2"></button><button type="button" class="mp-rev-dot" data-goto="2" aria-label="Show review 3"></button></div>
+      <span class="text-xs text-white/85 underline underline-offset-4" data-i18n="home.reviews_card.tap_to_read">Tap to read full</span>
+    </div>
+  </button>
 </aside>
+
+<!-- R025: expanded review modal — same three reviews, full text, plus
+     link to the full Google listing. Hidden by default; site.js
+     toggles .mp-rev-modal-open when the corner card is tapped. -->
+<div id="mp-rev-modal" class="mp-rev-modal" role="dialog" aria-modal="true" aria-labelledby="mp-rev-modal-title" hidden>
+  <div class="mp-rev-modal-backdrop" data-close="1"></div>
+  <div class="mp-rev-modal-panel" role="document">
+    <div class="flex items-start justify-between gap-4 mb-1">
+      <div>
+        <p class="text-xs uppercase tracking-widest text-sand-600 font-semibold" data-i18n="home.reviews_modal.eyebrow">In our guests' words</p>
+        <h3 id="mp-rev-modal-title" class="font-display text-3xl text-mira-900 mt-1">4.3 ★ · 118 reviews on Google</h3>
+      </div>
+      <button type="button" class="mp-rev-modal-x" aria-label="Close" data-close="1">
+        <svg viewBox="0 0 20 20" class="w-5 h-5" fill="currentColor" aria-hidden="true"><path d="M6.293 6.293a1 1 0 011.414 0L10 8.586l2.293-2.293a1 1 0 111.414 1.414L11.414 10l2.293 2.293a1 1 0 01-1.414 1.414L10 11.414l-2.293 2.293a1 1 0 01-1.414-1.414L8.586 10 6.293 7.707a1 1 0 010-1.414z"/></svg>
+      </button>
+    </div>
+    <div class="mp-rev-modal-body" id="mp-rev-modal-body">
+      <article class="mp-rev-modal-slide" data-idx="0">  <div class="text-xs uppercase tracking-widest text-sand-600 font-semibold">Family · Google · 1 month ago</div>  <div class="mt-1 text-sand-500 tracking-wider">★★★★★</div>  <blockquote class="mt-4 font-display text-2xl text-mira-900 leading-snug">&ldquo;A quiet, peaceful place where families can stay with peace of mind — very clean rooms. Special thanks to Mustafa Bey, the owner, and Eren Bey for their hospitality.&rdquo;</blockquote>  <div class="mt-6 text-sm text-mira-700 font-medium">Pelinsu Halıcı</div></article><article class="mp-rev-modal-slide" data-idx="1">  <div class="text-xs uppercase tracking-widest text-sand-600 font-semibold">Netherlands · Google · 8 months ago</div>  <div class="mt-1 text-sand-500 tracking-wider">★★★★★</div>  <blockquote class="mt-4 font-display text-2xl text-mira-900 leading-snug">&ldquo;We are very happy to be here — the staff and service was really nice and they helped us a lot with everything. You can feel like home, they have a big spa.&rdquo;</blockquote>  <div class="mt-6 text-sm text-mira-700 font-medium">Rianne Van zandvoort</div></article><article class="mp-rev-modal-slide" data-idx="2">  <div class="text-xs uppercase tracking-widest text-sand-600 font-semibold">Couple · Google · 1 year ago</div>  <div class="mt-1 text-sand-500 tracking-wider">★★★★★</div>  <blockquote class="mt-4 font-display text-2xl text-mira-900 leading-snug">&ldquo;Perfect for a quiet and beautiful holiday. The staff was friendly and took care of all our problems. A great place for a family or couple holiday.&rdquo;</blockquote>  <div class="mt-6 text-sm text-mira-700 font-medium">Abdullah Topçu</div></article>
+    </div>
+    <div class="mp-rev-modal-nav">
+      <button type="button" class="mp-rev-modal-prev" aria-label="Previous review">‹</button>
+      <div class="flex items-center gap-2 mp-rev-modal-dots"><button type="button" class="mp-rev-modal-dot" data-goto="0" aria-label="Show review 1"></button><button type="button" class="mp-rev-modal-dot" data-goto="1" aria-label="Show review 2"></button><button type="button" class="mp-rev-modal-dot" data-goto="2" aria-label="Show review 3"></button></div>
+      <button type="button" class="mp-rev-modal-next" aria-label="Next review">›</button>
+    </div>
+    <a href="https://www.google.com/search?q=Side+Mira+Palace+Hotel+Evrenseki+reviews" target="_blank" rel="noopener" class="mp-rev-modal-cta">
+      <span data-i18n="home.reviews_modal.cta">Read all reviews on Google</span> <span>→</span>
+    </a>
+  </div>
+</div>
 
     </section>
 <section class="bg-sand-50 py-20 lg:py-28 scroll-mt-24"><div class="max-w-7xl mx-auto px-5 lg:px-8">
@@ -369,34 +405,34 @@
         
         <article class="p-8 bg-white rounded-2xl shadow-lux flex flex-col h-full">
           <div class="text-sand-500 tracking-widest text-sm mb-4">★★★★★</div>
-          <blockquote class="font-display text-xl text-mira-900 leading-snug flex-1">&ldquo;A fantastic hotel in a relaxing location. As soon as I enter my room, I feel like I have been transported to another world.&rdquo;</blockquote>
+          <blockquote class="font-display text-xl text-mira-900 leading-snug flex-1">&ldquo;A quiet, peaceful place where families can stay with peace of mind — very clean rooms. Special thanks to Mustafa Bey, the owner, and Eren Bey for their hospitality.&rdquo;</blockquote>
           <div class="mt-6 pt-5 border-t border-mira-100">
-            <div class="font-medium text-mira-900">Bünyamin T.</div>
-            <div class="text-xs text-mira-600 mt-0.5">Germany · TripAdvisor · April 2024</div>
+            <div class="font-medium text-mira-900">Pelinsu Halıcı</div>
+            <div class="text-xs text-mira-600 mt-0.5">Family · Google · June 2026</div>
           </div>
         </article>
         
         <article class="p-8 bg-white rounded-2xl shadow-lux flex flex-col h-full">
           <div class="text-sand-500 tracking-widest text-sm mb-4">★★★★★</div>
-          <blockquote class="font-display text-xl text-mira-900 leading-snug flex-1">&ldquo;A family-run reliable boutique hotel — very attentive. The rooms are spacious, comfortable, most importantly immaculate.&rdquo;</blockquote>
+          <blockquote class="font-display text-xl text-mira-900 leading-snug flex-1">&ldquo;We are very happy to be here — the staff and service was really nice and they helped us a lot with everything. You can feel like home, they have a big spa.&rdquo;</blockquote>
           <div class="mt-6 pt-5 border-t border-mira-100">
-            <div class="font-medium text-mira-900">Dilek I.</div>
-            <div class="text-xs text-mira-600 mt-0.5">Türkiye · TripAdvisor · September 2024</div>
+            <div class="font-medium text-mira-900">Rianne Van zandvoort</div>
+            <div class="text-xs text-mira-600 mt-0.5">Netherlands · Google · November 2025</div>
           </div>
         </article>
         
         <article class="p-8 bg-white rounded-2xl shadow-lux flex flex-col h-full">
-          <div class="text-sand-500 tracking-widest text-sm mb-4">★★★★☆</div>
-          <blockquote class="font-display text-xl text-mira-900 leading-snug flex-1">&ldquo;I was exceedingly pleased with the lovely spa area. Both of these massages were some of the best. I'm already planning my return.&rdquo;</blockquote>
+          <div class="text-sand-500 tracking-widest text-sm mb-4">★★★★★</div>
+          <blockquote class="font-display text-xl text-mira-900 leading-snug flex-1">&ldquo;Perfect for a quiet and beautiful holiday. The staff was friendly and took care of all our problems. A great place for a family or couple holiday.&rdquo;</blockquote>
           <div class="mt-6 pt-5 border-t border-mira-100">
-            <div class="font-medium text-mira-900">Nancy D.</div>
-            <div class="text-xs text-mira-600 mt-0.5">Denver, USA · TripAdvisor · February 2025</div>
+            <div class="font-medium text-mira-900">Abdullah Topçu</div>
+            <div class="text-xs text-mira-600 mt-0.5">Couple · Google · 2024</div>
           </div>
         </article>
         
       </div>
       <p class="mt-10 text-center text-sm text-mira-600">
-        <a class="underline decoration-sand-400 underline-offset-4 hover:text-sand-600" href="https://www.tripadvisor.com/Hotel_Review-g12606409-d25909071-Reviews-Side_Mira_Palace-Ilica_Manavgat_Turkish_Mediterranean_Coast.html" target="_blank" rel="noopener" data-i18n="home.reviews.see_all">Read all Mira Palace reviews on TripAdvisor →</a>
+        <a class="underline decoration-sand-400 underline-offset-4 hover:text-sand-600" href="https://www.google.com/search?q=Side+Mira+Palace+Hotel+Evrenseki+reviews" target="_blank" rel="noopener" data-i18n="home.reviews.see_all">Read all 118 Mira Palace reviews on Google →</a>
       </p>
     </div></section><section class="bg-white py-20 lg:py-28 scroll-mt-24"><div class="max-w-7xl mx-auto px-5 lg:px-8">
       <div class="flex flex-wrap items-end justify-between gap-6 mb-8">
@@ -428,7 +464,7 @@
         </a>
       </div>
       <div class="grid grid-cols-3 md:grid-cols-6 gap-1.5">
-        <a href="https://www.instagram.com/sidemirapalace/" target="_blank" rel="noopener" class="group relative aspect-square block bg-cover bg-center overflow-hidden rounded" style="background-image:url('assets/img/king/king-11.webp')" aria-label="King Suite sea-view terrace — @sidemirapalace on Instagram"><div class="absolute inset-0 bg-mira-900/0 group-hover:bg-mira-900/40 transition flex items-center justify-center"><span class="opacity-0 group-hover:opacity-100 text-white text-xs tracking-widest uppercase transition">View on Instagram</span></div></a><a href="https://www.instagram.com/sidemirapalace/" target="_blank" rel="noopener" class="group relative aspect-square block bg-cover bg-center overflow-hidden rounded" style="background-image:url('assets/img/spa/spa-01.webp')" aria-label="Turkish hammam · marble göbek taşı — @sidemirapalace on Instagram"><div class="absolute inset-0 bg-mira-900/0 group-hover:bg-mira-900/40 transition flex items-center justify-center"><span class="opacity-0 group-hover:opacity-100 text-white text-xs tracking-widest uppercase transition">View on Instagram</span></div></a><a href="https://www.instagram.com/sidemirapalace/" target="_blank" rel="noopener" class="group relative aspect-square block bg-cover bg-center overflow-hidden rounded" style="background-image:url('assets/img/garden/garden-04.webp')" aria-label="Garden loungers at golden hour — @sidemirapalace on Instagram"><div class="absolute inset-0 bg-mira-900/0 group-hover:bg-mira-900/40 transition flex items-center justify-center"><span class="opacity-0 group-hover:opacity-100 text-white text-xs tracking-widest uppercase transition">View on Instagram</span></div></a><a href="https://www.instagram.com/sidemirapalace/" target="_blank" rel="noopener" class="group relative aspect-square block bg-cover bg-center overflow-hidden rounded" style="background-image:url('assets/img/deluxe/deluxe-10.webp')" aria-label="Deluxe Suite sea view — @sidemirapalace on Instagram"><div class="absolute inset-0 bg-mira-900/0 group-hover:bg-mira-900/40 transition flex items-center justify-center"><span class="opacity-0 group-hover:opacity-100 text-white text-xs tracking-widest uppercase transition">View on Instagram</span></div></a><a href="https://www.instagram.com/sidemirapalace/" target="_blank" rel="noopener" class="group relative aspect-square block bg-cover bg-center overflow-hidden rounded" style="background-image:url('assets/img/spa/spa-08.webp')" aria-label="Relaxation lounge — @sidemirapalace on Instagram"><div class="absolute inset-0 bg-mira-900/0 group-hover:bg-mira-900/40 transition flex items-center justify-center"><span class="opacity-0 group-hover:opacity-100 text-white text-xs tracking-widest uppercase transition">View on Instagram</span></div></a><a href="https://www.instagram.com/sidemirapalace/" target="_blank" rel="noopener" class="group relative aspect-square block bg-cover bg-center overflow-hidden rounded" style="background-image:url('assets/img/family/family-01.webp')" aria-label="Family Suite — connecting layout — @sidemirapalace on Instagram"><div class="absolute inset-0 bg-mira-900/0 group-hover:bg-mira-900/40 transition flex items-center justify-center"><span class="opacity-0 group-hover:opacity-100 text-white text-xs tracking-widest uppercase transition">View on Instagram</span></div></a>
+        <a href="https://www.instagram.com/p/DaSuvMJN7Bm/" target="_blank" rel="noopener" class="group relative aspect-square block bg-cover bg-center overflow-hidden rounded" style="background-image:url('assets/img/spa/spa-01.webp')" aria-label="Turkish hammam · marble göbek taşı — see this post on Instagram"><div class="absolute inset-0 bg-mira-900/0 group-hover:bg-mira-900/40 transition flex items-center justify-center"><span class="opacity-0 group-hover:opacity-100 text-white text-xs tracking-widest uppercase transition">View post</span></div></a><a href="https://www.instagram.com/p/DaK_8S2N8nA/" target="_blank" rel="noopener" class="group relative aspect-square block bg-cover bg-center overflow-hidden rounded" style="background-image:url('assets/img/king/king-01.webp')" aria-label="Signature bedroom · clean lines — see this post on Instagram"><div class="absolute inset-0 bg-mira-900/0 group-hover:bg-mira-900/40 transition flex items-center justify-center"><span class="opacity-0 group-hover:opacity-100 text-white text-xs tracking-widest uppercase transition">View post</span></div></a><a href="https://www.instagram.com/p/DZ-ivNWtJ7p/" target="_blank" rel="noopener" class="group relative aspect-square block bg-cover bg-center overflow-hidden rounded" style="background-image:url('assets/img/king/king-11.webp')" aria-label="King Suite room 206 · arrival ritual — see this post on Instagram"><div class="absolute inset-0 bg-mira-900/0 group-hover:bg-mira-900/40 transition flex items-center justify-center"><span class="opacity-0 group-hover:opacity-100 text-white text-xs tracking-widest uppercase transition">View post</span></div></a><a href="https://www.instagram.com/p/DZ5HEt0tdfV/" target="_blank" rel="noopener" class="group relative aspect-square block bg-cover bg-center overflow-hidden rounded" style="background-image:url('assets/img/garden/garden-04.webp')" aria-label="Fresh orange juice · pool detail — see this post on Instagram"><div class="absolute inset-0 bg-mira-900/0 group-hover:bg-mira-900/40 transition flex items-center justify-center"><span class="opacity-0 group-hover:opacity-100 text-white text-xs tracking-widest uppercase transition">View post</span></div></a><a href="https://www.instagram.com/p/DZmqGdANJNU/" target="_blank" rel="noopener" class="group relative aspect-square block bg-cover bg-center overflow-hidden rounded" style="background-image:url('assets/img/garden/garden-01.webp')" aria-label="Sun loungers under orange trees — see this post on Instagram"><div class="absolute inset-0 bg-mira-900/0 group-hover:bg-mira-900/40 transition flex items-center justify-center"><span class="opacity-0 group-hover:opacity-100 text-white text-xs tracking-widest uppercase transition">View post</span></div></a><a href="https://www.instagram.com/p/DZURx0St9S3/" target="_blank" rel="noopener" class="group relative aspect-square block bg-cover bg-center overflow-hidden rounded" style="background-image:url('assets/img/garden/garden-02.webp')" aria-label="Pomegranate tree · Turkish orchard — see this post on Instagram"><div class="absolute inset-0 bg-mira-900/0 group-hover:bg-mira-900/40 transition flex items-center justify-center"><span class="opacity-0 group-hover:opacity-100 text-white text-xs tracking-widest uppercase transition">View post</span></div></a>
       </div>
     </div></section><section class="bg-sand-50 py-20 lg:py-28 scroll-mt-24"><div class="max-w-7xl mx-auto px-5 lg:px-8">
       <div class="grid lg:grid-cols-2 gap-10 items-center">
@@ -632,6 +668,6 @@
 
     <script src="assets/js/media-manifest.js?v=32" defer></script>
     <script src="assets/js/search-index.js?v=32" defer></script>
-    <script src="assets/js/i18n.js?v=37" defer></script>
-    <script src="assets/js/site.js?v=37" defer></script>
+    <script src="assets/js/i18n.js?v=38" defer></script>
+    <script src="assets/js/site.js?v=38" defer></script>
     </body></html>

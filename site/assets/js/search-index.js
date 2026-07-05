@@ -159,13 +159,13 @@ window.MIRA_SEARCH_INDEX = [
     "description": "A 34-suite boutique all-inclusive hotel in Side, Antalya. Four pools, full Turkish hammam, private beach 600 metres from reception.",
     "headings": [
       "The Turkish Riviera, reimagined in quiet luxury.",
-      "Our specials",
+      "In their words",
+      "4.3 ★ · 118 reviews on Google",
       "Big-hotel comfort, small-hotel soul.",
       "Stay. Eat. Unwind.",
       "Suites",
       "Dining",
-      "Spa & wellness",
-      "Everything included. Nothing forgotten."
+      "Spa & wellness"
     ]
   },
   {

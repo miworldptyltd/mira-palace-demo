@@ -1,4 +1,5 @@
 from common import hero, section
+from textwrap import dedent
 
 # Gallery — a mix of real Mira Palace photography (suites, spa, garden) and
 # stock placeholders for categories we don't yet have photos for (dining,
@@ -73,20 +74,51 @@ def gallery(root: str) -> str:
 
 
 def offers(root: str) -> str:
+    # R025: real Mira Palace photos on every card (was 5 Unsplash stock
+    # shots including a tropical palm-beach fabrication that misrepresented
+    # our Mediterranean coast). Each card now shows an actual hotel view.
     offers_data = [
-        ("Summer 2026 Early Bird", "Up to 25% off", "Book by 31 May 2026 for arrivals before 15 July. Minimum three nights, direct bookings only.", "https://images.unsplash.com/photo-1540541338287-41700207dee6?auto=format&fit=crop&w=1600&q=80"),
-        ("Late-summer escape", "Stay 7, pay 6", "Arrivals between 1 and 30 September 2026. Complimentary airport transfer for two. Minimum stay seven nights.", "https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1600&q=80"),
-        ("Honeymoon package", "Included extras", "Sparkling wine and flowers on arrival, private hammam session for two, à-la-carte dinner on the beach. Marriage certificate (any date) required.", "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1600&q=80"),
-        ("Wellness week", "Spa credit €200 p.p.", "Seven nights including full wellness programme, daily yoga, two hammam rituals, two massages, and a personalised nutrition plan.", "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=1600&q=80"),
-        ("Winter warmer", "30% off", "A quiet coastline in winter. Direct bookings for November–February arrivals, 4+ nights. Breakfast upgraded, early check-in from 11:00.", "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1600&q=80"),
+        ("Summer 2026 Early Bird", "Up to 25% off",
+         "Book by 31 May 2026 for arrivals before 15 July. Minimum three nights, direct bookings only.",
+         "assets/img/garden/garden-01.webp"),
+        ("Late-summer escape", "Stay 7, pay 6",
+         "Arrivals between 1 and 30 September 2026. Complimentary airport transfer for two. Minimum stay seven nights.",
+         "assets/img/garden/garden-04.webp"),
+        ("Honeymoon package", "Included extras",
+         "Sparkling wine and flowers on arrival, private hammam session for two, à-la-carte dinner on the beach. Marriage certificate (any date) required.",
+         "assets/img/king/king-01.webp"),
+        ("Wellness week", "Spa credit €200 p.p.",
+         "Seven nights including full wellness programme, daily yoga, two hammam rituals, two massages, and a personalised nutrition plan.",
+         "assets/img/spa/spa-01.webp"),
+        ("Winter warmer", "30% off",
+         "A quiet coastline in winter. Direct bookings for November–February arrivals, 4+ nights. Breakfast upgraded, early check-in from 11:00.",
+         "assets/img/garden/garden-06.webp"),
     ]
     cards = "".join(
-        f'<article class="grid md:grid-cols-5 overflow-hidden rounded-lg bg-white shadow-lux"><div class="md:col-span-2 aspect-[16/10] md:aspect-auto bg-cover bg-center" style="background-image:url(\'{img}\')"></div><div class="md:col-span-3 p-8"><div class="text-xs uppercase tracking-widest text-sand-600">{tag}</div><h3 class="font-display text-2xl text-mira-900 mt-1">{t}</h3><p class="mt-3 text-mira-700 text-sm leading-relaxed">{d}</p><a href="{root}contact.html#enquiry" class="mt-6 inline-flex items-center gap-2 text-sm font-medium text-mira-700 hover:text-sand-600">Enquire about this offer <span>→</span></a></div></article>'
+        f'<article class="grid md:grid-cols-5 overflow-hidden rounded-lg bg-white shadow-lux"><div class="md:col-span-2 aspect-[16/10] md:aspect-auto bg-cover bg-center" style="background-image:url(\'{root}{img}\')"></div><div class="md:col-span-3 p-8"><div class="text-xs uppercase tracking-widest text-sand-600">{tag}</div><h3 class="font-display text-2xl text-mira-900 mt-1">{t}</h3><p class="mt-3 text-mira-700 text-sm leading-relaxed">{d}</p><a href="{root}contact.html#enquiry" class="mt-6 inline-flex items-center gap-2 text-sm font-medium text-mira-700 hover:text-sand-600">Enquire about this offer <span>→</span></a></div></article>'
         for t, tag, d, img in offers_data
     )
-    h = hero("https://images.unsplash.com/photo-1540541338287-41700207dee6?auto=format&fit=crop&w=1920&q=80",
-             "Offers", "Current offers &amp; packages.",
-             "Best rates are always direct. These packages are reserved for direct bookings — if you’ve come from an agent or OTA, we can still honour them up to 24 hours after booking.", height="55vh")
+    # R025: hero is a random-video-per-visit shuffler picked by site.js from
+    # window.MIRA_VIDEOS. No repeat within the same browser session. The
+    # poster JPG here is only shown for the ~200ms before the JS swaps in
+    # the chosen video source — we use garden-01 as a safe fallback.
+    poster = f"{root}assets/img/garden/garden-01.webp"
+    h = dedent(f"""
+    <section class="relative hero-section overflow-hidden" style="min-height:60vh;">
+      <div class="absolute inset-0 bg-cover bg-center" style="background-image:url('{poster}');"></div>
+      <video id="offers-hero-video" class="absolute inset-0 w-full h-full object-cover" autoplay loop muted playsinline preload="metadata" poster="{poster}" aria-hidden="true">
+        <source src="" type="video/mp4" />
+      </video>
+      <div class="absolute inset-0 hero-overlay pointer-events-none"></div>
+      <div class="relative max-w-7xl mx-auto px-5 lg:px-8 pt-14 pb-16 text-white flex flex-col justify-start" style="min-height:60vh;">
+        <div class="max-w-3xl">
+          <p class="uppercase tracking-[0.22em] text-sand-300 text-xs sm:text-sm font-semibold mb-4" data-i18n="offers.hero.kicker">Offers</p>
+          <h1 class="font-display text-4xl sm:text-5xl md:text-6xl leading-[1.05]" data-i18n="offers.hero.h1">Current offers &amp; packages.</h1>
+          <p class="mt-5 max-w-2xl text-base sm:text-lg text-white/90 leading-relaxed" data-i18n="offers.hero.sub">Best rates are always direct. These packages are reserved for direct bookings — if you've come from an agent or OTA, we can still honour them up to 24 hours after booking.</p>
+        </div>
+      </div>
+    </section>
+    """)
     body = section(f"""
       <div class="space-y-8">{cards}</div>
       <p class="mt-10 text-xs text-mira-500 italic">All rates, percentages and inclusions are illustrative for this demonstration site. Real offers and terms will be supplied by the hotel on content hand-off.</p>

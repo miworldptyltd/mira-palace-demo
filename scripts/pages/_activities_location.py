@@ -102,17 +102,27 @@ def location(root: str) -> str:
         </div>
       </div>
     """, bg="bg-sand-50")
-    # Nearby treasures gallery — gives the page the same visual cadence as
-    # Rooms / Dining / Spa.
+    # R025: Nearby treasures — real Wikimedia Commons images sourced by the
+    # travel SME research, with two-sentence verified copy for each site.
+    # All four images are CC BY-SA — the /credits page (added in R025) lists
+    # each photographer for licence compliance. Two [VERIFY] items flagged
+    # for owner: Aspendos 2026 opera festival dates and Manavgat 2026
+    # entrance fee — do NOT publish specific numbers on those without owner
+    # confirmation.
+    IMG_APOLLO_TEMPLE  = "https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Apollon_Tempel_in_Side.jpg/1600px-Apollon_Tempel_in_Side.jpg"
+    IMG_ASPENDOS_R025  = "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Aspendos_02.jpg/1600px-Aspendos_02.jpg"
+    IMG_MANAVGAT_R025  = "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Manavgat_waterfall_by_tomgensler.JPG/1600px-Manavgat_waterfall_by_tomgensler.JPG"
+    IMG_KALEICI_R025   = "https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Antalya_-_Kalei%C3%A7i.JPG/1600px-Antalya_-_Kalei%C3%A7i.JPG"
+
     nearby = [
-        (IMG_SIDE,     "Side & the temple of Apollo",
-         "12 km — wander the ancient harbour at golden hour, then dinner along the seafront promenade."),
-        (IMG_ASPENDOS, "Aspendos Roman theatre",
-         "33 km — one of antiquity's best-preserved theatres; opera and ballet evenings in summer."),
-        (IMG_FALLS,    "Manavgat waterfalls",
-         "18 km — a wide curtain of cool water on the Manavgat river, breakfast cafés on the bank."),
-        (IMG_HARBOR,   "Antalya old town (Kaleiçi)",
-         "65 km — Roman, Seljuk and Ottoman layers wrapped around the small marina."),
+        (IMG_APOLLO_TEMPLE, "Side & the temple of Apollo",
+         "12 km — five sunlit marble columns rising straight out of the Mediterranean, at the tip of Side's old-town peninsula. Come 45 minutes before sunset: the marble turns honey-gold, the tourist coaches have left, and the little fishing harbour behind you fills up for dinner."),
+        (IMG_ASPENDOS_R025, "Aspendos Roman theatre",
+         "33 km — the best-preserved Roman theatre anywhere in the ancient world, built in 155 AD and still standing almost exactly as Marcus Aurelius left it. The acoustics are so intact that a coin dropped centre-stage is audible from the top row — try it before the tour groups arrive around 10 am."),
+        (IMG_MANAVGAT_R025, "Manavgat waterfalls",
+         "18 km — a wide, low curtain of turquoise water dropping across the full breadth of the Manavgat River, ringed by tea gardens under plane trees. Go mid-morning when the sun is behind you and the river-boat crowds haven't arrived — order a glass of çay on the terrace and stay for lunch."),
+        (IMG_KALEICI_R025, "Antalya old town (Kaleiçi)",
+         "65 km — the walled Ottoman old town wrapped around a horseshoe harbour of wooden gulets, best entered on foot through Hadrian's Gate. Lose an afternoon on the cobbled lanes behind the harbour, then take the clifftop lift down to Mermerli beach for a swim before the drive back."),
     ]
     cards = "".join(
         f'<a class="group block bg-white rounded-lg overflow-hidden shadow-lux hover:-translate-y-1 transition will-change-transform">'
