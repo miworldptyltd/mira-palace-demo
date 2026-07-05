@@ -1,11 +1,11 @@
 from common import hero, hero_video, hero_slideshow, section, eyebrow, heading, card, feature_strip, cta_band, quote_block, specials_card
 
-IMG_POOL = "assets/img/garden/garden-01.jpg"
-IMG_GARDEN_2 = "assets/img/garden/garden-02.jpg"
-IMG_GARDEN_3 = "assets/img/garden/garden-03.jpg"
-IMG_GARDEN_4 = "assets/img/garden/garden-04.jpg"
-IMG_ROOM = "assets/img/king/king-01.jpg"    # real King Suite signature shot
-IMG_SPA  = "assets/img/spa/spa-01.jpg"      # real spa hero
+IMG_POOL = "assets/img/garden/garden-01.webp"
+IMG_GARDEN_2 = "assets/img/garden/garden-02.webp"
+IMG_GARDEN_3 = "assets/img/garden/garden-03.webp"
+IMG_GARDEN_4 = "assets/img/garden/garden-04.webp"
+IMG_ROOM = "assets/img/king/king-01.webp"    # real King Suite signature shot
+IMG_SPA  = "assets/img/spa/spa-01.webp"      # real spa hero
 
 # R021 image audit: the four constants below used to be generic Unsplash
 # shots that showed *specific* venues (a restaurant, a hotel lobby, a
@@ -14,9 +14,9 @@ IMG_SPA  = "assets/img/spa/spa-01.jpg"      # real spa hero
 # bar photo (same as the dining hub hero); the other three swap to real
 # Mira Palace photography already on disk.
 IMG_DINING    = "https://sidemirapalace.com/img/restaurant/20240713110135_88159.png"  # real bar from live site
-IMG_LOBBY     = "assets/img/garden/garden-06.jpg"      # real garden (used on "everything included" band)
-IMG_BREAKFAST = "assets/img/standard/standard-01.jpg"  # real Standard Suite — rounds gallery out to all 4 room types
-IMG_BEACH     = "assets/img/garden/garden-07.jpg"      # real garden/exterior — TODO: swap for a real beach photo when the hotel supplies one
+IMG_LOBBY     = "assets/img/garden/garden-06.webp"      # real garden (used on "everything included" band)
+IMG_BREAKFAST = "assets/img/standard/standard-01.webp"  # real Standard Suite — rounds gallery out to all 4 room types
+IMG_BEACH     = "assets/img/garden/garden-07.webp"      # real garden/exterior — TODO: swap for a real beach photo when the hotel supplies one
 
 # HERO_POSTER is the still image visible while the home-page hero video
 # is buffering. Real Mira Palace garden shot looks more inviting than a
@@ -124,12 +124,12 @@ def home(root: str) -> str:
       </div>
       <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
         <div class="aspect-[4/5] bg-cover bg-center rounded" style="background-image:url('{root}{IMG_POOL}')"></div>
-        <div class="aspect-[4/5] bg-cover bg-center rounded" style="background-image:url('{root}assets/img/king/king-03.jpg')"></div>
+        <div class="aspect-[4/5] bg-cover bg-center rounded" style="background-image:url('{root}assets/img/king/king-03.webp')"></div>
         <div class="aspect-[4/5] bg-cover bg-center rounded" style="background-image:url('{IMG_DINING}')"></div>
-        <div class="aspect-[4/5] bg-cover bg-center rounded" style="background-image:url('{root}assets/img/spa/spa-02.jpg')"></div>
-        <div class="aspect-[4/5] bg-cover bg-center rounded" style="background-image:url('{root}assets/img/garden/garden-05.jpg')"></div>
+        <div class="aspect-[4/5] bg-cover bg-center rounded" style="background-image:url('{root}assets/img/spa/spa-02.webp')"></div>
+        <div class="aspect-[4/5] bg-cover bg-center rounded" style="background-image:url('{root}assets/img/garden/garden-05.webp')"></div>
         <div class="aspect-[4/5] bg-cover bg-center rounded" style="background-image:url('{root}{IMG_BREAKFAST}')"></div>
-        <div class="aspect-[4/5] bg-cover bg-center rounded" style="background-image:url('{root}assets/img/deluxe/deluxe-02.jpg')"></div>
+        <div class="aspect-[4/5] bg-cover bg-center rounded" style="background-image:url('{root}assets/img/deluxe/deluxe-02.webp')"></div>
         <div class="aspect-[4/5] bg-cover bg-center rounded bg-mira-700 grid place-items-center text-sand-200 font-display text-xl"><a href="{root}gallery.html">See all →</a></div>
       </div>
     """, bg="bg-white")
@@ -156,12 +156,12 @@ def home(root: str) -> str:
     # For now every tile links to the profile as a whole so the CTA works.
     ig_url = "https://www.instagram.com/sidemirapalace/"
     ig_tiles = [
-        ("assets/img/king/king-11.jpg",       "King Suite sea-view terrace"),
-        ("assets/img/spa/spa-01.jpg",         "Turkish hammam · marble göbek taşı"),
-        ("assets/img/garden/garden-04.jpg",   "Garden loungers at golden hour"),
-        ("assets/img/deluxe/deluxe-10.jpg",   "Deluxe Suite sea view"),
-        ("assets/img/spa/spa-08.jpg",         "Relaxation lounge"),
-        ("assets/img/family/family-01.jpg",   "Family Suite — connecting layout"),
+        ("assets/img/king/king-11.webp",       "King Suite sea-view terrace"),
+        ("assets/img/spa/spa-01.webp",         "Turkish hammam · marble göbek taşı"),
+        ("assets/img/garden/garden-04.webp",   "Garden loungers at golden hour"),
+        ("assets/img/deluxe/deluxe-10.webp",   "Deluxe Suite sea view"),
+        ("assets/img/spa/spa-08.webp",         "Relaxation lounge"),
+        ("assets/img/family/family-01.webp",   "Family Suite — connecting layout"),
     ]
     ig_grid = "".join(
         f'<a href="{ig_url}" target="_blank" rel="noopener" '

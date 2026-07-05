@@ -116,6 +116,28 @@ if ($ForcePhotos -or -not (Test-Path $sentinel)) {
 }
 
 # ---------------------------------------------------------------------------
+Step "[1b/7]  Convert JPGs -> WebP  (R024 image optimisation)"
+
+# Ensures Pillow is installed. Runs the batch converter only for NEW/CHANGED
+# JPGs — a re-run with no source changes is a fast no-op.
+$python = (Get-Command python -ErrorAction SilentlyContinue).Source
+if (-not $python) { $python = (Get-Command python3 -ErrorAction SilentlyContinue).Source }
+if (-not $python) { Fail "no python on PATH"; exit 1 }
+
+# Quiet install (no-op if already installed). --break-system-packages is
+# needed on new Python 3.12+ that guards site-packages by default.
+$pilProbe = & $python -c "import PIL, sys; sys.exit(0)" 2>&1
+if ($LASTEXITCODE -ne 0) {
+  Info "Pillow not installed — installing now..."
+  & $python -m pip install --quiet --break-system-packages pillow
+  if ($LASTEXITCODE -ne 0) { Fail "Pillow install failed"; exit 1 }
+}
+
+& $python (Join-Path $root "scripts\convert-images.py")
+if ($LASTEXITCODE -ne 0) { Fail "Image conversion failed"; exit 1 }
+Pass "WebP conversion complete"
+
+# ---------------------------------------------------------------------------
 Step "[2/7]  Compile Tailwind CSS  (R020 — was v3 Play CDN, now proper build)"
 
 $twBin = Join-Path $root "tools\tailwindcss.exe"

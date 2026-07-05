@@ -152,10 +152,21 @@ HEAD = """<!doctype html>
 <meta name="twitter:title" content="{title}" />
 <meta name="twitter:description" content="{description}" />
 <meta name="twitter:image" content="{og_image}" />
+<!-- R024: force browsers to revalidate HTML on every navigation. GH Pages
+     serves index.html with Cache-Control: max-age=600 (10 min) by default,
+     which meant R022 hero-copy edits kept surfacing as stale content for
+     10 minutes after each release. This meta tag drops that to zero — as
+     soon as a release lands, next navigation sees the new HTML. CSS + JS
+     + images all still benefit from long cache via ?v= busters. -->
+<meta http-equiv="Cache-Control" content="no-cache, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
 <link rel="icon" type="image/svg+xml" href="{root}assets/img/favicon.svg" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<!-- R024: trimmed Cormorant weights from 4 (400/500/600/700) to 2 (400/600) — the
+     only weights actually used on display headings. Inter kept at full weight
+     range for body copy variations. Saves ~40 KB of unused woff2. -->
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.5.0/css/flag-icons.min.css" />
 <!-- R020: Tailwind v4 compiled build.
      Was: <script src="cdn.tailwindcss.com?plugins=..."> (~350 KB Play CDN,
@@ -170,9 +181,14 @@ HEAD = """<!doctype html>
   // because GitHub Pages hosts at /mira-palace-demo/ rather than /.
   window.MIRA_ROOT = "{root}";
 </script>
-<link rel="stylesheet" href="{root}assets/css/site.css?v=31" />
-<!-- R020: Tabler Icons bumped 2.47.0 → 3.44.0 (v3 kept the ti- prefix; classes we use — ti-chevron-down, ti-maximize — verified to still exist). -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.44.0/dist/tabler-icons.min.css" />
+<link rel="stylesheet" href="{root}assets/css/site.css?v=32" />
+<!-- R020: Tabler Icons bumped 2.47.0 → 3.44.0.
+     R024: async-loaded so the ~204 KB stylesheet does not block first paint.
+     The media="print" trick makes the browser fetch it at low priority; the
+     onload handler flips it to media="all" once downloaded, and the icons
+     paint just after LCP. Fallback <noscript> covers browsers without JS. -->
+<link rel="preload" as="style" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.44.0/dist/tabler-icons.min.css" onload="this.onload=null;this.rel='stylesheet'" />
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.44.0/dist/tabler-icons.min.css" /></noscript>
 <!-- R016: Cloudflare Turnstile (bot-check on forms). Test sitekey "always pass"
      during the stub phase; real sitekey swaps in once user creates the widget. -->
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" defer></script>
@@ -328,7 +344,8 @@ def nav(active: str, root: str) -> str:
       <div class="bg-mira-900/85 backdrop-blur supports-[backdrop-filter]:bg-mira-900/75 text-white border-b border-white/5">
         <div class="max-w-7xl mx-auto px-5 lg:px-8 flex items-center justify-between gap-4 h-16 xl:h-[68px]">
           <a href="{root}index.html" class="flex items-center gap-2 shrink-0">
-            <img src="{root}assets/img/mp-monogram-gold.png" alt="Mira Palace logo" class="w-9 h-9 object-contain" />
+            <!-- R024: added width/height + fetchpriority=high on the only <img> above the fold (the monogram) — locks aspect ratio to prevent CLS. TODO: swap PNG for SVG when the owner supplies a proper vector version — the current PNG is 234x229 rendered into a 36x36 box. -->
+            <img src="{root}assets/img/mp-monogram-gold.png" alt="Mira Palace logo" class="w-9 h-9 object-contain" width="36" height="36" fetchpriority="high" />
             <span class="font-display text-xl tracking-wide whitespace-nowrap">Mira Palace</span>
           </a>
           <nav class="hidden xl:flex items-center gap-x-3 2xl:gap-x-4 flex-1 justify-end" aria-label="Primary">
@@ -499,8 +516,8 @@ def footer(root: str) -> str:
     {customiser_panel(root)}
     <script src="{root}assets/js/media-manifest.js?v=32" defer></script>
     <script src="{root}assets/js/search-index.js?v=32" defer></script>
-    <script src="{root}assets/js/i18n.js?v=36" defer></script>
-    <script src="{root}assets/js/site.js?v=36" defer></script>
+    <script src="{root}assets/js/i18n.js?v=37" defer></script>
+    <script src="{root}assets/js/site.js?v=37" defer></script>
     </body></html>
     """)
 
@@ -655,16 +672,17 @@ def hero_slideshow(image_urls, kicker: str, heading: str, sub: str,
 # ---- Media discovery -----------------------------------------------------
 # Friendly labels for known files. Anything not listed is auto-humanised.
 
+# R024: removed pool_air ("Pool from above") + hotel_drone ("Hotel exterior")
+# per owner — files also deleted from site/assets/video/ so the auto-scan
+# stops emitting them into the customiser panel.
 VIDEO_LABEL_OVERRIDES = {
     "pool":         "Resort pool",
-    "pool_air":     "Pool from above",
     "coast":        "Mediterranean coast",
     "aerial":       "Drone view",
     "waves":        "Gentle waves",
     "lobby":        "Hotel interior",
     "room":         "Suite walkthrough",
     "spa":          "Spa & wellness",
-    "hotel_drone":  "Hotel exterior (drone)",
     "kite_surf":    "Kite surfing",
     "sunset":       "Sunset on the coast",
 }
@@ -690,7 +708,7 @@ _AUDIO_EXTS = (".mp3", ".ogg", ".wav", ".m4a", ".aac")
 
 
 def _humanise(bare: str) -> str:
-    """Turn 'pool_air' or 'Hotel-drone' into 'Pool Air' / 'Hotel Drone'."""
+    """Turn 'kite_surf' or 'Hero-coast' into 'Kite Surf' / 'Hero Coast'."""
     cleaned = bare.replace("_", " ").replace("-", " ").strip()
     return " ".join(w.capitalize() for w in cleaned.split() if w)
 

@@ -1,3 +1,7 @@
+## [R024] - 2026-07-05
+
+R024 perf pass — hero videos trimmed, JPG to WebP saving 39 percent (7.2 MB), content-visibility auto below fold, mobile floats collapsed to WhatsApp only under 640px, Tabler CSS async-loaded, Cormorant weights trimmed 4 to 2, HTML no-cache meta for instant release propagation, monogram width height fetchpriority
+
 ## [R023] - 2026-07-04
 
 R023 hotfix — i18n.js runtime was overwriting the R022 hero + footer copy with the old private-beach and four-pools fabrication in all four languages; corrected home.hero.sub and footer.tagline for EN/TR/DE/RU, bumped JS cache-buster v35 to v36
@@ -177,6 +181,7 @@ First publishable build. Sent to the hotel for owner review.
 - LICENSE is all-rights-reserved proprietary.
 
 [0.1.0]: https://github.com/-/-/releases/tag/v0.1.0
+
 
 
 

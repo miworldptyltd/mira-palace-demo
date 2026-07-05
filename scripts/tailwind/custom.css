@@ -1,6 +1,35 @@
 /* Mira Palace — custom stylesheet */
 
 /* -----------------------------------------------------------------------
+   R024 PERFORMANCE: content-visibility deferred rendering.
+   The site's hotel photos are almost entirely CSS background-images —
+   loading="lazy" doesn't apply to those, so we use content-visibility
+   instead. Every <section> after the first gets skipped by the browser
+   until it scrolls into view. Big paint-time win on long pages.
+   contain-intrinsic-size reserves layout space so we don't get CLS.
+   Firefox/Safari now fully support this (2024+).
+   ----------------------------------------------------------------------- */
+main > section:nth-of-type(n+2) {
+  content-visibility: auto;
+  contain-intrinsic-size: 800px;
+}
+
+/* -----------------------------------------------------------------------
+   R024 MOBILE FLOAT STACK — below 640px, the WhatsApp bubble is the only
+   float we keep visible. Music toggle, video cluster and the Customise
+   vertical tab were colliding with the SEND ENQUIRY button and other
+   primary CTAs on 375-428px phones. Above 640px everything reappears.
+   ----------------------------------------------------------------------- */
+@media (max-width: 639px) {
+  .music-cluster-pos,
+  .customiser-tab,
+  #customiser-side-tab {
+    display: none !important;
+  }
+}
+
+
+/* -----------------------------------------------------------------------
    MOBILE / TOUCH POLISH
    - iOS safe-area-inset for floating bottom buttons (iPhone X+ home bar)
    - Stack music cluster above WhatsApp on phones; side-by-side on tablet+

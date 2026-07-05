@@ -1,22 +1,22 @@
 from common import hero, hero_slideshow, section, eyebrow, heading, cta_band, SITE_META
 
 # Real Mira Palace photography (copied + resized by Copy-Photos.ps1)
-IMG_GARDEN_1 = "assets/img/garden/garden-01.jpg"
-IMG_GARDEN_2 = "assets/img/garden/garden-02.jpg"
-IMG_GARDEN_3 = "assets/img/garden/garden-03.jpg"
-IMG_GARDEN_4 = "assets/img/garden/garden-04.jpg"
-IMG_SPA_1  = "assets/img/spa/spa-01.jpg"   # hammam chamber
-IMG_SPA_2  = "assets/img/spa/spa-02.jpg"   # steam room
-IMG_SPA_3  = "assets/img/spa/spa-03.jpg"   # marble göbek taşı
-IMG_SPA_4  = "assets/img/spa/spa-04.jpg"   # massage suite
-IMG_SPA_5  = "assets/img/spa/spa-05.jpg"   # scrub / foam
-IMG_SPA_6  = "assets/img/spa/spa-06.jpg"   # treatment room
-IMG_SPA_7  = "assets/img/spa/spa-07.jpg"   # sauna
-IMG_SPA_8  = "assets/img/spa/spa-08.jpg"   # relaxation lounge
-IMG_SPA_9  = "assets/img/spa/spa-09.jpg"   # aromatherapy room
-IMG_SPA_10 = "assets/img/spa/spa-10.jpg"   # facility detail
-IMG_SPA_11 = "assets/img/spa/spa-11.jpg"   # spa entrance
-IMG_SPA_12 = "assets/img/spa/spa-12.jpg"   # spa detail
+IMG_GARDEN_1 = "assets/img/garden/garden-01.webp"
+IMG_GARDEN_2 = "assets/img/garden/garden-02.webp"
+IMG_GARDEN_3 = "assets/img/garden/garden-03.webp"
+IMG_GARDEN_4 = "assets/img/garden/garden-04.webp"
+IMG_SPA_1  = "assets/img/spa/spa-01.webp"   # hammam chamber
+IMG_SPA_2  = "assets/img/spa/spa-02.webp"   # steam room
+IMG_SPA_3  = "assets/img/spa/spa-03.webp"   # marble göbek taşı
+IMG_SPA_4  = "assets/img/spa/spa-04.webp"   # massage suite
+IMG_SPA_5  = "assets/img/spa/spa-05.webp"   # scrub / foam
+IMG_SPA_6  = "assets/img/spa/spa-06.webp"   # treatment room
+IMG_SPA_7  = "assets/img/spa/spa-07.webp"   # sauna
+IMG_SPA_8  = "assets/img/spa/spa-08.webp"   # relaxation lounge
+IMG_SPA_9  = "assets/img/spa/spa-09.webp"   # aromatherapy room
+IMG_SPA_10 = "assets/img/spa/spa-10.webp"   # facility detail
+IMG_SPA_11 = "assets/img/spa/spa-11.webp"   # spa entrance
+IMG_SPA_12 = "assets/img/spa/spa-12.webp"   # spa detail
 
 
 def pools(root: str) -> str:

@@ -53,6 +53,14 @@ jobs:
             --minify
           ls -la site/assets/css/site.css
 
+      # R024: batch-convert JPGs to WebP. Runs from Pillow (installed above);
+      # cheap re-run because unchanged JPGs are skipped.
+      - name: Install Pillow
+        run: pip install --break-system-packages pillow
+
+      - name: Convert JPGs to WebP
+        run: python3 scripts/convert-images.py
+
       - name: Generate site
         run: python3 scripts/build.py
 

@@ -13,14 +13,14 @@ def _imgs(slug: str, n: int | None = None) -> list[str]:
     take = total if n is None else min(n, total)
     return [f"assets/img/{slug}/{slug}-{i:02d}.jpg" for i in range(1, take + 1)]
 
-IMG_STD   = f"assets/img/standard/standard-01.jpg"
-IMG_DLX   = f"assets/img/deluxe/deluxe-01.jpg"
-IMG_FAM   = f"assets/img/family/family-01.jpg"
-IMG_SUITE = f"assets/img/king/king-01.jpg"
+IMG_STD   = f"assets/img/standard/standard-01.webp"
+IMG_DLX   = f"assets/img/deluxe/deluxe-01.webp"
+IMG_FAM   = f"assets/img/family/family-01.webp"
+IMG_SUITE = f"assets/img/king/king-01.webp"
 # Fallback (decorative) images — used when a room folder doesn't have enough
 # of its own to fill the inline gallery.
-IMG_BATH    = f"assets/img/king/king-02.jpg"
-IMG_BALCONY = f"assets/img/garden/garden-01.jpg"
+IMG_BATH    = f"assets/img/king/king-02.webp"
+IMG_BALCONY = f"assets/img/garden/garden-01.webp"
 
 # NB: "count" is the number of suites in the property (internal use only — the
 # website never displays it). It feeds the FAQ doc in reference\documents\.
