@@ -80,6 +80,8 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      # deploy-pages@v4 is still current in 2026
+      # R028: bumped v4 → v5 to fix "Deployment failed, try again later" — v4
+      # ships Node 20 which GitHub sunset on 2026-09-16; v5 (2026-03-25) is the
+      # Node 24 build. Fixes 3 consecutive failed deploys post-R025/R026/R027.
       - id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
