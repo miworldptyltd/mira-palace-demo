@@ -1436,6 +1436,40 @@
   var spForm = document.getElementById('sp-form');
   if (spForm) spForm.addEventListener('submit', function (e) { e.preventDefault(); handleEnquirySubmit(spForm); });
 
+  // R029.1: Info-icon popover (data-info-target -> element id to reveal).
+  // Click toggles the pop; outside-click and ESC close it.
+  (function initInfoPops() {
+    var buttons = document.querySelectorAll('[data-info-target]');
+    if (!buttons.length) return;
+    var openPop = null;
+
+    function closePop() {
+      if (openPop) { openPop.setAttribute('hidden', ''); openPop = null; }
+    }
+
+    buttons.forEach(function (btn) {
+      btn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var id = btn.getAttribute('data-info-target');
+        var pop = document.getElementById(id);
+        if (!pop) return;
+        if (pop === openPop) { closePop(); return; }
+        closePop();
+        pop.removeAttribute('hidden');
+        openPop = pop;
+      });
+    });
+
+    document.addEventListener('click', function (e) {
+      if (!openPop) return;
+      if (openPop.contains(e.target)) return;
+      closePop();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closePop();
+    });
+  })();
+
   // R029.1: Date-input min guards.
   // <input type="date" data-min="today">   -> min = today's YYYY-MM-DD
   // <input type="date" data-min="arrival"> -> min tracks the arrival input value
