@@ -102,17 +102,21 @@ def location(root: str) -> str:
         </div>
       </div>
     """, bg="bg-sand-50")
-    # R025: Nearby treasures — real Wikimedia Commons images sourced by the
-    # travel SME research, with two-sentence verified copy for each site.
-    # All four images are CC BY-SA — the /credits page (added in R025) lists
-    # each photographer for licence compliance. Two [VERIFY] items flagged
-    # for owner: Aspendos 2026 opera festival dates and Manavgat 2026
-    # entrance fee — do NOT publish specific numbers on those without owner
-    # confirmation.
-    IMG_APOLLO_TEMPLE  = "https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Apollon_Tempel_in_Side.jpg/1600px-Apollon_Tempel_in_Side.jpg"
-    IMG_ASPENDOS_R025  = "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Aspendos_02.jpg/1600px-Aspendos_02.jpg"
-    IMG_MANAVGAT_R025  = "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Manavgat_waterfall_by_tomgensler.JPG/1600px-Manavgat_waterfall_by_tomgensler.JPG"
-    IMG_KALEICI_R025   = "https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Antalya_-_Kalei%C3%A7i.JPG/1600px-Antalya_-_Kalei%C3%A7i.JPG"
+    # R025 → R026 hotfix: Wikimedia Commons was blocking all hotlinks and
+    # rate-limited direct PowerShell downloads too, leaving the four
+    # Nearby-treasures cards as empty white boxes on the live site.
+    # Swapped source to Pexels — all four images visually verified in-browser
+    # as unambiguous shots of the correct site. Pexels licence is free for
+    # commercial use with no attribution required, though we still credit
+    # every photograph in RELEASE_NOTES.md for good practice.
+    #
+    # Two [VERIFY] items flagged for owner: Aspendos 2026 opera festival dates
+    # and Manavgat 2026 entrance fee — do NOT publish specific numbers on
+    # those without owner confirmation.
+    IMG_APOLLO_TEMPLE  = "https://images.pexels.com/photos/10749696/pexels-photo-10749696.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1600&h=900"
+    IMG_ASPENDOS_R025  = "https://images.pexels.com/photos/19004824/pexels-photo-19004824.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1600&h=900"
+    IMG_MANAVGAT_R025  = "https://images.pexels.com/photos/8873004/pexels-photo-8873004.png?auto=compress&cs=tinysrgb&fit=crop&w=1600&h=900"
+    IMG_KALEICI_R025   = "https://images.pexels.com/photos/18761177/pexels-photo-18761177.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1600&h=900"
 
     nearby = [
         (IMG_APOLLO_TEMPLE, "Side & the temple of Apollo",

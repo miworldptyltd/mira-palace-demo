@@ -1,3 +1,7 @@
+## [R026] - 2026-07-06
+
+R026 hotfix — Location page Nearby treasures cards were empty white boxes because Wikimedia Commons blocks cross-origin hotlinks and rate-limited direct downloads. Swapped all 4 images to verified Pexels URLs (Side Apollo temple 5-column shot, Aspendos Roman theatre back wall, Manavgat Kucuk Selale wide low curtain, Antalya Kaleici horseshoe harbour with wooden gulets). All 4 verified in-browser as showing the correct site. Pexels licence free commercial use, no attribution required
+
 ## [R025] - 2026-07-05
 
 R025 home hero reviews carousel replaces specials card, secondary CTA See our special offers, real Google reviews (Pelinsu Rianne Abdullah), location Nearby treasures cards with Wikimedia Commons imagery (Side Apollo Aspendos Manavgat Kaleici), offers hero random-video-per-visit shuffler swapping the tropical fabrication, offers cards using real hotel photos, Instagram tiles deep-linked to specific posts, dead code removed (specials_card function and 16 home.specials i18n keys), RELEASE_NOTES.md ledger updated
@@ -185,6 +189,7 @@ First publishable build. Sent to the hotel for owner review.
 - LICENSE is all-rights-reserved proprietary.
 
 [0.1.0]: https://github.com/-/-/releases/tag/v0.1.0
+
 
 
 
