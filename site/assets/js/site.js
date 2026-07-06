@@ -1436,6 +1436,40 @@
   var spForm = document.getElementById('sp-form');
   if (spForm) spForm.addEventListener('submit', function (e) { e.preventDefault(); handleEnquirySubmit(spForm); });
 
+  // R029.1: Date-input min guards.
+  // <input type="date" data-min="today">   -> min = today's YYYY-MM-DD
+  // <input type="date" data-min="arrival"> -> min tracks the arrival input value
+  // Prevents past-date selection AND departure < arrival (same-day allowed).
+  (function initDateGuards() {
+    function todayISO() {
+      var d = new Date();
+      var m = String(d.getMonth() + 1).padStart(2, '0');
+      var day = String(d.getDate()).padStart(2, '0');
+      return d.getFullYear() + '-' + m + '-' + day;
+    }
+    var today = todayISO();
+
+    // Fields anchored to today.
+    document.querySelectorAll('input[type="date"][data-min="today"]').forEach(function (el) {
+      el.min = today;
+      // If the input already carries a past value (browser autofill), clear it.
+      if (el.value && el.value < today) el.value = today;
+    });
+
+    // Departure tracks arrival — same-day arrivals allowed.
+    var arrival   = document.getElementById('bk-arrival');
+    var departure = document.querySelector('input[type="date"][data-min="arrival"]');
+    if (arrival && departure) {
+      function syncDeparture() {
+        var lo = arrival.value || today;
+        departure.min = lo;
+        if (departure.value && departure.value < lo) departure.value = lo;
+      }
+      arrival.addEventListener('change', syncDeparture);
+      syncDeparture();
+    }
+  })();
+
   // ===================================================================
   // R025: Reviews carousel + modal (home page hero corner card)
   //   - card: 1 review at a time, auto-rotates every 8s, pauses on hover

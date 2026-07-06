@@ -290,9 +290,10 @@
       <div class="bk-cols">
 
         <!-- LEFT: form -->
-        <!-- R016: form posts intercepted by site.js submitEnquiry() handler.
-             Action URL becomes real Cloudflare Worker once user confirms wiring;
-             during stub phase the handler just shows the email preview panel. -->
+        <!-- R029: form posts intercepted by site.js submitEnquiry() handler,
+             which JSON-POSTs to the Cloudflare Worker (worker/mira-palace-enquiry.js).
+             Worker verifies Turnstile server-side, rate-limits, sanitises and
+             forwards to Resend. -->
         <form class="bk-form" id="bk-form" novalidate
               data-enquiry-kind="room"
               action="https://mira-palace-enquiry.apps-224.workers.dev"
@@ -319,9 +320,10 @@
 
           <div class="bk-grp">Dates</div>
           <div class="bk-rw2">
-            <div class="bk-fld"><label for="bk-arrival">Arrival</label><input type="date" id="bk-arrival" name="arrival" required /></div>
-            <div class="bk-fld"><label for="bk-departure">Departure</label><input type="date" id="bk-departure" name="departure" required /></div>
+            <div class="bk-fld"><label for="bk-arrival">Arrival</label><input type="date" id="bk-arrival" name="arrival" required data-min="today" /></div>
+            <div class="bk-fld"><label for="bk-departure">Departure</label><input type="date" id="bk-departure" name="departure" required data-min="arrival" /></div>
           </div>
+          <p class="bk-note-inline">Check-in from <strong>14:00</strong> · Check-out by <strong>12:00</strong> — regardless of arrival time. Same-day arrivals welcome; check-out remains 12:00 the next day.</p>
 
           <div class="bk-grp">Guests</div>
           <div class="bk-rw2">
@@ -347,14 +349,8 @@
           <div class="bk-grp">Your stay</div>
           <div class="bk-rw2">
             <div class="bk-fld">
-              <label for="bk-arrival-time">Estimated arrival</label>
-              <select id="bk-arrival-time" name="arrival_time">
-                <option value="">Not sure yet</option>
-                <option value="morning">Morning (before 12:00)</option>
-                <option value="afternoon">Afternoon (12:00–18:00)</option>
-                <option value="evening">Evening (18:00–22:00)</option>
-                <option value="late">Late (after 22:00)</option>
-              </select>
+              <label for="bk-arrival-time">Estimated arrival time <span class="bk-lbl-hint">(24-hour, optional)</span></label>
+              <input type="time" id="bk-arrival-time" name="arrival_time" step="900" placeholder="14:00" />
             </div>
             <div class="bk-fld">
               <label for="bk-occasion">Occasion (optional)</label>
@@ -474,11 +470,9 @@
     
           </div>
 
-          <!-- R016: Cloudflare Turnstile bot-check. Test sitekey "always pass"
-               during stub phase — swaps to real sitekey once user creates the
-               Turnstile widget in Cloudflare. -->
+          <!-- R029: real Turnstile Site Key (Cloudflare widget "mira-palace-enquiry"). -->
           <div class="bk-turnstile-wrap">
-            <div class="cf-turnstile" data-sitekey="1x00000000000000000000AA" data-callback="bkTurnstileOK" data-theme="light"></div>
+            <div class="cf-turnstile" data-sitekey="0x4AAAAAADw1GxGvpcClGqV8" data-callback="bkTurnstileOK" data-theme="light"></div>
           </div>
 
           <button type="submit" class="bk-go">Send enquiry →</button>
@@ -494,7 +488,7 @@
           <div class="bk-email-preview-head">
             <span class="bk-email-preview-tag">DEMO PREVIEW</span>
             <h3>What the hotel staff inbox will receive</h3>
-            <p class="bk-email-preview-note">This is the formatted email that Resend will deliver to the hotel once the email wiring is connected. During the stub phase, the form does not actually send — it shows you this preview so you can verify the format.</p>
+            <p class="bk-email-preview-note">Preview of the email the hotel receives when an enquiry is submitted. Shown only in <code>?demo=1</code> mode — real guests see the thank-you card instead.</p>
           </div>
           <pre id="bk-email-preview-body" class="bk-email-preview-body"></pre>
         </div>

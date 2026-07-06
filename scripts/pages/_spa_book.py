@@ -250,7 +250,7 @@ def spa_book(root: str) -> str:
 
           <div class="bk-grp">When</div>
           <div class="bk-rw2">
-            <div class="bk-fld"><label for="sp-date">Date</label><input type="date" id="sp-date" name="date" required /></div>
+            <div class="bk-fld"><label for="sp-date">Date</label><input type="date" id="sp-date" name="date" required data-min="today" /></div>
             <div class="bk-fld"><label for="sp-time">Time slot</label><select id="sp-time" name="time" required>{slot_options}</select></div>
           </div>
 

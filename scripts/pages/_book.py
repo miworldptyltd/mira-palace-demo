@@ -594,9 +594,10 @@ def book(root: str) -> str:
 
           <div class="bk-grp">Dates</div>
           <div class="bk-rw2">
-            <div class="bk-fld"><label for="bk-arrival">Arrival</label><input type="date" id="bk-arrival" name="arrival" required /></div>
-            <div class="bk-fld"><label for="bk-departure">Departure</label><input type="date" id="bk-departure" name="departure" required /></div>
+            <div class="bk-fld"><label for="bk-arrival">Arrival</label><input type="date" id="bk-arrival" name="arrival" required data-min="today" /></div>
+            <div class="bk-fld"><label for="bk-departure">Departure</label><input type="date" id="bk-departure" name="departure" required data-min="arrival" /></div>
           </div>
+          <p class="bk-note-inline">Check-in from <strong>14:00</strong> · Check-out by <strong>12:00</strong> — regardless of arrival time. Same-day arrivals welcome; check-out remains 12:00 the next day.</p>
 
           <div class="bk-grp">Guests</div>
           <div class="bk-rw2">
@@ -622,14 +623,8 @@ def book(root: str) -> str:
           <div class="bk-grp">Your stay</div>
           <div class="bk-rw2">
             <div class="bk-fld">
-              <label for="bk-arrival-time">Estimated arrival</label>
-              <select id="bk-arrival-time" name="arrival_time">
-                <option value="">Not sure yet</option>
-                <option value="morning">Morning (before 12:00)</option>
-                <option value="afternoon">Afternoon (12:00–18:00)</option>
-                <option value="evening">Evening (18:00–22:00)</option>
-                <option value="late">Late (after 22:00)</option>
-              </select>
+              <label for="bk-arrival-time">Estimated arrival time <span class="bk-lbl-hint">(24-hour, optional)</span></label>
+              <input type="time" id="bk-arrival-time" name="arrival_time" step="900" placeholder="14:00" />
             </div>
             <div class="bk-fld">
               <label for="bk-occasion">Occasion (optional)</label>
