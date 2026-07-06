@@ -181,7 +181,7 @@ HEAD = """<!doctype html>
   // because GitHub Pages hosts at /mira-palace-demo/ rather than /.
   window.MIRA_ROOT = "{root}";
 </script>
-<link rel="stylesheet" href="{root}assets/css/site.css?v=34" />
+<link rel="stylesheet" href="{root}assets/css/site.css?v=35" />
 <!-- R020: Tabler Icons bumped 2.47.0 → 3.44.0.
      R024: async-loaded so the ~204 KB stylesheet does not block first paint.
      The media="print" trick makes the browser fetch it at low priority; the

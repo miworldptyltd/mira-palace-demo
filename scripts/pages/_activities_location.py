@@ -5,12 +5,13 @@ IMG_KIDS = "https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?auto=fo
 IMG_EVE = "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=1600&q=80"
 IMG_SIDE = "https://images.unsplash.com/photo-1589489873962-88a30d7aa96c?auto=format&fit=crop&w=1920&q=80"
 IMG_MAP = "https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=1600&q=80"
-# R023: airport-transfer VIP MINIBUS (Mercedes V-Class / Vito Tourer, black
-# executive fit-out — the vehicle actually used for Antalya-Alanya VIP
-# transfers). Was: a passenger-car sedan Unsplash shot that didn't match
-# the "minibus" description in the copy. This image + a wide-search
-# minibus fallback both point to Unsplash's stable CDN.
-IMG_VAN = "https://images.unsplash.com/photo-1571043733612-d5444ff5d766?auto=format&fit=crop&w=1600&q=80"
+# R023 → R027 hotfix: airport-transfer VIP MINIBUS.
+# Was: Unsplash URL that 404'd on the live site and rendered as an empty
+# grey box. Swapped to Pexels — a verified shot of a black Mercedes V-Class
+# parked kerbside with the side door open, which matches the copy exactly
+# ("Executive-fit minibus (Mercedes V-Class or equivalent)"). Pexels licence
+# is free for commercial use with no attribution required.
+IMG_VAN = "https://images.pexels.com/photos/17455633/pexels-photo-17455633.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1600&h=1000"
 # Nearby experiences for the "Beyond the gates" gallery.
 IMG_ASPENDOS = "https://images.unsplash.com/photo-1518709268805-4e9042af2176?auto=format&fit=crop&w=1200&q=80"
 IMG_FALLS    = "https://images.unsplash.com/photo-1467810563316-b5476525c0f9?auto=format&fit=crop&w=1200&q=80"

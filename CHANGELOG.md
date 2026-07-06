@@ -1,3 +1,7 @@
+## [R027] - 2026-07-06
+
+R027 hotfix — VIP minibus image on Location page was a dead Unsplash URL rendering as an empty grey box next to the transfer options copy. Swapped to a verified Pexels shot of a black Mercedes V-Class parked kerbside with the side door open — matches the copy exactly (Executive-fit minibus Mercedes V-Class or equivalent). Pexels licence free commercial use no attribution required
+
 ## [R026] - 2026-07-06
 
 R026 hotfix — Location page Nearby treasures cards were empty white boxes because Wikimedia Commons blocks cross-origin hotlinks and rate-limited direct downloads. Swapped all 4 images to verified Pexels URLs (Side Apollo temple 5-column shot, Aspendos Roman theatre back wall, Manavgat Kucuk Selale wide low curtain, Antalya Kaleici horseshoe harbour with wooden gulets). All 4 verified in-browser as showing the correct site. Pexels licence free commercial use, no attribution required
@@ -189,6 +193,7 @@ First publishable build. Sent to the hotel for owner review.
 - LICENSE is all-rights-reserved proprietary.
 
 [0.1.0]: https://github.com/-/-/releases/tag/v0.1.0
+
 
 
 
