@@ -1,0 +1,39 @@
+# wrangler.toml — Mira Palace enquiry Worker
+# --------------------------------------------
+# Deploy with:   wrangler deploy
+# View logs:     wrangler tail
+#
+# Env vars (RESEND_API_KEY, TURNSTILE_SECRET, TO_EMAIL, FROM_EMAIL,
+# ALLOWED_ORIGINS) are NOT stored here. Set them via:
+#   wrangler secret put RESEND_API_KEY
+#   wrangler secret put TURNSTILE_SECRET
+#   wrangler secret put TO_EMAIL
+#   wrangler secret put FROM_EMAIL
+#   wrangler secret put ALLOWED_ORIGINS
+#
+# ...or paste them into the Cloudflare dashboard:
+#   Workers & Pages > mira-palace-enquiry > Settings > Variables > + Add
+#   Mark each as "Encrypt" so they're stored as secrets, not plaintext.
+
+name              = "mira-palace-enquiry"
+main              = "mira-palace-enquiry.js"
+compatibility_date = "2026-07-01"
+
+# Optional: Workers KV for per-IP rate limiting.
+# Create the namespace once with:
+#   wrangler kv:namespace create RATE_LIMIT_KV
+# then paste the returned id into the placeholder below.
+#
+# If you leave this commented out, the Worker still runs — it just skips
+# rate limiting (the check() function no-ops when RATE_LIMIT_KV is unbound).
+
+# [[kv_namespaces]]
+# binding = "RATE_LIMIT_KV"
+# id      = "REPLACE_WITH_NAMESPACE_ID"
+
+# Observability — 100% log sampling is fine at demo volume.
+[observability]
+enabled = true
+
+[placement]
+mode = "smart"

@@ -4,7 +4,7 @@
 
 Different from [`CHANGELOG.md`](CHANGELOG.md) — that file is a running one-line-per-tag log. This file is a curated ledger a new developer or the hotel owner can read in ten minutes to understand where the project stands: what has been decided, what has been built, and what the guiding rules are.
 
-Last significant update: **R025** (2026-07-05). See CHANGELOG.md for the tag-by-tag history.
+Last significant update: **R028** (2026-07-06). See CHANGELOG.md for the tag-by-tag history.
 
 ---
 
@@ -74,7 +74,7 @@ Every version below is intentional and current as of July 2026. See `CHANGELOG.m
 | Image optimisation | JPG → **WebP @ Q82** batch conversion via Pillow | Runs in Release.ps1 + GH Actions; ~39% byte saving vs JPG |
 | Interactivity | Vanilla JS (`site.js` ~62 KB) + `i18n.js` dictionary (~130 KB with all 4 languages inline; gzipped ~30 KB) | No React, no Vue |
 | Hosting | GitHub Pages (`miworldptyltd.github.io/mira-palace-demo`) | Planned prod cutover: sidemirapalace.com via Cloudflare Pages |
-| CI/CD | GitHub Actions — `checkout@v6`, `setup-python@v6`, `upload-pages-artifact@v4`, `deploy-pages@v4` | ~30 seconds end-to-end |
+| CI/CD | GitHub Actions — `checkout@v6`, `setup-python@v6`, `upload-pages-artifact@v4`, `deploy-pages@v5` | ~30 seconds end-to-end. deploy-pages bumped to v5 in R028 for Node 24 runtime |
 | Forms | Cloudflare Turnstile (bot check) + Cloudflare Worker (`mira-palace-enquiry.apps-224.workers.dev`) + Resend (email delivery) | Turnstile currently on test sitekey — parked pending owner-supplied real key |
 | Version control | Git + GitHub with R-tagged releases (R001…R024) | `Release.ps1` orchestrates photo import → WebP → Tailwind compile → HTML build → tag → push |
 
@@ -132,6 +132,11 @@ Retired pages (removed from build, listed in Release.ps1 `retiredPages` array so
 - 4 languages: English (source of truth), Turkish, German, Russian. All contextual, not literal.
 - Language switcher in header nav (flag pills).
 - "Translation in progress" notice for pages not yet fully localised.
+
+**Deployment reliability**
+- **R026** — Wikimedia Commons hotlink hostility → pivoted all Nearby Treasures cards to Pexels (Apollo, Aspendos, Manavgat, Kaleiçi).
+- **R027** — VIP minibus image on Location page → dead Unsplash 1571043733612 swapped to Pexels 17455633 (black Mercedes V-Class).
+- **R028** — GitHub Pages deploy job broke after 3 consecutive successful builds. Root cause: `actions/deploy-pages@v4` ships Node 20 which GitHub sunset 2026-09-16; v5 (2026-03-25) is the Node 24 build. One-line pin bump in `.github/workflows/deploy.yml` restored the pipeline.
 
 **Performance (R024)**
 - WebP conversion pipeline saving 39% on the 18 MB image budget.

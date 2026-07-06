@@ -564,9 +564,10 @@ def book(root: str) -> str:
       <div class="bk-cols">
 
         <!-- LEFT: form -->
-        <!-- R016: form posts intercepted by site.js submitEnquiry() handler.
-             Action URL becomes real Cloudflare Worker once user confirms wiring;
-             during stub phase the handler just shows the email preview panel. -->
+        <!-- R029: form posts intercepted by site.js submitEnquiry() handler,
+             which JSON-POSTs to the Cloudflare Worker (worker/mira-palace-enquiry.js).
+             Worker verifies Turnstile server-side, rate-limits, sanitises and
+             forwards to Resend. -->
         <form class="bk-form" id="bk-form" novalidate
               data-enquiry-kind="room"
               action="https://mira-palace-enquiry.apps-224.workers.dev"
@@ -655,11 +656,9 @@ def book(root: str) -> str:
             {addons_html}
           </div>
 
-          <!-- R016: Cloudflare Turnstile bot-check. Test sitekey "always pass"
-               during stub phase — swaps to real sitekey once user creates the
-               Turnstile widget in Cloudflare. -->
+          <!-- R029: real Turnstile Site Key (Cloudflare widget "mira-palace-enquiry"). -->
           <div class="bk-turnstile-wrap">
-            <div class="cf-turnstile" data-sitekey="1x00000000000000000000AA" data-callback="bkTurnstileOK" data-theme="light"></div>
+            <div class="cf-turnstile" data-sitekey="0x4AAAAAADw1GxGvpcClGqV8" data-callback="bkTurnstileOK" data-theme="light"></div>
           </div>
 
           <button type="submit" class="bk-go">Send enquiry →</button>
@@ -675,7 +674,7 @@ def book(root: str) -> str:
           <div class="bk-email-preview-head">
             <span class="bk-email-preview-tag">DEMO PREVIEW</span>
             <h3>What the hotel staff inbox will receive</h3>
-            <p class="bk-email-preview-note">This is the formatted email that Resend will deliver to the hotel once the email wiring is connected. During the stub phase, the form does not actually send — it shows you this preview so you can verify the format.</p>
+            <p class="bk-email-preview-note">Preview of the email the hotel receives when an enquiry is submitted. Shown only in <code>?demo=1</code> mode — real guests see the thank-you card instead.</p>
           </div>
           <pre id="bk-email-preview-body" class="bk-email-preview-body"></pre>
         </div>

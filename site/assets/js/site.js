@@ -1374,11 +1374,14 @@
     var kind = form.dataset.enquiryKind || 'room';
     var email = (kind === 'spa') ? buildSpaEmail(form) : buildRoomEmail(form);
 
-    // R016 STUB: render the preview, console-log the payload, show thanks.
-    // R017+: replace this block with a real fetch() to the Worker.
-    var previewBody = document.getElementById(kind === 'spa' ? 'sp-email-preview-body' : 'bk-email-preview-body');
+    // R029: wire the real fetch() to the Cloudflare Worker. Preview panel
+    // remains available in ?demo=1 mode so we can eyeball formatting during
+    // testing without opening the inbox.
+    var previewBody  = document.getElementById(kind === 'spa' ? 'sp-email-preview-body' : 'bk-email-preview-body');
     var previewPanel = document.getElementById(kind === 'spa' ? 'sp-email-preview' : 'bk-email-preview');
-    var thanksPanel = document.getElementById(kind === 'spa' ? 'sp-thanks' : 'bk-thanks');
+    var thanksPanel  = document.getElementById(kind === 'spa' ? 'sp-thanks' : 'bk-thanks');
+    var errorPanel   = document.getElementById(kind === 'spa' ? 'sp-error' : 'bk-error');
+
     if (previewBody) {
       previewBody.textContent =
         'From:    ' + email.from + '\n' +
@@ -1386,29 +1389,45 @@
         'Subject: ' + email.subject + '\n' +
         '\n' + email.body;
     }
-    // R023: only reveal the DEMO PREVIEW panel when ?demo=1 is in the URL.
-    // At production the panel stays hidden — a real guest sees only the
-    // thank-you confirmation.
     var demoOn = /(^|[?&])demo=1(?:&|$)/.test(window.location.search);
     if (previewPanel && demoOn) previewPanel.classList.remove('bk-hidden');
+
+    // Optimistically hide the form and show the thanks panel — real guests
+    // shouldn't stare at a spinner. If the send fails we surface an error
+    // panel and re-show the form so they can retry or fall back to email.
     if (thanksPanel) thanksPanel.classList.remove('bk-hidden');
     form.style.display = 'none';
 
-    console.info('[enquiry] payload (stub — not sent):', email);
+    var submitBtn = form.querySelector('button[type="submit"]');
+    if (submitBtn) submitBtn.disabled = true;
 
-    /* === Real Worker submit — uncomment in R017 when Worker is wired ===
     fetch(form.action, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ kind: kind, email: email, turnstileToken: turnstileToken })
     }).then(function (r) {
-      if (!r.ok) throw new Error('Worker rejected: ' + r.status);
-      console.info('[enquiry] sent OK');
+      if (!r.ok) {
+        return r.text().then(function (t) {
+          throw new Error('Worker ' + r.status + ': ' + (t || 'no body'));
+        });
+      }
+      console.info('[enquiry] sent OK (' + kind + ')');
     }).catch(function (e) {
-      console.error('[enquiry] send failed:', e);
-      alert('Sorry — the enquiry could not be sent right now. Please email info@mirapalace.com directly or try again in a moment.');
+      console.error('[enquiry] send failed:', e && e.message);
+      // Roll back the UI so the guest sees the failure and can retry.
+      if (thanksPanel) thanksPanel.classList.add('bk-hidden');
+      form.style.display = '';
+      if (submitBtn) submitBtn.disabled = false;
+      if (errorPanel) {
+        errorPanel.classList.remove('bk-hidden');
+      } else {
+        alert('Sorry — your enquiry could not be sent right now. Please email info@mirapalace.com directly or try again in a moment.');
+      }
+      // Reset Turnstile so a new token is minted for the retry.
+      if (window.turnstile && window.turnstile.reset) {
+        try { window.turnstile.reset(); } catch (_) {}
+      }
     });
-    === */
   }
 
   // Wire to both forms

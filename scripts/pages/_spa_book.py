@@ -279,9 +279,9 @@ def spa_book(root: str) -> str:
           <div class="bk-fld"><label for="sp-room">Room number <span class="bk-hint">(if a hotel guest)</span></label><input type="text" id="sp-room" name="room" placeholder="A6 / B7 / C12..." /></div>
           <div class="bk-fld"><label for="sp-notes">Notes (optional)</label><input type="text" id="sp-notes" name="notes" placeholder="Pregnancy, injuries, allergies, preferred therapist gender..." /></div>
 
-          <!-- R016: Cloudflare Turnstile bot-check -->
+          <!-- R029: real Turnstile Site Key (Cloudflare widget "mira-palace-enquiry"). -->
           <div class="bk-turnstile-wrap">
-            <div class="cf-turnstile" data-sitekey="1x00000000000000000000AA" data-callback="bkTurnstileOK" data-theme="light"></div>
+            <div class="cf-turnstile" data-sitekey="0x4AAAAAADw1GxGvpcClGqV8" data-callback="bkTurnstileOK" data-theme="light"></div>
           </div>
 
           <button type="submit" class="bk-go">Send enquiry →</button>
@@ -294,7 +294,7 @@ def spa_book(root: str) -> str:
           <div class="bk-email-preview-head">
             <span class="bk-email-preview-tag">DEMO PREVIEW</span>
             <h3>What the spa staff inbox will receive</h3>
-            <p class="bk-email-preview-note">This is the formatted email that Resend will deliver once the email wiring is connected. During the stub phase, the form does not actually send — it shows you this preview so you can verify the format.</p>
+            <p class="bk-email-preview-note">Preview of the email the spa staff receives when an enquiry is submitted. Shown only in <code>?demo=1</code> mode — real guests see the thank-you card instead.</p>
           </div>
           <pre id="sp-email-preview-body" class="bk-email-preview-body"></pre>
         </div>
