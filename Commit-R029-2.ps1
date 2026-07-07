@@ -11,7 +11,7 @@ $RepoRoot    = $PSScriptRoot
 $BuildScript = Join-Path $RepoRoot 'scripts/build.py'
 $Tag         = 'R029.2'
 $Msg         = @'
-R029.2: arrival-time select + info popover + 12h checkout blurb
+R029.2: arrival-time select + info popover + 12h checkout blurb + submit scroll
 
 Killed the native <input type="time"> browser-wheel picker. Guests were
 seeing a minute-granularity vertical scroll (03/04/05...) with no snap
@@ -30,6 +30,10 @@ Also lands:
 * initInfoPops() — reusable click-toggle popover pattern for future
   info icons. Outside-click and ESC close.
 * CSS for .bk-info-btn + .bk-info-pop + .bk-note-line.
+* Submit-success now scrollIntoView({smooth, start}) on the thanks
+  panel + focus() for screen readers. Guests were seeing the success
+  card sit below the fold with no visual feedback that the enquiry
+  went through.
 '@
 
 foreach ($p in @($BuildScript)) { if (-not (Test-Path $p)) { throw "Missing: $p" } }
@@ -41,7 +45,8 @@ if ($booktxt -notmatch 'Not sure yet')           { throw '_book.py missing arriv
 if ($booktxt -match 'input type="time" id="bk-arrival-time"') { throw '_book.py still has native time input' }
 
 $sitejs = Get-Content -Raw -LiteralPath (Join-Path $RepoRoot 'site/assets/js/site.js')
-if ($sitejs -notmatch 'initInfoPops') { throw 'site.js missing initInfoPops' }
+if ($sitejs -notmatch 'initInfoPops')       { throw 'site.js missing initInfoPops' }
+if ($sitejs -notmatch 'scrollIntoView.*smooth') { throw 'site.js missing thanks-panel scrollIntoView' }
 
 $css = Get-Content -Raw -LiteralPath (Join-Path $RepoRoot 'scripts/tailwind/custom.css')
 if ($css -notmatch '\.bk-info-btn') { throw 'custom.css missing .bk-info-btn' }

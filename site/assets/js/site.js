@@ -1398,6 +1398,17 @@
     if (thanksPanel) thanksPanel.classList.remove('bk-hidden');
     form.style.display = 'none';
 
+    // R029.2: scroll the thanks panel into view so the guest sees the
+    // confirmation instead of staring at the middle of the page.
+    if (thanksPanel && thanksPanel.scrollIntoView) {
+      try { thanksPanel.scrollIntoView({ behavior: 'smooth', block: 'start' }); } catch (_) {
+        thanksPanel.scrollIntoView();
+      }
+      // Nudge focus so screen readers announce it too.
+      if (thanksPanel.setAttribute) thanksPanel.setAttribute('tabindex', '-1');
+      if (thanksPanel.focus) { try { thanksPanel.focus({ preventScroll: true }); } catch (_) {} }
+    }
+
     var submitBtn = form.querySelector('button[type="submit"]');
     if (submitBtn) submitBtn.disabled = true;
 
