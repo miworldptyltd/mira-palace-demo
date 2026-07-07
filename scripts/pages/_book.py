@@ -346,6 +346,32 @@ def _suite_tab(key: str, selected: bool) -> str:
 
 # --- Add-on render helpers -------------------------------------------------
 
+def _arrival_time_select(name: str = "arrival_time") -> str:
+    """R029.2: shared 30-min slot arrival-time select. Kills native browser
+    time-wheel picker. Used by transfer add-ons (airport + otogar)."""
+    # Slots: hourly ends first so :00 sits above :30 in the dropdown.
+    def _lbl(hh):
+        h12 = hh % 12
+        if h12 == 0: h12 = 12
+        ampm = "AM" if hh < 12 else "PM"
+        return f"{h12}:00 {ampm}" if hh not in (0, 12) else ("12:00 Midnight" if hh == 0 else "12:00 Noon")
+    parts = ['<option value="">Not sure yet</option>']
+    for hh in range(24):
+        for mm in (0, 30):
+            v = f"{hh:02d}:{mm:02d}"
+            if mm == 0:
+                parts.append(f'<option value="{v}">{v} ({_lbl(hh)})</option>')
+            else:
+                # 12-hour half-hour label
+                h12 = hh % 12
+                if h12 == 0: h12 = 12
+                ampm = "AM" if hh < 12 else "PM"
+                parts.append(f'<option value="{v}">{v} ({h12}:30 {ampm})</option>')
+    parts.append('<option value="late">After midnight (late arrival)</option>')
+    opts = "".join(parts)
+    return f'<select name="{name}">{opts}</select>'
+
+
 def _addon_airport(root: str) -> str:
     options = "".join(
         f'<label class="bk-radio-opt" data-airport="{a["key"]}">'
@@ -369,8 +395,8 @@ def _addon_airport(root: str) -> str:
           {options}
         </div>
         <div class="bk-mini-grid">
-          <div class="bk-mini-fld"><label>Arrival date</label><input type="date" /></div>
-          <div class="bk-mini-fld"><label>Arrival time</label><input type="time" /></div>
+          <div class="bk-mini-fld"><label>Arrival date</label><input type="date" data-min="today" /></div>
+          <div class="bk-mini-fld"><label>Arrival time</label>{_arrival_time_select("airport_arrival_time")}</div>
           <div class="bk-mini-fld bk-full"><label>Flight number <span class="bk-hint">e.g. TK1944</span></label><input type="text" class="bk-flight-input" placeholder="TK1944" autocomplete="off" /></div>
           <div class="bk-mini-fld bk-full"><label>Airline <span class="bk-hint">auto-filled from flight number</span></label><input type="text" class="bk-airline-out" disabled placeholder="(auto)" /></div>
         </div>
@@ -408,8 +434,8 @@ def _addon_otogar(root: str) -> str:
             <input type="text" list="bus-operators" placeholder="Start typing — Kamil Koç, Metro…" autocomplete="off" />
             <datalist id="bus-operators">{bus_options}<option value="Other / not listed">Other / not listed</option></datalist>
           </div>
-          <div class="bk-mini-fld"><label>Arrival date</label><input type="date" /></div>
-          <div class="bk-mini-fld"><label>Arrival time</label><input type="time" /></div>
+          <div class="bk-mini-fld"><label>Arrival date</label><input type="date" data-min="today" /></div>
+          <div class="bk-mini-fld"><label>Arrival time</label>{_arrival_time_select("otogar_arrival_time")}</div>
         </div>
       </div>
     </div>
