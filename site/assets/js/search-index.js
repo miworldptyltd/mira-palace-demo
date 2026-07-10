@@ -30,7 +30,7 @@ window.MIRA_SEARCH_INDEX = [
     "title": "Book a stay · Mira Palace",
     "description": "Direct-booking enquiry form for Mira Palace — confirm your dates, suite preference, and any specific requirements.",
     "headings": [
-      "Send an enquiry",
+      "Enquire about a stay",
       "What the hotel staff inbox will receive",
       "Enquiry sent.",
       "Basic Details",
@@ -156,7 +156,7 @@ window.MIRA_SEARCH_INDEX = [
   {
     "path": "",
     "title": "Mira Palace · Boutique all-inclusive on the Turkish Riviera",
-    "description": "A 34-suite boutique all-inclusive hotel in Side, Antalya. Four pools, full Turkish hammam, private beach 600 metres from reception.",
+    "description": "A 34-suite boutique all-inclusive on the Turkish Riviera. Two pools, a full Turkish hammam, and Evrenseki's Blue-Flag public beach a seven-minute walk down the lane.",
     "headings": [
       "The Turkish Riviera, reimagined in quiet luxury.",
       "In their words",
@@ -332,7 +332,7 @@ window.MIRA_SEARCH_INDEX = [
     "title": "Book a spa session · Mira Palace",
     "description": "Book a spa session at Mira Palace — Classic, Relax or Aromatherapy package. Hammam, sauna, steam room and treatment included. Open to hotel guests and visitors.",
     "headings": [
-      "Spa enquiry",
+      "Enquire about a spa session",
       "What the spa staff inbox will receive",
       "Request sent.",
       "Included in this package",

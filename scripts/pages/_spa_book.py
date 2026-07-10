@@ -216,7 +216,7 @@ def spa_book(root: str) -> str:
     <div class="bk-page sp-page">
 
       <div class="bk-title">
-        <h1>Spa enquiry</h1>
+        <h1 data-i18n="sp.page.h1">Enquire about a spa session</h1>
         <p class="bk-title-note">Open daily 10:00–19:00 · free shuttle from the hotel · we confirm availability for your chosen slot within the hour, no payment now</p>
       </div>
 

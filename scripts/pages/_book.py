@@ -587,7 +587,7 @@ def book(root: str) -> str:
 
       <!-- Title bar -->
       <div class="bk-title">
-        <h1>Send an enquiry</h1>
+        <h1 data-i18n="bk.page.h1">Enquire about a stay</h1>
         <p class="bk-title-note">No payment, no commitment · rates shown are indicative — we confirm the final rate for your dates within the hour, usually faster</p>
       </div>
 

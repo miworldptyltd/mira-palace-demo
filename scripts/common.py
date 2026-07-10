@@ -418,7 +418,7 @@ def footer(root: str) -> str:
             <img src="{root}assets/img/mp-monogram-gold.png" alt="Mira Palace logo" class="w-9 h-9 object-contain" width="36" height="36" />
             <span class="font-display text-2xl text-white">Mira Palace</span>
           </div>
-          <p class="mt-4 text-sm leading-relaxed" data-i18n="footer.tagline">{m['tagline']}. Thirty-four suites, 600 metres from the Mediterranean, on the Turkish Riviera.</p>
+          <p class="mt-4 text-sm leading-relaxed" data-i18n="footer.tagline">{m['tagline']}. Thirty-four suites on the Turkish Riviera, a seven-minute walk from Evrenseki's Blue-Flag public beach.</p>
         </div>
         <div>
           <h4 class="font-display text-lg text-white" data-i18n="footer.explore">Explore</h4>
@@ -1027,7 +1027,7 @@ def _hotel_jsonld(page_url: str) -> str:
         "@type": "Hotel",
         "name": m["brand"],
         "alternateName": m["brand_full"],
-        "description": m["tagline"] + ". Thirty-four suites, 600 metres from the Mediterranean, on the Turkish Riviera.",
+        "description": m["tagline"] + ". Thirty-four suites on the Turkish Riviera, a seven-minute walk from Evrenseki's Blue-Flag public beach.",
         "url": m["base_url"].rstrip("/") + "/",
         "logo": m["base_url"].rstrip("/") + "/assets/img/Mira_Palace_Logo.png",
         "image": m["og_image"],

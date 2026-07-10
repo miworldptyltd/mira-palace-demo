@@ -244,7 +244,7 @@ def about(root: str) -> str:
 PAGES = [
     {"path": "index.html", "active": "home",
      "title": "Mira Palace · Boutique all-inclusive on the Turkish Riviera",
-     "description": "A 34-suite boutique all-inclusive hotel in Side, Antalya. Four pools, full Turkish hammam, private beach 600 metres from reception.",
+     "description": "A 34-suite boutique all-inclusive on the Turkish Riviera. Two pools, a full Turkish hammam, and Evrenseki's Blue-Flag public beach a seven-minute walk down the lane.",
      "body": home},
     {"path": "about.html", "active": "about",
      "title": "About · Mira Palace",
