@@ -344,8 +344,11 @@ def nav(active: str, root: str) -> str:
       <div class="bg-mira-900/85 backdrop-blur supports-[backdrop-filter]:bg-mira-900/75 text-white border-b border-white/5">
         <div class="max-w-7xl mx-auto px-5 lg:px-8 flex items-center justify-between gap-4 h-16 xl:h-[68px]">
           <a href="{root}index.html" class="flex items-center gap-2 shrink-0">
-            <!-- R024: added width/height + fetchpriority=high on the only <img> above the fold (the monogram) — locks aspect ratio to prevent CLS. TODO: swap PNG for SVG when the owner supplies a proper vector version — the current PNG is 234x229 rendered into a 36x36 box. -->
-            <img src="{root}assets/img/mp-monogram-gold.png" alt="Mira Palace logo" class="w-9 h-9 object-contain" width="36" height="36" fetchpriority="high" />
+            <!-- R029.5: single canonical SVG monogram — gold circle + dark M.
+                 Shared with the footer and the favicon so the brand mark is
+                 identical wherever it appears. Inline <img src=".svg"> keeps
+                 CSS out of it and lets browsers cache one file. -->
+            <img src="{root}assets/img/mp-monogram.svg" alt="Mira Palace logo" class="w-9 h-9" width="36" height="36" fetchpriority="high" />
             <span class="font-display text-xl tracking-wide whitespace-nowrap">Mira Palace</span>
           </a>
           <nav class="hidden xl:flex items-center gap-x-3 2xl:gap-x-4 flex-1 justify-end" aria-label="Primary">
@@ -413,7 +416,7 @@ def footer(root: str) -> str:
       <div class="max-w-7xl mx-auto px-5 lg:px-8 py-14 grid grid-cols-1 md:grid-cols-4 gap-10">
         <div class="md:col-span-1">
           <div class="flex items-center gap-2">
-            <span class="inline-block w-9 h-9 rounded-full bg-sand-300 text-mira-900 grid place-items-center font-display font-bold text-xl">M</span>
+            <img src="{root}assets/img/mp-monogram.svg" alt="Mira Palace logo" class="w-9 h-9" width="36" height="36" />
             <span class="font-display text-2xl text-white">Mira Palace</span>
           </div>
           <p class="mt-4 text-sm leading-relaxed" data-i18n="footer.tagline">{m['tagline']}. Thirty-four suites, 600 metres from the Mediterranean, on the Turkish Riviera.</p>
@@ -1027,7 +1030,7 @@ def _hotel_jsonld(page_url: str) -> str:
         "alternateName": m["brand_full"],
         "description": m["tagline"] + ". Thirty-four suites, 600 metres from the Mediterranean, on the Turkish Riviera.",
         "url": m["base_url"].rstrip("/") + "/",
-        "logo": m["base_url"].rstrip("/") + "/assets/img/mp-monogram-gold.png",
+        "logo": m["base_url"].rstrip("/") + "/assets/img/mp-monogram.svg",
         "image": m["og_image"],
         "telephone": m["phone_display"],
         "address": {
