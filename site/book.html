@@ -280,7 +280,7 @@
       <!-- Title bar -->
       <div class="bk-title">
         <h1 data-i18n="bk.page.h1">Enquire about a stay</h1>
-        <p class="bk-title-note">No payment, no commitment · rates shown are indicative — we confirm the final rate for your dates within the hour, usually faster</p>
+        <p class="bk-title-note" data-i18n="bk.page.note">No payment, no commitment · rates shown are indicative — we confirm the final rate for your dates within the hour, usually faster</p>
       </div>
 
       <!-- Suite tabs (full width) -->
@@ -320,10 +320,10 @@
             </div>
           </div>
 
-          <div class="bk-grp">Dates</div>
+          <div class="bk-grp" data-i18n="bk.form.dates_group">Dates</div>
           <div class="bk-rw2">
-            <div class="bk-fld"><label for="bk-arrival">Arrival</label><input type="date" id="bk-arrival" name="arrival" required data-min="today" /></div>
-            <div class="bk-fld"><label for="bk-departure">Departure</label><input type="date" id="bk-departure" name="departure" required data-min="arrival" /></div>
+            <div class="bk-fld"><label for="bk-arrival" data-i18n="bk.form.arrival_label">Arrival</label><input type="date" id="bk-arrival" name="arrival" required data-min="today" /></div>
+            <div class="bk-fld"><label for="bk-departure" data-i18n="bk.form.departure_label">Departure</label><input type="date" id="bk-departure" name="departure" required data-min="arrival" /></div>
           </div>
           <p class="bk-note-inline">
             <span class="bk-note-line"><strong>Check-in:</strong> From 2:00 PM</span>
@@ -331,14 +331,14 @@
               <button type="button" class="bk-info-btn" aria-label="Check-out time details" data-info-target="bk-checkout-info">&#9432;</button>
             </span>
             <span id="bk-checkout-info" class="bk-info-pop" role="tooltip" hidden>
-              Guests arriving after midnight are welcome. Please note that late-night arrival does not extend the standard 12:00 noon check-out time.
+              <span data-i18n="bk.form.checkout_info">Guests arriving after midnight are welcome. Please note that late-night arrival does not extend the standard 12:00 noon check-out time.</span>
             </span>
           </p>
 
-          <div class="bk-grp">Guests</div>
+          <div class="bk-grp" data-i18n="bk.form.guests_group">Guests</div>
           <div class="bk-rw2">
             <div class="bk-fld">
-              <label for="bk-adults">Adults</label>
+              <label for="bk-adults" data-i18n="bk.form.adults_label">Adults</label>
               <select id="bk-adults" name="adults">
                 <option value="1">1</option>
                 <option value="2" selected>2</option>
@@ -347,7 +347,7 @@
               </select>
             </div>
             <div class="bk-fld">
-              <label for="bk-children">Children</label>
+              <label for="bk-children" data-i18n="bk.form.children_label">Children</label>
               <select id="bk-children" name="children">
                 <option value="0" selected>0</option>
                 <option value="1">1</option>
@@ -356,10 +356,10 @@
             </div>
           </div>
 
-          <div class="bk-grp">Your stay</div>
+          <div class="bk-grp" data-i18n="bk.form.stay_group">Your stay</div>
           <div class="bk-rw2">
             <div class="bk-fld">
-              <label for="bk-arrival-time">Estimated arrival time <span class="bk-lbl-hint">(optional)</span></label>
+              <label for="bk-arrival-time"><span data-i18n="bk.form.arrival_time_label">Estimated arrival time</span> <span class="bk-lbl-hint" data-i18n="bk.form.optional_hint">(optional)</span></label>
               <select id="bk-arrival-time" name="arrival_time">
                 <option value="">Not sure yet</option>
                 <option value="06:00">06:00 (6:00 AM)</option>
@@ -403,7 +403,7 @@
               </select>
             </div>
             <div class="bk-fld">
-              <label for="bk-occasion">Occasion (optional)</label>
+              <label for="bk-occasion" data-i18n="bk.form.occasion_label">Occasion (optional)</label>
               <select id="bk-occasion" name="occasion">
                 <option value="">Just a stay</option>
                 <option value="honeymoon">Honeymoon</option>
@@ -416,24 +416,24 @@
             </div>
           </div>
 
-          <div class="bk-grp">Your details</div>
-          <div class="bk-fld"><label for="bk-name">Full name</label><input type="text" id="bk-name" name="name" placeholder="Jane Roberts" required /></div>
-          <div class="bk-fld"><label for="bk-email">Email</label><input type="email" id="bk-email" name="email" placeholder="jane@example.com" required /></div>
-          <div class="bk-fld"><label for="bk-phone">Phone</label><input type="tel" id="bk-phone" name="phone" placeholder="+44 7700 900 123" /></div>
-          <div class="bk-fld"><label for="bk-notes">Anything else? (optional)</label><input type="text" id="bk-notes" name="notes" placeholder="Dietary, accessibility, a specific request..." /></div>
+          <div class="bk-grp" data-i18n="bk.form.details_group">Your details</div>
+          <div class="bk-fld"><label for="bk-name" data-i18n="bk.form.name_label">Full name</label><input type="text" id="bk-name" name="name" placeholder="Jane Roberts" required /></div>
+          <div class="bk-fld"><label for="bk-email" data-i18n="bk.form.email_label">Email</label><input type="email" id="bk-email" name="email" placeholder="jane@example.com" required /></div>
+          <div class="bk-fld"><label for="bk-phone" data-i18n="bk.form.phone_label">Phone</label><input type="tel" id="bk-phone" name="phone" placeholder="+44 7700 900 123" /></div>
+          <div class="bk-fld"><label for="bk-notes" data-i18n="bk.form.notes_label">Anything else? (optional)</label><input type="text" id="bk-notes" name="notes" placeholder="Dietary, accessibility, a specific request..." data-i18n-placeholder="bk.form.notes_placeholder" /></div>
 
-          <div class="bk-grp">Add-ons</div>
+          <div class="bk-grp" data-i18n="bk.form.addons_group">Add-ons</div>
           <div class="bk-xs" id="bk-xs">
             
     <div class="bk-x" data-addon="airport">
       <label class="bk-x-hd">
         <input type="checkbox" class="bk-x-chk" />
-        <span class="bk-x-ttl">Airport transfer</span>
+        <span class="bk-x-ttl" data-i18n="bk.addon.airport.title">Airport transfer</span>
         <span class="bk-x-px" data-prices='{"try": 2800, "eur": 80, "usd": 87}'><span class="bk-x-from">from</span> +€80</span>
         <i class="ti ti-chevron-down bk-x-caret" aria-hidden="true"></i>
       </label>
       <div class="bk-x-body">
-        <span class="bk-sublbl">Which airport</span>
+        <span class="bk-sublbl" data-i18n="bk.addon.airport.which">Which airport</span>
         <div class="bk-radio-grp" data-required="airport">
           <label class="bk-radio-opt" data-airport="ayt"><span class="bk-dot"></span><span class="bk-radio-lbl">Antalya (AYT)</span><span class="bk-radio-px" data-prices='{"try": 2800, "eur": 80, "usd": 87}'>+€80</span></label><label class="bk-radio-opt" data-airport="gzp"><span class="bk-dot"></span><span class="bk-radio-lbl">Gazipaşa (GZP)</span><span class="bk-radio-px" data-prices='{"try": 4200, "eur": 120, "usd": 130}'>+€120</span></label>
         </div>
@@ -450,12 +450,12 @@
     <div class="bk-x" data-addon="otogar">
       <label class="bk-x-hd">
         <input type="checkbox" class="bk-x-chk" />
-        <span class="bk-x-ttl">Otogar (bus) transfer</span>
+        <span class="bk-x-ttl" data-i18n="bk.addon.otogar.title">Otogar (bus) transfer</span>
         <span class="bk-x-px" data-prices='{"try": 800, "eur": 23, "usd": 25}'><span class="bk-x-from">from</span> +€23</span>
         <i class="ti ti-chevron-down bk-x-caret" aria-hidden="true"></i>
       </label>
       <div class="bk-x-body">
-        <span class="bk-sublbl">Which Otogar (bus station)</span>
+        <span class="bk-sublbl" data-i18n="bk.addon.otogar.which">Which Otogar (bus station)</span>
         <div class="bk-radio-grp bk-radio-stacked" data-required="otogar">
           <label class="bk-radio-opt" data-otogar="antalya"><span class="bk-dot"></span><span class="bk-radio-lbl">Antalya Otogar</span><span class="bk-radio-px" data-prices='{"try": 1800, "eur": 52, "usd": 56}'>+€52</span></label><label class="bk-radio-opt" data-otogar="manavgat"><span class="bk-dot"></span><span class="bk-radio-lbl">Manavgat Otogar</span><span class="bk-radio-px" data-prices='{"try": 800, "eur": 23, "usd": 25}'>+€23</span></label><label class="bk-radio-opt" data-otogar="alanya"><span class="bk-dot"></span><span class="bk-radio-lbl">Alanya Otogar</span><span class="bk-radio-px" data-prices='{"try": 1500, "eur": 43, "usd": 47}'>+€43</span></label>
         </div>
@@ -475,7 +475,7 @@
     <div class="bk-x" data-addon="late-checkout" data-available="true" data-prices='{"try": 1000, "eur": 28, "usd": 30}'>
       <label class="bk-x-hd">
         <input type="checkbox" class="bk-x-chk" />
-        <span class="bk-x-ttl">Late checkout</span>
+        <span class="bk-x-ttl" data-i18n="bk.addon.late.title">Late checkout</span>
         <span class="bk-x-px" data-prices='{"try": 1000, "eur": 28, "usd": 30}'>+€28 flat</span>
         <i class="ti ti-chevron-down bk-x-caret" aria-hidden="true"></i>
       </label>
@@ -483,7 +483,7 @@
         <p class="bk-blurb">Fixed late-checkout fee up to 17:00. Anything beyond 17:00, a full additional night is charged. Standard checkout is 12:00.</p>
         <div class="bk-mini-grid">
           <div class="bk-mini-fld bk-full">
-            <label>Stay until</label>
+            <label data-i18n="bk.addon.late.stay_until">Stay until</label>
             <select><option value="13:00">13:00</option><option value="14:00">14:00</option><option value="15:00">15:00</option><option value="16:00">16:00</option><option value="17:00">17:00</option></select>
           </div>
         </div>
@@ -497,12 +497,12 @@
     <div class="bk-x" data-addon="spa">
       <label class="bk-x-hd">
         <input type="checkbox" class="bk-x-chk" />
-        <span class="bk-x-ttl">Spa</span>
+        <span class="bk-x-ttl" data-i18n="bk.addon.spa.title">Spa</span>
         <span class="bk-x-px" data-prices='{"try": 1120, "eur": 32, "usd": 35}'><span class="bk-x-from">from</span> +€32</span>
         <i class="ti ti-chevron-down bk-x-caret" aria-hidden="true"></i>
       </label>
       <div class="bk-x-body">
-        <span class="bk-sublbl">Choose a package</span>
+        <span class="bk-sublbl" data-i18n="bk.addon.spa.choose">Choose a package</span>
         <div class="bk-spa-grp" data-required="spa">
           <label class="bk-spa-opt" data-spa="classic" data-prices='{"try": 1120, "eur": 32, "usd": 35}'><span class="bk-spa-head"><span class="bk-dot"></span><span class="bk-spa-px">+€32</span><span class="bk-spa-name">Classic Package</span></span><ul class="bk-spa-bullets"><li>20 min Turkish scrub & foam</li><li>40 min classic massage</li><li>Sauna and steam room access</li><li>Face mask after each massage</li><li>Herbal tea or coffee service</li><li>Free shuttle service — round trip</li></ul></label><label class="bk-spa-opt" data-spa="relax" data-prices='{"try": 1505, "eur": 43, "usd": 47}'><span class="bk-spa-head"><span class="bk-dot"></span><span class="bk-spa-px">+€43</span><span class="bk-spa-name">Relax Package</span></span><ul class="bk-spa-bullets"><li>20 min Turkish scrub & foam</li><li>60 min mix therapy</li><li>Sauna and steam room access</li><li>Face mask after each massage</li><li>Herbal tea or coffee service</li><li>Free shuttle service — round trip</li></ul></label><label class="bk-spa-opt" data-spa="aroma" data-prices='{"try": 2065, "eur": 59, "usd": 64}'><span class="bk-spa-head"><span class="bk-dot"></span><span class="bk-spa-px">+€59</span><span class="bk-spa-name">Aromatherapy Package</span></span><ul class="bk-spa-bullets"><li>20 min Turkish scrub & foam</li><li>90 min aromatherapy</li><li>Sauna and steam room access</li><li>Face mask after each massage</li><li>Freshly squeezed orange juice</li><li>Free shuttle service — round trip</li></ul></label>
         </div>
@@ -513,7 +513,7 @@
     <div class="bk-x" data-addon="wine" data-prices='{"try": 1575, "eur": 45, "usd": 49}'>
       <label class="bk-x-hd">
         <input type="checkbox" class="bk-x-chk" />
-        <span class="bk-x-ttl">Sparkling wine on arrival</span>
+        <span class="bk-x-ttl" data-i18n="bk.addon.wine.title">Sparkling wine on arrival</span>
         <span class="bk-x-px" data-prices='{"try": 1575, "eur": 45, "usd": 49}'>+€45</span>
       </label>
     </div>
@@ -525,8 +525,8 @@
             <div class="cf-turnstile" data-sitekey="0x4AAAAAADw1GxGvpcClGqV8" data-callback="bkTurnstileOK" data-theme="light"></div>
           </div>
 
-          <button type="submit" class="bk-go">Send enquiry →</button>
-          <p class="bk-foot">This is an enquiry, not a confirmed booking. No payment now. We reply with availability and a direct rate within the hour — usually faster.</p>
+          <button type="submit" class="bk-go"><span data-i18n="bk.form.submit">Send enquiry</span> →</button>
+          <p class="bk-foot" data-i18n="bk.form.footnote">This is an enquiry, not a confirmed booking. No payment now. We reply with availability and a direct rate within the hour — usually faster.</p>
 
         </form>
 
@@ -536,9 +536,9 @@
              production. Local previews still pop it up with ?demo=1. -->
         <div id="bk-email-preview" class="bk-hidden bk-email-preview" data-demo-only="true">
           <div class="bk-email-preview-head">
-            <span class="bk-email-preview-tag">DEMO PREVIEW</span>
-            <h3>What the hotel staff inbox will receive</h3>
-            <p class="bk-email-preview-note">Preview of the email the hotel receives when an enquiry is submitted. Shown only in <code>?demo=1</code> mode — real guests see the thank-you card instead.</p>
+            <span class="bk-email-preview-tag" data-i18n="bk.preview.tag">DEMO PREVIEW</span>
+            <h3 data-i18n="bk.preview.h3">What the hotel staff inbox will receive</h3>
+            <p class="bk-email-preview-note" data-i18n="bk.preview.note">Preview of the email the hotel receives when an enquiry is submitted. Shown only in <code>?demo=1</code> mode — real guests see the thank-you card instead.</p>
           </div>
           <pre id="bk-email-preview-body" class="bk-email-preview-body"></pre>
         </div>
@@ -548,15 +548,15 @@
           <div class="bk-thanks-tick">
             <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
           </div>
-          <h3>Enquiry sent.</h3>
-          <p>We'll be back to you within the hour with availability and a direct rate. Thank you for choosing to write to us directly.</p>
+          <h3 data-i18n="bk.thanks.h3">Enquiry sent.</h3>
+          <p data-i18n="bk.thanks.p">We'll be back to you within the hour with availability and a direct rate. Thank you for choosing to write to us directly.</p>
         </div>
 
         <!-- RIGHT: visuals -->
         <div class="bk-vis">
           <div class="bk-hero" id="bk-hero" style="background-image:url('assets/img/king/king-01.webp');">
             <span class="bk-hero-tag" id="bk-hero-tag">Bedroom · King Suite — A6</span>
-            <button type="button" class="bk-hero-full" aria-label="View fullscreen"><i class="ti ti-maximize" aria-hidden="true"></i><span>Fullscreen</span></button>
+            <button type="button" class="bk-hero-full" aria-label="View fullscreen" data-i18n-aria="bk.hero.fullscreen_aria"><i class="ti ti-maximize" aria-hidden="true"></i><span data-i18n="bk.hero.fullscreen">Fullscreen</span></button>
           </div>
 
           <div class="bk-info" id="bk-info">
@@ -567,7 +567,7 @@
 
           <div class="bk-tiles-hd">
             <h3>More photos (<span id="bk-photo-count">6</span>)</h3>
-            <button type="button" class="bk-viewall" aria-label="View all"><i class="ti ti-maximize" aria-hidden="true"></i>View all</button>
+            <button type="button" class="bk-viewall" aria-label="View all" data-i18n-aria="bk.tiles.viewall_aria"><i class="ti ti-maximize" aria-hidden="true"></i><span data-i18n="bk.tiles.viewall">View all</span></button>
           </div>
           <div id="bk-tiles-host">
             <div class="bk-tiles"><button type="button" class="bk-tile" data-photo="assets/img/king/king-01.webp" data-label="Bedroom" aria-label="Bedroom"><span class="bk-tile-img" style="background-image:url('assets/img/king/king-01.webp')"></span><span class="bk-tile-tag">Bedroom</span></button><button type="button" class="bk-tile" data-photo="assets/img/king/king-04.webp" data-label="Marble bath" aria-label="Marble bath"><span class="bk-tile-img" style="background-image:url('assets/img/king/king-04.webp')"></span><span class="bk-tile-tag">Marble bath</span></button><button type="button" class="bk-tile" data-photo="assets/img/king/king-05.webp" data-label="Sitting area" aria-label="Sitting area"><span class="bk-tile-img" style="background-image:url('assets/img/king/king-05.webp')"></span><span class="bk-tile-tag">Sitting area</span></button><button type="button" class="bk-tile" data-photo="assets/img/king/king-09.webp" data-label="Terrace" aria-label="Terrace"><span class="bk-tile-img" style="background-image:url('assets/img/king/king-09.webp')"></span><span class="bk-tile-tag">Terrace</span></button><button type="button" class="bk-tile" data-photo="assets/img/king/king-11.webp" data-label="Sea view" aria-label="Sea view"><span class="bk-tile-img" style="background-image:url('assets/img/king/king-11.webp')"></span><span class="bk-tile-tag">Sea view</span></button><button type="button" class="bk-tile" data-photo="assets/img/king/king-14.webp" data-label="Entrance" aria-label="Entrance"><span class="bk-tile-img" style="background-image:url('assets/img/king/king-14.webp')"></span><span class="bk-tile-tag">Entrance</span></button></div>

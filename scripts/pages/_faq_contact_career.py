@@ -7,37 +7,40 @@ IMG_CAREER = "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=
 
 def faq(root: str) -> str:
     qs = [
-        ("What time is check-in and check-out?",
+        ("faq.q1",  "What time is check-in and check-out?",
          "Check-in from 15:00 and check-out by 12:00. Early check-in and late check-out are offered subject to availability — ask on arrival, or arrange in advance via the enquiry form."),
-        ("Is breakfast / All-Inclusive included in my room rate?",
+        ("faq.q2",  "Is breakfast / All-Inclusive included in my room rate?",
          "Yes. Every rate at Mira Palace is All-Inclusive and covers breakfast, lunch, dinner, afternoon tea, a late-night snack bar, and all soft drinks, local beers, wines, spirits and coffees. See the All-Inclusive page for the honest extras list."),
-        ("What airport do you recommend?",
+        ("faq.q3",  "What airport do you recommend?",
          "Antalya International (AYT), 60 km from the hotel. We can arrange a private or shared transfer — see the Location page for options and prices."),
-        ("Is the hotel suitable for children?",
+        ("faq.q4",  "Is the hotel suitable for children?",
          "Yes — we have a dedicated Family Suite (two connecting rooms), a children’s pool with a small slide, a kids’ club (4–12) and a teen lounge (13–17). Children under 6 stay free when sharing with two adults; 6–12 at a reduced rate."),
-        ("Do you allow pets?",
+        ("faq.q5",  "Do you allow pets?",
          "Service dogs are welcome; other pets are not, in line with Turkish food-safety rules for the restaurant and pool areas."),
-        ("Is smoking allowed?",
+        ("faq.q6",  "Is smoking allowed?",
          "Rooms and indoor public spaces are non-smoking. Smoking is permitted on balconies and in designated outdoor areas away from dining."),
-        ("What is your cancellation policy?",
+        ("faq.q7",  "What is your cancellation policy?",
          "Flexible: free cancellation up to 14 days before arrival. Within 14 days, the first night is charged. Non-refundable rates are discounted by 10 per cent and are — as the name implies — not refundable. Seasonal and package rates may vary."),
-        ("Do you have facilities for guests with reduced mobility?",
+        ("faq.q8",  "Do you have facilities for guests with reduced mobility?",
          "Yes. The ground floor is step-free, one of our Deluxe rooms is fully accessible with a roll-in shower, and the spa, restaurants and pools are reachable without stairs. Please let us know at booking so we can allocate the right room."),
-        ("Can I arrange a wedding, proposal or honeymoon?",
+        ("faq.q9",  "Can I arrange a wedding, proposal or honeymoon?",
          "Yes to all three. The honeymoon package covers couples within six months of their wedding — write to info@sidemirapalace.com with your dates."),
-        ("Do you have a spa and what does it cost?",
+        ("faq.q10", "Do you have a spa and what does it cost?",
          "Yes. The hammam, saunas, steam room, cold plunge and relaxation room are included in your stay. Treatments — massage, facial, rituals — are priced à la carte on the treatment menu."),
-        ("Is the electricity Turkish standard?",
+        ("faq.q11", "Is the electricity Turkish standard?",
          "Yes, 230 V, type F (European two-pin). Our rooms also have USB-C sockets on the bedside and desk."),
-        ("Is there Wi-Fi? Is it fast?",
+        ("faq.q12", "Is there Wi-Fi? Is it fast?",
          "Yes, complimentary fibre (approximately 500 Mbps) throughout the hotel. Good enough for video calls and streaming. If yours misbehaves, the front desk will move you to a closer access point."),
     ]
     items = "".join(
-        f'<details class="group border-b border-mira-200 py-5"><summary class="flex items-center justify-between cursor-pointer list-none"><span class="font-display text-xl text-mira-900">{q}</span><span class="text-sand-500 transition group-open:rotate-45 text-2xl leading-none">+</span></summary><p class="mt-4 text-mira-700 leading-relaxed">{a}</p></details>'
-        for q, a in qs
+        f'<details class="group border-b border-mira-200 py-5"><summary class="flex items-center justify-between cursor-pointer list-none"><span class="font-display text-xl text-mira-900" data-i18n="{k}.q">{q}</span><span class="text-sand-500 transition group-open:rotate-45 text-2xl leading-none">+</span></summary><p class="mt-4 text-mira-700 leading-relaxed" data-i18n="{k}.a">{a}</p></details>'
+        for k, q, a in qs
     )
-    h = hero(IMG_FAQ, "FAQ", "Before you ask.",
-             "Twelve of the questions we hear most often, answered. Don’t see yours? Drop us a line on info@sidemirapalace.com and we will reply the same day, usually within an hour.", height="55vh")
+    h = hero(IMG_FAQ,
+             '<span data-i18n="faq.hero.kicker">FAQ</span>',
+             '<span data-i18n="faq.hero.h1">Before you ask.</span>',
+             '<span data-i18n="faq.hero.sub">Twelve of the questions we hear most often, answered. Don’t see yours? Drop us a line on info@sidemirapalace.com and we will reply the same day, usually within an hour.</span>',
+             height="55vh")
     body = section(f"""
       <div class="max-w-3xl">{items}</div>
     """, bg="bg-white")
@@ -136,42 +139,45 @@ def contact(root: str) -> str:
 
 def career(root: str) -> str:
     roles = [
-        ("Front-desk Receptionist", "Full-time · Year-round", "Excellent English; a second language (German, Russian, Arabic) a strong plus. Prior hospitality experience preferred."),
-        ("Commis Chef", "Full-time · Year-round", "Training under our head chef. Willing to learn both Turkish and Mediterranean cuisines."),
-        ("Spa Therapist", "Full-time · Seasonal", "Certified massage therapist. Knowledge of Turkish hammam techniques preferred."),
-        ("Housekeeping Assistant", "Full-time · Seasonal", "Careful, thorough, reliable. Staff accommodation available for applicants from outside Manavgat."),
-        ("Kids’ Club Leader", "Full-time · April–November", "Experience working with children 4–12. First-aid qualification required (we will support a recert if needed)."),
+        ("career.role1", "Front-desk Receptionist", "Full-time · Year-round", "Excellent English; a second language (German, Russian, Arabic) a strong plus. Prior hospitality experience preferred."),
+        ("career.role2", "Commis Chef", "Full-time · Year-round", "Training under our head chef. Willing to learn both Turkish and Mediterranean cuisines."),
+        ("career.role3", "Spa Therapist", "Full-time · Seasonal", "Certified massage therapist. Knowledge of Turkish hammam techniques preferred."),
+        ("career.role4", "Housekeeping Assistant", "Full-time · Seasonal", "Careful, thorough, reliable. Staff accommodation available for applicants from outside Manavgat."),
+        ("career.role5", "Kids’ Club Leader", "Full-time · April–November", "Experience working with children 4–12. First-aid qualification required (we will support a recert if needed)."),
     ]
     rows = "".join(
-        f'<div class="p-7 bg-white rounded-lg shadow-lux flex flex-col md:flex-row md:items-center md:justify-between gap-4"><div><h3 class="font-display text-2xl text-mira-900">{t}</h3><p class="text-sm text-mira-600">{sub}</p><p class="mt-2 text-sm text-mira-700">{d}</p></div><a href="#apply" class="shrink-0 inline-flex items-center px-5 py-2 bg-mira-700 text-white rounded-full text-sm font-medium hover:bg-mira-800">Apply</a></div>'
-        for t, sub, d in roles
+        f'<div class="p-7 bg-white rounded-lg shadow-lux flex flex-col md:flex-row md:items-center md:justify-between gap-4"><div><h3 class="font-display text-2xl text-mira-900" data-i18n="{k}.title">{t}</h3><p class="text-sm text-mira-600" data-i18n="{k}.meta">{sub}</p><p class="mt-2 text-sm text-mira-700" data-i18n="{k}.body">{d}</p></div><a href="#apply" class="shrink-0 inline-flex items-center px-5 py-2 bg-mira-700 text-white rounded-full text-sm font-medium hover:bg-mira-800" data-i18n="career.apply_btn">Apply</a></div>'
+        for k, t, sub, d in roles
     )
-    h = hero(IMG_CAREER, "Careers", "Come and work with us.",
-             "A small team — thirty-four suites asks about fifty staff — which means every job matters and every person is visible. We pay on time, we train, and most of our seasonal staff come back the following year.",
+    h = hero(IMG_CAREER,
+             '<span data-i18n="career.hero.kicker">Careers</span>',
+             '<span data-i18n="career.hero.h1">Come and work with us.</span>',
+             '<span data-i18n="career.hero.sub">A small team — thirty-four suites asks about fifty staff — which means every job matters and every person is visible. We pay on time, we train, and most of our seasonal staff come back the following year.</span>',
              height="60vh")
     listings = section(f"""
-      {eyebrow('Open positions')}
-      {heading('Who we’re hiring this season.', 3)}
+      <p class="uppercase tracking-[0.22em] text-mira-600 text-xs font-semibold" data-i18n="career.listings.eyebrow">Open positions</p>
+      <h3 class="font-display text-2xl sm:text-3xl md:text-4xl text-mira-900 leading-tight" data-i18n="career.listings.h3">Who we’re hiring this season.</h3>
       <div class="grid gap-5 mt-10">{rows}</div>
     """, bg="bg-sand-50")
     form = section(f"""
-      <div id="apply" class="max-w-2xl mx-auto">{eyebrow('Apply')}
-        {heading('Application form.', 3)}
+      <div id="apply" class="max-w-2xl mx-auto">
+        <p class="uppercase tracking-[0.22em] text-mira-600 text-xs font-semibold" data-i18n="career.form.eyebrow">Apply</p>
+        <h3 class="font-display text-2xl sm:text-3xl md:text-4xl text-mira-900 leading-tight" data-i18n="career.form.h3">Application form.</h3>
         <form class="mt-8 bg-white rounded-lg shadow-lux p-7 space-y-5" onsubmit="event.preventDefault(); alert('Demo form — in the production site, this submits to HR.');">
           <div class="grid sm:grid-cols-2 gap-5">
-            <label class="block"><span class="text-sm text-mira-700">Full name</span><input required class="mt-1 block w-full rounded border border-mira-200 px-3 py-2 text-sm" /></label>
-            <label class="block"><span class="text-sm text-mira-700">Email</span><input required type="email" class="mt-1 block w-full rounded border border-mira-200 px-3 py-2 text-sm" /></label>
-            <label class="block"><span class="text-sm text-mira-700">Phone</span><input type="tel" class="mt-1 block w-full rounded border border-mira-200 px-3 py-2 text-sm" /></label>
-            <label class="block"><span class="text-sm text-mira-700">Position applied for</span>
+            <label class="block"><span class="text-sm text-mira-700" data-i18n="career.form.name">Full name</span><input required class="mt-1 block w-full rounded border border-mira-200 px-3 py-2 text-sm" /></label>
+            <label class="block"><span class="text-sm text-mira-700" data-i18n="career.form.email">Email</span><input required type="email" class="mt-1 block w-full rounded border border-mira-200 px-3 py-2 text-sm" /></label>
+            <label class="block"><span class="text-sm text-mira-700" data-i18n="career.form.phone">Phone</span><input type="tel" class="mt-1 block w-full rounded border border-mira-200 px-3 py-2 text-sm" /></label>
+            <label class="block"><span class="text-sm text-mira-700" data-i18n="career.form.position">Position applied for</span>
               <select class="mt-1 block w-full rounded border border-mira-200 px-3 py-2 text-sm">
-                {"".join(f"<option>{t}</option>" for t, *_ in roles)}
+                {"".join(f'<option data-i18n="{k}.title">{t}</option>' for k, t, *_ in roles)}
               </select>
             </label>
-            <label class="block sm:col-span-2"><span class="text-sm text-mira-700">CV (PDF, up to 5 MB)</span><input type="file" accept="application/pdf" class="mt-1 block w-full text-sm text-mira-700" /></label>
-            <label class="block sm:col-span-2"><span class="text-sm text-mira-700">Cover note</span><textarea rows="4" class="mt-1 block w-full rounded border border-mira-200 px-3 py-2 text-sm" placeholder="A short note about your experience and availability."></textarea></label>
+            <label class="block sm:col-span-2"><span class="text-sm text-mira-700" data-i18n="career.form.cv">CV (PDF, up to 5 MB)</span><input type="file" accept="application/pdf" class="mt-1 block w-full text-sm text-mira-700" /></label>
+            <label class="block sm:col-span-2"><span class="text-sm text-mira-700" data-i18n="career.form.cover">Cover note</span><textarea rows="4" class="mt-1 block w-full rounded border border-mira-200 px-3 py-2 text-sm" placeholder="A short note about your experience and availability." data-i18n-placeholder="career.form.cover_placeholder"></textarea></label>
           </div>
-          <label class="flex items-start gap-3 text-xs text-mira-700"><input type="checkbox" required class="mt-1" /><span>I consent to Mira Palace storing my application details for up to 12 months for recruitment purposes, in line with the <a href="{root}legal/privacy.html" class="underline">Privacy Notice</a>.</span></label>
-          <button class="inline-flex items-center justify-center px-6 py-3 bg-mira-700 text-white rounded-full font-medium hover:bg-mira-800">Submit application</button>
+          <label class="flex items-start gap-3 text-xs text-mira-700"><input type="checkbox" required class="mt-1" /><span data-i18n="career.form.consent">I consent to Mira Palace storing my application details for up to 12 months for recruitment purposes, in line with the Privacy Notice.</span></label>
+          <button class="inline-flex items-center justify-center px-6 py-3 bg-mira-700 text-white rounded-full font-medium hover:bg-mira-800" data-i18n="career.form.submit">Submit application</button>
         </form>
       </div>
     """, bg="bg-white")

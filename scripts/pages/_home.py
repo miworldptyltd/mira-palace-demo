@@ -48,8 +48,8 @@ def home(root: str) -> str:
           {heading('Big-hotel comfort, small-hotel soul.')}
         </div>
         <div class="lg:col-span-7 text-mira-700 leading-relaxed text-lg space-y-4">
-          <p>Open since May 2022, Mira Palace was designed for travellers who want the convenience of an all-inclusive resort — unlimited dining, a full spa, pools for every mood — but in a setting small enough that the staff learn your favourite drink by the second evening.</p>
-          <p>Thirty-four suites, individually styled. Two pools — a generous outdoor pool for the season, and a heated indoor pool for winter mornings. Evrenseki\'s Blue-Flag public beach seven minutes down the lane. And a kitchen that refuses to serve the same buffet twice in a week.</p>
+          <p data-i18n="home.intro.p1">Open since May 2022, Mira Palace was designed for travellers who want the convenience of an all-inclusive resort — unlimited dining, a full spa, pools for every mood — but in a setting small enough that the staff learn your favourite drink by the second evening.</p>
+          <p data-i18n="home.intro.p2">Thirty-four suites, individually styled. Two pools — a generous outdoor pool for the season, and a heated indoor pool for winter mornings. Evrenseki\'s Blue-Flag public beach seven minutes down the lane. And a kitchen that refuses to serve the same buffet twice in a week.</p>
         </div>
       </div>
       <div class="mt-14">{feature_strip([('Suites','34'),('Pools','2'),('To Evrenseki beach','700 m'),('To Side old town','12 km'),('Antalya airport','60 km'),('Operates year-round','12/12')])}</div>
@@ -64,10 +64,10 @@ def home(root: str) -> str:
       </div>
     """, bg="bg-white")
     concept_band = cta_band(
-        "Everything included. Nothing forgotten.",
-        "Unlimited buffet breakfasts, lunches and dinners. All soft drinks, local beers, wines and spirits. Afternoon tea and late-night snacks. Pools, beach, hammam access, fitness classes, evening entertainment. See what's covered.",
+        '<span data-i18n="home.cta_band.h2">Everything included. Nothing forgotten.</span>',
+        '<span data-i18n="home.cta_band.body">Unlimited buffet breakfasts, lunches and dinners. All soft drinks, local beers, wines and spirits. Afternoon tea and late-night snacks. Pools, beach, hammam access, fitness classes, evening entertainment. See what&#8217;s covered.</span>',
         f"{root}concept.html",
-        "See the All-Inclusive concept",
+        '<span data-i18n="home.cta_band.btn">See the All-Inclusive concept</span>',
         f"{root}{IMG_LOBBY}",
     )
     # R025: swapped to real Google reviews (verified via Google Hotels
@@ -127,7 +127,7 @@ def home(root: str) -> str:
         <div>{eyebrow('Moments at Mira Palace')}
           {heading('A glimpse of your stay.')}
         </div>
-        <a href="{root}gallery.html" class="text-sm font-medium text-mira-700 hover:text-sand-500 inline-flex items-center gap-2">Full gallery <span>→</span></a>
+        <a href="{root}gallery.html" class="text-sm font-medium text-mira-700 hover:text-sand-500 inline-flex items-center gap-2"><span data-i18n="home.gallery.full_link">Full gallery</span> <span>→</span></a>
       </div>
       <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
         <div class="aspect-[4/5] bg-cover bg-center rounded" style="background-image:url('{root}{IMG_POOL}')"></div>
@@ -137,20 +137,20 @@ def home(root: str) -> str:
         <div class="aspect-[4/5] bg-cover bg-center rounded" style="background-image:url('{root}assets/img/garden/garden-05.webp')"></div>
         <div class="aspect-[4/5] bg-cover bg-center rounded" style="background-image:url('{root}{IMG_BREAKFAST}')"></div>
         <div class="aspect-[4/5] bg-cover bg-center rounded" style="background-image:url('{root}assets/img/deluxe/deluxe-02.webp')"></div>
-        <div class="aspect-[4/5] bg-cover bg-center rounded bg-mira-700 grid place-items-center text-sand-200 font-display text-xl"><a href="{root}gallery.html">See all →</a></div>
+        <div class="aspect-[4/5] bg-cover bg-center rounded bg-mira-700 grid place-items-center text-sand-200 font-display text-xl"><a href="{root}gallery.html" data-i18n="home.gallery.see_all">See all →</a></div>
       </div>
     """, bg="bg-white")
     location_teaser = section(f"""
       <div class="grid lg:grid-cols-2 gap-10 items-center">
         <div>{eyebrow('Where you are')}
           {heading('Evrenseki, between Side and the Taurus Mountains.')}
-          <p class="mt-5 text-mira-700 leading-relaxed">Fifteen minutes east of Side's ancient harbour, forty-five minutes from Antalya International Airport, and a seven-minute walk down a cypress-lined lane to <strong>Evrenseki Halk Plajı</strong> — the Blue-Flag public beach on our doorstep. Pool weather from April to November, spa weather all year.</p>
+          <p class="mt-5 text-mira-700 leading-relaxed" data-i18n="home.location.p">Fifteen minutes east of Side's ancient harbour, forty-five minutes from Antalya International Airport, and a seven-minute walk down a cypress-lined lane to <strong>Evrenseki Halk Plajı</strong> — the Blue-Flag public beach on our doorstep. Pool weather from April to November, spa weather all year.</p>
           <div class="mt-6 grid grid-cols-3 gap-4 text-sm">
-            <div><div class="font-display text-2xl text-mira-800">700 m</div><div class="text-mira-600">To Evrenseki beach</div></div>
-            <div><div class="font-display text-2xl text-mira-800">12 km</div><div class="text-mira-600">To Side old town</div></div>
-            <div><div class="font-display text-2xl text-mira-800">60 km</div><div class="text-mira-600">To Antalya airport</div></div>
+            <div><div class="font-display text-2xl text-mira-800">700 m</div><div class="text-mira-600" data-i18n="home.location.stat_beach">To Evrenseki beach</div></div>
+            <div><div class="font-display text-2xl text-mira-800">12 km</div><div class="text-mira-600" data-i18n="home.location.stat_side">To Side old town</div></div>
+            <div><div class="font-display text-2xl text-mira-800">60 km</div><div class="text-mira-600" data-i18n="home.location.stat_airport">To Antalya airport</div></div>
           </div>
-          <a href="{root}location.html" class="mt-8 inline-flex items-center gap-2 text-mira-700 font-medium hover:text-sand-500">Directions &amp; transfers <span>→</span></a>
+          <a href="{root}location.html" class="mt-8 inline-flex items-center gap-2 text-mira-700 font-medium hover:text-sand-500"><span data-i18n="home.location.link">Directions &amp; transfers</span> <span>→</span></a>
         </div>
         <div class="aspect-[4/3] rounded-lg bg-cover bg-center shadow-lux" style="background-image:url('{root}{IMG_BEACH}')"></div>
       </div>

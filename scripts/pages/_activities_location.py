@@ -59,22 +59,23 @@ def location(root: str) -> str:
     # beach ~700 m down the lane), and removed the fabricated
     # "complimentary shuttle twice daily to Side" — Side is a taxi ride.
     distances = [
-        ("Evrenseki Halk Plajı (public, Blue Flag)", "700 m", "~7-minute walk down the cypress-lined lane; sand, sunbeds, kiosks on the front"),
-        ("Evrenseki village centre", "1.5 km", "Small bakery, pharmacy, ATM, Saturday market"),
-        ("Side old town (ancient harbour, Apollo temple)", "12 km", "15–20 minutes by taxi"),
-        ("Manavgat waterfalls", "18 km", "25 minutes by car; popular half-day excursion"),
-        ("Aspendos Roman theatre", "33 km", "45 minutes; summer evening performances"),
-        ("Antalya International Airport (AYT)", "60 km", "~45 minutes; private transfer arranged on request"),
-        ("Alanya castle", "65 km", "75 minutes east along the coast"),
-        ("Köprülü Canyon (rafting)", "55 km", "1 hour; full-day white-water excursion available"),
+        ("location.dist1", "Evrenseki Halk Plajı (public, Blue Flag)", "700 m", "~7-minute walk down the cypress-lined lane; sand, sunbeds, kiosks on the front"),
+        ("location.dist2", "Evrenseki village centre", "1.5 km", "Small bakery, pharmacy, ATM, Saturday market"),
+        ("location.dist3", "Side old town (ancient harbour, Apollo temple)", "12 km", "15–20 minutes by taxi"),
+        ("location.dist4", "Manavgat waterfalls", "18 km", "25 minutes by car; popular half-day excursion"),
+        ("location.dist5", "Aspendos Roman theatre", "33 km", "45 minutes; summer evening performances"),
+        ("location.dist6", "Antalya International Airport (AYT)", "60 km", "~45 minutes; private transfer arranged on request"),
+        ("location.dist7", "Alanya castle", "65 km", "75 minutes east along the coast"),
+        ("location.dist8", "Köprülü Canyon (rafting)", "55 km", "1 hour; full-day white-water excursion available"),
     ]
     rows = "".join(
-        f'<tr class="border-t border-mira-200"><td class="py-4 pr-6 font-medium text-mira-900">{n}</td><td class="py-4 pr-6 text-mira-800 whitespace-nowrap">{d}</td><td class="py-4 text-mira-600 text-sm">{note}</td></tr>'
-        for n, d, note in distances
+        f'<tr class="border-t border-mira-200"><td class="py-4 pr-6 font-medium text-mira-900" data-i18n="{k}.n">{n}</td><td class="py-4 pr-6 text-mira-800 whitespace-nowrap">{d}</td><td class="py-4 text-mira-600 text-sm" data-i18n="{k}.note">{note}</td></tr>'
+        for k, n, d, note in distances
     )
-    h = hero(IMG_SIDE, "Location & transfers",
-             "On the edge of Side.<br/>Halfway along the Turkish Riviera.",
-             "Mira Palace is in Evrenseki, between Side and Manavgat — central enough to reach the major sights in under an hour, quiet enough that you can hear the sea from the terrace.", height="70vh")
+    h = hero(IMG_SIDE,
+             '<span data-i18n="location.hero.kicker">Location &amp; transfers</span>',
+             '<span data-i18n="location.hero.h1">On the edge of Side.<br/>Halfway along the Turkish Riviera.</span>',
+             '<span data-i18n="location.hero.sub">Mira Palace is in Evrenseki, between Side and Manavgat — central enough to reach the major sights in under an hour, quiet enough that you can hear the sea from the terrace.</span>', height="70vh")
     a = section(f"""
       {eyebrow('Getting around')}
       {heading('Distances from the hotel.')}
@@ -88,17 +89,17 @@ def location(root: str) -> str:
         <div>{eyebrow('From the airport')}
           {heading('Transfer options.', 3)}
           <ul class="mt-6 space-y-4 text-mira-700">
-            <li><span class="font-semibold text-mira-900">Private VIP minibus:</span> €{PRICES['transfer_airport_private']} one way for up to four passengers, with waiting time included. Executive-fit minibus (Mercedes V-Class or equivalent) — the same vehicle used on the popular Antalya–Alanya VIP transfer route. Arrange on booking or on arrival.</li>
-            <li><span class="font-semibold text-mira-900">Shared shuttle:</span> €{PRICES['transfer_airport_shared']} per person, subject to availability, routed with other Mira Palace arrivals. Journey time 75–90 minutes.</li>
-            <li><span class="font-semibold text-mira-900">Taxi:</span> approx. €70 one way; we recommend booking via the hotel to agree the fare in advance.</li>
-            <li><span class="font-semibold text-mira-900">Self-drive:</span> ~45 minutes via the D-400 coast road. Complimentary hotel parking.</li>
+            <li><span class="font-semibold text-mira-900" data-i18n="location.transfer.private.lbl">Private VIP minibus:</span> <span data-i18n="location.transfer.private.body">€{PRICES['transfer_airport_private']} one way for up to four passengers, with waiting time included. Executive-fit minibus (Mercedes V-Class or equivalent) — the same vehicle used on the popular Antalya–Alanya VIP transfer route. Arrange on booking or on arrival.</span></li>
+            <li><span class="font-semibold text-mira-900" data-i18n="location.transfer.shared.lbl">Shared shuttle:</span> <span data-i18n="location.transfer.shared.body">€{PRICES['transfer_airport_shared']} per person, subject to availability, routed with other Mira Palace arrivals. Journey time 75–90 minutes.</span></li>
+            <li><span class="font-semibold text-mira-900" data-i18n="location.transfer.taxi.lbl">Taxi:</span> <span data-i18n="location.transfer.taxi.body">approx. €70 one way; we recommend booking via the hotel to agree the fare in advance.</span></li>
+            <li><span class="font-semibold text-mira-900" data-i18n="location.transfer.drive.lbl">Self-drive:</span> <span data-i18n="location.transfer.drive.body">~45 minutes via the D-400 coast road. Complimentary hotel parking.</span></li>
           </ul>
         </div>
         <div class="relative">
           <div class="aspect-[4/3] rounded-lg bg-cover bg-center shadow-lux" style="background-image:url('{IMG_VAN}')"></div>
           <div class="absolute bottom-4 left-4 bg-white/90 backdrop-blur px-4 py-2 rounded shadow-lux">
-            <div class="text-[10px] uppercase tracking-widest text-mira-600">VIP MINIBUS</div>
-            <div class="text-sm font-medium text-mira-900">Antalya airport transfer</div>
+            <div class="text-[10px] uppercase tracking-widest text-mira-600" data-i18n="location.van.tag">VIP MINIBUS</div>
+            <div class="text-sm font-medium text-mira-900" data-i18n="location.van.label">Antalya airport transfer</div>
           </div>
         </div>
       </div>
@@ -120,21 +121,21 @@ def location(root: str) -> str:
     IMG_KALEICI_R025   = "https://images.pexels.com/photos/18761177/pexels-photo-18761177.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1600&h=900"
 
     nearby = [
-        (IMG_APOLLO_TEMPLE, "Side & the temple of Apollo",
+        ("location.near1", IMG_APOLLO_TEMPLE, "Side & the temple of Apollo",
          "12 km — five sunlit marble columns rising straight out of the Mediterranean, at the tip of Side's old-town peninsula. Come 45 minutes before sunset: the marble turns honey-gold, the tourist coaches have left, and the little fishing harbour behind you fills up for dinner."),
-        (IMG_ASPENDOS_R025, "Aspendos Roman theatre",
+        ("location.near2", IMG_ASPENDOS_R025, "Aspendos Roman theatre",
          "33 km — the best-preserved Roman theatre anywhere in the ancient world, built in 155 AD and still standing almost exactly as Marcus Aurelius left it. The acoustics are so intact that a coin dropped centre-stage is audible from the top row — try it before the tour groups arrive around 10 am."),
-        (IMG_MANAVGAT_R025, "Manavgat waterfalls",
+        ("location.near3", IMG_MANAVGAT_R025, "Manavgat waterfalls",
          "18 km — a wide, low curtain of turquoise water dropping across the full breadth of the Manavgat River, ringed by tea gardens under plane trees. Go mid-morning when the sun is behind you and the river-boat crowds haven't arrived — order a glass of çay on the terrace and stay for lunch."),
-        (IMG_KALEICI_R025, "Antalya old town (Kaleiçi)",
+        ("location.near4", IMG_KALEICI_R025, "Antalya old town (Kaleiçi)",
          "65 km — the walled Ottoman old town wrapped around a horseshoe harbour of wooden gulets, best entered on foot through Hadrian's Gate. Lose an afternoon on the cobbled lanes behind the harbour, then take the clifftop lift down to Mermerli beach for a swim before the drive back."),
     ]
     cards = "".join(
         f'<a class="group block bg-white rounded-lg overflow-hidden shadow-lux hover:-translate-y-1 transition will-change-transform">'
         f'<div class="aspect-[4/3] bg-cover bg-center transition group-hover:scale-[1.04]" style="background-image:url(\'{img}\')"></div>'
-        f'<div class="p-6"><h3 class="font-display text-xl text-mira-900">{t}</h3>'
-        f'<p class="mt-2 text-sm text-mira-700 leading-relaxed">{d}</p></div></a>'
-        for img, t, d in nearby
+        f'<div class="p-6"><h3 class="font-display text-xl text-mira-900" data-i18n="{k}.t">{t}</h3>'
+        f'<p class="mt-2 text-sm text-mira-700 leading-relaxed" data-i18n="{k}.d">{d}</p></div></a>'
+        for k, img, t, d in nearby
     )
     c = section(f"""
       {eyebrow('Beyond the gates')}
@@ -148,15 +149,15 @@ def location(root: str) -> str:
         <div class="lg:col-span-1">
           {eyebrow('Find us')}
           {heading('On the map.', 3)}
-          <p class="mt-4 text-mira-700 leading-relaxed">Evrenseki Mahallesi, between Side and Manavgat. The map below is interactive — drag, zoom, or open in Google Maps for turn-by-turn directions.</p>
+          <p class="mt-4 text-mira-700 leading-relaxed" data-i18n="location.map.p">Evrenseki Mahallesi, between Side and Manavgat. The map below is interactive — drag, zoom, or open in Google Maps for turn-by-turn directions.</p>
           <a href="https://maps.app.goo.gl/psUsJCW22broH4nQ8" target="_blank" rel="noopener" class="mt-5 inline-flex items-center gap-2 px-4 py-2 bg-mira-900 text-white text-sm rounded-full hover:bg-mira-800 transition">
-            Open in Google Maps
+            <span data-i18n="location.map.cta">Open in Google Maps</span>
             <svg viewBox="0 0 20 20" class="w-4 h-4" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586L8.293 10.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 100-2H5z"/></svg>
           </a>
         </div>
         <div class="lg:col-span-2">
           <iframe src="https://www.google.com/maps?q=36.7748,31.3888&amp;hl=en&amp;z=12&amp;output=embed" class="w-full aspect-[16/10] rounded-lg shadow-lux border-0" loading="lazy" title="Map of Mira Palace"></iframe>
-          <p class="mt-3 text-xs text-mira-600">Approximate location shown; the detailed directions sent with your booking confirmation are authoritative.</p>
+          <p class="mt-3 text-xs text-mira-600" data-i18n="location.map.foot">Approximate location shown; the detailed directions sent with your booking confirmation are authoritative.</p>
         </div>
       </div>
     """, bg="bg-sand-50")

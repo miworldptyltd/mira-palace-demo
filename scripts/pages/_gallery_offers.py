@@ -38,8 +38,9 @@ GALLERY = [
 
 def gallery(root: str) -> str:
     cats = ["All"] + sorted({c for c, _, _ in GALLERY})
+    _filter_keys = {"All": "gallery.filter.all", "Suites": "gallery.filter.suites", "Spa": "gallery.filter.spa", "Garden": "gallery.filter.garden", "Dining": "gallery.filter.dining", "Bar": "gallery.filter.bar"}
     filters = "".join(
-        f'<button data-cat="{c}" class="gal-filter px-4 py-2 rounded-full border border-mira-300 text-sm text-mira-800 hover:bg-mira-900 hover:text-white transition{" bg-mira-900 text-white border-mira-900" if c == "All" else ""}">{c}</button>'
+        f'<button data-cat="{c}" class="gal-filter px-4 py-2 rounded-full border border-mira-300 text-sm text-mira-800 hover:bg-mira-900 hover:text-white transition{" bg-mira-900 text-white border-mira-900" if c == "All" else ""}" data-i18n="{_filter_keys.get(c, "gallery.filter." + c.lower())}">{c}</button>'
         for c in cats
     )
     def _u(u): return u if u.startswith("http") else f"{root}{u}"
@@ -49,8 +50,10 @@ def gallery(root: str) -> str:
         f'<figcaption class="px-3 py-2 bg-white text-xs text-mira-600">{alt}</figcaption></figure>'
         for c, url, alt in GALLERY
     )
-    h = hero(GALLERY[0][1], "Gallery", "A photo album.",
-             "Real photography will replace every image on this site before launch. The frames below are representative — Turkish Riviera resort imagery from Unsplash — to give the design its shape.",
+    h = hero(GALLERY[0][1],
+             '<span data-i18n="gallery.hero.kicker">Gallery</span>',
+             '<span data-i18n="gallery.hero.h1">A photo album.</span>',
+             '<span data-i18n="gallery.hero.sub">Real photography will replace every image on this site before launch. The frames below are representative — Turkish Riviera resort imagery from Unsplash — to give the design its shape.</span>',
              height="55vh")
     body = section(f"""
       <div class="flex flex-wrap items-center gap-2">{filters}</div>
@@ -78,25 +81,25 @@ def offers(root: str) -> str:
     # shots including a tropical palm-beach fabrication that misrepresented
     # our Mediterranean coast). Each card now shows an actual hotel view.
     offers_data = [
-        ("Summer 2026 Early Bird", "Up to 25% off",
+        ("offers.card1", "Summer 2026 Early Bird", "Up to 25% off",
          "Book by 31 May 2026 for arrivals before 15 July. Minimum three nights, direct bookings only.",
          "assets/img/garden/garden-01.webp"),
-        ("Late-summer escape", "Stay 7, pay 6",
+        ("offers.card2", "Late-summer escape", "Stay 7, pay 6",
          "Arrivals between 1 and 30 September 2026. Complimentary airport transfer for two. Minimum stay seven nights.",
          "assets/img/garden/garden-04.webp"),
-        ("Honeymoon package", "Included extras",
+        ("offers.card3", "Honeymoon package", "Included extras",
          "Sparkling wine and flowers on arrival, private hammam session for two, à-la-carte dinner on the beach. Marriage certificate (any date) required.",
          "assets/img/king/king-01.webp"),
-        ("Wellness week", "Spa credit €200 p.p.",
+        ("offers.card4", "Wellness week", "Spa credit €200 p.p.",
          "Seven nights including full wellness programme, daily yoga, two hammam rituals, two massages, and a personalised nutrition plan.",
          "assets/img/spa/spa-01.webp"),
-        ("Winter warmer", "30% off",
+        ("offers.card5", "Winter warmer", "30% off",
          "A quiet coastline in winter. Direct bookings for November–February arrivals, 4+ nights. Breakfast upgraded, early check-in from 11:00.",
          "assets/img/garden/garden-06.webp"),
     ]
     cards = "".join(
-        f'<article class="grid md:grid-cols-5 overflow-hidden rounded-lg bg-white shadow-lux"><div class="md:col-span-2 aspect-[16/10] md:aspect-auto bg-cover bg-center" style="background-image:url(\'{root}{img}\')"></div><div class="md:col-span-3 p-8"><div class="text-xs uppercase tracking-widest text-sand-600">{tag}</div><h3 class="font-display text-2xl text-mira-900 mt-1">{t}</h3><p class="mt-3 text-mira-700 text-sm leading-relaxed">{d}</p><a href="{root}contact.html#enquiry" class="mt-6 inline-flex items-center gap-2 text-sm font-medium text-mira-700 hover:text-sand-600">Enquire about this offer <span>→</span></a></div></article>'
-        for t, tag, d, img in offers_data
+        f'<article class="grid md:grid-cols-5 overflow-hidden rounded-lg bg-white shadow-lux"><div class="md:col-span-2 aspect-[16/10] md:aspect-auto bg-cover bg-center" style="background-image:url(\'{root}{img}\')"></div><div class="md:col-span-3 p-8"><div class="text-xs uppercase tracking-widest text-sand-600" data-i18n="{k}.tag">{tag}</div><h3 class="font-display text-2xl text-mira-900 mt-1" data-i18n="{k}.title">{t}</h3><p class="mt-3 text-mira-700 text-sm leading-relaxed" data-i18n="{k}.body">{d}</p><a href="{root}contact.html#enquiry" class="mt-6 inline-flex items-center gap-2 text-sm font-medium text-mira-700 hover:text-sand-600"><span data-i18n="offers.card.cta">Enquire about this offer</span> <span>→</span></a></div></article>'
+        for k, t, tag, d, img in offers_data
     )
     # R025: hero is a random-video-per-visit shuffler picked by site.js from
     # window.MIRA_VIDEOS. No repeat within the same browser session. The
@@ -121,7 +124,7 @@ def offers(root: str) -> str:
     """)
     body = section(f"""
       <div class="space-y-8">{cards}</div>
-      <p class="mt-10 text-xs text-mira-500 italic">All rates, percentages and inclusions are illustrative for this demonstration site. Real offers and terms will be supplied by the hotel on content hand-off.</p>
+      <p class="mt-10 text-xs text-mira-500 italic" data-i18n="offers.foot">All rates, percentages and inclusions are illustrative for this demonstration site. Real offers and terms will be supplied by the hotel on content hand-off.</p>
     """, bg="bg-sand-50")
     return h + body
 

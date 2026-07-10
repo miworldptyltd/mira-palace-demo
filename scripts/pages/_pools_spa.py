@@ -24,19 +24,20 @@ def pools(root: str) -> str:
     # Reality: TWO pools (outdoor + heated indoor), and the nearest beach is
     # Evrenseki Halk Plajı — a Blue-Flag public beach ~700 m down the lane.
     hero_urls = [f"{root}{u}" for u in (IMG_GARDEN_1, IMG_GARDEN_2, IMG_GARDEN_3, IMG_GARDEN_4)]
-    h = hero_slideshow(hero_urls, "Pools & Beach",
-             "Two pools. One sea.<br/>Your choice of shade.",
-             "A generous outdoor pool through the season, a heated indoor pool for the winter months and cold mornings, and the Blue-Flag public beach at Evrenseki a seven-minute walk down the cypress lane.",
+    h = hero_slideshow(hero_urls,
+             '<span data-i18n="pools.hero.kicker">Pools &amp; Beach</span>',
+             '<span data-i18n="pools.hero.h1">Two pools. One sea.<br/>Your choice of shade.</span>',
+             '<span data-i18n="pools.hero.sub">A generous outdoor pool through the season, a heated indoor pool for the winter months and cold mornings, and the Blue-Flag public beach at Evrenseki a seven-minute walk down the cypress lane.</span>',
              height="72vh")
     pools_data = [
-        ("Outdoor pool",
+        ("pools.outdoor", "Outdoor pool",
          "Open through the season, sun loungers on three sides and shaded pergolas around the terrace. Towel service at the pool bar. Kids welcome — the shallow end is gentle."),
-        ("Indoor pool",
+        ("pools.indoor", "Indoor pool",
          "Heated year-round for winter guests and early risers who want a lap before breakfast. Adjacent to the spa, so a swim naturally leads to the hammam."),
     ]
     pool_cards = "".join(
-        f'<div class="p-7 bg-white rounded-lg shadow-lux"><h3 class="font-display text-2xl text-mira-900">{t}</h3><p class="mt-3 text-mira-700 text-sm leading-relaxed">{d}</p></div>'
-        for t, d in pools_data
+        f'<div class="p-7 bg-white rounded-lg shadow-lux"><h3 class="font-display text-2xl text-mira-900" data-i18n="{k}.title">{t}</h3><p class="mt-3 text-mira-700 text-sm leading-relaxed" data-i18n="{k}.body">{d}</p></div>'
+        for k, t, d in pools_data
     )
     a = section(f"""
       {eyebrow('Our pools')}
@@ -47,13 +48,13 @@ def pools(root: str) -> str:
       <div class="grid lg:grid-cols-2 gap-12 items-center">
         <div>{eyebrow('The beach')}
           {heading('Evrenseki Halk Plajı, seven minutes on foot.')}
-          <p class="mt-5 text-mira-700 leading-relaxed"><strong>Evrenseki Halk Plajı</strong> is the Blue-Flag public beach at the end of the lane — the same soft sandy strip that runs the length of Evrenseki. Turn left out of reception, walk down the cypress-lined path, and you're on the sand in about seven minutes. Sunbeds, umbrellas and a beach kiosk on the front.</p>
+          <p class="mt-5 text-mira-700 leading-relaxed" data-i18n="pools.beach.p"><strong>Evrenseki Halk Plajı</strong> is the Blue-Flag public beach at the end of the lane — the same soft sandy strip that runs the length of Evrenseki. Turn left out of reception, walk down the cypress-lined path, and you're on the sand in about seven minutes. Sunbeds, umbrellas and a beach kiosk on the front.</p>
           <ul class="mt-6 space-y-3 text-sm text-mira-700">
-            <li class="flex gap-3"><span class="text-sand-500">✓</span>Blue Flag since 2010 — soft, family-friendly sand</li>
-            <li class="flex gap-3"><span class="text-sand-500">✓</span>Sunbeds, parasols, showers and changing rooms on the beach (public)</li>
-            <li class="flex gap-3"><span class="text-sand-500">✓</span>Gentle shallow entry — good for young children</li>
-            <li class="flex gap-3"><span class="text-sand-500">✓</span>Kiosks and cafés along the promenade for drinks and light bites</li>
-            <li class="flex gap-3"><span class="text-sand-500">✓</span>Ask reception for a fresh towel to take with you</li>
+            <li class="flex gap-3"><span class="text-sand-500">✓</span><span data-i18n="pools.beach.b1">Blue Flag since 2010 — soft, family-friendly sand</span></li>
+            <li class="flex gap-3"><span class="text-sand-500">✓</span><span data-i18n="pools.beach.b2">Sunbeds, parasols, showers and changing rooms on the beach (public)</span></li>
+            <li class="flex gap-3"><span class="text-sand-500">✓</span><span data-i18n="pools.beach.b3">Gentle shallow entry — good for young children</span></li>
+            <li class="flex gap-3"><span class="text-sand-500">✓</span><span data-i18n="pools.beach.b4">Kiosks and cafés along the promenade for drinks and light bites</span></li>
+            <li class="flex gap-3"><span class="text-sand-500">✓</span><span data-i18n="pools.beach.b5">Ask reception for a fresh towel to take with you</span></li>
           </ul>
         </div>
         <div class="aspect-[4/5] bg-cover bg-center rounded-lg shadow-lux" style="background-image:url('{root}{IMG_GARDEN_2}')"></div>
@@ -62,9 +63,9 @@ def pools(root: str) -> str:
     c = section(f"""
       <div class="aspect-[16/6] rounded-lg bg-cover bg-center shadow-lux" style="background-image:url('{root}{IMG_GARDEN_3}')"></div>
     """, bg="bg-sand-50")
-    cta = cta_band("A pool for every mood — and a spa for when the sun is too much.",
-                   "Our Turkish hammam, two saunas, a steam room, a cold plunge and a small but considered treatment menu sit next to the indoor pool.",
-                   f"{root}spa.html", "Visit the spa", f"{root}{IMG_SPA_1}")
+    cta = cta_band('<span data-i18n="pools.cta.h2">A pool for every mood — and a spa for when the sun is too much.</span>',
+                   '<span data-i18n="pools.cta.body">Our Turkish hammam, two saunas, a steam room, a cold plunge and a small but considered treatment menu sit next to the indoor pool.</span>',
+                   f"{root}spa.html", '<span data-i18n="pools.cta.btn">Visit the spa</span>', f"{root}{IMG_SPA_1}")
     return h + a + b + c + cta
 
 
@@ -447,14 +448,15 @@ def spa_treatments(root: str) -> str:
         )
         blocks += f'<div class="mt-12 first:mt-0"><h3 class="font-display text-2xl text-mira-900">{sec_t}</h3><table class="w-full mt-4"><tbody>{row_html}</tbody></table></div>'
 
-    h = hero(f"{root}{IMG_SPA_6}", "Spa · Treatments",
-             "The treatment menu.",
-             "Massage, facial, body work, hammam rituals. Prices in Euro. Hammam and facility access are included in your stay; treatments below are priced per serve and can be booked at the spa reception or via WhatsApp.",
+    h = hero(f"{root}{IMG_SPA_6}",
+             '<span data-i18n="spat.hero.kicker">Spa · Treatments</span>',
+             '<span data-i18n="spat.hero.h1">The treatment menu.</span>',
+             '<span data-i18n="spat.hero.sub">Massage, facial, body work, hammam rituals. Prices in Euro. Hammam and facility access are included in your stay; treatments below are priced per serve and can be booked at the spa reception or via WhatsApp.</span>',
              height="60vh")
     body = section(f"""
       {blocks}
-      <p class="mt-10 text-xs text-mira-500 italic">Prices illustrative for the demo site. Real pricing will be supplied by the hotel on content hand-off. A 24-hour cancellation policy applies; a no-show is charged at 50 per cent.</p>
-      <a href="{root}contact.html#enquiry" class="mt-8 inline-flex items-center px-6 py-3 bg-mira-700 text-white rounded-full font-medium hover:bg-mira-800">Book a treatment</a>
+      <p class="mt-10 text-xs text-mira-500 italic" data-i18n="spat.foot">Prices illustrative for the demo site. Real pricing will be supplied by the hotel on content hand-off. A 24-hour cancellation policy applies; a no-show is charged at 50 per cent.</p>
+      <a href="{root}contact.html#enquiry" class="mt-8 inline-flex items-center px-6 py-3 bg-mira-700 text-white rounded-full font-medium hover:bg-mira-800" data-i18n="spat.book_cta">Book a treatment</a>
     """, bg="bg-white")
     return h + body
 

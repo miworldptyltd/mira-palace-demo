@@ -41,7 +41,7 @@ def privacy(root: str) -> str:
       <p>Written communications: Mira Palace, Evrenseki Mahallesi, Kömürcüler Küme Evleri No:96, Manavgat/Antalya, Türkiye. Email: <a href="mailto:info@sidemirapalace.com">info@sidemirapalace.com</a>.</p>
       <p class="text-sm text-mira-600 italic">DEMO SITE NOTICE: this policy is a realistic placeholder. The real, legally reviewed version must be provided before public launch, per the project’s legal-gate rule. Do not rely on this wording for real guests.</p>
     """
-    return _legal_wrap(root, "Privacy Notice", "How we handle personal data.", html)
+    return _legal_wrap(root, '<span data-i18n="legal.privacy.title">Privacy Notice</span>', '<span data-i18n="legal.privacy.sub">How we handle personal data.</span>', f'<div data-i18n="legal.privacy.body" data-i18n-html="1">{html}</div>')
 
 
 def cookies(root: str) -> str:
@@ -58,7 +58,7 @@ def cookies(root: str) -> str:
       <h2>3. Third-party embedded content</h2>
       <p>Google Maps embeds on the Location and Contact pages may set their own cookies. If you would like these blocked, use a privacy extension or disable third-party cookies in your browser.</p>
     """
-    return _legal_wrap(root, "Cookie Notice", "What we do, and don’t do, with cookies.", html)
+    return _legal_wrap(root, '<span data-i18n="legal.cookies.title">Cookie Notice</span>', '<span data-i18n="legal.cookies.sub">What we do, and don’t do, with cookies.</span>', f'<div data-i18n="legal.cookies.body" data-i18n-html="1">{html}</div>')
 
 
 def hotel_policies(root: str) -> str:
@@ -82,23 +82,23 @@ def hotel_policies(root: str) -> str:
       <p>By completing a booking, the guest accepts the hotel’s standard terms of stay. The hotel reserves the right to update these at any time without prior notice. Turkish law governs these terms.</p>
       <p class="text-sm text-mira-600 italic">DEMO SITE NOTICE: the real version of this document must be reviewed by the hotel’s legal advisor before public launch. This version is a clean English rewrite of the hotel’s existing policy (which was previously published only in Turkish and with broken character encoding).</p>
     """
-    return _legal_wrap(root, "Hotel Policies", "The house rules, in plain English.", html)
+    return _legal_wrap(root, '<span data-i18n="legal.policies.title">Hotel Policies</span>', '<span data-i18n="legal.policies.sub">The house rules, in plain English.</span>', f'<div data-i18n="legal.policies.body" data-i18n-html="1">{html}</div>')
 
 
 def notfound(root: str) -> str:
     return hero(
         "https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1920&q=80",
-        "404",
-        "This page has gone swimming.",
-        "The link you followed either never existed or has moved. Try the navigation above — or the friendly shortcuts below.",
-        primary_href=f"{root}index.html", primary_label="Back to the home page",
+        '<span data-i18n="error404.kicker">404</span>',
+        '<span data-i18n="error404.h1">This page has gone swimming.</span>',
+        '<span data-i18n="error404.sub">The link you followed either never existed or has moved. Try the navigation above — or the friendly shortcuts below.</span>',
+        primary_href=f"{root}index.html", primary_label='<span data-i18n="error404.cta">Back to the home page</span>',
         height="85vh",
     ) + section(
         f"""
         <div class="grid md:grid-cols-3 gap-5 text-center">
-          <a href="{root}rooms/" class="p-7 bg-white rounded-lg shadow-lux hover:-translate-y-1 transition"><div class="font-display text-2xl text-mira-900">Rooms &amp; Suites</div><div class="mt-1 text-sm text-mira-600">Four room types, 22–42 m²</div></a>
-          <a href="{root}dining/" class="p-7 bg-white rounded-lg shadow-lux hover:-translate-y-1 transition"><div class="font-display text-2xl text-mira-900">Dining</div><div class="mt-1 text-sm text-mira-600">Four outlets under one roof</div></a>
-          <a href="{root}contact.html#enquiry" class="p-7 bg-white rounded-lg shadow-lux hover:-translate-y-1 transition"><div class="font-display text-2xl text-mira-900">Contact</div><div class="mt-1 text-sm text-mira-600">We’ll reply within the hour</div></a>
+          <a href="{root}rooms/" class="p-7 bg-white rounded-lg shadow-lux hover:-translate-y-1 transition"><div class="font-display text-2xl text-mira-900" data-i18n="error404.tile1.t">Rooms &amp; Suites</div><div class="mt-1 text-sm text-mira-600" data-i18n="error404.tile1.s">Four room types, 22–42 m²</div></a>
+          <a href="{root}dining/" class="p-7 bg-white rounded-lg shadow-lux hover:-translate-y-1 transition"><div class="font-display text-2xl text-mira-900" data-i18n="error404.tile2.t">Dining</div><div class="mt-1 text-sm text-mira-600" data-i18n="error404.tile2.s">Four outlets under one roof</div></a>
+          <a href="{root}contact.html#enquiry" class="p-7 bg-white rounded-lg shadow-lux hover:-translate-y-1 transition"><div class="font-display text-2xl text-mira-900" data-i18n="error404.tile3.t">Contact</div><div class="mt-1 text-sm text-mira-600" data-i18n="error404.tile3.s">We’ll reply within the hour</div></a>
         </div>
         """,
         bg="bg-sand-50")

@@ -395,12 +395,12 @@ def _addon_airport(root: str) -> str:
     <div class="bk-x" data-addon="airport">
       <label class="bk-x-hd">
         <input type="checkbox" class="bk-x-chk" />
-        <span class="bk-x-ttl">Airport transfer</span>
+        <span class="bk-x-ttl" data-i18n="bk.addon.airport.title">Airport transfer</span>
         <span class="bk-x-px" data-prices='{json.dumps(AIRPORTS[0]["prices"])}'><span class="bk-x-from">from</span> +{_fmt_price(AIRPORTS[0]["prices"])}</span>
         <i class="ti ti-chevron-down bk-x-caret" aria-hidden="true"></i>
       </label>
       <div class="bk-x-body">
-        <span class="bk-sublbl">Which airport</span>
+        <span class="bk-sublbl" data-i18n="bk.addon.airport.which">Which airport</span>
         <div class="bk-radio-grp" data-required="airport">
           {options}
         </div>
@@ -429,12 +429,12 @@ def _addon_otogar(root: str) -> str:
     <div class="bk-x" data-addon="otogar">
       <label class="bk-x-hd">
         <input type="checkbox" class="bk-x-chk" />
-        <span class="bk-x-ttl">Otogar (bus) transfer</span>
+        <span class="bk-x-ttl" data-i18n="bk.addon.otogar.title">Otogar (bus) transfer</span>
         <span class="bk-x-px" data-prices='{json.dumps(OTOGARS[1]["prices"])}'><span class="bk-x-from">from</span> +{_fmt_price(OTOGARS[1]["prices"])}</span>
         <i class="ti ti-chevron-down bk-x-caret" aria-hidden="true"></i>
       </label>
       <div class="bk-x-body">
-        <span class="bk-sublbl">Which Otogar (bus station)</span>
+        <span class="bk-sublbl" data-i18n="bk.addon.otogar.which">Which Otogar (bus station)</span>
         <div class="bk-radio-grp bk-radio-stacked" data-required="otogar">
           {options}
         </div>
@@ -460,7 +460,7 @@ def _addon_late_checkout() -> str:
     <div class="bk-x" data-addon="late-checkout" data-available="true" data-prices='{json.dumps(px)}'>
       <label class="bk-x-hd">
         <input type="checkbox" class="bk-x-chk" />
-        <span class="bk-x-ttl">Late checkout</span>
+        <span class="bk-x-ttl" data-i18n="bk.addon.late.title">Late checkout</span>
         <span class="bk-x-px" data-prices='{json.dumps(px)}'>+{_fmt_price(px)} flat</span>
         <i class="ti ti-chevron-down bk-x-caret" aria-hidden="true"></i>
       </label>
@@ -468,7 +468,7 @@ def _addon_late_checkout() -> str:
         <p class="bk-blurb">{LATE_CHECKOUT['available_blurb']} Standard checkout is {co_default}.</p>
         <div class="bk-mini-grid">
           <div class="bk-mini-fld bk-full">
-            <label>Stay until</label>
+            <label data-i18n="bk.addon.late.stay_until">Stay until</label>
             <select>{slot_options}</select>
           </div>
         </div>
@@ -496,12 +496,12 @@ def _addon_spa() -> str:
     <div class="bk-x" data-addon="spa">
       <label class="bk-x-hd">
         <input type="checkbox" class="bk-x-chk" />
-        <span class="bk-x-ttl">Spa</span>
+        <span class="bk-x-ttl" data-i18n="bk.addon.spa.title">Spa</span>
         <span class="bk-x-px" data-prices='{json.dumps(SPA_PACKAGES[0]["prices"])}'><span class="bk-x-from">from</span> +{_fmt_price(SPA_PACKAGES[0]["prices"])}</span>
         <i class="ti ti-chevron-down bk-x-caret" aria-hidden="true"></i>
       </label>
       <div class="bk-x-body">
-        <span class="bk-sublbl">Choose a package</span>
+        <span class="bk-sublbl" data-i18n="bk.addon.spa.choose">Choose a package</span>
         <div class="bk-spa-grp" data-required="spa">
           {packages_html}
         </div>
@@ -515,7 +515,7 @@ def _addon_wine() -> str:
     <div class="bk-x" data-addon="wine" data-prices='{json.dumps(WINE["prices"])}'>
       <label class="bk-x-hd">
         <input type="checkbox" class="bk-x-chk" />
-        <span class="bk-x-ttl">Sparkling wine on arrival</span>
+        <span class="bk-x-ttl" data-i18n="bk.addon.wine.title">Sparkling wine on arrival</span>
         <span class="bk-x-px" data-prices='{json.dumps(WINE["prices"])}'>+{_fmt_price(WINE["prices"])}</span>
       </label>
     </div>
@@ -588,7 +588,7 @@ def book(root: str) -> str:
       <!-- Title bar -->
       <div class="bk-title">
         <h1 data-i18n="bk.page.h1">Enquire about a stay</h1>
-        <p class="bk-title-note">No payment, no commitment · rates shown are indicative — we confirm the final rate for your dates within the hour, usually faster</p>
+        <p class="bk-title-note" data-i18n="bk.page.note">No payment, no commitment · rates shown are indicative — we confirm the final rate for your dates within the hour, usually faster</p>
       </div>
 
       <!-- Suite tabs (full width) -->
@@ -628,10 +628,10 @@ def book(root: str) -> str:
             </div>
           </div>
 
-          <div class="bk-grp">Dates</div>
+          <div class="bk-grp" data-i18n="bk.form.dates_group">Dates</div>
           <div class="bk-rw2">
-            <div class="bk-fld"><label for="bk-arrival">Arrival</label><input type="date" id="bk-arrival" name="arrival" required data-min="today" /></div>
-            <div class="bk-fld"><label for="bk-departure">Departure</label><input type="date" id="bk-departure" name="departure" required data-min="arrival" /></div>
+            <div class="bk-fld"><label for="bk-arrival" data-i18n="bk.form.arrival_label">Arrival</label><input type="date" id="bk-arrival" name="arrival" required data-min="today" /></div>
+            <div class="bk-fld"><label for="bk-departure" data-i18n="bk.form.departure_label">Departure</label><input type="date" id="bk-departure" name="departure" required data-min="arrival" /></div>
           </div>
           <p class="bk-note-inline">
             <span class="bk-note-line"><strong>Check-in:</strong> From 2:00 PM</span>
@@ -639,14 +639,14 @@ def book(root: str) -> str:
               <button type="button" class="bk-info-btn" aria-label="Check-out time details" data-info-target="bk-checkout-info">&#9432;</button>
             </span>
             <span id="bk-checkout-info" class="bk-info-pop" role="tooltip" hidden>
-              Guests arriving after midnight are welcome. Please note that late-night arrival does not extend the standard 12:00 noon check-out time.
+              <span data-i18n="bk.form.checkout_info">Guests arriving after midnight are welcome. Please note that late-night arrival does not extend the standard 12:00 noon check-out time.</span>
             </span>
           </p>
 
-          <div class="bk-grp">Guests</div>
+          <div class="bk-grp" data-i18n="bk.form.guests_group">Guests</div>
           <div class="bk-rw2">
             <div class="bk-fld">
-              <label for="bk-adults">Adults</label>
+              <label for="bk-adults" data-i18n="bk.form.adults_label">Adults</label>
               <select id="bk-adults" name="adults">
                 <option value="1">1</option>
                 <option value="2" selected>2</option>
@@ -655,7 +655,7 @@ def book(root: str) -> str:
               </select>
             </div>
             <div class="bk-fld">
-              <label for="bk-children">Children</label>
+              <label for="bk-children" data-i18n="bk.form.children_label">Children</label>
               <select id="bk-children" name="children">
                 <option value="0" selected>0</option>
                 <option value="1">1</option>
@@ -664,10 +664,10 @@ def book(root: str) -> str:
             </div>
           </div>
 
-          <div class="bk-grp">Your stay</div>
+          <div class="bk-grp" data-i18n="bk.form.stay_group">Your stay</div>
           <div class="bk-rw2">
             <div class="bk-fld">
-              <label for="bk-arrival-time">Estimated arrival time <span class="bk-lbl-hint">(optional)</span></label>
+              <label for="bk-arrival-time"><span data-i18n="bk.form.arrival_time_label">Estimated arrival time</span> <span class="bk-lbl-hint" data-i18n="bk.form.optional_hint">(optional)</span></label>
               <select id="bk-arrival-time" name="arrival_time">
                 <option value="">Not sure yet</option>
                 <option value="06:00">06:00 (6:00 AM)</option>
@@ -711,7 +711,7 @@ def book(root: str) -> str:
               </select>
             </div>
             <div class="bk-fld">
-              <label for="bk-occasion">Occasion (optional)</label>
+              <label for="bk-occasion" data-i18n="bk.form.occasion_label">Occasion (optional)</label>
               <select id="bk-occasion" name="occasion">
                 <option value="">Just a stay</option>
                 <option value="honeymoon">Honeymoon</option>
@@ -724,13 +724,13 @@ def book(root: str) -> str:
             </div>
           </div>
 
-          <div class="bk-grp">Your details</div>
-          <div class="bk-fld"><label for="bk-name">Full name</label><input type="text" id="bk-name" name="name" placeholder="Jane Roberts" required /></div>
-          <div class="bk-fld"><label for="bk-email">Email</label><input type="email" id="bk-email" name="email" placeholder="jane@example.com" required /></div>
-          <div class="bk-fld"><label for="bk-phone">Phone</label><input type="tel" id="bk-phone" name="phone" placeholder="+44 7700 900 123" /></div>
-          <div class="bk-fld"><label for="bk-notes">Anything else? (optional)</label><input type="text" id="bk-notes" name="notes" placeholder="Dietary, accessibility, a specific request..." /></div>
+          <div class="bk-grp" data-i18n="bk.form.details_group">Your details</div>
+          <div class="bk-fld"><label for="bk-name" data-i18n="bk.form.name_label">Full name</label><input type="text" id="bk-name" name="name" placeholder="Jane Roberts" required /></div>
+          <div class="bk-fld"><label for="bk-email" data-i18n="bk.form.email_label">Email</label><input type="email" id="bk-email" name="email" placeholder="jane@example.com" required /></div>
+          <div class="bk-fld"><label for="bk-phone" data-i18n="bk.form.phone_label">Phone</label><input type="tel" id="bk-phone" name="phone" placeholder="+44 7700 900 123" /></div>
+          <div class="bk-fld"><label for="bk-notes" data-i18n="bk.form.notes_label">Anything else? (optional)</label><input type="text" id="bk-notes" name="notes" placeholder="Dietary, accessibility, a specific request..." data-i18n-placeholder="bk.form.notes_placeholder" /></div>
 
-          <div class="bk-grp">Add-ons</div>
+          <div class="bk-grp" data-i18n="bk.form.addons_group">Add-ons</div>
           <div class="bk-xs" id="bk-xs">
             {addons_html}
           </div>
@@ -740,8 +740,8 @@ def book(root: str) -> str:
             <div class="cf-turnstile" data-sitekey="0x4AAAAAADw1GxGvpcClGqV8" data-callback="bkTurnstileOK" data-theme="light"></div>
           </div>
 
-          <button type="submit" class="bk-go">Send enquiry →</button>
-          <p class="bk-foot">This is an enquiry, not a confirmed booking. No payment now. We reply with availability and a direct rate within the hour — usually faster.</p>
+          <button type="submit" class="bk-go"><span data-i18n="bk.form.submit">Send enquiry</span> →</button>
+          <p class="bk-foot" data-i18n="bk.form.footnote">This is an enquiry, not a confirmed booking. No payment now. We reply with availability and a direct rate within the hour — usually faster.</p>
 
         </form>
 
@@ -751,9 +751,9 @@ def book(root: str) -> str:
              production. Local previews still pop it up with ?demo=1. -->
         <div id="bk-email-preview" class="bk-hidden bk-email-preview" data-demo-only="true">
           <div class="bk-email-preview-head">
-            <span class="bk-email-preview-tag">DEMO PREVIEW</span>
-            <h3>What the hotel staff inbox will receive</h3>
-            <p class="bk-email-preview-note">Preview of the email the hotel receives when an enquiry is submitted. Shown only in <code>?demo=1</code> mode — real guests see the thank-you card instead.</p>
+            <span class="bk-email-preview-tag" data-i18n="bk.preview.tag">DEMO PREVIEW</span>
+            <h3 data-i18n="bk.preview.h3">What the hotel staff inbox will receive</h3>
+            <p class="bk-email-preview-note" data-i18n="bk.preview.note">Preview of the email the hotel receives when an enquiry is submitted. Shown only in <code>?demo=1</code> mode — real guests see the thank-you card instead.</p>
           </div>
           <pre id="bk-email-preview-body" class="bk-email-preview-body"></pre>
         </div>
@@ -763,15 +763,15 @@ def book(root: str) -> str:
           <div class="bk-thanks-tick">
             <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
           </div>
-          <h3>Enquiry sent.</h3>
-          <p>We'll be back to you within the hour with availability and a direct rate. Thank you for choosing to write to us directly.</p>
+          <h3 data-i18n="bk.thanks.h3">Enquiry sent.</h3>
+          <p data-i18n="bk.thanks.p">We'll be back to you within the hour with availability and a direct rate. Thank you for choosing to write to us directly.</p>
         </div>
 
         <!-- RIGHT: visuals -->
         <div class="bk-vis">
           <div class="bk-hero" id="bk-hero" style="background-image:url('{hero_url}');">
             <span class="bk-hero-tag" id="bk-hero-tag">{hero_label} · {s['name']}</span>
-            <button type="button" class="bk-hero-full" aria-label="View fullscreen"><i class="ti ti-maximize" aria-hidden="true"></i><span>Fullscreen</span></button>
+            <button type="button" class="bk-hero-full" aria-label="View fullscreen" data-i18n-aria="bk.hero.fullscreen_aria"><i class="ti ti-maximize" aria-hidden="true"></i><span data-i18n="bk.hero.fullscreen">Fullscreen</span></button>
           </div>
 
           <div class="bk-info" id="bk-info">
@@ -782,7 +782,7 @@ def book(root: str) -> str:
 
           <div class="bk-tiles-hd">
             <h3>More photos (<span id="bk-photo-count">{len(s['photos'])}</span>)</h3>
-            <button type="button" class="bk-viewall" aria-label="View all"><i class="ti ti-maximize" aria-hidden="true"></i>View all</button>
+            <button type="button" class="bk-viewall" aria-label="View all" data-i18n-aria="bk.tiles.viewall_aria"><i class="ti ti-maximize" aria-hidden="true"></i><span data-i18n="bk.tiles.viewall">View all</span></button>
           </div>
           <div id="bk-tiles-host">
             {tiles_html}

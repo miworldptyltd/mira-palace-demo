@@ -217,7 +217,7 @@ def spa_book(root: str) -> str:
 
       <div class="bk-title">
         <h1 data-i18n="sp.page.h1">Enquire about a spa session</h1>
-        <p class="bk-title-note">Open daily 10:00–19:00 · free shuttle from the hotel · we confirm availability for your chosen slot within the hour, no payment now</p>
+        <p class="bk-title-note" data-i18n="sp.page.note">Open daily 10:00–19:00 · free shuttle from the hotel · we confirm availability for your chosen slot within the hour, no payment now</p>
       </div>
 
       <div class="bk-tabs" id="sp-tabs" role="tablist" aria-label="Spa package">
@@ -244,57 +244,57 @@ def spa_book(root: str) -> str:
             </div>
             <div class="bk-form-pr">
               <span id="sp-form-price" data-prices='{json.dumps(p["prices"])}'>{_fmt(p["prices"])}</span>
-              <small>per person</small>
+              <small data-i18n="sp.form.per_person">per person</small>
             </div>
           </div>
 
-          <div class="bk-grp">When</div>
+          <div class="bk-grp" data-i18n="sp.form.when_group">When</div>
           <div class="bk-rw2">
-            <div class="bk-fld"><label for="sp-date">Date</label><input type="date" id="sp-date" name="date" required data-min="today" /></div>
-            <div class="bk-fld"><label for="sp-time">Time slot</label><select id="sp-time" name="time" required>{slot_options}</select></div>
+            <div class="bk-fld"><label for="sp-date" data-i18n="sp.form.date_label">Date</label><input type="date" id="sp-date" name="date" required data-min="today" /></div>
+            <div class="bk-fld"><label for="sp-time" data-i18n="sp.form.time_label">Time slot</label><select id="sp-time" name="time" required>{slot_options}</select></div>
           </div>
 
-          <div class="bk-grp">Who</div>
+          <div class="bk-grp" data-i18n="sp.form.who_group">Who</div>
           <div class="bk-rw2">
             <div class="bk-fld">
-              <label for="sp-people">People</label>
+              <label for="sp-people" data-i18n="sp.form.people_label">People</label>
               <select id="sp-people" name="people">
-                <option value="1" selected>1 person</option>
-                <option value="2">2 people (couples)</option>
+                <option value="1" selected data-i18n="sp.form.people.one">1 person</option>
+                <option value="2" data-i18n="sp.form.people.two">2 people (couples)</option>
               </select>
             </div>
             <div class="bk-fld">
-              <label for="sp-guest">Hotel guest?</label>
+              <label for="sp-guest" data-i18n="sp.form.guest_label">Hotel guest?</label>
               <select id="sp-guest" name="guest">
-                <option value="yes" selected>Staying at Mira Palace</option>
-                <option value="no">Visiting from elsewhere</option>
+                <option value="yes" selected data-i18n="sp.form.guest.yes">Staying at Mira Palace</option>
+                <option value="no" data-i18n="sp.form.guest.no">Visiting from elsewhere</option>
               </select>
             </div>
           </div>
 
-          <div class="bk-grp">Your details</div>
-          <div class="bk-fld"><label for="sp-name">Full name</label><input type="text" id="sp-name" name="name" placeholder="Jane Roberts" required /></div>
-          <div class="bk-fld"><label for="sp-email">Email</label><input type="email" id="sp-email" name="email" placeholder="jane@example.com" required /></div>
-          <div class="bk-fld"><label for="sp-phone">Phone</label><input type="tel" id="sp-phone" name="phone" placeholder="+44 7700 900 123" /></div>
-          <div class="bk-fld"><label for="sp-room">Room number <span class="bk-hint">(if a hotel guest)</span></label><input type="text" id="sp-room" name="room" placeholder="A6 / B7 / C12..." /></div>
-          <div class="bk-fld"><label for="sp-notes">Notes (optional)</label><input type="text" id="sp-notes" name="notes" placeholder="Pregnancy, injuries, allergies, preferred therapist gender..." /></div>
+          <div class="bk-grp" data-i18n="sp.form.details_group">Your details</div>
+          <div class="bk-fld"><label for="sp-name" data-i18n="sp.form.name_label">Full name</label><input type="text" id="sp-name" name="name" placeholder="Jane Roberts" required /></div>
+          <div class="bk-fld"><label for="sp-email" data-i18n="sp.form.email_label">Email</label><input type="email" id="sp-email" name="email" placeholder="jane@example.com" required /></div>
+          <div class="bk-fld"><label for="sp-phone" data-i18n="sp.form.phone_label">Phone</label><input type="tel" id="sp-phone" name="phone" placeholder="+44 7700 900 123" /></div>
+          <div class="bk-fld"><label for="sp-room"><span data-i18n="sp.form.room_label">Room number</span> <span class="bk-hint" data-i18n="sp.form.room_hint">(if a hotel guest)</span></label><input type="text" id="sp-room" name="room" placeholder="A6 / B7 / C12..." /></div>
+          <div class="bk-fld"><label for="sp-notes" data-i18n="sp.form.notes_label">Notes (optional)</label><input type="text" id="sp-notes" name="notes" placeholder="Pregnancy, injuries, allergies, preferred therapist gender..." data-i18n-placeholder="sp.form.notes_placeholder" /></div>
 
           <!-- R029: real Turnstile Site Key (Cloudflare widget "mira-palace-enquiry"). -->
           <div class="bk-turnstile-wrap">
             <div class="cf-turnstile" data-sitekey="0x4AAAAAADw1GxGvpcClGqV8" data-callback="bkTurnstileOK" data-theme="light"></div>
           </div>
 
-          <button type="submit" class="bk-go">Send enquiry →</button>
-          <p class="bk-foot">This is an enquiry, not a confirmed booking. No payment now. We reply with availability for your chosen slot within the hour during spa hours.</p>
+          <button type="submit" class="bk-go"><span data-i18n="sp.form.submit">Send enquiry</span> →</button>
+          <p class="bk-foot" data-i18n="sp.form.footnote">This is an enquiry, not a confirmed booking. No payment now. We reply with availability for your chosen slot within the hour during spa hours.</p>
 
         </form>
 
         <!-- R016: email preview panel -->
         <div id="sp-email-preview" class="bk-hidden bk-email-preview" data-demo-only="true">
           <div class="bk-email-preview-head">
-            <span class="bk-email-preview-tag">DEMO PREVIEW</span>
-            <h3>What the spa staff inbox will receive</h3>
-            <p class="bk-email-preview-note">Preview of the email the spa staff receives when an enquiry is submitted. Shown only in <code>?demo=1</code> mode — real guests see the thank-you card instead.</p>
+            <span class="bk-email-preview-tag" data-i18n="sp.preview.tag">DEMO PREVIEW</span>
+            <h3 data-i18n="sp.preview.h3">What the spa staff inbox will receive</h3>
+            <p class="bk-email-preview-note" data-i18n="sp.preview.note">Preview of the email the spa staff receives when an enquiry is submitted. Shown only in <code>?demo=1</code> mode — real guests see the thank-you card instead.</p>
           </div>
           <pre id="sp-email-preview-body" class="bk-email-preview-body"></pre>
         </div>
@@ -303,14 +303,14 @@ def spa_book(root: str) -> str:
           <div class="bk-thanks-tick">
             <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
           </div>
-          <h3>Request sent.</h3>
-          <p>We'll be back to you within the hour with availability confirmed for your chosen slot. Thank you for booking direct.</p>
+          <h3 data-i18n="sp.thanks.h3">Request sent.</h3>
+          <p data-i18n="sp.thanks.p">We'll be back to you within the hour with availability confirmed for your chosen slot. Thank you for booking direct.</p>
         </div>
 
         <div class="bk-vis">
           <div class="bk-hero" id="sp-hero" style="background-image:url('{hero_url}');">
             <span class="bk-hero-tag" id="sp-hero-tag">{hero_label} · {p['name']}</span>
-            <button type="button" class="bk-hero-full" aria-label="View fullscreen"><i class="ti ti-maximize" aria-hidden="true"></i><span>Fullscreen</span></button>
+            <button type="button" class="bk-hero-full" aria-label="View fullscreen" data-i18n-aria="sp.hero.fullscreen_aria"><i class="ti ti-maximize" aria-hidden="true"></i><span data-i18n="sp.hero.fullscreen">Fullscreen</span></button>
           </div>
 
           <div class="bk-info" id="sp-info">
@@ -321,7 +321,7 @@ def spa_book(root: str) -> str:
 
           <div class="bk-tiles-hd">
             <h3>Spa photos (<span id="sp-photo-count">{len(p['photos'])}</span>)</h3>
-            <button type="button" class="bk-viewall" aria-label="View all"><i class="ti ti-maximize" aria-hidden="true"></i>View all</button>
+            <button type="button" class="bk-viewall" aria-label="View all" data-i18n-aria="sp.tiles.viewall_aria"><i class="ti ti-maximize" aria-hidden="true"></i><span data-i18n="sp.tiles.viewall">View all</span></button>
           </div>
           <div id="sp-tiles-host">
             {tiles_html}
