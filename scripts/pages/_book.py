@@ -314,9 +314,19 @@ def _info_card(title: str, rows) -> str:
 
 
 def _amen_card(amenities) -> str:
+    # R029.6: the amenities pills previously carried per-icon glyphs
+    # (wifi/snowflake/bath...) which rendered as empty squares whenever a
+    # glyph was missing from the inlined subset. Owner also wants the
+    # affordance to clearly say "the room HAS this", not present it as a
+    # filter. Swapped to a single green check icon — reads as a checklist
+    # of confirmed features.
+    tick = ('<svg class="bk-chip-tick" viewBox="0 0 24 24" fill="none" '
+            'stroke="currentColor" stroke-width="3" stroke-linecap="round" '
+            'stroke-linejoin="round" aria-hidden="true">'
+            '<path d="M5 12l5 5L20 7"/></svg>')
     chips = "".join(
-        f'<span class="bk-chip"><i class="ti ti-{icon}" aria-hidden="true"></i>{label}</span>'
-        for icon, label in amenities
+        f'<span class="bk-chip">{tick}{label}</span>'
+        for _icon, label in amenities
     )
     return f'<div class="bk-card bk-card-full"><h3>Features &amp; Amenities</h3><div class="bk-chips">{chips}</div></div>'
 
