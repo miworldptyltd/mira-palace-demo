@@ -33,10 +33,8 @@ window.MIRA_SEARCH_INDEX = [
       "Enquire about a stay",
       "What the hotel staff inbox will receive",
       "Enquiry sent.",
-      "Basic Details",
-      "Capacity Beds",
-      "Features Amenities",
-      "More photos (6)"
+      "Please choose your suite",
+      "More photos (0)"
     ]
   },
   {

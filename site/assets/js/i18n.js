@@ -687,6 +687,11 @@ window.MIRA_I18N = {
     "error404.tile2.s": "Four outlets under one roof",
     "error404.tile3.t": "Contact",
     "error404.tile3.s": "We’ll reply within the hour",
+    "bk.placeholder.h3": "Please choose your suite",
+    "bk.placeholder.body": "Pick a suite type above to see photos, room details and amenities.",
+    "bk.placeholder.hero_tag": "Mira Palace",
+    "bk.form_head.name_placeholder": "Please choose your suite",
+    "bk.form_head.sub_placeholder": "Standard, Deluxe, Family or King",
   },
 
   // =============================================================
@@ -1333,6 +1338,11 @@ window.MIRA_I18N = {
     "error404.tile2.s": "Tek çatı altında dört mekân",
     "error404.tile3.t": "İletişim",
     "error404.tile3.s": "Bir saat içinde döneriz",
+    "bk.placeholder.h3": "Süitinizi seçin",
+    "bk.placeholder.body": "Fotoğrafları, oda ayrıntılarını ve olanakları görmek için yukarıdan bir süit tipi seçin.",
+    "bk.placeholder.hero_tag": "Mira Palace",
+    "bk.form_head.name_placeholder": "Süitinizi seçin",
+    "bk.form_head.sub_placeholder": "Standard, Deluxe, Aile veya King",
   },
 
   // =============================================================
@@ -1979,6 +1989,11 @@ window.MIRA_I18N = {
     "error404.tile2.s": "Vier Locations unter einem Dach",
     "error404.tile3.t": "Kontakt",
     "error404.tile3.s": "Wir antworten innerhalb einer Stunde",
+    "bk.placeholder.h3": "Bitte wählen Sie Ihre Suite",
+    "bk.placeholder.body": "Wählen Sie oben eine Suitenkategorie, um Fotos, Zimmerdetails und Ausstattung zu sehen.",
+    "bk.placeholder.hero_tag": "Mira Palace",
+    "bk.form_head.name_placeholder": "Bitte wählen Sie Ihre Suite",
+    "bk.form_head.sub_placeholder": "Standard, Deluxe, Familie oder King",
   },
 
   // =============================================================
@@ -2625,5 +2640,10 @@ window.MIRA_I18N = {
     "error404.tile2.s": "Четыре площадки под одной крышей",
     "error404.tile3.t": "Контакты",
     "error404.tile3.s": "Ответим в течение часа",
+    "bk.placeholder.h3": "Выберите ваш номер",
+    "bk.placeholder.body": "Выберите тип номера выше, чтобы увидеть фотографии, детали и удобства.",
+    "bk.placeholder.hero_tag": "Mira Palace",
+    "bk.form_head.name_placeholder": "Выберите ваш номер",
+    "bk.form_head.sub_placeholder": "Стандартный, Делюкс, Семейный или King",
   }
 };

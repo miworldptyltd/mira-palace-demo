@@ -967,6 +967,9 @@
         if (!BOOK_DATA.suites[key]) return;
         currentSuite = key;
         var s = BOOK_DATA.suites[key];
+        // R029.9: reveal the "More photos" header now that we have photos.
+        var tilesHd = document.getElementById('bk-tiles-hd');
+        if (tilesHd) tilesHd.style.display = '';
         // Tabs
         document.querySelectorAll('.bk-tab').forEach(function (t) {
           t.dataset.sel = (t.dataset.suite === key) ? 'true' : 'false';
@@ -1364,6 +1367,38 @@
       console.warn('[enquiry] honeypot triggered — submission silently dropped');
       return;
     }
+
+    // R029.9: enforce mandatory fields for a real booking enquiry.
+    // This is BEFORE the Turnstile check so guests don't waste a token if
+    // they've forgotten to pick a suite or type their phone number.
+    var missing = [];
+    var kindEarly = form.dataset.enquiryKind || 'room';
+    if (kindEarly === 'room') {
+      var selectedTab = document.querySelector('.bk-tab[data-sel="true"]');
+      if (!selectedTab) missing.push('a suite');
+      var arr = form.querySelector('#bk-arrival');
+      var dep = form.querySelector('#bk-departure');
+      if (arr && !arr.value) missing.push('arrival date');
+      if (dep && !dep.value) missing.push('departure date');
+    }
+    // Common contact fields on both room + spa forms
+    ['name','email','phone'].forEach(function (n) {
+      var el = form.querySelector('[name="' + n + '"]');
+      if (el && !String(el.value || '').trim()) missing.push(n === 'name' ? 'full name' : (n === 'email' ? 'email' : 'phone'));
+      if (el) {
+        var wrap = el.closest('.bk-fld');
+        if (wrap) wrap.classList.toggle('bk-fld-invalid', !String(el.value || '').trim());
+      }
+    });
+    if (missing.length) {
+      alert('Please fill in: ' + missing.join(', ') + '.');
+      // Scroll first missing field into view
+      var first = form.querySelector('.bk-fld-invalid input, .bk-fld-invalid select');
+      if (!first && missing[0] === 'a suite') first = document.querySelector('.bk-tabs');
+      if (first && first.scrollIntoView) first.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+
     // Turnstile token check — test sitekey always passes so this is fine in stub
     var turnstileToken = (form.querySelector('[name="cf-turnstile-response"]') || {}).value || '';
     if (!turnstileToken) {

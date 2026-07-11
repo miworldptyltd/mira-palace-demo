@@ -554,22 +554,31 @@ def _data_json(root: str) -> str:
 
 
 def book(root: str) -> str:
-    initial = "king"
-    s = SUITES[initial]
+    # R029.9: no suite pre-selected. Guest must click a tab before the right
+    # column populates AND before submit is allowed. Also blocks submit until
+    # name / email / phone / dates are filled — this is a booking enquiry,
+    # every piece of contact info is mandatory.
+    initial = None
 
-    # Suite tabs
-    tabs_html = "".join(_suite_tab(k, k == initial) for k in SUITE_ORDER)
+    # Suite tabs — none marked selected on load.
+    tabs_html = "".join(_suite_tab(k, False) for k in SUITE_ORDER)
 
-    # Initial info cards (King is selected by default)
-    basics_html = _info_card("Basic Details", s["basics"])
-    capacity_html = _info_card("Capacity &amp; Beds", s["capacity"])
-    amenities_html = _amen_card(s["amenities"])
+    # Placeholder card replaces the basics / capacity / amenities cards on load.
+    # site.js swaps this out for real cards the moment a suite tab is clicked.
+    basics_html = ""
+    capacity_html = ""
+    amenities_html = (
+        '<div class="bk-card bk-card-full bk-placeholder" id="bk-placeholder">'
+        '  <h3 data-i18n="bk.placeholder.h3">Please choose your suite</h3>'
+        '  <p data-i18n="bk.placeholder.body">Pick a suite type above to see photos, room details and amenities.</p>'
+        '</div>'
+    )
 
-    # Initial hero + tiles
-    first_photo = s["photos"][0]
-    hero_url = f"{root}{first_photo[0]}"
-    hero_label = first_photo[1]
-    tiles_html = _photo_tiles(s["photos"], root)
+    # Hero photo — friendly garden shot until a suite is picked (matches the
+    # home-page hero poster, so returning guests feel oriented).
+    hero_url = f"{root}assets/img/garden/garden-01.webp"
+    hero_label = "Mira Palace"
+    tiles_html = ""
 
     # Add-ons
     addons_html = "\n".join([
@@ -619,11 +628,11 @@ def book(root: str) -> str:
 
           <div class="bk-form-head">
             <div>
-              <div class="bk-form-nm" id="bk-form-nm">{s['name']}</div>
-              <div class="bk-form-sub" id="bk-form-sub">{s['rooms_label']}</div>
+              <div class="bk-form-nm" id="bk-form-nm" data-i18n="bk.form_head.name_placeholder">Please choose your suite</div>
+              <div class="bk-form-sub" id="bk-form-sub" data-i18n="bk.form_head.sub_placeholder">Standard, Deluxe, Family or King</div>
             </div>
             <div class="bk-form-pr">
-              <span id="bk-form-price" data-prices='{json.dumps(s["prices"])}'>{_fmt_price(s["prices"])}</span>
+              <span id="bk-form-price" data-prices='{{}}'>—</span>
               <small>/ night</small>
             </div>
           </div>
@@ -770,7 +779,7 @@ def book(root: str) -> str:
         <!-- RIGHT: visuals -->
         <div class="bk-vis">
           <div class="bk-hero" id="bk-hero" style="background-image:url('{hero_url}');">
-            <span class="bk-hero-tag" id="bk-hero-tag">{hero_label} · {s['name']}</span>
+            <span class="bk-hero-tag" id="bk-hero-tag" data-i18n="bk.placeholder.hero_tag">Mira Palace</span>
             <button type="button" class="bk-hero-full" aria-label="View fullscreen" data-i18n-aria="bk.hero.fullscreen_aria"><i class="ti ti-maximize" aria-hidden="true"></i><span data-i18n="bk.hero.fullscreen">Fullscreen</span></button>
           </div>
 
@@ -780,8 +789,8 @@ def book(root: str) -> str:
             {amenities_html}
           </div>
 
-          <div class="bk-tiles-hd">
-            <h3>More photos (<span id="bk-photo-count">{len(s['photos'])}</span>)</h3>
+          <div class="bk-tiles-hd" id="bk-tiles-hd" style="display:none;">
+            <h3>More photos (<span id="bk-photo-count">0</span>)</h3>
             <button type="button" class="bk-viewall" aria-label="View all" data-i18n-aria="bk.tiles.viewall_aria"><i class="ti ti-maximize" aria-hidden="true"></i><span data-i18n="bk.tiles.viewall">View all</span></button>
           </div>
           <div id="bk-tiles-host">
