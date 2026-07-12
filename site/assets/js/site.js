@@ -919,6 +919,96 @@
         recalcTotal();
       }
 
+      // --- R029.9b: Photo lightbox (hero fullscreen + view all + tile click)
+      var lbState = { photos: [], idx: 0 };
+      function openLightbox(photos, startIdx) {
+        if (!photos || !photos.length) return;
+        lbState.photos = photos;
+        lbState.idx = Math.max(0, Math.min(startIdx || 0, photos.length - 1));
+        var box = document.getElementById('bk-lightbox');
+        if (!box) return;
+        box.hidden = false;
+        box.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        showLightboxPhoto();
+      }
+      function showLightboxPhoto() {
+        var p = lbState.photos[lbState.idx];
+        if (!p) return;
+        var img = document.getElementById('bk-lb-img');
+        var cap = document.getElementById('bk-lb-cap');
+        var counter = document.getElementById('bk-lb-counter');
+        var prev = document.querySelector('[data-lb-prev]');
+        var next = document.querySelector('[data-lb-next]');
+        if (img) { img.src = p.path || p; img.alt = p.label || ''; }
+        if (cap) cap.textContent = p.label || '';
+        if (counter) counter.textContent = (lbState.idx + 1) + ' / ' + lbState.photos.length;
+        var single = lbState.photos.length <= 1;
+        if (prev) prev.style.display = single ? 'none' : '';
+        if (next) next.style.display = single ? 'none' : '';
+      }
+      function closeLightbox() {
+        var box = document.getElementById('bk-lightbox');
+        if (!box) return;
+        box.hidden = true;
+        box.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      }
+      function lightboxStep(delta) {
+        if (!lbState.photos.length) return;
+        lbState.idx = (lbState.idx + delta + lbState.photos.length) % lbState.photos.length;
+        showLightboxPhoto();
+      }
+      // Wire close / prev / next buttons + backdrop click + keyboard
+      var lb = document.getElementById('bk-lightbox');
+      if (lb) {
+        lb.addEventListener('click', function (e) {
+          if (e.target === lb) closeLightbox();
+        });
+        document.querySelectorAll('[data-lb-close]').forEach(function (b) { b.addEventListener('click', closeLightbox); });
+        document.querySelectorAll('[data-lb-prev]').forEach(function (b) { b.addEventListener('click', function () { lightboxStep(-1); }); });
+        document.querySelectorAll('[data-lb-next]').forEach(function (b) { b.addEventListener('click', function () { lightboxStep(1); }); });
+        document.addEventListener('keydown', function (e) {
+          if (lb.hidden) return;
+          if (e.key === 'Escape') closeLightbox();
+          if (e.key === 'ArrowLeft') lightboxStep(-1);
+          if (e.key === 'ArrowRight') lightboxStep(1);
+        });
+      }
+      // Hero fullscreen button
+      var heroFull = document.querySelector('.bk-hero-full');
+      if (heroFull) {
+        heroFull.addEventListener('click', function () {
+          // If a suite is picked, open the full suite gallery starting at hero photo.
+          // Otherwise show the current hero image alone (garden placeholder).
+          var suite = currentSuite && BOOK_DATA.suites[currentSuite];
+          if (suite && suite.photos && suite.photos.length) {
+            var hero = document.getElementById('bk-hero');
+            var bg = hero ? hero.style.backgroundImage : '';
+            var url = bg.replace(/^url\(['"]?/, '').replace(/['"]?\)$/, '');
+            var start = 0;
+            for (var i = 0; i < suite.photos.length; i++) {
+              if (suite.photos[i].path === url) { start = i; break; }
+            }
+            openLightbox(suite.photos, start);
+          } else {
+            // Placeholder mode
+            var hero2 = document.getElementById('bk-hero');
+            var bg2 = hero2 ? hero2.style.backgroundImage : '';
+            var url2 = bg2.replace(/^url\(['"]?/, '').replace(/['"]?\)$/, '');
+            openLightbox([{ path: url2, label: 'Mira Palace' }], 0);
+          }
+        });
+      }
+      // "View all" button — opens gallery at first photo
+      var viewAll = document.querySelector('.bk-viewall');
+      if (viewAll) {
+        viewAll.addEventListener('click', function () {
+          var suite = currentSuite && BOOK_DATA.suites[currentSuite];
+          if (suite && suite.photos && suite.photos.length) openLightbox(suite.photos, 0);
+        });
+      }
+
       // --- Suite tab swap ---------------------------------------------------
       function rebuildInfoCards(s) {
         var info = document.getElementById('bk-info');

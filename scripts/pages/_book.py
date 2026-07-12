@@ -802,6 +802,19 @@ def book(root: str) -> str:
 
     </div>
 
+    <!-- R029.9b: Lightbox for fullscreen photo view + gallery. Hidden on load;
+         site.js openLightbox() reveals + populates. -->
+    <div id="bk-lightbox" class="bk-lightbox" hidden aria-hidden="true" role="dialog" aria-modal="true" aria-label="Photo viewer">
+      <button type="button" class="bk-lb-close" data-lb-close aria-label="Close">&times;</button>
+      <button type="button" class="bk-lb-prev" data-lb-prev aria-label="Previous photo">&#8249;</button>
+      <button type="button" class="bk-lb-next" data-lb-next aria-label="Next photo">&#8250;</button>
+      <figure class="bk-lb-frame">
+        <img id="bk-lb-img" alt="" />
+        <figcaption id="bk-lb-cap" class="bk-lb-cap"></figcaption>
+      </figure>
+      <div id="bk-lb-counter" class="bk-lb-counter"></div>
+    </div>
+
     <!-- Data blob the front-end JS reads from. R010 swaps this for a fetch() call to the admin API. -->
     <script type="application/json" id="bk-data">{data_blob}</script>
     """
